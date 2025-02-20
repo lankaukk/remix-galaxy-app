@@ -6,6 +6,7 @@ export default function JournalApp() {
     <ProjectLayout
       title="Journal App"
       description="A minimal writing experience focused on clarity and ease of use"
+      backLink="/work/foundations"
     >
       <div className="space-y-12">
         <img
@@ -46,7 +47,7 @@ export default function JournalApp() {
             <li>Automatic saving and versioning</li>
             <li>Cross-device synchronization</li>
           </ul>
-          
+
           <h2>Results</h2>
           <p>
             The Journal App has helped users maintain consistent writing habits

@@ -6,6 +6,7 @@ export default function ModernPotions() {
     <ProjectLayout
       title="Modern Potions"
       description="An e-commerce redesign for artisanal beverages"
+      backLink="/work/foundations"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function ModernPotions() {
             <li>Personalized recommendations</li>
             <li>Seamless checkout process</li>
           </ul>
-          
+
           <h2>Results</h2>
           <p>
             The redesigned platform has significantly improved customer

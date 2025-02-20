@@ -6,6 +6,7 @@ export default function UiSimplification() {
     <ProjectLayout
       title="UI Simplification"
       description="Making complex React development more accessible through intuitive visual interfaces"
+      backLink="/work/utopia"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function UiSimplification() {
             <li>Interactive property controls</li>
             <li>Custom component library integration</li>
           </ul>
-          
+
           <h2>Impact</h2>
           <p>
             The UI simplification initiative has significantly reduced the learning

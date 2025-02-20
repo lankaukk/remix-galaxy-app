@@ -6,6 +6,7 @@ export default function PexelArt() {
     <ProjectLayout
       title="Pexel Art"
       description="A digital art creation and curation platform"
+      backLink="/work/foundations"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function PexelArt() {
             <li>Animation support</li>
             <li>Custom palette management</li>
           </ul>
-          
+
           <h2>Impact</h2>
           <p>
             Pexel Art has grown into a vibrant community of digital artists,

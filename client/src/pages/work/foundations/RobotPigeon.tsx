@@ -6,6 +6,7 @@ export default function RobotPigeon() {
     <ProjectLayout
       title="Robot Pigeon"
       description="A playful AI-driven message delivery system"
+      backLink="/work/foundations"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function RobotPigeon() {
             <li>Message journey tracking</li>
             <li>Collectible pigeon variants</li>
           </ul>
-          
+
           <h2>Impact</h2>
           <p>
             Robot Pigeon has brought joy and whimsy to digital communication,

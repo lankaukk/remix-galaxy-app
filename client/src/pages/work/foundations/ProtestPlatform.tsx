@@ -6,6 +6,7 @@ export default function ProtestPlatform() {
     <ProjectLayout
       title="Protest Platform"
       description="A digital toolkit for organizing social movements"
+      backLink="/work/foundations"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function ProtestPlatform() {
             <li>Offline functionality</li>
             <li>Multi-language support</li>
           </ul>
-          
+
           <h2>Impact</h2>
           <p>
             The Protest Platform has become an essential tool for grassroots

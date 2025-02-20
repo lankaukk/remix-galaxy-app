@@ -6,6 +6,7 @@ export default function NoLikes() {
     <ProjectLayout
       title="No Likes"
       description="A social media platform reimagined without vanity metrics"
+      backLink="/work/foundations"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function NoLikes() {
             <li>Community-driven content curation</li>
             <li>Focus on conversation quality</li>
           </ul>
-          
+
           <h2>Results</h2>
           <p>
             No Likes has demonstrated that social platforms can thrive without

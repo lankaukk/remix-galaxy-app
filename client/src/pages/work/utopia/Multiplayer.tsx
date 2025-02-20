@@ -6,6 +6,7 @@ export default function Multiplayer() {
     <ProjectLayout
       title="Multiplayer Features"
       description="Enabling real-time collaboration in React development"
+      backLink="/work/utopia"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function Multiplayer() {
             <li>Built-in chat and commenting system</li>
             <li>Conflict resolution handling</li>
           </ul>
-          
+
           <h2>Results</h2>
           <p>
             The multiplayer features have transformed how teams approach React

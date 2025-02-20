@@ -6,6 +6,7 @@ export default function Blank() {
     <ProjectLayout
       title="Blank Canvas"
       description="An experimental design space for creative exploration"
+      backLink="/work/foundations"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function Blank() {
             <li>Real-time collaboration options</li>
             <li>Export in multiple formats</li>
           </ul>
-          
+
           <h2>Outcome</h2>
           <p>
             Blank Canvas has become a playground for digital artists and

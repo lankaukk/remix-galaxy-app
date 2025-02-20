@@ -6,6 +6,7 @@ export default function Shopify() {
     <ProjectLayout
       title="Shopify Redesign"
       description="A comprehensive redesign of the Shopify merchant dashboard to improve usability and efficiency."
+      backLink="/work"
     >
       <div className="space-y-12">
         <img

@@ -6,6 +6,7 @@ export default function ProjectsPage() {
     <ProjectLayout
       title="Projects Page"
       description="A comprehensive project management system for React applications"
+      backLink="/work/utopia"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function ProjectsPage() {
             <li>Project analytics and insights</li>
             <li>Resource organization tools</li>
           </ul>
-          
+
           <h2>Impact</h2>
           <p>
             The projects page has become a central hub for team collaboration,

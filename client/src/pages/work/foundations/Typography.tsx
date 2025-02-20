@@ -6,6 +6,7 @@ export default function Typography() {
     <ProjectLayout
       title="Typography System"
       description="A comprehensive type scale and hierarchy system designed for digital interfaces"
+      backLink="/work/foundations"
     >
       <div className="space-y-12">
         <img
@@ -47,7 +48,7 @@ export default function Typography() {
             <li>Consistent spacing rules</li>
             <li>Accessibility-first approach</li>
           </ul>
-          
+
           <h2>Impact</h2>
           <p>
             The typography system has become the foundation for all our digital
