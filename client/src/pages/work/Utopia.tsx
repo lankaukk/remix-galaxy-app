@@ -6,13 +6,15 @@ import { ArrowRight } from "lucide-react";
 const sections = [
   {
     title: "UI Simplification",
-    description: "Streamlining complex interaction patterns into intuitive, user-friendly interfaces",
+    description:
+      "Streamlining complex interaction patterns into intuitive, user-friendly interfaces",
     href: "/work/utopia/ui_simplification",
     image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07",
   },
   {
     title: "Multiplayer Features",
-    description: "Real-time collaboration tools that enhance the development experience",
+    description:
+      "Real-time collaboration tools that enhance the development experience",
     href: "/work/utopia/multiplayer",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978",
   },
@@ -31,11 +33,6 @@ export default function Utopia() {
       description="A revolutionary design tool for building React applications visually while maintaining complete control over the code."
     >
       <div className="space-y-12">
-        <Link href="/" className="mb-4 block">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Back to Utopia
-          </button>
-        </Link>
         <img
           src="https://images.unsplash.com/photo-1586953208448-b95a79798f07"
           alt="Utopia Platform"
@@ -45,10 +42,11 @@ export default function Utopia() {
         <div className="prose prose-lg max-w-none text-[#333333]">
           <h2>About Utopia</h2>
           <p>
-            Utopia is an innovative platform that bridges the gap between design and development,
-            allowing developers to create React applications through a visual interface while
-            maintaining full access to the underlying code. Unlike traditional no-code tools,
-            Utopia empowers developers with a unique approach that combines the immediacy of
+            Utopia is an innovative platform that bridges the gap between design
+            and development, allowing developers to create React applications
+            through a visual interface while maintaining full access to the
+            underlying code. Unlike traditional no-code tools, Utopia empowers
+            developers with a unique approach that combines the immediacy of
             visual design with the flexibility of direct code manipulation.
           </p>
         </div>
