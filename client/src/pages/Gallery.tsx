@@ -6,7 +6,10 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
+  DialogTitle,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const images = [
   {
@@ -59,7 +62,8 @@ function GallerySkeleton() {
 
 export default function Gallery() {
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<typeof images[0] | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -67,6 +71,29 @@ export default function Gallery() {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'ArrowLeft') {
+        setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+      } else if (e.key === 'ArrowRight') {
+        setCurrentImageIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen]);
+
+  const handlePrevious = () => {
+    setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentImageIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -81,7 +108,14 @@ export default function Gallery() {
           ))
         ) : (
           images.map((image, index) => (
-            <Dialog key={index}>
+            <Dialog 
+              key={index}
+              open={isModalOpen && currentImageIndex === index}
+              onOpenChange={(open) => {
+                setIsModalOpen(open);
+                if (open) setCurrentImageIndex(index);
+              }}
+            >
               <DialogTrigger asChild>
                 <Card className="overflow-hidden group cursor-pointer relative">
                   <CardContent className="p-0">
@@ -101,16 +135,42 @@ export default function Gallery() {
                 </Card>
               </DialogTrigger>
               <DialogContent className="max-w-4xl">
+                <DialogTitle className="sr-only">{image.title}</DialogTitle>
                 <div className="relative">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full object-contain max-h-[80vh]"
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={currentImageIndex}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.2 }}
+                      src={images[currentImageIndex].src}
+                      alt={images[currentImageIndex].alt}
+                      className="w-full object-contain max-h-[80vh]"
+                    />
+                  </AnimatePresence>
                   <div className="mt-4">
-                    <h2 className="text-2xl font-semibold">{image.title}</h2>
-                    <p className="text-muted-foreground mt-2">{image.description}</p>
+                    <h2 className="text-2xl font-semibold">{images[currentImageIndex].title}</h2>
+                    <p className="text-muted-foreground mt-2">{images[currentImageIndex].description}</p>
                   </div>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
+                    onClick={handlePrevious}
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
+                    onClick={handleNext}
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
                 </div>
               </DialogContent>
             </Dialog>
