@@ -6,11 +6,12 @@ import Masonry from 'react-masonry-css';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import type { Artwork } from "@shared/schema";
 
@@ -20,13 +21,63 @@ const breakpointColumns = {
   640: 1
 };
 
-function GallerySkeleton() {
+function GalleryItemSkeleton() {
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-0">
-        <Skeleton className="aspect-video w-full" />
+        <div className="aspect-video w-full bg-muted flex items-center justify-center">
+          <Skeleton className="w-full h-full" />
+        </div>
       </CardContent>
     </Card>
+  );
+}
+
+function ImageWithFallback({ 
+  src, 
+  alt, 
+  aspectRatio, 
+  onLoad, 
+  onError 
+}: { 
+  src: string; 
+  alt: string; 
+  aspectRatio: string;
+  onLoad?: () => void;
+  onError?: () => void;
+}) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <div className={`${aspectRatio} w-full relative bg-muted`}>
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Skeleton className="w-full h-full" />
+        </div>
+      )}
+      {hasError ? (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <ImageIcon className="h-12 w-12 text-muted-foreground" />
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
+          loading="lazy"
+          onLoad={() => {
+            setIsLoading(false);
+            onLoad?.();
+          }}
+          onError={() => {
+            setIsLoading(false);
+            setHasError(true);
+            onError?.();
+          }}
+        />
+      )}
+    </div>
   );
 }
 
@@ -78,7 +129,7 @@ export default function Gallery() {
       {isLoading ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array(6).fill(0).map((_, index) => (
-            <GallerySkeleton key={index} />
+            <GalleryItemSkeleton key={index} />
           ))}
         </div>
       ) : (
@@ -105,16 +156,11 @@ export default function Gallery() {
                 <DialogTrigger asChild>
                   <Card className="overflow-hidden group cursor-pointer relative">
                     <CardContent className="p-0">
-                      <motion.div
-                        className={`${artwork.aspectRatio} w-full relative`}
-                      >
-                        <img
-                          src={artwork.imageUrl}
-                          alt={artwork.title}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
-                          loading="lazy"
-                        />
-                      </motion.div>
+                      <ImageWithFallback
+                        src={artwork.imageUrl}
+                        alt={artwork.title}
+                        aspectRatio={artwork.aspectRatio}
+                      />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4">
                         <h3 className="text-white font-semibold text-lg">{artwork.title}</h3>
                         <p className="text-white/80 text-sm">{artwork.description}</p>
@@ -123,24 +169,25 @@ export default function Gallery() {
                   </Card>
                 </DialogTrigger>
                 <DialogContent className="max-w-4xl">
-                  <DialogTitle className="sr-only">{artwork.title}</DialogTitle>
+                  <DialogTitle>{artwork.title}</DialogTitle>
+                  <DialogDescription>{artwork.description}</DialogDescription>
                   <div className="relative">
                     <AnimatePresence mode="wait">
-                      <motion.img
+                      <motion.div
                         key={currentImageIndex}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.2 }}
-                        src={artworks[currentImageIndex].imageUrl}
-                        alt={artworks[currentImageIndex].title}
-                        className="w-full object-contain max-h-[80vh]"
-                      />
+                        className="relative"
+                      >
+                        <ImageWithFallback
+                          src={artworks[currentImageIndex].imageUrl}
+                          alt={artworks[currentImageIndex].title}
+                          aspectRatio={artworks[currentImageIndex].aspectRatio}
+                        />
+                      </motion.div>
                     </AnimatePresence>
-                    <div className="mt-4">
-                      <h2 className="text-2xl font-semibold">{artworks[currentImageIndex].title}</h2>
-                      <p className="text-muted-foreground mt-2">{artworks[currentImageIndex].description}</p>
-                    </div>
                     <Button
                       variant="outline"
                       size="icon"
