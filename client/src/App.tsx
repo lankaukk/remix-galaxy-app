@@ -10,6 +10,9 @@ import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import Shopify from "@/pages/work/Shopify";
 import Utopia from "@/pages/work/Utopia";
+import UiSimplification from "@/pages/work/utopia/UiSimplification";
+import Multiplayer from "@/pages/work/utopia/Multiplayer";
+import ProjectsPage from "@/pages/work/utopia/ProjectsPage";
 import Foundations from "@/pages/work/Foundations";
 
 function Router() {
@@ -19,6 +22,9 @@ function Router() {
       <Route path="/work" component={Work} />
       <Route path="/work/shopify" component={Shopify} />
       <Route path="/work/utopia" component={Utopia} />
+      <Route path="/work/utopia/ui_simplification" component={UiSimplification} />
+      <Route path="/work/utopia/multiplayer" component={Multiplayer} />
+      <Route path="/work/utopia/projects_page" component={ProjectsPage} />
       <Route path="/work/foundations" component={Foundations} />
       <Route path="/gallery" component={Gallery} />
       <Route path="/contact" component={Contact} />
