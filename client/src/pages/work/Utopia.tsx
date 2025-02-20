@@ -31,6 +31,11 @@ export default function Utopia() {
       description="A revolutionary design tool for building React applications visually while maintaining complete control over the code."
     >
       <div className="space-y-12">
+        <Link href="/" className="mb-4 block">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Back to Utopia
+          </button>
+        </Link>
         <img
           src="https://images.unsplash.com/photo-1586953208448-b95a79798f07"
           alt="Utopia Platform"

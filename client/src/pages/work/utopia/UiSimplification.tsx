@@ -7,6 +7,7 @@ export default function UiSimplification() {
       title="UI Simplification"
       description="Making complex React development more accessible through intuitive visual interfaces"
       backLink="/work/utopia"
+      backText="Back to Utopia"
     >
       <div className="space-y-12">
         <img

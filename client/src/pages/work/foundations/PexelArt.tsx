@@ -7,6 +7,7 @@ export default function PexelArt() {
       title="Pexel Art"
       description="A digital art creation and curation platform"
       backLink="/work/foundations"
+      backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img

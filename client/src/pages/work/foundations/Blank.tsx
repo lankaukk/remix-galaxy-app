@@ -7,6 +7,7 @@ export default function Blank() {
       title="Blank Canvas"
       description="An experimental design space for creative exploration"
       backLink="/work/foundations"
+      backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img

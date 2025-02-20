@@ -7,6 +7,7 @@ export default function ProtestPlatform() {
       title="Protest Platform"
       description="A digital toolkit for organizing social movements"
       backLink="/work/foundations"
+      backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img

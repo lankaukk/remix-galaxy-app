@@ -7,6 +7,7 @@ export default function RobotPigeon() {
       title="Robot Pigeon"
       description="A playful AI-driven message delivery system"
       backLink="/work/foundations"
+      backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img

@@ -7,6 +7,7 @@ export default function Typography() {
       title="Typography System"
       description="A comprehensive type scale and hierarchy system designed for digital interfaces"
       backLink="/work/foundations"
+      backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img

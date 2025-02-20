@@ -7,6 +7,7 @@ export default function ProjectsPage() {
       title="Projects Page"
       description="A comprehensive project management system for React applications"
       backLink="/work/utopia"
+      backText="Back to Utopia"
     >
       <div className="space-y-12">
         <img

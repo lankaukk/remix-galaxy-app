@@ -6,10 +6,11 @@ interface ProjectLayoutProps {
   title: string;
   description: string;
   children: React.ReactNode;
-  backLink: string;
+  backLink?: string;
+  backText?: string;
 }
 
-export default function ProjectLayout({ title, description, children, backLink }: ProjectLayoutProps) {
+export default function ProjectLayout({ title, description, children, backLink, backText }: ProjectLayoutProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -17,12 +18,14 @@ export default function ProjectLayout({ title, description, children, backLink }
       exit={{ opacity: 0, y: 20 }}
       className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
     >
-      <Link href={backLink}>
-        <a className="mb-8 inline-flex items-center text-[#333333] hover:text-[#FF5757]">
-          <ArrowLeft className="mr-2 h-5 w-5" />
-          Back
-        </a>
-      </Link>
+      {backLink && (
+        <Link href={backLink}>
+          <a className="mb-8 inline-flex items-center text-[#333333] hover:text-[#FF5757]">
+            <ArrowLeft className="mr-2 h-5 w-5" />
+            {backText || "Back"}
+          </a>
+        </Link>
+      )}
       <div className="mb-12 text-center">
         <h1 className="mb-4 text-4xl font-bold text-[#2D2D2D] sm:text-5xl">
           {title}

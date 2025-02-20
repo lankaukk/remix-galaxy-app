@@ -7,6 +7,7 @@ export default function NoLikes() {
       title="No Likes"
       description="A social media platform reimagined without vanity metrics"
       backLink="/work/foundations"
+      backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img

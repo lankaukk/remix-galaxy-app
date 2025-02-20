@@ -7,6 +7,7 @@ export default function Multiplayer() {
       title="Multiplayer Features"
       description="Enabling real-time collaboration in React development"
       backLink="/work/utopia"
+      backText="Back to Utopia"
     >
       <div className="space-y-12">
         <img

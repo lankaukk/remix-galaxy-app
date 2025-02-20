@@ -7,6 +7,7 @@ export default function JournalApp() {
       title="Journal App"
       description="A minimal writing experience focused on clarity and ease of use"
       backLink="/work/foundations"
+      backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img

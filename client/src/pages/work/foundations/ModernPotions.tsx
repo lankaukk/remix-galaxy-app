@@ -7,6 +7,7 @@ export default function ModernPotions() {
       title="Modern Potions"
       description="An e-commerce redesign for artisanal beverages"
       backLink="/work/foundations"
+      backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img
