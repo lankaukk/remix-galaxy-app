@@ -1,7 +1,32 @@
+import { useState, useEffect } from "react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
+import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 
 export default function PexelArt() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for images and content
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <ProjectLayout
+        title="Pexel Art"
+        description="A digital art creation and curation platform"
+        backLink="/work/foundations"
+        backText="Back to Foundations"
+      >
+        <ProjectDetailSkeleton />
+      </ProjectLayout>
+    );
+  }
+
   return (
     <ProjectLayout
       title="Pexel Art"
@@ -14,6 +39,7 @@ export default function PexelArt() {
           src="https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07"
           alt="Pexel Art Platform"
           className="w-full rounded-lg shadow-xl"
+          loading="lazy"
         />
 
         <div className="grid gap-8 md:grid-cols-2">
