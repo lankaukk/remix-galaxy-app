@@ -11,51 +11,14 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import type { Project } from "@shared/schema";
 
-const images = [
-  {
-    src: "https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8",
-    alt: "UI Design 1",
-    title: "Modern Dashboard Design",
-    description: "A clean and intuitive dashboard interface for data visualization",
-    aspectRatio: "aspect-video",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
-    alt: "UI Design 2",
-    title: "Financial App Interface",
-    description: "Mobile banking application with focus on user experience",
-    aspectRatio: "aspect-[4/5]",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506729623306-b5a934d88b53",
-    alt: "UI Design 3",
-    title: "E-commerce Redesign",
-    description: "Complete redesign of an online shopping platform",
-    aspectRatio: "aspect-square",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1529119513315-c7c361862fc7",
-    alt: "UI Design 4",
-    title: "Social Media App",
-    description: "Modern social networking interface with dark mode",
-    aspectRatio: "aspect-[3/4]",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1739514984003-330f7c1d2007",
-    alt: "UI Design 5",
-    title: "Healthcare Platform",
-    description: "Patient management system with accessibility features",
-    aspectRatio: "aspect-[16/9]",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1510759395231-72b17d622279",
-    alt: "UI Design 6",
-    title: "Travel Booking Interface",
-    description: "Streamlined booking process for travel services",
-    aspectRatio: "aspect-[3/2]",
-  },
-];
+const breakpointColumns = {
+  default: 3,
+  1024: 2,
+  640: 1
+};
 
 function GallerySkeleton() {
   return (
@@ -67,46 +30,48 @@ function GallerySkeleton() {
   );
 }
 
-const breakpointColumns = {
-  default: 3,
-  1024: 2,
-  640: 1
-};
-
 export default function Gallery() {
-  const [isLoading, setIsLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  const { data: projects, isLoading, error } = useQuery<Project[]>({
+    queryKey: ['/api/projects'],
+  });
 
   useEffect(() => {
     if (!isModalOpen) return;
 
     function handleKeyDown(e: KeyboardEvent) {
+      if (!projects) return;
+
       if (e.key === 'ArrowLeft') {
-        setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+        setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : projects.length - 1));
       } else if (e.key === 'ArrowRight') {
-        setCurrentImageIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+        setCurrentImageIndex((prev) => (prev < projects.length - 1 ? prev + 1 : 0));
       }
     }
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isModalOpen]);
+  }, [isModalOpen, projects]);
 
   const handlePrevious = () => {
-    setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+    if (!projects) return;
+    setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : projects.length - 1));
   };
 
   const handleNext = () => {
-    setCurrentImageIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+    if (!projects) return;
+    setCurrentImageIndex((prev) => (prev < projects.length - 1 ? prev + 1 : 0));
   };
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <p className="text-destructive">Error loading projects. Please try again later.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -122,9 +87,9 @@ export default function Gallery() {
           className="flex -ml-6 w-auto"
           columnClassName="pl-6 bg-clip-padding"
         >
-          {images.map((image, index) => (
+          {projects?.map((project, index) => (
             <motion.div
-              key={index}
+              key={project.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -141,24 +106,24 @@ export default function Gallery() {
                   <Card className="overflow-hidden group cursor-pointer relative">
                     <CardContent className="p-0">
                       <motion.div
-                        className={`${image.aspectRatio} w-full relative`}
+                        className={`${project.aspectRatio} w-full relative`}
                       >
                         <img
-                          src={image.src}
-                          alt={image.alt}
+                          src={project.imageUrl}
+                          alt={project.title}
                           className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
                           loading="lazy"
                         />
                       </motion.div>
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4">
-                        <h3 className="text-white font-semibold text-lg">{image.title}</h3>
-                        <p className="text-white/80 text-sm">{image.description}</p>
+                        <h3 className="text-white font-semibold text-lg">{project.title}</h3>
+                        <p className="text-white/80 text-sm">{project.description}</p>
                       </div>
                     </CardContent>
                   </Card>
                 </DialogTrigger>
                 <DialogContent className="max-w-4xl">
-                  <DialogTitle className="sr-only">{image.title}</DialogTitle>
+                  <DialogTitle className="sr-only">{project.title}</DialogTitle>
                   <div className="relative">
                     <AnimatePresence mode="wait">
                       <motion.img
@@ -167,14 +132,14 @@ export default function Gallery() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.2 }}
-                        src={images[currentImageIndex].src}
-                        alt={images[currentImageIndex].alt}
+                        src={projects[currentImageIndex].imageUrl}
+                        alt={projects[currentImageIndex].title}
                         className="w-full object-contain max-h-[80vh]"
                       />
                     </AnimatePresence>
                     <div className="mt-4">
-                      <h2 className="text-2xl font-semibold">{images[currentImageIndex].title}</h2>
-                      <p className="text-muted-foreground mt-2">{images[currentImageIndex].description}</p>
+                      <h2 className="text-2xl font-semibold">{projects[currentImageIndex].title}</h2>
+                      <p className="text-muted-foreground mt-2">{projects[currentImageIndex].description}</p>
                     </div>
                     <Button
                       variant="outline"

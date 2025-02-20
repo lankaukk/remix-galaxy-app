@@ -5,9 +5,9 @@ import { z } from "zod";
 export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
-  slug: text("slug").notNull().unique(),
   description: text("description").notNull(),
   imageUrl: text("image_url").notNull(),
+  aspectRatio: varchar("aspect_ratio", { length: 20 }).notNull(),
   category: varchar("category", { length: 50 }).notNull(),
 });
 
