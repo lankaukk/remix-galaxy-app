@@ -1,78 +1,51 @@
-import { users, type User, type InsertUser } from "@shared/schema";
-import { projects, type Project, type InsertProject } from "@shared/schema";
+import { artwork, type Artwork, type InsertArtwork } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
-// modify the interface with any CRUD methods
-// you might need
-
 export interface IStorage {
-  getUser(id: number): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
-  getProjects(): Promise<Project[]>;
-  getProject(id: number): Promise<Project | undefined>;
-  createProject(project: InsertProject): Promise<Project>;
+  getArtworks(): Promise<Artwork[]>;
+  getArtwork(id: number): Promise<Artwork | undefined>;
+  createArtwork(artwork: InsertArtwork): Promise<Artwork>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<number, User>;
+  private artworks: Map<number, Artwork>;
   currentId: number;
 
   constructor() {
-    this.users = new Map();
+    this.artworks = new Map();
     this.currentId = 1;
   }
 
-  async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+  async getArtworks(): Promise<Artwork[]> {
+    return Array.from(this.artworks.values());
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async getArtwork(id: number): Promise<Artwork | undefined> {
+    return this.artworks.get(id);
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async createArtwork(insertArtwork: InsertArtwork): Promise<Artwork> {
     const id = this.currentId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
-  }
-  async getProjects(): Promise<Project[]> {
-    throw new Error("Method not implemented.");
-  }
-  async getProject(id: number): Promise<Project | undefined> {
-    throw new Error("Method not implemented.");
-  }
-  async createProject(project: InsertProject): Promise<Project> {
-    throw new Error("Method not implemented.");
+    const newArtwork: Artwork = { ...insertArtwork, id };
+    this.artworks.set(id, newArtwork);
+    return newArtwork;
   }
 }
 
 export class DatabaseStorage implements IStorage {
-  async getProjects(): Promise<Project[]> {
-    return await db.select().from(projects);
+  async getArtworks(): Promise<Artwork[]> {
+    return await db.select().from(artwork);
   }
 
-  async getProject(id: number): Promise<Project | undefined> {
-    const [project] = await db.select().from(projects).where(eq(projects.id, id));
-    return project;
+  async getArtwork(id: number): Promise<Artwork | undefined> {
+    const [art] = await db.select().from(artwork).where(eq(artwork.id, id));
+    return art;
   }
 
-  async createProject(project: InsertProject): Promise<Project> {
-    const [newProject] = await db.insert(projects).values(project).returning();
-    return newProject;
-  }
-  async getUser(id: number): Promise<User | undefined> {
-    throw new Error("Method not implemented.");
-  }
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    throw new Error("Method not implemented.");
-  }
-  async createUser(user: InsertUser): Promise<User> {
-    throw new Error("Method not implemented.");
+  async createArtwork(insertArtwork: InsertArtwork): Promise<Artwork> {
+    const [newArtwork] = await db.insert(artwork).values(insertArtwork).returning();
+    return newArtwork;
   }
 }
 

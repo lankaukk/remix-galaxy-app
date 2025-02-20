@@ -2,7 +2,7 @@ import { pgTable, text, serial, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const projects = pgTable("projects", {
+export const artwork = pgTable("artwork", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   description: text("description").notNull(),
@@ -11,7 +11,7 @@ export const projects = pgTable("projects", {
   category: varchar("category", { length: 50 }).notNull(),
 });
 
-export const insertProjectSchema = createInsertSchema(projects).omit({ id: true });
+export const insertArtworkSchema = createInsertSchema(artwork).omit({ id: true });
 
-export type InsertProject = z.infer<typeof insertProjectSchema>;
-export type Project = typeof projects.$inferSelect;
+export type InsertArtwork = z.infer<typeof insertArtworkSchema>;
+export type Artwork = typeof artwork.$inferSelect;
