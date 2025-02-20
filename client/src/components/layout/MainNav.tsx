@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -52,18 +52,19 @@ export default function MainNav() {
               <SheetContent side="right" className="w-[240px] sm:w-[280px]">
                 <div className="mt-6 flex flex-col space-y-3">
                   {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={cn(
-                        "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                        location === item.href
-                          ? "text-[#FF5757]"
-                          : "text-[#333333] hover:text-[#00C2FF]"
-                      )}
-                    >
-                      {item.name}
-                    </Link>
+                    <SheetClose key={item.name} asChild>
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                          location === item.href
+                            ? "text-[#FF5757]"
+                            : "text-[#333333] hover:text-[#00C2FF]"
+                        )}
+                      >
+                        {item.name}
+                      </Link>
+                    </SheetClose>
                   ))}
                 </div>
               </SheetContent>
