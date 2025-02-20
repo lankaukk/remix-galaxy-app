@@ -1,7 +1,9 @@
 import { Link } from "wouter";
+import { useState, useEffect } from "react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
+import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 
 const projects = [
   {
@@ -55,6 +57,15 @@ const projects = [
 ];
 
 export default function Foundations() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <ProjectLayout
       title="Design Foundations"
@@ -62,26 +73,33 @@ export default function Foundations() {
     >
       <div className="space-y-12">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <Link key={project.title} href={project.href}>
-              <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
-                <CardContent className="p-0">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="aspect-video w-full object-cover"
-                  />
-                  <div className="p-6">
-                    <h3 className="mb-2 flex items-center justify-between text-xl font-bold text-[#2D2D2D]">
-                      {project.title}
-                      <ArrowRight className="h-5 w-5 text-[#FF5757]" />
-                    </h3>
-                    <p className="text-[#333333]">{project.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+          {isLoading ? (
+            Array(8).fill(0).map((_, index) => (
+              <ProjectCardSkeleton key={index} />
+            ))
+          ) : (
+            projects.map((project) => (
+              <Link key={project.title} href={project.href}>
+                <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
+                  <CardContent className="p-0">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="aspect-video w-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="p-6">
+                      <h3 className="mb-2 flex items-center justify-between text-xl font-bold text-[#2D2D2D]">
+                        {project.title}
+                        <ArrowRight className="h-5 w-5 text-[#FF5757]" />
+                      </h3>
+                      <p className="text-[#333333]">{project.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))
+          )}
         </div>
 
         <div className="prose prose-lg max-w-none text-[#333333]">
