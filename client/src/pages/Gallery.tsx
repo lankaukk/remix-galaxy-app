@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const images = [
   {
@@ -28,7 +30,26 @@ const images = [
   },
 ];
 
+function GallerySkeleton() {
+  return (
+    <Card className="overflow-hidden">
+      <CardContent className="p-0">
+        <Skeleton className="aspect-video w-full" />
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function Gallery() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <motion.div
@@ -36,19 +57,26 @@ export default function Gallery() {
         animate={{ opacity: 1, y: 0 }}
         className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
-        {images.map((image, index) => (
-          <Card key={index} className="overflow-hidden">
-            <CardContent className="p-0">
-              <motion.img
-                initial={{ scale: 1.1 }}
-                whileHover={{ scale: 1 }}
-                src={image.src}
-                alt={image.alt}
-                className="aspect-video w-full object-cover transition-transform"
-              />
-            </CardContent>
-          </Card>
-        ))}
+        {isLoading ? (
+          Array(6).fill(0).map((_, index) => (
+            <GallerySkeleton key={index} />
+          ))
+        ) : (
+          images.map((image, index) => (
+            <Card key={index} className="overflow-hidden">
+              <CardContent className="p-0">
+                <motion.img
+                  initial={{ scale: 1.1 }}
+                  whileHover={{ scale: 1 }}
+                  src={image.src}
+                  alt={image.alt}
+                  className="aspect-video w-full object-cover transition-transform"
+                  loading="lazy"
+                />
+              </CardContent>
+            </Card>
+          ))
+        )}
       </motion.div>
     </div>
   );
