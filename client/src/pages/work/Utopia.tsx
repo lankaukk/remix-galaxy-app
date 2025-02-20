@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
+import { ProjectDetailSkeleton, ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 
 const sections = [
   {
@@ -27,6 +29,33 @@ const sections = [
 ];
 
 export default function Utopia() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <ProjectLayout
+        title="Utopia Platform"
+        description="A revolutionary design tool for building React applications visually while maintaining complete control over the code."
+      >
+        <div className="space-y-12">
+          <ProjectDetailSkeleton />
+          <div className="grid gap-8 md:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <ProjectCardSkeleton key={i} />
+            ))}
+          </div>
+        </div>
+      </ProjectLayout>
+    );
+  }
+
   return (
     <ProjectLayout
       title="Utopia Platform"
@@ -37,6 +66,7 @@ export default function Utopia() {
           src="https://images.unsplash.com/photo-1586953208448-b95a79798f07"
           alt="Utopia Platform"
           className="w-full rounded-lg shadow-xl"
+          loading="lazy"
         />
 
         <div className="prose prose-lg max-w-none text-[#333333]">
@@ -60,6 +90,7 @@ export default function Utopia() {
                     src={section.image}
                     alt={section.title}
                     className="aspect-video w-full object-cover"
+                    loading="lazy"
                   />
                   <div className="p-6">
                     <h3 className="mb-2 flex items-center justify-between text-xl font-bold text-[#2D2D2D]">

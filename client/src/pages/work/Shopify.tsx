@@ -1,7 +1,32 @@
+import { useState, useEffect } from "react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
+import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 
 export default function Shopify() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for images and content
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <ProjectLayout
+        title="Shopify Redesign"
+        description="A comprehensive redesign of the Shopify merchant dashboard to improve usability and efficiency."
+        backLink="/work"
+        backText="Back to Work"
+      >
+        <ProjectDetailSkeleton />
+      </ProjectLayout>
+    );
+  }
+
   return (
     <ProjectLayout
       title="Shopify Redesign"
@@ -14,6 +39,7 @@ export default function Shopify() {
           src="https://images.unsplash.com/photo-1531403009284-440f080d1e12"
           alt="Shopify Dashboard"
           className="w-full rounded-lg shadow-xl"
+          loading="lazy"
         />
 
         <div className="grid gap-8 lg:grid-cols-2">
