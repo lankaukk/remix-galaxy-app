@@ -49,22 +49,45 @@ function ImageWithFallback({
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
+  // Convert aspect ratio class to paddingTop percentage
+  const getPaddingTop = () => {
+    switch (aspectRatio) {
+      case 'aspect-square': return '100%';
+      case 'aspect-video': return '56.25%';
+      case 'aspect-[4/5]': return '125%';
+      case 'aspect-[3/4]': return '133.33%';
+      case 'aspect-[16/9]': return '56.25%';
+      case 'aspect-[3/2]': return '66.67%';
+      case 'aspect-[9/16]': return '177.78%';
+      case 'aspect-[4/3]': return '75%';
+      case 'aspect-[21/9]': return '42.86%';
+      case 'aspect-[5/4]': return '80%';
+      default: return '100%';
+    }
+  };
+
   return (
-    <div className={`${aspectRatio} w-full relative bg-muted`}>
+    <div 
+      style={{ paddingTop: getPaddingTop() }}
+      className="relative w-full bg-muted"
+    >
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <Skeleton className="w-full h-full" />
+          <Skeleton className="w-full h-full absolute inset-0" />
         </div>
       )}
       {hasError ? (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <ImageIcon className="h-12 w-12 text-muted-foreground" />
+        <div className="absolute inset-0 flex items-center justify-center bg-muted">
+          <div className="text-center">
+            <ImageIcon className="h-12 w-12 text-muted-foreground mx-auto" />
+            <p className="text-sm text-muted-foreground mt-2">Failed to load image</p>
+          </div>
         </div>
       ) : (
         <img
           src={src}
           alt={alt}
-          className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
+          className={`absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105 duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
           loading="lazy"
           onLoad={() => {
             setIsLoading(false);
