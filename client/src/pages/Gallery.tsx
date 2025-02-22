@@ -199,18 +199,15 @@ export default function Gallery() {
 
                   <DialogDescription>
                     {artwork.medium && (
-                      <span className="block">{artwork.medium}</span>
-                    )}
-                    {artwork.year && (
                       <span className="block">
-                        {artwork.year.split("-")[0]}
+                        {artwork.medium}, {artwork.year.split("-")[0]}
                       </span>
                     )}
-                    {artwork.collection && (
+                    {/* {artwork.collection && (
                       <span className="block">
                         Collection: {artwork.collection}
                       </span>
-                    )}
+                    )} */}
                   </DialogDescription>
                   <div className="relative">
                     <AnimatePresence mode="wait">
@@ -230,11 +227,11 @@ export default function Gallery() {
                     </AnimatePresence>
 
                     {artworks.length > 1 && (
-                      <>
+                      <div className="flex justify-between mt-4">
                         <Button
-                          variant="outline"
+                          variant="ghost"
                           size="icon"
-                          className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
+                          className="bg-transparent"
                           onClick={() =>
                             setCurrentImageIndex((prev) =>
                               prev > 0 ? prev - 1 : artworks.length - 1,
@@ -245,9 +242,9 @@ export default function Gallery() {
                           <ChevronLeft className="h-4 w-4" />
                         </Button>
                         <Button
-                          variant="outline"
+                          variant="ghost"
                           size="icon"
-                          className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
+                          className="bg-transparent"
                           onClick={() =>
                             setCurrentImageIndex((prev) =>
                               prev < artworks.length - 1 ? prev + 1 : 0,
@@ -257,7 +254,7 @@ export default function Gallery() {
                         >
                           <ChevronRight className="h-4 w-4" />
                         </Button>
-                      </>
+                      </div>
                     )}
                   </div>
                 </DialogContent>
