@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -14,16 +15,16 @@ export default function MainNav() {
   const [location] = useLocation();
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-border bg-white/80 backdrop-blur-sm">
+    <nav className="fixed top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-[#2D2D2D]">
+          <Link href="/" className="text-xl font-bold text-foreground">
             UX Portfolio
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+          <div className="hidden md:flex md:items-center md:space-x-4">
+            <div className="flex items-baseline space-x-4">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -32,20 +33,21 @@ export default function MainNav() {
                     "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     location === item.href
                       ? "text-[#FF5757]"
-                      : "text-[#333333] hover:text-[#00C2FF]"
+                      : "text-foreground hover:text-[#00C2FF]"
                   )}
                 >
                   {item.name}
                 </Link>
               ))}
             </div>
+            <ThemeToggle />
           </div>
 
           {/* Mobile Navigation */}
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <button className="rounded-md p-2 text-[#333333] hover:bg-gray-100">
+                <button className="rounded-md p-2 text-foreground hover:bg-accent">
                   <Menu className="h-6 w-6" />
                 </button>
               </SheetTrigger>
@@ -59,13 +61,16 @@ export default function MainNav() {
                           "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                           location === item.href
                             ? "text-[#FF5757]"
-                            : "text-[#333333] hover:text-[#00C2FF]"
+                            : "text-foreground hover:text-[#00C2FF]"
                         )}
                       >
                         {item.name}
                       </Link>
                     </SheetClose>
                   ))}
+                  <div className="px-3 py-2">
+                    <ThemeToggle />
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
