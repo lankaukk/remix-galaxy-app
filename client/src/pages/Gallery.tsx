@@ -22,13 +22,21 @@ const breakpointColumns = {
   640: 1
 };
 
-function GalleryError({ error }: { error: Error }) {
+function GalleryError({ error }: { error: any }) {
+  // Handle specific error types
+  const getErrorMessage = () => {
+    if (error.code === 'AUTH_ERROR') {
+      return "Unable to connect to the artwork database. Please verify the API credentials.";
+    }
+    return error.error || "Failed to load artwork. Please try again later.";
+  };
+
   return (
     <Alert variant="destructive" className="mx-auto max-w-2xl mt-8">
       <AlertCircle className="h-4 w-4" />
       <AlertTitle>Error Loading Gallery</AlertTitle>
       <AlertDescription>
-        {error.message || "Failed to load artwork. Please try again later."}
+        {getErrorMessage()}
       </AlertDescription>
     </Alert>
   );
@@ -125,10 +133,13 @@ export default function Gallery() {
     queryKey: ['/api/artwork'],
     retry: 2,
     refetchOnWindowFocus: false,
+    onError: (error) => {
+      console.error('Gallery fetch error:', error);
+    }
   });
 
   if (error) {
-    return <GalleryError error={error as Error} />;
+    return <GalleryError error={error} />;
   }
 
   return (

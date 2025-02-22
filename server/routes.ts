@@ -11,7 +11,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(artworks);
     } catch (error) {
       console.error('Error fetching artworks:', error);
-      res.status(500).json({ error: 'Failed to fetch artworks' });
+      // Send more specific error message to client
+      if (error instanceof Error) {
+        res.status(500).json({ 
+          error: error.message || 'Failed to fetch artworks',
+          code: error.message.includes('AUTHENTICATION_REQUIRED') ? 'AUTH_ERROR' : 'SERVER_ERROR'
+        });
+      } else {
+        res.status(500).json({ error: 'Failed to fetch artworks' });
+      }
     }
   });
 
@@ -24,7 +32,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(artwork);
     } catch (error) {
       console.error('Error fetching artwork:', error);
-      res.status(500).json({ error: 'Failed to fetch artwork' });
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Failed to fetch artwork' });
+      }
     }
   });
 
@@ -35,7 +47,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(artwork);
     } catch (error) {
       console.error('Error creating artwork:', error);
-      res.status(400).json({ error: 'Invalid artwork data' });
+      if (error instanceof Error) {
+        res.status(400).json({ error: error.message });
+      } else {
+        res.status(400).json({ error: 'Invalid artwork data' });
+      }
     }
   });
 
