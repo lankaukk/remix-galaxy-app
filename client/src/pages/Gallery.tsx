@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import Masonry from 'react-masonry-css';
+import Masonry from "react-masonry-css";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, ImageIcon, AlertCircle } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ImageIcon,
+  AlertCircle,
+} from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import type { Artwork } from "@shared/schema";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -19,12 +24,12 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 const breakpointColumns = {
   default: 3,
   1024: 2,
-  640: 1
+  640: 1,
 };
 
 function GalleryError({ error }: { error: any }) {
   const getErrorMessage = () => {
-    if (error.message?.includes('AUTHENTICATION_REQUIRED')) {
+    if (error.message?.includes("AUTHENTICATION_REQUIRED")) {
       return "Unable to connect to the artwork database. Please verify the API credentials.";
     }
     return error.error || "Failed to load artwork. Please try again later.";
@@ -34,9 +39,7 @@ function GalleryError({ error }: { error: any }) {
     <Alert variant="destructive" className="mx-auto max-w-2xl mt-8">
       <AlertCircle className="h-4 w-4" />
       <AlertTitle>Error Loading Gallery</AlertTitle>
-      <AlertDescription>
-        {getErrorMessage()}
-      </AlertDescription>
+      <AlertDescription>{getErrorMessage()}</AlertDescription>
     </Alert>
   );
 }
@@ -53,13 +56,13 @@ function GalleryItemSkeleton() {
   );
 }
 
-function ImageWithFallback({ 
-  src, 
+function ImageWithFallback({
+  src,
   alt,
-  onLoad, 
-  onError 
-}: { 
-  src: string; 
+  onLoad,
+  onError,
+}: {
+  src: string;
   alt: string;
   onLoad?: () => void;
   onError?: () => void;
@@ -78,7 +81,9 @@ function ImageWithFallback({
         <div className="absolute inset-0 flex items-center justify-center bg-muted">
           <div className="text-center">
             <ImageIcon className="h-12 w-12 text-muted-foreground mx-auto" />
-            <p className="text-sm text-muted-foreground mt-2">Failed to load image</p>
+            <p className="text-sm text-muted-foreground mt-2">
+              Failed to load image
+            </p>
           </div>
         </div>
       ) : (
@@ -86,7 +91,7 @@ function ImageWithFallback({
           src={src}
           alt={alt}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-            isLoading ? 'opacity-0' : 'opacity-100'
+            isLoading ? "opacity-0" : "opacity-100"
           }`}
           loading="lazy"
           onLoad={() => {
@@ -108,13 +113,17 @@ export default function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data: artworks, isLoading, error } = useQuery<Artwork[]>({
-    queryKey: ['/api/artwork'],
+  const {
+    data: artworks,
+    isLoading,
+    error,
+  } = useQuery<Artwork[]>({
+    queryKey: ["/api/artwork"],
     retry: 2,
     refetchOnWindowFocus: false,
     onError: (error) => {
-      console.error('Gallery fetch error:', error);
-    }
+      console.error("Gallery fetch error:", error);
+    },
   });
 
   if (error) {
@@ -126,7 +135,9 @@ export default function Gallery() {
       {!artworks?.length && !isLoading && (
         <div className="text-center py-12">
           <ImageIcon className="mx-auto h-12 w-12 text-muted-foreground" />
-          <h3 className="mt-2 text-sm font-semibold text-muted-foreground">No Artwork</h3>
+          <h3 className="mt-2 text-sm font-semibold text-muted-foreground">
+            No Artwork
+          </h3>
           <p className="mt-1 text-sm text-muted-foreground">
             No artwork has been added to the gallery yet.
           </p>
@@ -135,9 +146,11 @@ export default function Gallery() {
 
       {isLoading ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {Array(6).fill(0).map((_, index) => (
-            <GalleryItemSkeleton key={index} />
-          ))}
+          {Array(6)
+            .fill(0)
+            .map((_, index) => (
+              <GalleryItemSkeleton key={index} />
+            ))}
         </div>
       ) : (
         <Masonry
@@ -153,7 +166,7 @@ export default function Gallery() {
               transition={{ delay: index * 0.1 }}
               className="mb-6"
             >
-              <Dialog 
+              <Dialog
                 open={isModalOpen && currentImageIndex === index}
                 onOpenChange={(open) => {
                   setIsModalOpen(open);
@@ -168,9 +181,13 @@ export default function Gallery() {
                         alt={artwork.title}
                       />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4">
-                        <h3 className="text-white font-semibold text-lg">{artwork.title}</h3>
+                        <h3 className="text-white font-semibold text-lg">
+                          {artwork.title}
+                        </h3>
                         {artwork.medium && (
-                          <p className="text-white/80 text-sm">{artwork.medium}</p>
+                          <p className="text-white/80 text-sm">
+                            {artwork.medium}
+                          </p>
                         )}
                       </div>
                     </CardContent>
@@ -179,11 +196,20 @@ export default function Gallery() {
 
                 <DialogContent className="max-w-4xl">
                   <DialogTitle>{artwork.title}</DialogTitle>
+
                   <DialogDescription>
-                    {artwork.medium && <span className="block">{artwork.medium}</span>}
-                    {artwork.year && <span className="block">{artwork.year}</span>}
+                    {artwork.medium && (
+                      <span className="block">{artwork.medium}</span>
+                    )}
+                    {artwork.year && (
+                      <span className="block">
+                        {artwork.year.split("-")[0]}
+                      </span>
+                    )}
                     {artwork.collection && (
-                      <span className="block">Collection: {artwork.collection}</span>
+                      <span className="block">
+                        Collection: {artwork.collection}
+                      </span>
                     )}
                   </DialogDescription>
                   <div className="relative">
@@ -209,9 +235,11 @@ export default function Gallery() {
                           variant="outline"
                           size="icon"
                           className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
-                          onClick={() => setCurrentImageIndex(prev => 
-                            prev > 0 ? prev - 1 : artworks.length - 1
-                          )}
+                          onClick={() =>
+                            setCurrentImageIndex((prev) =>
+                              prev > 0 ? prev - 1 : artworks.length - 1,
+                            )
+                          }
                           aria-label="Previous image"
                         >
                           <ChevronLeft className="h-4 w-4" />
@@ -220,9 +248,11 @@ export default function Gallery() {
                           variant="outline"
                           size="icon"
                           className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
-                          onClick={() => setCurrentImageIndex(prev => 
-                            prev < artworks.length - 1 ? prev + 1 : 0
-                          )}
+                          onClick={() =>
+                            setCurrentImageIndex((prev) =>
+                              prev < artworks.length - 1 ? prev + 1 : 0,
+                            )
+                          }
                           aria-label="Next image"
                         >
                           <ChevronRight className="h-4 w-4" />
