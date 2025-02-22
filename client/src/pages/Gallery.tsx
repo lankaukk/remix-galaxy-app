@@ -23,9 +23,8 @@ const breakpointColumns = {
 };
 
 function GalleryError({ error }: { error: any }) {
-  // Handle specific error types
   const getErrorMessage = () => {
-    if (error.code === 'AUTH_ERROR') {
+    if (error.message?.includes('AUTHENTICATION_REQUIRED')) {
       return "Unable to connect to the artwork database. Please verify the API credentials.";
     }
     return error.error || "Failed to load artwork. Please try again later.";
@@ -46,8 +45,8 @@ function GalleryItemSkeleton() {
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-0">
-        <div className="aspect-video w-full bg-muted flex items-center justify-center">
-          <Skeleton className="w-full h-full" />
+        <div className="relative pt-[75%] w-full bg-muted flex items-center justify-center">
+          <Skeleton className="absolute inset-0" />
         </div>
       </CardContent>
     </Card>
@@ -56,42 +55,20 @@ function GalleryItemSkeleton() {
 
 function ImageWithFallback({ 
   src, 
-  alt, 
-  aspectRatio,
+  alt,
   onLoad, 
   onError 
 }: { 
   src: string; 
-  alt: string; 
-  aspectRatio: string;
+  alt: string;
   onLoad?: () => void;
   onError?: () => void;
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  // Convert aspect ratio class to paddingTop percentage
-  const getPaddingTop = () => {
-    switch (aspectRatio) {
-      case 'aspect-square': return '100%';
-      case 'aspect-video': return '56.25%';
-      case 'aspect-[4/5]': return '125%';
-      case 'aspect-[3/4]': return '133.33%';
-      case 'aspect-[16/9]': return '56.25%';
-      case 'aspect-[3/2]': return '66.67%';
-      case 'aspect-[9/16]': return '177.78%';
-      case 'aspect-[4/3]': return '75%';
-      case 'aspect-[21/9]': return '42.86%';
-      case 'aspect-[5/4]': return '80%';
-      default: return '100%';
-    }
-  };
-
   return (
-    <div 
-      style={{ paddingTop: getPaddingTop() }}
-      className="relative w-full bg-muted"
-    >
+    <div className="relative pt-[75%] w-full bg-muted">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center">
           <Skeleton className="w-full h-full absolute inset-0" />
@@ -108,7 +85,9 @@ function ImageWithFallback({
         <img
           src={src}
           alt={alt}
-          className={`absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105 duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+            isLoading ? 'opacity-0' : 'opacity-100'
+          }`}
           loading="lazy"
           onLoad={() => {
             setIsLoading(false);
@@ -185,13 +164,14 @@ export default function Gallery() {
                   <Card className="overflow-hidden group cursor-pointer relative">
                     <CardContent className="p-0">
                       <ImageWithFallback
-                        src={artwork.imageUrl}
+                        src={artwork.image}
                         alt={artwork.title}
-                        aspectRatio={artwork.aspectRatio}
                       />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4">
                         <h3 className="text-white font-semibold text-lg">{artwork.title}</h3>
-                        <p className="text-white/80 text-sm">{artwork.category}</p>
+                        {artwork.medium && (
+                          <p className="text-white/80 text-sm">{artwork.medium}</p>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
@@ -199,7 +179,13 @@ export default function Gallery() {
 
                 <DialogContent className="max-w-4xl">
                   <DialogTitle>{artwork.title}</DialogTitle>
-                  <DialogDescription>{artwork.category}</DialogDescription>
+                  <DialogDescription>
+                    {artwork.medium && <span className="block">{artwork.medium}</span>}
+                    {artwork.year && <span className="block">{artwork.year}</span>}
+                    {artwork.collection && (
+                      <span className="block">Collection: {artwork.collection}</span>
+                    )}
+                  </DialogDescription>
                   <div className="relative">
                     <AnimatePresence mode="wait">
                       <motion.div
@@ -211,9 +197,8 @@ export default function Gallery() {
                         className="relative"
                       >
                         <ImageWithFallback
-                          src={artworks[currentImageIndex].imageUrl}
+                          src={artworks[currentImageIndex].image}
                           alt={artworks[currentImageIndex].title}
-                          aspectRatio={artworks[currentImageIndex].aspectRatio}
                         />
                       </motion.div>
                     </AnimatePresence>
