@@ -5,7 +5,7 @@ import { Link } from "wouter";
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="py-24">
           <motion.div
@@ -13,13 +13,13 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <h1 className="mb-6 text-5xl font-bold text-[#2D2D2D] sm:text-6xl lg:text-7xl">
+            <h1 className="mb-6 text-5xl font-bold sm:text-6xl lg:text-7xl">
               UX Designer & <br />
               Digital Craftsperson
             </h1>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-[#333333]">
-              Creating thoughtful digital experiences through user-centered design,
-              research, and careful attention to detail.
+            <p className="mx-auto mb-8 max-w-2xl text-lg ">
+              Creating thoughtful digital experiences through user-centered
+              design, research, and careful attention to detail.
             </p>
             <Link href="/work">
               <Button

@@ -19,8 +19,8 @@ export default function Multiplayer() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Objective</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Objective</h3>
+              <p className="">
                 Create a seamless collaborative environment where multiple developers
                 can work on the same React project simultaneously, seeing changes
                 in real-time.
@@ -30,8 +30,8 @@ export default function Multiplayer() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Implementation</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Implementation</h3>
+              <p className="">
                 Developed a robust real-time synchronization system using WebSocket
                 technology and operational transformation algorithms to handle
                 concurrent edits effectively.
@@ -40,7 +40,7 @@ export default function Multiplayer() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className=" prose-lg max-w-none ">
           <h2>Collaborative Features</h2>
           <ul>
             <li>Real-time component editing</li>

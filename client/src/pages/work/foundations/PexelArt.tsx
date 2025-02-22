@@ -45,8 +45,8 @@ export default function PexelArt() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Vision</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Vision</h3>
+              <p className="">
                 Create a platform that combines pixel art creation tools with
                 a community-driven gallery system, making digital art more
                 accessible to everyone.
@@ -56,8 +56,8 @@ export default function PexelArt() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Implementation</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Implementation</h3>
+              <p className="">
                 Built an intuitive pixel art editor with powerful tools and
                 integrated it with a social platform for sharing and discovering
                 artwork.
@@ -66,7 +66,7 @@ export default function PexelArt() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Key Features</h2>
           <ul>
             <li>Intuitive pixel art editor</li>

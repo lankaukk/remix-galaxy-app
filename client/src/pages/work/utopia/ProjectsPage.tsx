@@ -19,8 +19,8 @@ export default function ProjectsPage() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Vision</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Vision</h3>
+              <p className="">
                 Create an intuitive project management interface that helps teams
                 organize and track their React applications, components, and
                 resources effectively.
@@ -30,8 +30,8 @@ export default function ProjectsPage() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Achievement</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Achievement</h3>
+              <p className="">
                 Developed a comprehensive project dashboard that provides clear
                 visibility into project status, team activity, and component
                 libraries while maintaining an organized workspace.
@@ -40,7 +40,7 @@ export default function ProjectsPage() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Key Features</h2>
           <ul>
             <li>Project templates and quick-start options</li>

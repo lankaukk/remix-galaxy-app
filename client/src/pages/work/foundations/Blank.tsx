@@ -19,8 +19,8 @@ export default function Blank() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Concept</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Concept</h3>
+              <p className="">
                 Create an open-ended digital canvas that encourages experimentation
                 and creative expression without the constraints of traditional
                 design tools.
@@ -30,8 +30,8 @@ export default function Blank() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Approach</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Approach</h3>
+              <p className="">
                 Developed a flexible interface that combines traditional design
                 tools with experimental features, allowing users to discover new
                 ways of creating digital art.
@@ -40,7 +40,7 @@ export default function Blank() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Features</h2>
           <ul>
             <li>Infinite canvas with zoom capabilities</li>

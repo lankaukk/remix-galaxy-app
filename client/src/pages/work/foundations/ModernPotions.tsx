@@ -19,8 +19,8 @@ export default function ModernPotions() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Challenge</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Challenge</h3>
+              <p className="">
                 Reimagine the online shopping experience for craft beverages,
                 focusing on storytelling and visual presentation while maintaining
                 efficient e-commerce functionality.
@@ -30,8 +30,8 @@ export default function ModernPotions() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Solution</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Solution</h3>
+              <p className="">
                 Created an immersive shopping experience that combines beautiful
                 product photography with engaging content about ingredients,
                 brewing processes, and brand stories.
@@ -40,7 +40,7 @@ export default function ModernPotions() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Key Features</h2>
           <ul>
             <li>Immersive product presentations</li>

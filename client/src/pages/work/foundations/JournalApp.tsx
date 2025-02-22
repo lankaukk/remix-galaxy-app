@@ -19,8 +19,8 @@ export default function JournalApp() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Goal</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Goal</h3>
+              <p className="">
                 Create a distraction-free writing environment that encourages
                 daily journaling while maintaining a clean and intuitive interface.
               </p>
@@ -29,8 +29,8 @@ export default function JournalApp() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Execution</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Execution</h3>
+              <p className="">
                 Designed a minimal interface that focuses on the content while
                 providing subtle but powerful formatting tools that appear only
                 when needed.
@@ -39,7 +39,7 @@ export default function JournalApp() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Key Features</h2>
           <ul>
             <li>Distraction-free writing mode</li>

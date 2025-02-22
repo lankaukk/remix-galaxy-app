@@ -19,8 +19,8 @@ export default function ProtestPlatform() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Mission</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Mission</h3>
+              <p className="">
                 Develop a secure and accessible platform that empowers
                 activists to organize, communicate, and coordinate social
                 movements effectively.
@@ -30,8 +30,8 @@ export default function ProtestPlatform() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Approach</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Approach</h3>
+              <p className="">
                 Created a comprehensive suite of tools focused on privacy,
                 accessibility, and rapid information sharing, designed to
                 work even in challenging connectivity conditions.
@@ -40,7 +40,7 @@ export default function ProtestPlatform() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Core Features</h2>
           <ul>
             <li>Secure communication channels</li>

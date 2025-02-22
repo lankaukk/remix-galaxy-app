@@ -19,8 +19,8 @@ export default function Typography() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Challenge</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Challenge</h3>
+              <p className="">
                 Creating a consistent and scalable typography system that works
                 across different screen sizes and maintains readability while
                 conveying visual hierarchy.
@@ -30,8 +30,8 @@ export default function Typography() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Solution</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Solution</h3>
+              <p className="">
                 Developed a modular type scale with carefully selected font pairs
                 and spacing ratios that ensure optimal legibility and visual
                 harmony across all devices.
@@ -40,7 +40,7 @@ export default function Typography() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>System Components</h2>
           <ul>
             <li>Modular type scale with 8 sizes</li>

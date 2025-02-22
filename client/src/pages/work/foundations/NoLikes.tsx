@@ -19,8 +19,8 @@ export default function NoLikes() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Challenge</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Challenge</h3>
+              <p className="">
                 Create a social platform that promotes meaningful interactions
                 without relying on traditional engagement metrics like likes
                 and follower counts.
@@ -30,8 +30,8 @@ export default function NoLikes() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Solution</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Solution</h3>
+              <p className="">
                 Designed an alternative engagement system that emphasizes
                 quality of interaction over quantity, using thoughtful
                 responses and genuine connections.
@@ -40,7 +40,7 @@ export default function NoLikes() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Core Features</h2>
           <ul>
             <li>Response-based engagement system</li>

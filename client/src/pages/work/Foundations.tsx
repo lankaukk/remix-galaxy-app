@@ -89,11 +89,11 @@ export default function Foundations() {
                       loading="lazy"
                     />
                     <div className="p-6">
-                      <h3 className="mb-2 flex items-center justify-between text-xl font-bold text-[#2D2D2D]">
+                      <h3 className="mb-2 flex items-center justify-between text-xl font-bold ">
                         {project.title}
-                        <ArrowRight className="h-5 w-5 text-[#FF5757]" />
+                        <ArrowRight className="h-5 w-5" />
                       </h3>
-                      <p className="text-[#333333]">{project.description}</p>
+                      <p className="">{project.description}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -102,7 +102,7 @@ export default function Foundations() {
           )}
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Design System Principles</h2>
           <p>
             Each project in this collection represents a unique exploration of design

@@ -71,7 +71,7 @@ function ImageWithFallback({
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="relative pt-[75%] w-full bg-muted">
+    <div className="relative pt-[75%] w-full ">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center">
           <Skeleton className="w-full h-full absolute inset-0" />
@@ -131,7 +131,7 @@ export default function Gallery() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-background text-foreground">
       {!artworks?.length && !isLoading && (
         <div className="text-center py-12">
           <ImageIcon className="mx-auto h-12 w-12 text-muted-foreground" />

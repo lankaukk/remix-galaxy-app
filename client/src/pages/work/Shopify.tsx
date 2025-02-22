@@ -45,8 +45,8 @@ export default function Shopify() {
         <div className="grid gap-8 lg:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Challenge</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Challenge</h3>
+              <p className="">
                 Merchants found the existing dashboard complex and time-consuming to navigate,
                 leading to reduced productivity and satisfaction.
               </p>
@@ -55,8 +55,8 @@ export default function Shopify() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Solution</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Solution</h3>
+              <p className="">
                 Redesigned the interface with a focus on simplicity and quick access to
                 key features, resulting in a 40% improvement in task completion time.
               </p>
@@ -64,7 +64,7 @@ export default function Shopify() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Process & Outcome</h2>
           <p>
             Through extensive user research and iterative design, we identified key pain

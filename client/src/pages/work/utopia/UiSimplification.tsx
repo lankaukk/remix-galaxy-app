@@ -19,28 +19,29 @@ export default function UiSimplification() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Challenge</h3>
-              <p className="text-[#333333]">
-                React development traditionally requires deep technical knowledge and
-                extensive code writing, making it challenging for designers and newer
-                developers to build complex interfaces efficiently.
+              <h3 className="mb-4 text-xl font-bold ">Challenge</h3>
+              <p className="">
+                React development traditionally requires deep technical
+                knowledge and extensive code writing, making it challenging for
+                designers and newer developers to build complex interfaces
+                efficiently.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Solution</h3>
-              <p className="text-[#333333]">
-                We developed an intuitive visual interface that allows developers to
-                manipulate React components directly while automatically generating
-                clean, maintainable code.
+              <h3 className="mb-4 text-xl font-bold ">Solution</h3>
+              <p className="">
+                We developed an intuitive visual interface that allows
+                developers to manipulate React components directly while
+                automatically generating clean, maintainable code.
               </p>
             </CardContent>
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Key Features</h2>
           <ul>
             <li>Visual component hierarchy editor</li>
@@ -52,10 +53,11 @@ export default function UiSimplification() {
 
           <h2>Impact</h2>
           <p>
-            The UI simplification initiative has significantly reduced the learning
-            curve for new React developers while maintaining the flexibility and
-            power that experienced developers expect. Teams report up to 40% faster
-            development cycles for complex interface components.
+            The UI simplification initiative has significantly reduced the
+            learning curve for new React developers while maintaining the
+            flexibility and power that experienced developers expect. Teams
+            report up to 40% faster development cycles for complex interface
+            components.
           </p>
         </div>
       </div>

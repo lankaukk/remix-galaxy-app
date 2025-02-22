@@ -36,7 +36,7 @@ export default function Work() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-background text-foreground">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -57,10 +57,10 @@ export default function Work() {
                       loading="lazy"
                     />
                     <div className="p-6">
-                      <h3 className="mb-2 text-xl font-bold text-[#2D2D2D]">
+                      <h3 className="mb-2 text-xl font-bold ">
                         {project.title}
                       </h3>
-                      <p className="text-[#333333]">{project.description}</p>
+                      <p className="">{project.description}</p>
                     </div>
                   </CardContent>
                 </Card>

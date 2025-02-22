@@ -19,8 +19,8 @@ export default function RobotPigeon() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Concept</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Concept</h3>
+              <p className="">
                 Create a whimsical messaging platform that uses AI-powered
                 virtual pigeons to deliver messages, adding an element of
                 surprise and delight to digital communication.
@@ -30,8 +30,8 @@ export default function RobotPigeon() {
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#2D2D2D]">Execution</h3>
-              <p className="text-[#333333]">
+              <h3 className="mb-4 text-xl font-bold ">Execution</h3>
+              <p className="">
                 Developed an intuitive interface that combines messaging
                 functionality with playful animations and AI-generated
                 delivery scenarios.
@@ -40,7 +40,7 @@ export default function RobotPigeon() {
           </Card>
         </div>
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>Features</h2>
           <ul>
             <li>AI-powered message delivery system</li>

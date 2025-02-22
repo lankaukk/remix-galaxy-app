@@ -3,7 +3,10 @@ import { Link } from "wouter";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
-import { ProjectDetailSkeleton, ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
+import {
+  ProjectDetailSkeleton,
+  ProjectCardSkeleton,
+} from "@/components/ui/project-card-skeleton";
 
 const sections = [
   {
@@ -69,7 +72,7 @@ export default function Utopia() {
           loading="lazy"
         />
 
-        <div className="prose prose-lg max-w-none text-[#333333]">
+        <div className="prose-lg max-w-none ">
           <h2>About Utopia</h2>
           <p>
             Utopia is an innovative platform that bridges the gap between design
@@ -93,11 +96,11 @@ export default function Utopia() {
                     loading="lazy"
                   />
                   <div className="p-6">
-                    <h3 className="mb-2 flex items-center justify-between text-xl font-bold text-[#2D2D2D]">
+                    <h3 className="mb-2 flex items-center justify-between text-xl font-bold ">
                       {section.title}
-                      <ArrowRight className="h-5 w-5 text-[#FF5757]" />
+                      <ArrowRight className="h-5 w-5" />
                     </h3>
-                    <p className="text-[#333333]">{section.description}</p>
+                    <p className="">{section.description}</p>
                   </div>
                 </CardContent>
               </Card>
