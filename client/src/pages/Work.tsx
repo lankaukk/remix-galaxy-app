@@ -42,32 +42,30 @@ export default function Work() {
         animate={{ opacity: 1, y: 0 }}
         className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
       >
-        {isLoading ? (
-          Array(3).fill(0).map((_, index) => (
-            <ProjectCardSkeleton key={index} />
-          ))
-        ) : (
-          projects.map((project) => (
-            <Link key={project.title} href={project.href}>
-              <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
-                <CardContent className="p-0">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="aspect-video w-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="p-6">
-                    <h3 className="mb-2 text-xl font-bold text-[#2D2D2D]">
-                      {project.title}
-                    </h3>
-                    <p className="text-[#333333]">{project.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))
-        )}
+        {isLoading
+          ? Array(3)
+              .fill(0)
+              .map((_, index) => <ProjectCardSkeleton key={index} />)
+          : projects.map((project) => (
+              <Link key={project.title} href={project.href}>
+                <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
+                  <CardContent className="p-0">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="aspect-video w-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="p-6">
+                      <h3 className="mb-2 text-xl font-bold text-[#2D2D2D]">
+                        {project.title}
+                      </h3>
+                      <p className="text-[#333333]">{project.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
       </motion.div>
     </div>
   );

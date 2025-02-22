@@ -11,7 +11,9 @@ export const artwork = pgTable("artwork", {
   category: varchar("category", { length: 50 }).notNull(),
 });
 
-export const insertArtworkSchema = createInsertSchema(artwork).omit({ id: true });
+export const insertArtworkSchema = createInsertSchema(artwork).omit({
+  id: true,
+});
 
 export type InsertArtwork = z.infer<typeof insertArtworkSchema>;
 export type Artwork = typeof artwork.$inferSelect;
