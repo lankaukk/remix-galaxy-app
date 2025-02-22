@@ -6,6 +6,10 @@ if (!process.env.AIRTABLE_API_KEY) {
   throw new Error("AIRTABLE_API_KEY environment variable is required");
 }
 
+if (!process.env.AIRTABLE_BASE_ID) {
+  throw new Error("AIRTABLE_BASE_ID environment variable is required");
+}
+
 // Initialize Airtable with explicit error handling and logging
 console.log('Initializing Airtable client...');
 const airtable = new Airtable({
@@ -20,7 +24,7 @@ const airtable = new Airtable({
   }
 });
 
-const base = airtable.base('appr9UTq2Y6sy9dJK');
+const base = airtable.base(process.env.AIRTABLE_BASE_ID);
 
 export interface IStorage {
   getArtworks(): Promise<Artwork[]>;
@@ -31,8 +35,8 @@ export interface IStorage {
 }
 
 export class AirtableStorage implements IStorage {
-  private artworksTable = base('tbl7iUDGuQHQ6K01j'); // Artworks table
-  private collectionsTable = base('tblsBk5HuQemOfMFt'); // Collections table
+  private artworksTable = base('Artworks'); // Using a generic table name
+  private collectionsTable = base('Collections'); // Using a generic table name
 
   async getArtworks(): Promise<Artwork[]> {
     try {
@@ -41,6 +45,7 @@ export class AirtableStorage implements IStorage {
       console.log('Using API Key:', token ? `Present (starts with: ${token.substring(0, 4)}...)` : 'Missing');
       console.log('Token length:', token?.length);
       console.log('Token starts with pat.?:', token?.startsWith('pat.'));
+      console.log('Base ID:', process.env.AIRTABLE_BASE_ID);
 
       const records = await this.artworksTable.select({
         view: "Grid view",
@@ -76,56 +81,18 @@ export class AirtableStorage implements IStorage {
           console.error('Authentication failed. Make sure your Personal Access Token (PAT):');
           console.error('1. Starts with "pat."');
           console.error('2. Has the correct scopes (data.records:read, data.records:write)');
-          console.error('3. Has access to the base (appr9UTq2Y6sy9dJK)');
+          console.error('3. Has access to the base');
           throw new Error('Failed to authenticate with Airtable. Please check your Personal Access Token (PAT).');
         } else if (error.message.includes('NOT_FOUND')) {
+          console.error('Base or table not found. Please verify:');
+          console.error('1. Your Base ID is correct');
+          console.error('2. The table named "Artworks" exists in the base');
+          console.error('3. Your PAT has access to this base');
           throw new Error('Airtable base or table not found. Please check your Base ID and table name.');
         }
         console.error('Error details:', error.message);
       }
       throw error;
-    }
-  }
-
-  async getCollections(): Promise<Collection[]> {
-    try {
-      console.log('Fetching collections from Airtable...');
-      const records = await this.collectionsTable.select({
-        view: "Grid view"
-      }).all();
-      console.log(`Successfully fetched ${records.length} collections`);
-
-      return records.map(record => ({
-        id: parseInt(record.id.replace(/\D/g, '')),
-        name: record.get('Name') as string,
-        description: record.get('Description') as string,
-        artworks: record.get('Artworks') as number[] || [],
-      }));
-    } catch (error) {
-      console.error('Error fetching collections:', error);
-      throw new Error('Failed to fetch collections from Airtable');
-    }
-  }
-
-  async getCollection(id: number): Promise<Collection | undefined> {
-    try {
-      const records = await this.collectionsTable.select({
-        filterByFormula: `RECORD_ID()='${id}'`,
-        view: "Grid view"
-      }).all();
-
-      if (records.length === 0) return undefined;
-
-      const record = records[0];
-      return {
-        id: parseInt(record.id.replace(/\D/g, '')),
-        name: record.get('Name') as string,
-        description: record.get('Description') as string,
-        artworks: record.get('Artworks') as number[] || [],
-      };
-    } catch (error) {
-      console.error('Error fetching collection:', error);
-      throw new Error(`Failed to fetch collection with ID: ${id}`);
     }
   }
 
@@ -198,6 +165,48 @@ export class AirtableStorage implements IStorage {
         }
       }
       throw new Error('Failed to create artwork in Airtable');
+    }
+  }
+
+  async getCollections(): Promise<Collection[]> {
+    try {
+      console.log('Fetching collections from Airtable...');
+      const records = await this.collectionsTable.select({
+        view: "Grid view"
+      }).all();
+      console.log(`Successfully fetched ${records.length} collections`);
+
+      return records.map(record => ({
+        id: parseInt(record.id.replace(/\D/g, '')),
+        name: record.get('Name') as string,
+        description: record.get('Description') as string,
+        artworks: record.get('Artworks') as number[] || [],
+      }));
+    } catch (error) {
+      console.error('Error fetching collections:', error);
+      throw new Error('Failed to fetch collections from Airtable');
+    }
+  }
+
+  async getCollection(id: number): Promise<Collection | undefined> {
+    try {
+      const records = await this.collectionsTable.select({
+        filterByFormula: `RECORD_ID()='${id}'`,
+        view: "Grid view"
+      }).all();
+
+      if (records.length === 0) return undefined;
+
+      const record = records[0];
+      return {
+        id: parseInt(record.id.replace(/\D/g, '')),
+        name: record.get('Name') as string,
+        description: record.get('Description') as string,
+        artworks: record.get('Artworks') as number[] || [],
+      };
+    } catch (error) {
+      console.error('Error fetching collection:', error);
+      throw new Error(`Failed to fetch collection with ID: ${id}`);
     }
   }
 }
