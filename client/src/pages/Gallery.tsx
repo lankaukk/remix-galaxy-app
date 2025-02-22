@@ -186,14 +186,12 @@ export default function Gallery() {
                       />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4">
                         <h3 className="text-white font-semibold text-lg">{artwork.title}</h3>
-                        <p className="text-white/80 text-sm">{artwork.description}</p>
                       </div>
                     </CardContent>
                   </Card>
                 </DialogTrigger>
                 <DialogContent className="max-w-4xl">
                   <DialogTitle>{artwork.title}</DialogTitle>
-                  <DialogDescription>{artwork.description}</DialogDescription>
                   <div className="relative">
                     <AnimatePresence mode="wait">
                       <motion.div
