@@ -44,33 +44,10 @@ export class AirtableStorage implements IStorage {
       console.log(`Successfully fetched ${records.length} artworks`);
       console.log('Sample record structure:', JSON.stringify(records[0]?.fields, null, 2));
 
-      // Fetch all collections first
-      const collections = await this.collectionsTable.select({
-        fields: ['Name', 'Description']
-      }).all();
-      
-      // Create a map of collection id to {name, description}
-      const collectionMap = new Map(
-        collections.map(collection => [
-          collection.id, 
-          {
-            name: collection.get('Name') as string,
-            description: collection.get('Description') as string
-          }
-        ])
-      );
-
       return records.map(record => {
         // Handle Airtable attachment format for images
         const attachments = record.get('Image') as any[];
         const imageUrl = attachments && attachments.length > 0 ? attachments[0].url : '';
-        
-        // Get collection info from the IDs
-        const collectionIds = record.get('Collection') as string[];
-        const collections = collectionIds 
-          ? collectionIds.map(id => collectionMap.get(id)).filter(Boolean)
-          : [];
-        const collectionInfo = collections.map(c => `${c.name}${c.description ? ` - ${c.description}` : ''}`).join(', ');
 
         const artwork = {
           id: parseInt(record.id.replace(/\D/g, '')),
@@ -78,7 +55,7 @@ export class AirtableStorage implements IStorage {
           image: imageUrl,
           medium: record.get('Medium') as string,
           year: record.get('Year') as string,
-          collection: collectionInfo,
+          collection: record.get('Collection') as string,
         };
 
         // Log image data for debugging
