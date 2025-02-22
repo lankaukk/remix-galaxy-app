@@ -9,10 +9,15 @@ if (!process.env.AIRTABLE_API_KEY) {
 // Initialize Airtable with explicit error handling and logging
 console.log('Initializing Airtable client...');
 const airtable = new Airtable({
-  apiKey: process.env.AIRTABLE_API_KEY,
   endpointUrl: 'https://api.airtable.com',
   apiVersion: '0.2.0',
-  requestTimeout: 300000  // 5 minute timeout
+  requestTimeout: 300000,  // 5 minute timeout
+  fetch: (url: string, init?: RequestInit) => {
+    // Add Authorization Bearer header for PAT
+    const headers = new Headers(init?.headers);
+    headers.set('Authorization', `Bearer ${process.env.AIRTABLE_API_KEY}`);
+    return fetch(url, { ...init, headers });
+  }
 });
 
 const base = airtable.base('appr9UTq2Y6sy9dJK');
