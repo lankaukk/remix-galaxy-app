@@ -6,19 +6,8 @@ if (!process.env.AIRTABLE_API_KEY) {
   throw new Error("AIRTABLE_API_KEY environment variable is required");
 }
 
-// Initialize Airtable client with explicit error handling
-let airtable: Airtable;
-try {
-  airtable = new Airtable({
-    apiKey: process.env.AIRTABLE_API_KEY,
-    endpointUrl: 'https://api.airtable.com',
-  });
-} catch (error) {
-  console.error('Failed to initialize Airtable client:', error);
-  throw new Error('Failed to initialize Airtable client. Please check your API key.');
-}
-
-const base = airtable.base('appr9UTq2Y6sy9dJK');
+// Initialize Airtable exactly as shown in the example
+const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base('appr9UTq2Y6sy9dJK');
 
 export interface IStorage {
   getArtworks(): Promise<Artwork[]>;
