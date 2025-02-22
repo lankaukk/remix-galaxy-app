@@ -179,7 +179,7 @@ export class AirtableStorage implements IStorage {
 
       return records.map(record => ({
         id: parseInt(record.id.replace(/\D/g, '')),
-        name: record.get('Name') as string,
+        name: record.get('Collection Name') as string, //Corrected field name
         description: record.get('Description') as string,
         artworks: record.get('Artworks') as number[] || [],
       }));
@@ -201,7 +201,7 @@ export class AirtableStorage implements IStorage {
       const record = records[0];
       return {
         id: parseInt(record.id.replace(/\D/g, '')),
-        name: record.get('Name') as string,
+        name: record.get('Collection Name') as string, //Corrected field name
         description: record.get('Description') as string,
         artworks: record.get('Artworks') as number[] || [],
       };
