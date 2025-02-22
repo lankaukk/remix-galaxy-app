@@ -25,8 +25,8 @@ export interface IStorage {
 }
 
 export class AirtableStorage implements IStorage {
-  private artworksTable = base('Artworks'); // Using a generic table name
-  private collectionsTable = base('Collections'); // Using a generic table name
+  private artworksTable = base('Artworks');
+  private collectionsTable = base('Collections');
 
   async getArtworks(): Promise<Artwork[]> {
     try {
@@ -42,16 +42,28 @@ export class AirtableStorage implements IStorage {
       }).all();
 
       console.log(`Successfully fetched ${records.length} artworks`);
+      console.log('Sample record structure:', JSON.stringify(records[0]?.fields, null, 2));
 
       return records.map(record => {
+        // Handle Airtable attachment format for images
+        const attachments = record.get('Image') as any[];
+        const imageUrl = attachments && attachments.length > 0 ? attachments[0].url : '';
+
         const artwork = {
           id: parseInt(record.id.replace(/\D/g, '')),
           title: record.get('Title') as string,
-          image: record.get('Image') as string,
+          image: imageUrl,
           medium: record.get('Medium') as string,
           year: record.get('Year') as string,
           collection: record.get('Collection') as string,
         };
+
+        // Log image data for debugging
+        console.log(`Processing artwork ${artwork.id}:`, {
+          title: artwork.title,
+          hasImage: !!artwork.image,
+          imageUrl: artwork.image
+        });
 
         // Validate required fields
         if (!artwork.title || !artwork.image) {
