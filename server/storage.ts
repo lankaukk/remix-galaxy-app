@@ -6,25 +6,15 @@ if (!process.env.AIRTABLE_API_KEY) {
   throw new Error("AIRTABLE_API_KEY environment variable is required");
 }
 
-if (!process.env.AIRTABLE_BASE_ID) {
-  throw new Error("AIRTABLE_BASE_ID environment variable is required");
-}
-
 // Initialize Airtable with explicit error handling and logging
 console.log('Initializing Airtable client...');
-const airtable = new Airtable({
+
+Airtable.configure({
   endpointUrl: 'https://api.airtable.com',
-  apiVersion: '0.2.0',
-  requestTimeout: 300000,  // 5 minute timeout
-  fetch: (url: string, init?: RequestInit) => {
-    // Add Authorization Bearer header for PAT
-    const headers = new Headers(init?.headers);
-    headers.set('Authorization', `Bearer ${process.env.AIRTABLE_API_KEY}`);
-    return fetch(url, { ...init, headers });
-  }
+  apiKey: process.env.AIRTABLE_API_KEY
 });
 
-const base = airtable.base(process.env.AIRTABLE_BASE_ID);
+const base = Airtable.base('appr9UTq2Y6sy9dJK');
 
 export interface IStorage {
   getArtworks(): Promise<Artwork[]>;
@@ -45,7 +35,6 @@ export class AirtableStorage implements IStorage {
       console.log('Using API Key:', token ? `Present (starts with: ${token.substring(0, 4)}...)` : 'Missing');
       console.log('Token length:', token?.length);
       console.log('Token starts with pat.?:', token?.startsWith('pat.'));
-      console.log('Base ID:', process.env.AIRTABLE_BASE_ID);
 
       const records = await this.artworksTable.select({
         view: "Grid view",
