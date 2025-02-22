@@ -2,9 +2,17 @@ import { type Artwork, type InsertArtwork } from "@shared/schema";
 import Airtable from "airtable";
 
 // Initialize Airtable with API key
+if (!process.env.AIRTABLE_API_KEY) {
+  throw new Error("AIRTABLE_API_KEY environment variable is required");
+}
+
+if (!process.env.AIRTABLE_BASE_ID) {
+  throw new Error("AIRTABLE_BASE_ID environment variable is required");
+}
+
 const airtable = new Airtable({
   apiKey: process.env.AIRTABLE_API_KEY
-}).base(process.env.AIRTABLE_BASE_ID!);
+}).base(process.env.AIRTABLE_BASE_ID);
 
 export interface IStorage {
   getArtworks(): Promise<Artwork[]>;
@@ -17,7 +25,9 @@ export class AirtableStorage implements IStorage {
 
   async getArtworks(): Promise<Artwork[]> {
     try {
+      console.log('Fetching artworks from Airtable...');
       const records = await this.table.select().all();
+      console.log(`Successfully fetched ${records.length} artworks`);
       return records.map(record => ({
         id: parseInt(record.id.replace(/\D/g, '')), // Clean ID to ensure it's numeric
         title: record.fields['title'] as string,
@@ -27,19 +37,27 @@ export class AirtableStorage implements IStorage {
       }));
     } catch (error) {
       console.error('Error fetching artworks:', error);
+      if (error instanceof Error) {
+        console.error('Error details:', error.message);
+      }
       return [];
     }
   }
 
   async getArtwork(id: number): Promise<Artwork | undefined> {
     try {
+      console.log(`Fetching artwork with ID: ${id}`);
       const records = await this.table.select({
         filterByFormula: `RECORD_ID()='${id}'`
       }).all();
 
-      if (records.length === 0) return undefined;
+      if (records.length === 0) {
+        console.log(`No artwork found with ID: ${id}`);
+        return undefined;
+      }
 
       const record = records[0];
+      console.log(`Successfully fetched artwork: ${record.fields['title']}`);
       return {
         id: parseInt(record.id.replace(/\D/g, '')),
         title: record.fields['title'] as string,
@@ -49,12 +67,16 @@ export class AirtableStorage implements IStorage {
       };
     } catch (error) {
       console.error('Error fetching artwork:', error);
+      if (error instanceof Error) {
+        console.error('Error details:', error.message);
+      }
       return undefined;
     }
   }
 
   async createArtwork(insertArtwork: InsertArtwork): Promise<Artwork> {
     try {
+      console.log('Creating new artwork:', insertArtwork.title);
       const [record] = await this.table.create([
         {
           fields: {
@@ -66,6 +88,7 @@ export class AirtableStorage implements IStorage {
         }
       ]);
 
+      console.log('Successfully created artwork:', record.fields['title']);
       return {
         id: parseInt(record.id.replace(/\D/g, '')),
         title: record.fields['title'] as string,
@@ -75,6 +98,9 @@ export class AirtableStorage implements IStorage {
       };
     } catch (error) {
       console.error('Error creating artwork:', error);
+      if (error instanceof Error) {
+        console.error('Error details:', error.message);
+      }
       throw new Error('Failed to create artwork in Airtable');
     }
   }
