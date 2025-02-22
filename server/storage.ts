@@ -6,8 +6,16 @@ if (!process.env.AIRTABLE_API_KEY) {
   throw new Error("AIRTABLE_API_KEY environment variable is required");
 }
 
-// Initialize Airtable exactly as shown in the example
-const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base('appr9UTq2Y6sy9dJK');
+// Initialize Airtable with explicit error handling and logging
+console.log('Initializing Airtable client...');
+const airtable = new Airtable({
+  apiKey: process.env.AIRTABLE_API_KEY,
+  endpointUrl: 'https://api.airtable.com',
+  apiVersion: '0.2.0',
+  requestTimeout: 300000  // 5 minute timeout
+});
+
+const base = airtable.base('appr9UTq2Y6sy9dJK');
 
 export interface IStorage {
   getArtworks(): Promise<Artwork[]>;
@@ -24,8 +32,14 @@ export class AirtableStorage implements IStorage {
   async getArtworks(): Promise<Artwork[]> {
     try {
       console.log('Fetching artworks from Airtable...');
+      const token = process.env.AIRTABLE_API_KEY;
+      console.log('Using API Key:', token ? `Present (starts with: ${token.substring(0, 4)}...)` : 'Missing');
+      console.log('Token length:', token?.length);
+      console.log('Token starts with pat.?:', token?.startsWith('pat.'));
+
       const records = await this.artworksTable.select({
-        view: "Grid view"
+        view: "Grid view",
+        maxRecords: 100
       }).all();
 
       console.log(`Successfully fetched ${records.length} artworks`);
@@ -53,15 +67,18 @@ export class AirtableStorage implements IStorage {
     } catch (error) {
       console.error('Error fetching artworks:', error);
       if (error instanceof Error) {
-        // Check for specific Airtable error types
         if (error.message.includes('AUTHENTICATION_REQUIRED')) {
-          throw new Error('Failed to authenticate with Airtable. Please check your API key.');
+          console.error('Authentication failed. Make sure your Personal Access Token (PAT):');
+          console.error('1. Starts with "pat."');
+          console.error('2. Has the correct scopes (data.records:read, data.records:write)');
+          console.error('3. Has access to the base (appr9UTq2Y6sy9dJK)');
+          throw new Error('Failed to authenticate with Airtable. Please check your Personal Access Token (PAT).');
         } else if (error.message.includes('NOT_FOUND')) {
           throw new Error('Airtable base or table not found. Please check your Base ID and table name.');
         }
         console.error('Error details:', error.message);
       }
-      throw new Error('Failed to fetch artworks from Airtable');
+      throw error;
     }
   }
 
