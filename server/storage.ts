@@ -36,16 +36,6 @@ export class AirtableStorage implements IStorage {
       console.log('Token length:', token?.length);
       console.log('Token starts with pat.?:', token?.startsWith('pat.'));
 
-      // First get all collections to map IDs to names
-      const collections = await this.collectionsTable.select({
-        view: "Grid view",
-        fields: ['Name']
-      }).all();
-
-      const collectionMap = new Map(
-        collections.map(record => [record.id, record.get('Name') as string])
-      );
-
       const records = await this.artworksTable.select({
         view: "Grid view",
         maxRecords: 100
@@ -59,32 +49,20 @@ export class AirtableStorage implements IStorage {
         const attachments = record.get('Image') as any[];
         const imageUrl = attachments && attachments.length > 0 ? attachments[0].url : '';
 
-        // Format year from full date (assuming YYYY-MM-DD format)
-        const fullDate = record.get('Year') as string;
-        const year = fullDate ? new Date(fullDate).getFullYear().toString() : undefined;
-
-        // Get collection names instead of IDs
-        const collectionIds = record.get('Collection') as string[];
-        const collectionNames = collectionIds
-          ? collectionIds.map(id => collectionMap.get(id)).filter(Boolean).join(', ')
-          : undefined;
-
         const artwork = {
           id: parseInt(record.id.replace(/\D/g, '')),
           title: record.get('Title') as string,
           image: imageUrl,
           medium: record.get('Medium') as string,
-          year,
-          collection: collectionNames,
+          year: record.get('Year') as string,
+          collection: record.get('Collection') as string,
         };
 
         // Log image data for debugging
         console.log(`Processing artwork ${artwork.id}:`, {
           title: artwork.title,
           hasImage: !!artwork.image,
-          imageUrl: artwork.image,
-          year: artwork.year,
-          collection: artwork.collection
+          imageUrl: artwork.image
         });
 
         // Validate required fields
