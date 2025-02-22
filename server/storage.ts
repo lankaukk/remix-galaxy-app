@@ -10,9 +10,19 @@ if (!process.env.AIRTABLE_BASE_ID) {
   throw new Error("AIRTABLE_BASE_ID environment variable is required");
 }
 
-const airtable = new Airtable({
-  apiKey: process.env.AIRTABLE_API_KEY
-}).base(process.env.AIRTABLE_BASE_ID);
+// Initialize Airtable client with explicit error handling
+let airtable: Airtable;
+try {
+  airtable = new Airtable({
+    apiKey: process.env.AIRTABLE_API_KEY,
+    endpointUrl: 'https://api.airtable.com',
+  });
+} catch (error) {
+  console.error('Failed to initialize Airtable client:', error);
+  throw new Error('Failed to initialize Airtable client. Please check your API key.');
+}
+
+const base = airtable.base(process.env.AIRTABLE_BASE_ID);
 
 export interface IStorage {
   getArtworks(): Promise<Artwork[]>;
@@ -21,26 +31,45 @@ export interface IStorage {
 }
 
 export class AirtableStorage implements IStorage {
-  private table = airtable('Artworks');
+  private table = base('Artworks');
 
   async getArtworks(): Promise<Artwork[]> {
     try {
       console.log('Fetching artworks from Airtable...');
       const records = await this.table.select().all();
       console.log(`Successfully fetched ${records.length} artworks`);
-      return records.map(record => ({
-        id: parseInt(record.id.replace(/\D/g, '')), // Clean ID to ensure it's numeric
-        title: record.fields['title'] as string,
-        imageUrl: record.fields['imageUrl'] as string,
-        aspectRatio: record.fields['aspectRatio'] as string,
-        category: record.fields['category'] as string,
-      }));
+
+      return records.map(record => {
+        const artwork = {
+          id: parseInt(record.id.replace(/\D/g, '')), // Clean ID to ensure it's numeric
+          title: record.fields['title'] as string,
+          imageUrl: record.fields['imageUrl'] as string,
+          aspectRatio: record.fields['aspectRatio'] as string,
+          category: record.fields['category'] as string,
+        };
+
+        // Validate required fields
+        if (!artwork.title || !artwork.imageUrl) {
+          console.warn(`Artwork ${artwork.id} is missing required fields:`, {
+            hasTitle: !!artwork.title,
+            hasImageUrl: !!artwork.imageUrl,
+          });
+        }
+
+        return artwork;
+      });
     } catch (error) {
       console.error('Error fetching artworks:', error);
       if (error instanceof Error) {
+        // Check for specific Airtable error types
+        if (error.message.includes('AUTHENTICATION_REQUIRED')) {
+          throw new Error('Failed to authenticate with Airtable. Please check your API key.');
+        } else if (error.message.includes('NOT_FOUND')) {
+          throw new Error('Airtable base or table not found. Please check your Base ID and table name.');
+        }
         console.error('Error details:', error.message);
       }
-      return [];
+      throw new Error('Failed to fetch artworks from Airtable');
     }
   }
 
@@ -58,6 +87,7 @@ export class AirtableStorage implements IStorage {
 
       const record = records[0];
       console.log(`Successfully fetched artwork: ${record.fields['title']}`);
+
       return {
         id: parseInt(record.id.replace(/\D/g, '')),
         title: record.fields['title'] as string,
@@ -70,7 +100,7 @@ export class AirtableStorage implements IStorage {
       if (error instanceof Error) {
         console.error('Error details:', error.message);
       }
-      return undefined;
+      throw new Error(`Failed to fetch artwork with ID: ${id}`);
     }
   }
 
@@ -100,6 +130,12 @@ export class AirtableStorage implements IStorage {
       console.error('Error creating artwork:', error);
       if (error instanceof Error) {
         console.error('Error details:', error.message);
+        // Check for specific Airtable error types
+        if (error.message.includes('AUTHENTICATION_REQUIRED')) {
+          throw new Error('Failed to authenticate with Airtable. Please check your API key.');
+        } else if (error.message.includes('NOT_FOUND')) {
+          throw new Error('Airtable base or table not found. Please check your Base ID and table name.');
+        }
       }
       throw new Error('Failed to create artwork in Airtable');
     }

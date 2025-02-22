@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Masonry from 'react-masonry-css';
 import {
@@ -11,15 +11,28 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImageIcon, AlertCircle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import type { Artwork } from "@shared/schema";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 const breakpointColumns = {
   default: 3,
   1024: 2,
   640: 1
 };
+
+function GalleryError({ error }: { error: Error }) {
+  return (
+    <Alert variant="destructive" className="mx-auto max-w-2xl mt-8">
+      <AlertCircle className="h-4 w-4" />
+      <AlertTitle>Error Loading Gallery</AlertTitle>
+      <AlertDescription>
+        {error.message || "Failed to load artwork. Please try again later."}
+      </AlertDescription>
+    </Alert>
+  );
+}
 
 function GalleryItemSkeleton() {
   return (
@@ -36,7 +49,7 @@ function GalleryItemSkeleton() {
 function ImageWithFallback({ 
   src, 
   alt, 
-  aspectRatio, 
+  aspectRatio,
   onLoad, 
   onError 
 }: { 
@@ -110,45 +123,26 @@ export default function Gallery() {
 
   const { data: artworks, isLoading, error } = useQuery<Artwork[]>({
     queryKey: ['/api/artwork'],
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 
-  useEffect(() => {
-    if (!isModalOpen) return;
-
-    function handleKeyDown(e: KeyboardEvent) {
-      if (!artworks) return;
-
-      if (e.key === 'ArrowLeft') {
-        setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : artworks.length - 1));
-      } else if (e.key === 'ArrowRight') {
-        setCurrentImageIndex((prev) => (prev < artworks.length - 1 ? prev + 1 : 0));
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isModalOpen, artworks]);
-
-  const handlePrevious = () => {
-    if (!artworks) return;
-    setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : artworks.length - 1));
-  };
-
-  const handleNext = () => {
-    if (!artworks) return;
-    setCurrentImageIndex((prev) => (prev < artworks.length - 1 ? prev + 1 : 0));
-  };
-
   if (error) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <p className="text-destructive">Error loading artworks. Please try again later.</p>
-      </div>
-    );
+    return <GalleryError error={error as Error} />;
   }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      {!artworks?.length && !isLoading && (
+        <div className="text-center py-12">
+          <ImageIcon className="mx-auto h-12 w-12 text-muted-foreground" />
+          <h3 className="mt-2 text-sm font-semibold text-muted-foreground">No Artwork</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            No artwork has been added to the gallery yet.
+          </p>
+        </div>
+      )}
+
       {isLoading ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array(6).fill(0).map((_, index) => (
@@ -186,12 +180,15 @@ export default function Gallery() {
                       />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4">
                         <h3 className="text-white font-semibold text-lg">{artwork.title}</h3>
+                        <p className="text-white/80 text-sm">{artwork.category}</p>
                       </div>
                     </CardContent>
                   </Card>
                 </DialogTrigger>
+
                 <DialogContent className="max-w-4xl">
                   <DialogTitle>{artwork.title}</DialogTitle>
+                  <DialogDescription>{artwork.category}</DialogDescription>
                   <div className="relative">
                     <AnimatePresence mode="wait">
                       <motion.div
@@ -209,24 +206,33 @@ export default function Gallery() {
                         />
                       </motion.div>
                     </AnimatePresence>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
-                      onClick={handlePrevious}
-                      aria-label="Previous image"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
-                      onClick={handleNext}
-                      aria-label="Next image"
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
+
+                    {artworks.length > 1 && (
+                      <>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
+                          onClick={() => setCurrentImageIndex(prev => 
+                            prev > 0 ? prev - 1 : artworks.length - 1
+                          )}
+                          aria-label="Previous image"
+                        >
+                          <ChevronLeft className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm"
+                          onClick={() => setCurrentImageIndex(prev => 
+                            prev < artworks.length - 1 ? prev + 1 : 0
+                          )}
+                          aria-label="Next image"
+                        >
+                          <ChevronRight className="h-4 w-4" />
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </DialogContent>
               </Dialog>
