@@ -1,19 +1,17 @@
-
-import { pgTable, text, serial, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const artwork = pgTable("artwork", {
-  id: serial("id").primaryKey(),
-  title: text("title").notNull(),
-  imageUrl: text("image_url").notNull(),
-  aspectRatio: varchar("aspect_ratio", { length: 20 }).notNull(),
-  category: varchar("category", { length: 50 }).notNull(),
+// Define the artwork schema using Zod
+export const artworkSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  imageUrl: z.string(),
+  aspectRatio: z.string(),
+  category: z.string(),
 });
 
-export const insertArtworkSchema = createInsertSchema(artwork).omit({
-  id: true,
-});
+// Schema for inserting new artwork (without id)
+export const insertArtworkSchema = artworkSchema.omit({ id: true });
 
+// Types for TypeScript
 export type InsertArtwork = z.infer<typeof insertArtworkSchema>;
-export type Artwork = typeof artwork.$inferSelect;
+export type Artwork = z.infer<typeof artworkSchema>;
