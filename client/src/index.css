@@ -49,13 +49,12 @@
   }
 
   .sunset {
-    /* --background: linear-gradient(135deg, pink, yellow); */
-    --background: 40 100% 95%;
+    --background: 350 100% 98%;
+    --nav-bg: 350 100% 98% / 0.8;
+    --popover: 350 100% 98%;
     --foreground: 25 29% 24%;
     --card: 350 100% 98%;
     --card-foreground: 25 29% 24%;
-    --popover: 350 100% 98%;
-    --popover-foreground: 25 29% 24%;
     --primary: 350 100% 69%;
     --primary-foreground: 25 29% 24%;
     --secondary: 40 100% 97%;
