@@ -24,10 +24,7 @@ export default function ProjectsPage() {
             <CardContent className="p-6">
               <h3 className="mb-4 text-xl font-bold">Vision</h3>
               <p>
-                Like any good creative tool, Utopia needs a dedicated space for users
-                to see and organize all of their projects. This became especially
-                important with multiplayer functionality, helping users distinguish
-                between collaborative and private projects.
+                Like any good creative tool, Utopia needs a dedicated space for all users to see and organize all of their projects! This became especially important once we started developing multiplayer functionality, because of how helpful it is to share and distinguish between collaborative projects and private ones.
               </p>
             </CardContent>
           </Card>
@@ -58,10 +55,11 @@ export default function ProjectsPage() {
 
           <h2>Project Visibility</h2>
           <p>
-            A cornerstone feature of the Projects Page is the ability to set project
-            visibility to Public, Private, or Collaborative. Users can manage access
-            levels through an intuitive sharing dialog, which includes visibility
-            settings, shareable project links, and collaborator management.
+            Utopia facilitates a whole new way of working, and collaboration is an integral part of that. We believe that everyone should get to decide where on the spectrum of synchronousness is best for them. This is why we have designed Utopia to be place where you can work together in a variety of ways.
+          </p>
+          
+          <p>
+            This is not only a tool for designers and developers, but it can also be for artists, copywriters, marketers, merchandisers, - anyone from any discipline can collaborate on projects together from within Utopia. With different permission settings, you can invite others to view, comments on, or edit your projects. Non-technical collaborators can still make meaningful contributions to live applications, and the design-to-development workflow is fully synchronized.
           </p>
 
           <img
