@@ -1,5 +1,7 @@
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function Multiplayer() {
   return (
@@ -58,6 +60,10 @@ export default function Multiplayer() {
             the development process.
           </p>
         </div>
+        <Link href="/work/utopia" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Utopia
+        </Link>
       </div>
     </ProjectLayout>
   );

@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 
 const projects = [
@@ -68,6 +68,13 @@ export default function Foundations() {
     return () => clearTimeout(timer);
   }, []);
 
+  const backButton = (
+    <Link href="/work" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+      <ArrowLeft className="mr-2 h-4 w-4" />
+      Back to Work
+    </Link>
+  );
+
   return (
     <ProjectLayout
       title="Design Foundations"
@@ -99,6 +106,7 @@ export default function Foundations() {
       }
     >
       <div className="space-y-12">
+        {backButton}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {isLoading
             ? Array(8)
@@ -115,17 +123,18 @@ export default function Foundations() {
                         loading="lazy"
                       />
                       <div className="p-6">
-                        <h3 className="mb-2 flex items-center justify-between text-xl font-bold ">
+                        <h3 className="mb-2 flex items-center justify-between text-xl font-bold">
                           {project.title}
                           <ArrowRight className="h-5 w-5" />
                         </h3>
-                        <p className="">{project.description}</p>
+                        <p className="text-muted-foreground">{project.description}</p>
                       </div>
                     </CardContent>
                   </Card>
                 </Link>
               ))}
         </div>
+        {backButton}
       </div>
     </ProjectLayout>
   );

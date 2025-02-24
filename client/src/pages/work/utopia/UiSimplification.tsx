@@ -1,5 +1,8 @@
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import { ArrowLeft } from "@/components/ui/icons";
+
 
 export default function UiSimplification() {
   return (
@@ -60,6 +63,10 @@ export default function UiSimplification() {
             components.
           </p>
         </div>
+        <Link href="/work/utopia" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Utopia
+        </Link>
       </div>
     </ProjectLayout>
   );

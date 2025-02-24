@@ -1,12 +1,10 @@
+
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { ArrowLeft } from "lucide-react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
-import {
-  ProjectDetailSkeleton,
-  ProjectCardSkeleton,
-} from "@/components/ui/project-card-skeleton";
+import { Card } from "@/components/ui/card";
+import { ProjectDetailSkeleton, ProjectCardSkeleton } from "@/components/skeletons";
 
 const sections = [
   {
@@ -41,6 +39,13 @@ export default function Utopia() {
     return () => clearTimeout(timer);
   }, []);
 
+  const backButton = (
+    <Link href="/work" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+      <ArrowLeft className="mr-2 h-4 w-4" />
+      Back to Work
+    </Link>
+  );
+
   if (isLoading) {
     return (
       <ProjectLayout
@@ -48,12 +53,14 @@ export default function Utopia() {
         description="A revolutionary design tool for building React applications visually while maintaining complete control over the code."
       >
         <div className="space-y-12">
+          {backButton}
           <ProjectDetailSkeleton />
           <div className="grid gap-8 md:grid-cols-3">
             {[1, 2, 3].map((i) => (
               <ProjectCardSkeleton key={i} />
             ))}
           </div>
+          {backButton}
         </div>
       </ProjectLayout>
     );
@@ -65,6 +72,7 @@ export default function Utopia() {
       description="A revolutionary design tool for building React applications visually while maintaining complete control over the code."
     >
       <div className="space-y-12">
+        {backButton}
         <img
           src="https://images.unsplash.com/photo-1586953208448-b95a79798f07"
           alt="Utopia Platform"
@@ -72,7 +80,7 @@ export default function Utopia() {
           loading="lazy"
         />
 
-        <div className="prose-lg max-w-none ">
+        <div className="prose-lg max-w-none">
           <h2>About Utopia</h2>
           <p>
             Utopia is an innovative platform that bridges the gap between design
@@ -83,30 +91,24 @@ export default function Utopia() {
             visual design with the flexibility of direct code manipulation.
           </p>
         </div>
-
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {sections.map((section) => (
             <Link key={section.title} href={section.href}>
               <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
-                <CardContent className="p-0">
-                  <img
-                    src={section.image}
-                    alt={section.title}
-                    className="aspect-video w-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="p-6">
-                    <h3 className="mb-2 flex items-center justify-between text-xl font-bold ">
-                      {section.title}
-                      <ArrowRight className="h-5 w-5" />
-                    </h3>
-                    <p className="">{section.description}</p>
-                  </div>
-                </CardContent>
+                <img
+                  src={section.image}
+                  alt={section.title}
+                  className="aspect-video w-full object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="mb-2 text-xl font-bold">{section.title}</h3>
+                  <p className="text-muted-foreground">{section.description}</p>
+                </div>
               </Card>
             </Link>
           ))}
         </div>
+        {backButton}
       </div>
     </ProjectLayout>
   );
