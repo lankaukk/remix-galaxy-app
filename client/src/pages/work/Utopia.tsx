@@ -1,10 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card } from "@/components/ui/card";
-import { ProjectDetailSkeleton, ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
+import {
+  ProjectDetailSkeleton,
+  ProjectCardSkeleton,
+} from "@/components/ui/project-card-skeleton";
 
 const sections = [
   {
@@ -40,9 +42,11 @@ export default function Utopia() {
   }, []);
 
   const backButton = (
-    <Link href="/work" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+    <Link
+      href="/work"
+      className="inline-flex items-center text-muted-foreground hover:text-foreground"
+    >
       <ArrowLeft className="mr-2 h-4 w-4" />
-      Back to Work
     </Link>
   );
 

@@ -69,9 +69,11 @@ export default function Foundations() {
   }, []);
 
   const backButton = (
-    <Link href="/work" className="inline-flex items-center text-muted-foreground hover:text-foreground">
-      <ArrowLeft className="mr-2 h-4 w-4" />
-      Back to Work
+    <Link
+      href="/work"
+      className="inline-flex items-center text-muted-foreground hover:text-foreground"
+    >
+      <ArrowLeft className="mr-2 h-4 w-4" />{" "}
     </Link>
   );
 
@@ -127,7 +129,9 @@ export default function Foundations() {
                           {project.title}
                           <ArrowRight className="h-5 w-5" />
                         </h3>
-                        <p className="text-muted-foreground">{project.description}</p>
+                        <p className="text-muted-foreground">
+                          {project.description}
+                        </p>
                       </div>
                     </CardContent>
                   </Card>
