@@ -26,15 +26,15 @@ export default function ProjectLayout({
     >
       {backLink && (
         <Link href={backLink}>
-          <a className="mb-8 inline-flex items-center hover:text-[#FF5757]">
+          <a className="mb-4 inline-flex items-center hover:text-[#FF5757]">
             <ArrowLeft className="mr-2 h-5 w-5" />
             {backText || "Back"}
           </a>
         </Link>
       )}
-      <div className="mb-12 ">
+      <div>
         <h1 className="mb-4 text-4xl font-bold sm:text-5xl">{title}</h1>
-        <p className="mx-auto max-w-2xl text-lg ">{description}</p>
+        <p className="mx-auto max-w-2xl text-lg mb-12">{description}</p>
       </div>
       {children}
     </motion.div>
