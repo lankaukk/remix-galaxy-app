@@ -49,7 +49,8 @@
   }
 
   .sunset {
-    --background: linear-gradient(135deg, pink, yellow);
+    /* --background: linear-gradient(135deg, pink, yellow); */
+    --background: 40 100% 95%;
     --foreground: 25 29% 24%;
     --card: 350 100% 98%;
     --card-foreground: 25 29% 24%;
