@@ -1,3 +1,4 @@
+
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
@@ -21,46 +22,59 @@ export default function ProjectsPage() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold ">Vision</h3>
-              <p className="">
-                Create an intuitive project management interface that helps teams
-                organize and track their React applications, components, and
-                resources effectively.
+              <h3 className="mb-4 text-xl font-bold">Vision</h3>
+              <p>
+                Like any good creative tool, Utopia needs a dedicated space for users
+                to see and organize all of their projects. This became especially
+                important with multiplayer functionality, helping users distinguish
+                between collaborative and private projects.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold ">Achievement</h3>
-              <p className="">
-                Developed a comprehensive project dashboard that provides clear
-                visibility into project status, team activity, and component
-                libraries while maintaining an organized workspace.
+              <h3 className="mb-4 text-xl font-bold">Implementation</h3>
+              <p>
+                The project evolved from a basic page to a robust Remix-based
+                application capable of handling extensive datasets and advanced
+                functionality. We leveraged Radix UI components for consistency
+                and built-in theme support, alongside Vanilla Extract for custom
+                styling where needed.
               </p>
             </CardContent>
           </Card>
         </div>
 
-        <div className="prose-lg max-w-none ">
+        <div className="prose-lg max-w-none">
           <h2>Key Features</h2>
           <ul>
-            <li>Project templates and quick-start options</li>
-            <li>Component library management</li>
-            <li>Team activity tracking</li>
-            <li>Project analytics and insights</li>
-            <li>Resource organization tools</li>
+            <li>Fully responsive design across all devices</li>
+            <li>Dark and light theme support</li>
+            <li>Advanced sorting and filtering options</li>
+            <li>List and grid view layouts</li>
+            <li>Project categorization system</li>
           </ul>
 
-          <h2>Impact</h2>
+          <h2>Project Visibility</h2>
           <p>
-            The projects page has become a central hub for team collaboration,
-            providing clear organization and easy access to all project resources.
-            Teams report improved project visibility and faster onboarding for
-            new team members.
+            A cornerstone feature of the Projects Page is the ability to set project
+            visibility to Public, Private, or Collaborative. Users can manage access
+            levels through an intuitive sharing dialog, which includes visibility
+            settings, shareable project links, and collaborator management.
           </p>
+
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
+            alt="Project Collaboration Interface"
+            className="my-8 w-full rounded-lg shadow-xl"
+          />
         </div>
-        <Link href="/work/utopia" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+
+        <Link
+          href="/work/utopia"
+          className="inline-flex items-center text-muted-foreground hover:text-foreground"
+        >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Utopia
         </Link>
