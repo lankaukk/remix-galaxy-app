@@ -12,7 +12,7 @@ const sections = [
   {
     title: "UI Simplification",
     description:
-      "Streamlining complex interaction patterns into intuitive, user-friendly interfaces",
+      "Interface redesign to create a more intuitive and flexible development environment",
     href: "/work/utopia/ui_simplification",
     image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07",
   },
@@ -54,8 +54,8 @@ export default function Utopia() {
   if (isLoading) {
     return (
       <ProjectLayout
-        title="Utopia Platform"
-        description="A revolutionary design tool for building React applications visually while maintaining complete control over the code."
+        title="Utopia"
+        description="Utopia is an integrated design and development environment for React. It uses React code as the source of truth, and lets you make real time changes to components by editing your app visually and using a suite of familiar design tools."
         backLink="/work"
         backText="All Work"
       >
@@ -90,12 +90,12 @@ export default function Utopia() {
         <div className="prose-lg max-w-none">
           <h2>About the product</h2>
           <p>
-            Utopia is a revolutionaly web software that bridges the gap between design
-            and development, allowing developers to create React applications
-            through a visual interface while maintaining full access to the
-            underlying code. Utopia empowers
-            developers with a unique approach that combines the immediacy of
-            visual design with the flexibility of direct code manipulation.
+            Utopia is a revolutionaly web software that bridges the gap between
+            design and development, allowing developers to create React
+            applications through a visual interface while maintaining full
+            access to the underlying code. Utopia empowers developers with a
+            unique approach that combines the immediacy of visual design with
+            the flexibility of direct code manipulation.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
