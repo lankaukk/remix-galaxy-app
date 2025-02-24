@@ -1,7 +1,12 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navigation = [
@@ -15,7 +20,7 @@ export default function MainNav() {
   const [location] = useLocation();
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-sm">
+    <nav className="fixed top-0 z-50 w-full border-b border-border  backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="text-xl font-bold text-foreground">
@@ -33,7 +38,7 @@ export default function MainNav() {
                     "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     location === item.href
                       ? "text-[#FF5757]"
-                      : "text-foreground hover:text-[#00C2FF]"
+                      : "text-foreground hover:text-[#00C2FF]",
                   )}
                 >
                   {item.name}
@@ -61,7 +66,7 @@ export default function MainNav() {
                           "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                           location === item.href
                             ? "text-[#FF5757]"
-                            : "text-foreground hover:text-[#00C2FF]"
+                            : "text-foreground hover:text-[#00C2FF]",
                         )}
                       >
                         {item.name}

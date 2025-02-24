@@ -37,7 +37,10 @@ function Router() {
       <Route path="/work" component={Work} />
       <Route path="/work/shopify" component={Shopify} />
       <Route path="/work/utopia" component={Utopia} />
-      <Route path="/work/utopia/ui_simplification" component={UiSimplification} />
+      <Route
+        path="/work/utopia/ui_simplification"
+        component={UiSimplification}
+      />
       <Route path="/work/utopia/multiplayer" component={Multiplayer} />
       <Route path="/work/utopia/projects_page" component={ProjectsPage} />
       <Route path="/work/foundations" component={Foundations} />
@@ -47,8 +50,14 @@ function Router() {
       <Route path="/work/foundations/pexel_art" component={PexelArt} />
       <Route path="/work/foundations/no_likes" component={NoLikes} />
       <Route path="/work/foundations/robot_pigeon" component={RobotPigeon} />
-      <Route path="/work/foundations/modern_potions" component={ModernPotions} />
-      <Route path="/work/foundations/protest_platform" component={ProtestPlatform} />
+      <Route
+        path="/work/foundations/modern_potions"
+        component={ModernPotions}
+      />
+      <Route
+        path="/work/foundations/protest_platform"
+        component={ProtestPlatform}
+      />
       <Route path="/gallery" component={Gallery} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
@@ -60,7 +69,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MainNav />
-      <main className="min-h-screen bg-white pt-16">
+      <main className="min-h-screen pt-16">
         <Router />
       </main>
       <Toaster />
