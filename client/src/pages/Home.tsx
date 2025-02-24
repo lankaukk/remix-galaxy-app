@@ -11,16 +11,18 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center"
           >
             <h1 className="mb-6 text-5xl font-bold sm:text-6xl lg:text-7xl">
-              UX Designer & <br />
-              Digital Craftsperson
+              Hi, <br />
+              I'm <br />
+              McKayla
             </h1>
-            <p className="mx-auto mb-8 max-w-2xl text-lg ">
-              Creating thoughtful digital experiences through user-centered
-              design, research, and careful attention to detail.
+            <p className="mb-8 text-lg sm:text-xl">
+              I’m a UX designer working on the Storefronts team at Shopify. My passion
+              is to create intuitive experiences at the intersection of art,
+              design, and code.
             </p>
+
             <Link href="/work">
               <Button
                 size="lg"

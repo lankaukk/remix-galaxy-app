@@ -13,13 +13,13 @@ const projects = [
   },
   {
     title: "Utopia",
-    description: "Social platform UI simplification",
+    description: "Founding Designer of the Design Tool For Code",
     image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07",
     href: "/work/utopia",
   },
   {
     title: "Foundations",
-    description: "Design system and component library",
+    description: "Academic explorations of digital design and emerging technologies",
     image: "https://images.unsplash.com/photo-1581287053822-fd7bf4f4bfec",
     href: "/work/foundations",
   },

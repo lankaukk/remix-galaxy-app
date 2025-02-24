@@ -8,13 +8,15 @@ import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 const projects = [
   {
     title: "Typography System",
-    description: "Comprehensive type scale and hierarchy for digital interfaces",
+    description:
+      "Comprehensive type scale and hierarchy for digital interfaces",
     href: "/work/foundations/typo",
     image: "https://images.unsplash.com/photo-1581287053822-fd7bf4f4bfec",
   },
   {
     title: "Journal App",
-    description: "Minimal writing experience focused on clarity and ease of use",
+    description:
+      "Minimal writing experience focused on clarity and ease of use",
     href: "/work/foundations/journal_app",
     image: "https://images.unsplash.com/photo-1660592868727-858d28c3ba52",
   },
@@ -69,47 +71,60 @@ export default function Foundations() {
   return (
     <ProjectLayout
       title="Design Foundations"
-      description="A collection of experimental projects exploring different aspects of digital design and user experience."
+      description={
+        <>
+          A collection of projects developed during my studies in the
+          Communication Design Program at{" "}
+          <span className="text-primary">
+            <a
+              href="https://www.parsons.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Parsons School of Design
+            </a>
+          </span>{" "}
+          and the Software Engineering Program at{" "}
+          <span className="text-primary">
+            <a
+              href="https://flatironschool.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              The Flatiron School
+            </a>
+          </span>
+          .
+        </>
+      }
     >
       <div className="space-y-12">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {isLoading ? (
-            Array(8).fill(0).map((_, index) => (
-              <ProjectCardSkeleton key={index} />
-            ))
-          ) : (
-            projects.map((project) => (
-              <Link key={project.title} href={project.href}>
-                <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
-                  <CardContent className="p-0">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="aspect-video w-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="p-6">
-                      <h3 className="mb-2 flex items-center justify-between text-xl font-bold ">
-                        {project.title}
-                        <ArrowRight className="h-5 w-5" />
-                      </h3>
-                      <p className="">{project.description}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))
-          )}
-        </div>
-
-        <div className="prose-lg max-w-none ">
-          <h2>Design System Principles</h2>
-          <p>
-            Each project in this collection represents a unique exploration of design
-            principles, user interaction patterns, and innovative solutions to
-            real-world challenges. These experiments inform our broader understanding
-            of digital design and help shape future projects.
-          </p>
+          {isLoading
+            ? Array(8)
+                .fill(0)
+                .map((_, index) => <ProjectCardSkeleton key={index} />)
+            : projects.map((project) => (
+                <Link key={project.title} href={project.href}>
+                  <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
+                    <CardContent className="p-0">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="aspect-video w-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="p-6">
+                        <h3 className="mb-2 flex items-center justify-between text-xl font-bold ">
+                          {project.title}
+                          <ArrowRight className="h-5 w-5" />
+                        </h3>
+                        <p className="">{project.description}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
         </div>
       </div>
     </ProjectLayout>
