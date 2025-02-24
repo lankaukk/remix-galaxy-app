@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card } from "@/components/ui/card";
-import { ProjectDetailSkeleton, ProjectCardSkeleton } from "@/components/skeletons";
+import { ProjectDetailSkeleton, ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 
 const sections = [
   {
