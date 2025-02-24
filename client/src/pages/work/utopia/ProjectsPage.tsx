@@ -1,6 +1,6 @@
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
+import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 
 export default function ProjectsPage() {

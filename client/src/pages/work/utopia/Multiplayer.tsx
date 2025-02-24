@@ -1,7 +1,7 @@
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { Link } from "wouter";
 
 export default function Multiplayer() {
   return (
