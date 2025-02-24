@@ -73,7 +73,7 @@ export default function Foundations() {
       href="/work"
       className="inline-flex items-center text-muted-foreground hover:text-foreground"
     >
-      <ArrowLeft className="mr-2 h-4 w-4" />{" "}
+      <ArrowLeft className="mr-2 h-4 w-4" /> All Work
     </Link>
   );
 
@@ -106,9 +106,10 @@ export default function Foundations() {
           .
         </>
       }
+      backLink="/work"
+      backText="All Work"
     >
       <div className="space-y-12">
-        {backButton}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {isLoading
             ? Array(8)

@@ -20,7 +20,7 @@ export default function Shopify() {
         title="Shopify Redesign"
         description="A comprehensive redesign of the Shopify merchant dashboard to improve usability and efficiency."
         backLink="/work"
-        backText="Back to Work"
+        backText="All Work"
       >
         <ProjectDetailSkeleton />
       </ProjectLayout>
@@ -32,7 +32,7 @@ export default function Shopify() {
       title="Shopify Redesign"
       description="A comprehensive redesign of the Shopify merchant dashboard to improve usability and efficiency."
       backLink="/work"
-      backText="Back to Work"
+      backText="All Work"
     >
       <div className="space-y-12">
         <img
@@ -47,8 +47,9 @@ export default function Shopify() {
             <CardContent className="p-6">
               <h3 className="mb-4 text-xl font-bold ">Challenge</h3>
               <p className="">
-                Merchants found the existing dashboard complex and time-consuming to navigate,
-                leading to reduced productivity and satisfaction.
+                Merchants found the existing dashboard complex and
+                time-consuming to navigate, leading to reduced productivity and
+                satisfaction.
               </p>
             </CardContent>
           </Card>
@@ -57,8 +58,9 @@ export default function Shopify() {
             <CardContent className="p-6">
               <h3 className="mb-4 text-xl font-bold ">Solution</h3>
               <p className="">
-                Redesigned the interface with a focus on simplicity and quick access to
-                key features, resulting in a 40% improvement in task completion time.
+                Redesigned the interface with a focus on simplicity and quick
+                access to key features, resulting in a 40% improvement in task
+                completion time.
               </p>
             </CardContent>
           </Card>
@@ -67,10 +69,10 @@ export default function Shopify() {
         <div className="prose-lg max-w-none ">
           <h2>Process & Outcome</h2>
           <p>
-            Through extensive user research and iterative design, we identified key pain
-            points and opportunities for improvement. The new design introduces a
-            streamlined navigation system, enhanced data visualization, and
-            contextual help features.
+            Through extensive user research and iterative design, we identified
+            key pain points and opportunities for improvement. The new design
+            introduces a streamlined navigation system, enhanced data
+            visualization, and contextual help features.
           </p>
         </div>
       </div>
