@@ -7,30 +7,30 @@ import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 
 const projects = [
   {
-    title: "Typography System",
-    description:
-      "Comprehensive type scale and hierarchy for digital interfaces",
+    title: "Typo App",
+    description: "Web app for creating typographic compositions",
     href: "/work/foundations/typo",
-    image: "https://images.unsplash.com/photo-1581287053822-fd7bf4f4bfec",
+    image: "https://mckayla.com/images/typo-posters.jpg",
   },
   {
     title: "Journal App",
     description:
       "Minimal writing experience focused on clarity and ease of use",
     href: "/work/foundations/journal_app",
-    image: "https://images.unsplash.com/photo-1660592868727-858d28c3ba52",
+    image: "https://mckayla.com/images/journal-mockup.jpg",
   },
   {
-    title: "Blank Canvas",
-    description: "Experimental design space for creative exploration",
+    title: "_blank",
+    description:
+      "Digital Experience exploring contemporary social media consumption",
     href: "/work/foundations/blank",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe",
+    image: "https://mckayla.com/images/projects/blank/install.gif",
   },
   {
     title: "Pexel Art",
-    description: "Digital art creation and curation platform",
+    description: "Type to search for a word, and see the average color of the image results in a new pixelated visual",
     href: "/work/foundations/pexel_art",
-    image: "https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07",
+    image: "https://mckayla.com/images/pexel-art.png",
   },
   {
     title: "No Likes",

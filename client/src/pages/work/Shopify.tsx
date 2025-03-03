@@ -17,8 +17,8 @@ export default function Shopify() {
   if (isLoading) {
     return (
       <ProjectLayout
-        title="Shopify Redesign"
-        description="A comprehensive redesign of the Shopify merchant dashboard to improve usability and efficiency."
+        title="UX Designer at Shopify"
+        description="Defining and crafting elegant user experiences, so merchants can intuitively use the products and services we create at Shopify to help them win."
         backLink="/work"
         backText="All Work"
       >
@@ -29,50 +29,39 @@ export default function Shopify() {
 
   return (
     <ProjectLayout
-      title="Shopify Redesign"
-      description="A comprehensive redesign of the Shopify merchant dashboard to improve usability and efficiency."
+      title="UX Designer at Shopify"
+      description="Defining and crafting elegant user experiences, so merchants can intuitively use the products and services we create at Shopify to help them win."
       backLink="/work"
       backText="All Work"
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1531403009284-440f080d1e12"
-          alt="Shopify Dashboard"
+          src="https://media.graphassets.com/53cwIkkyTGCGg2faP1WY"
+          alt="Shopify Platform"
           className="w-full rounded-lg shadow-xl"
           loading="lazy"
         />
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold ">Challenge</h3>
-              <p className="">
-                Merchants found the existing dashboard complex and
-                time-consuming to navigate, leading to reduced productivity and
-                satisfaction.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold ">Solution</h3>
-              <p className="">
-                Redesigned the interface with a focus on simplicity and quick
-                access to key features, resulting in a 40% improvement in task
-                completion time.
-              </p>
-            </CardContent>
-          </Card>
+        <div className="prose-lg max-w-none">
+          <h2>Process & Contributions</h2>
+          <p>
+            I joined Shopify when it acquired Utopia in 2022, and I currently
+            design aspects of the core platform across teams. Through applying
+            Shopify's UX Principles and prototyping solutions, I validate
+            enhancements via iterative feedback and testing. This work results
+            in a more stylish, intuitive platform that aligns with business
+            needs and exceeds user expectations.
+          </p>
         </div>
 
-        <div className="prose-lg max-w-none ">
-          <h2>Process & Outcome</h2>
+        <div className="prose-lg max-w-none">
+          <h2>Learning & Growth</h2>
           <p>
-            Through extensive user research and iterative design, we identified
-            key pain points and opportunities for improvement. The new design
-            introduces a streamlined navigation system, enhanced data
-            visualization, and contextual help features.
+            In my role at Shopify, I emphasize system-level thinking, creating
+            solutions that resonate across all layers of the experience. By
+            challenging design boundaries and embracing an experimental
+            approach, I contribute to a dynamic Shopify environment that evolves
+            and improves continuously for its users.
           </p>
         </div>
       </div>

@@ -5,13 +5,13 @@ export default function JournalApp() {
   return (
     <ProjectLayout
       title="Journal App"
-      description="A minimal writing experience focused on clarity and ease of use"
+      description="Keeping a journal has countless benefits for both creativity and mental health. This Digital Application is a simple, colorful, customizable journal intended for phone screens. When users make an entry, they get to choose the background color, the text color, and the font. A block representing that entry is then stacked ontop of previous entries, if any, creating a layered pattern of colored pages."
       backLink="/work/foundations"
       backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1660592868727-858d28c3ba52"
+          src="https://mckayla.com/images/journal-mockup.jpg"
           alt="Journal App Interface"
           className="w-full rounded-lg shadow-xl"
         />
@@ -22,7 +22,8 @@ export default function JournalApp() {
               <h3 className="mb-4 text-xl font-bold ">Goal</h3>
               <p className="">
                 Create a distraction-free writing environment that encourages
-                daily journaling while maintaining a clean and intuitive interface.
+                daily journaling while maintaining a clean and intuitive
+                interface.
               </p>
             </CardContent>
           </Card>

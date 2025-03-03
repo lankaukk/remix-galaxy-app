@@ -81,7 +81,7 @@ export default function Utopia() {
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1586953208448-b95a79798f07"
+          src="https://user-images.githubusercontent.com/2226774/93580752-7b7b8e80-f9a0-11ea-8663-39683a53df2e.png"
           alt="Utopia Platform"
           className="w-full rounded-lg shadow-xl"
           loading="lazy"
