@@ -23,6 +23,7 @@ import RobotPigeon from "@/pages/work/foundations/RobotPigeon";
 import ModernPotions from "@/pages/work/foundations/ModernPotions";
 import ProtestPlatform from "@/pages/work/foundations/ProtestPlatform";
 import { useEffect } from "react";
+import { Waves } from "@/components/Waves";
 
 function Router() {
   const [location] = useLocation();
@@ -68,11 +69,14 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <MainNav />
-      <main className="min-h-screen pt-16">
-        <Router />
-      </main>
-      <Toaster />
+      <div className="relative">
+        <Waves />
+        <MainNav />
+        <main className="min-h-screen pt-16 relative z-10">
+          <Router />
+        </main>
+        <Toaster />
+      </div>
     </QueryClientProvider>
   );
 }

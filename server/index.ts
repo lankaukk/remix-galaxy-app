@@ -1,7 +1,10 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { exec as childProcessExec } from 'child_process';
+import { promisify } from 'util';
 
+const exec = promisify(childProcessExec);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -47,19 +50,52 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client
   const PORT = 5000;
-  server.listen(PORT, "0.0.0.0", () => {
-    log(`serving on port ${PORT}`);
+
+  async function killProcessOnPort() {
+    try {
+      const { stdout } = await exec(`lsof -i :${PORT} | grep LISTEN | awk '{print $2}'`);
+      if (stdout) {
+        const pid = stdout.trim();
+        await exec(`kill -9 ${pid}`);
+        log(`Successfully killed process ${pid} on port ${PORT}`);
+        return true;
+      }
+    } catch (error) {
+      log(`Error killing process on port ${PORT}: ${error}`);
+      return false;
+    }
+    return false;
+  }
+
+  function startServer() {
+    server.listen(PORT, "0.0.0.0", () => {
+      log(`Server is running on port ${PORT}`);
+    });
+  }
+
+  server.on('error', async (error: NodeJS.ErrnoException) => {
+    if (error.code === 'EADDRINUSE') {
+      log(`Port ${PORT} is already in use. Attempting to close existing connection...`);
+      const killed = await killProcessOnPort();
+      if (killed) {
+        log(`Successfully freed port ${PORT}. Restarting server...`);
+        setTimeout(startServer, 1000);
+      } else {
+        log(`Failed to kill process on port ${PORT}. Please close it manually.`);
+        process.exit(1);
+      }
+    } else {
+      log(`Server error: ${error.message}`);
+      process.exit(1);
+    }
   });
+
+  startServer();
 })();
