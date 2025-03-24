@@ -5,6 +5,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 
+import pexelArt from '@/assets/images/pexel-art.png';
+import igLikes from '@/assets/images/ig-likes.gif';
+import pigeonSquare from '@/assets/images/pigeon-square.png';
+import potionsCatalog from '@/assets/images/potions-catalog-cover-square.jpg';
+import protestPlatform from '@/assets/images/protest-platform/protest-platform-map.gif';
+
 const projects = [
   {
     title: "Typo App",
@@ -31,31 +37,31 @@ const projects = [
     description:
       "Type a word, and see the average color of the image search results in a new pixelated visual",
     href: "/work/foundations/pexel_art",
-    image: "@/assets/images/pexel-art.png",
+    image: pexelArt,
   },
   {
     title: "No Likes",
     description: "Chrome extension to remove likes on Instagram",
     href: "/work/foundations/no_likes",
-    image: "@/assets/images/ig-likes.gif",
+    image: igLikes,
   },
   {
     title: "Robot Pigeon",
     description: "Snapchat Lens to support the Birds Aren't Real Movement",
     href: "/work/foundations/robot_pigeon",
-    image: "@/assets/images/pigeon-square.png",
+    image: pigeonSquare,
   },
   {
     title: "Modern Potions",
     description: "Editorial Design and Production for a Magic Potions Catalog",
     href: "/work/foundations/modern_potions",
-    image: "@/assets/images/potions-catalog-cover-square.jpg",
+    image: potionsCatalog,
   },
   {
     title: "Protest Platform",
     description: "UI Design for a Social Media Platform for Protesting",
     href: "/work/foundations/protest_platform",
-    image: "@/assets/images/protest-platform/protest-platform-map.gif",
+    image: protestPlatform,
   },
 ];
 
