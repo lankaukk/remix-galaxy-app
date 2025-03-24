@@ -36,7 +36,7 @@ export default function ProjectLayout({
       </div>
       <div className="mb-8">
         <h1 className="mb-4 text-4xl font-bold sm:text-5xl">{title}</h1>
-        <p className="mx-auto max-w-2xl text-lg">{description}</p>
+        <p className="mx-auto text-lg">{description}</p>
       </div>
       {children}
     </motion.div>

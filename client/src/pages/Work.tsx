@@ -7,7 +7,7 @@ import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 const projects = [
   {
     title: "Shopify",
-    description: "UX Designer on Custom Storefronts, and Channel Expansion",
+    description: "UX Designer on the Channels Platform",
     image:
       "https://cdn.shopify.com/b/shopify-brochure2-assets/96a6f6adef1e37a003d62291d3fd32ea.png?originalWidth=814&originalHeight=968",
     href: "/work/shopify",

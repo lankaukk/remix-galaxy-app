@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Linkedin, Twitter } from "lucide-react";
+import { Mail, Linkedin, Twitter, Github, Instagram } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -26,25 +26,34 @@ export default function Contact() {
               className="flex items-center gap-2 hover:text-[#00C2FF]"
             >
               <Mail className="h-5 w-5" />
-              contact@example.com
+              mckaylalankau@gmail.com
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/mckayla-lankau/"
               className="flex items-center gap-2  hover:text-[#00C2FF]"
               target="_blank"
               rel="noopener noreferrer"
             >
               <Linkedin className="h-5 w-5" />
-              LinkedIn Profile
+              LinkedIn
             </a>
             <a
-              href="https://twitter.com"
+              href="https://github.com/lankaukk"
               className="flex items-center gap-2  hover:text-[#00C2FF]"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Twitter className="h-5 w-5" />
-              Twitter Profile
+              <Github className="h-5 w-5" />
+              Github
+            </a>
+            <a
+              href="https://www.instagram.com/forwardchaos/?hl=en"
+              className="flex items-center gap-2  hover:text-[#00C2FF]"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram className="h-5 w-5" />
+              Instagram
             </a>
           </div>
         </div>
