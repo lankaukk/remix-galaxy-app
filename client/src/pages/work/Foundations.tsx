@@ -15,7 +15,7 @@ const projects = [
   {
     title: "Journal App",
     description:
-      "Minimal writing experience focused on clarity and ease of use",
+      "Mobile App Design and Prototype for an ExpressiveJournaling App",
     href: "/work/foundations/journal_app",
     image: "https://mckayla.com/images/journal-mockup.jpg",
   },
@@ -28,33 +28,34 @@ const projects = [
   },
   {
     title: "Pexel Art",
-    description: "Type to search for a word, and see the average color of the image results in a new pixelated visual",
+    description:
+      "Type a word, and see the average color of the image search results in a new pixelated visual",
     href: "/work/foundations/pexel_art",
-    image: "https://mckayla.com/images/pexel-art.png",
+    image: "/src/images/pexel-art.png",
   },
   {
     title: "No Likes",
-    description: "Social media reimagined without vanity metrics",
+    description: "Chrome extension to remove likes on Instagram",
     href: "/work/foundations/no_likes",
-    image: "/src/assets/images/ig-likes.gif",
+    image: "/src/images/ig-likes.gif",
   },
   {
     title: "Robot Pigeon",
-    description: "Playful AI-driven message delivery system",
+    description: "Snapchat Lens to support the Birds Aren't Real Movement",
     href: "/work/foundations/robot_pigeon",
-    image: "https://images.unsplash.com/photo-1548802673-380ab8ebc7b7",
+    image: "/src/images/pigeon-square.png",
   },
   {
     title: "Modern Potions",
-    description: "E-commerce redesign for artisanal beverages",
+    description: "Editorial Design and Production for a Magic Potions Catalog",
     href: "/work/foundations/modern_potions",
-    image: "https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64",
+    image: "/src/images/potions-catalog-cover-square.jpg",
   },
   {
     title: "Protest Platform",
-    description: "Digital toolkit for organizing social movements",
+    description: "UI Design for a Social Media Platform for Protesting",
     href: "/work/foundations/protest_platform",
-    image: "https://images.unsplash.com/photo-1591625677520-65c9b8016a31",
+    image: "/src/images/protest-platform/protest-platform-map.gif",
   },
 ];
 
