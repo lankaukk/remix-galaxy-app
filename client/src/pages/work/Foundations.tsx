@@ -36,7 +36,7 @@ const projects = [
     title: "No Likes",
     description: "Social media reimagined without vanity metrics",
     href: "/work/foundations/no_likes",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7",
+    image: "/src/assets/images/ig-likes.gif",
   },
   {
     title: "Robot Pigeon",
