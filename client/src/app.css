@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: blue;
+    --foreground: pink;
   }
 }
 
 .waves svg path {
-  fill: none;
+  fill: green;
   stroke: url(#line-gradient);
-  stroke-width: 5px;
+  stroke-width: 10px;
 }
 
 body {

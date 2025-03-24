@@ -34,7 +34,7 @@ function Router() {
 
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={Waves} />
       <Route path="/work" component={Work} />
       <Route path="/work/shopify" component={Shopify} />
       <Route path="/work/utopia" component={Utopia} />
@@ -70,7 +70,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="relative">
-        <Waves />
         <MainNav />
         <main className="min-h-screen pt-16 relative z-10">
           <Router />
