@@ -31,31 +31,31 @@ const projects = [
     description:
       "Type a word, and see the average color of the image search results in a new pixelated visual",
     href: "/work/foundations/pexel_art",
-    image: "/src/images/pexel-art.png",
+    image: "/src/assets/images/pexel-art.png",
   },
   {
     title: "No Likes",
     description: "Chrome extension to remove likes on Instagram",
     href: "/work/foundations/no_likes",
-    image: "/src/images/ig-likes.gif",
+    image: "/src/assets/images/ig-likes.gif",
   },
   {
     title: "Robot Pigeon",
     description: "Snapchat Lens to support the Birds Aren't Real Movement",
     href: "/work/foundations/robot_pigeon",
-    image: "/src/images/pigeon-square.png",
+    image: "/src/assets/images/pigeon-square.png",
   },
   {
     title: "Modern Potions",
     description: "Editorial Design and Production for a Magic Potions Catalog",
     href: "/work/foundations/modern_potions",
-    image: "/src/images/potions-catalog-cover-square.jpg",
+    image: "/src/assets/images/potions-catalog-cover-square.jpg",
   },
   {
     title: "Protest Platform",
     description: "UI Design for a Social Media Platform for Protesting",
     href: "/work/foundations/protest_platform",
-    image: "/src/images/protest-platform/protest-platform-map.gif",
+    image: "/src/assets/images/protest-platform/protest-platform-map.gif",
   },
 ];
 
