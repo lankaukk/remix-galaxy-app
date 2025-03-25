@@ -63,25 +63,122 @@ function ImageWithFallback({
   onLoad,
   onError,
   maintainAspectRatio = false,
+  inGallery = false,
 }: {
   src: string;
   alt: string;
   onLoad?: () => void;
   onError?: () => void;
   maintainAspectRatio?: boolean;
+  inGallery?: boolean;
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [imgNaturalHeight, setImgNaturalHeight] = useState<number | null>(null);
+  const [imgNaturalWidth, setImgNaturalWidth] = useState<number | null>(null);
 
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    setImgNaturalHeight(img.naturalHeight);
+    setImgNaturalWidth(img.naturalWidth);
+    setIsLoading(false);
+    onLoad?.();
+  };
+
+  // For gallery cards, we want them to maintain aspect ratio but have consistent width
+  if (inGallery) {
+    return (
+      <div className="w-full">
+        {isLoading && (
+          <div className="w-full pt-[75%] relative">
+            <Skeleton className="absolute inset-0" />
+          </div>
+        )}
+        {hasError ? (
+          <div className="w-full pt-[75%] relative flex items-center justify-center bg-muted">
+            <div className="text-center absolute inset-0 flex flex-col items-center justify-center">
+              <ImageIcon className="h-12 w-12 text-muted-foreground" />
+              <p className="text-sm text-muted-foreground mt-2">
+                Failed to load image
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div 
+            className={`w-full ${isLoading ? 'pt-[75%]' : ''} relative`}
+            style={imgNaturalWidth && imgNaturalHeight && !isLoading ? {
+              paddingTop: `${(imgNaturalHeight / imgNaturalWidth * 100)}%`
+            } : {}}
+          >
+            <img
+              src={src}
+              alt={alt}
+              className={`${isLoading ? 'hidden' : 'block'} absolute inset-0 w-full h-full object-cover transition-opacity duration-300`}
+              loading="lazy"
+              onLoad={handleImageLoad}
+              onError={() => {
+                setIsLoading(false);
+                setHasError(true);
+                onError?.();
+              }}
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // For modal images - maintain aspect ratio with max height constraint
+  if (maintainAspectRatio) {
+    return (
+      <div className="w-full">
+        {isLoading && (
+          <div className="min-h-[200px] flex items-center justify-center">
+            <Skeleton className="w-full h-[200px]" />
+          </div>
+        )}
+        {hasError ? (
+          <div className="min-h-[200px] flex items-center justify-center bg-muted">
+            <div className="text-center">
+              <ImageIcon className="h-12 w-12 text-muted-foreground mx-auto" />
+              <p className="text-sm text-muted-foreground mt-2">
+                Failed to load image
+              </p>
+            </div>
+          </div>
+        ) : (
+          <img
+            src={src}
+            alt={alt}
+            className={`w-full max-h-[70vh] object-contain transition-opacity duration-300 ${
+              isLoading ? "opacity-0" : "opacity-100"
+            }`}
+            loading="lazy"
+            onLoad={() => {
+              setIsLoading(false);
+              onLoad?.();
+            }}
+            onError={() => {
+              setIsLoading(false);
+              setHasError(true);
+              onError?.();
+            }}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // Original fixed aspect ratio display for backward compatibility
   return (
-    <div className={`relative ${!maintainAspectRatio ? "pt-[75%]" : ""} w-full`}>
+    <div className="relative pt-[75%] w-full">
       {isLoading && (
-        <div className={`${!maintainAspectRatio ? "absolute inset-0" : "min-h-[200px]"} flex items-center justify-center`}>
-          <Skeleton className={`${!maintainAspectRatio ? "absolute inset-0" : "w-full h-[200px]"}`} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Skeleton className="absolute inset-0" />
         </div>
       )}
       {hasError ? (
-        <div className={`${!maintainAspectRatio ? "absolute inset-0" : "min-h-[200px]"} flex items-center justify-center bg-muted`}>
+        <div className="absolute inset-0 flex items-center justify-center bg-muted">
           <div className="text-center">
             <ImageIcon className="h-12 w-12 text-muted-foreground mx-auto" />
             <p className="text-sm text-muted-foreground mt-2">
@@ -93,7 +190,7 @@ function ImageWithFallback({
         <img
           src={src}
           alt={alt}
-          className={`${!maintainAspectRatio ? "absolute inset-0 w-full h-full object-cover" : "w-full max-h-[70vh] object-contain"} transition-opacity duration-300 ${
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
             isLoading ? "opacity-0" : "opacity-100"
           }`}
           loading="lazy"
@@ -179,6 +276,7 @@ export default function Gallery() {
                       <ImageWithFallback
                         src={artwork.image}
                         alt={artwork.title}
+                        inGallery={true}
                       />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4">
                         <h3 className="text-white font-semibold text-lg">
