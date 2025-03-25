@@ -16,6 +16,10 @@ import {
   ChevronRight,
   ImageIcon,
   AlertCircle,
+  ArrowDown,
+  ArrowUp,
+  Calendar,
+  Type,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import type { Artwork } from "@shared/schema";
@@ -240,12 +244,21 @@ function ImageWithFallback({
   );
 }
 
-type SortOption = "date" | "title";
+type SortField = "date" | "title";
+type SortDirection = "asc" | "desc";
+
+type SortOptions = {
+  field: SortField;
+  direction: SortDirection;
+};
 
 export default function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sortBy, setSortBy] = useState<SortOption>("date");
+  const [sortOptions, setSortOptions] = useState<SortOptions>({ 
+    field: "date", 
+    direction: "desc" 
+  });
 
   const {
     data: artworksData = [],
@@ -259,14 +272,22 @@ export default function Gallery() {
 
   // Sort artworks based on selected sort option
   const artworks = [...(artworksData || [])].sort((a, b) => {
-    if (sortBy === "title") {
-      return (a.title || "").localeCompare(b.title || "");
+    // Determine sort order multiplier based on direction
+    const directionMultiplier = sortOptions.direction === "asc" ? 1 : -1;
+    
+    if (sortOptions.field === "title") {
+      // Sort by title
+      return directionMultiplier * (a.title || "").localeCompare(b.title || "");
     } else {
-      // Sort by year, most recent first (date is default)
+      // Sort by year
       if (!a.year && !b.year) return 0;
-      if (!a.year) return 1;
-      if (!b.year) return -1;
-      return b.year.localeCompare(a.year);
+      if (!a.year) return directionMultiplier * 1;
+      if (!b.year) return directionMultiplier * -1;
+      return directionMultiplier * (
+        sortOptions.direction === "asc" 
+          ? a.year.localeCompare(b.year) 
+          : b.year.localeCompare(a.year)
+      );
     }
   });
 
@@ -279,24 +300,74 @@ export default function Gallery() {
       {/* Sort selector */}
       {artworks.length > 1 && !isLoading && (
         <div className="mb-6 flex justify-end">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Sort by:</span>
-            <Select
-              value={sortBy}
-              onValueChange={(value) => setSortBy(value as SortOption)}
-            >
-              <SelectTrigger className="w-[130px]">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="date">
-                  <span>Date</span>
-                </SelectItem>
-                <SelectItem value="title">
-                  <span>Title</span>
-                </SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Sort by:</span>
+              <Select
+                value={sortOptions.field}
+                onValueChange={(value) => 
+                  setSortOptions(prev => ({ ...prev, field: value as SortField }))}
+              >
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Sort field" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="date">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5" />
+                      <span>Date</span>
+                      {sortOptions.field === "date" && (
+                        sortOptions.direction === "asc" ? (
+                          <ArrowUp className="h-3.5 w-3.5 ml-auto" />
+                        ) : (
+                          <ArrowDown className="h-3.5 w-3.5 ml-auto" />
+                        )
+                      )}
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="title">
+                    <div className="flex items-center gap-1.5">
+                      <Type className="h-3.5 w-3.5" />
+                      <span>Title</span>
+                      {sortOptions.field === "title" && (
+                        sortOptions.direction === "asc" ? (
+                          <ArrowUp className="h-3.5 w-3.5 ml-auto" />
+                        ) : (
+                          <ArrowDown className="h-3.5 w-3.5 ml-auto" />
+                        )
+                      )}
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Order:</span>
+              <Select
+                value={sortOptions.direction}
+                onValueChange={(value) => 
+                  setSortOptions(prev => ({ ...prev, direction: value as SortDirection }))}
+              >
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Sort direction" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="asc">
+                    <div className="flex items-center gap-1.5">
+                      <ArrowUp className="h-3.5 w-3.5" />
+                      <span>Ascending</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="desc">
+                    <div className="flex items-center gap-1.5">
+                      <ArrowDown className="h-3.5 w-3.5" />
+                      <span>Descending</span>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       )}
