@@ -11,6 +11,7 @@ const OrbitingContactIcon = ({
   orbitRadius,
   orbitDuration,
   initialRotation,
+  angleRange = 180, // Only orbit in 180-degree arc by default (never going behind)
 }: {
   icon: React.ReactNode;
   color: string;
@@ -19,37 +20,20 @@ const OrbitingContactIcon = ({
   orbitRadius: number;
   orbitDuration: number;
   initialRotation: number;
+  angleRange?: number;
 }) => {
-  // This creates a circular path animation
-  const orbitPath = {
-    x: Math.cos(initialRotation * (Math.PI / 180)) * orbitRadius,
-    y: Math.sin(initialRotation * (Math.PI / 180)) * orbitRadius,
-  };
-
-  // Animation to move in a circle
-  const circleAnimation = {
-    initial: { x: orbitPath.x, y: orbitPath.y },
-    animate: {
-      x: [
-        Math.cos(initialRotation * (Math.PI / 180)) * orbitRadius,
-        Math.cos((initialRotation + 90) * (Math.PI / 180)) * orbitRadius,
-        Math.cos((initialRotation + 180) * (Math.PI / 180)) * orbitRadius,
-        Math.cos((initialRotation + 270) * (Math.PI / 180)) * orbitRadius,
-        Math.cos((initialRotation + 360) * (Math.PI / 180)) * orbitRadius,
-      ],
-      y: [
-        Math.sin(initialRotation * (Math.PI / 180)) * orbitRadius,
-        Math.sin((initialRotation + 90) * (Math.PI / 180)) * orbitRadius,
-        Math.sin((initialRotation + 180) * (Math.PI / 180)) * orbitRadius,
-        Math.sin((initialRotation + 270) * (Math.PI / 180)) * orbitRadius,
-        Math.sin((initialRotation + 360) * (Math.PI / 180)) * orbitRadius,
-      ],
-      transition: {
-        duration: orbitDuration,
-        repeat: Infinity,
-        ease: "linear",
-        times: [0, 0.25, 0.5, 0.75, 1],
-      },
+  // Calculate starting position on the left side of the circle
+  const startAngle = -90 + initialRotation;
+  
+  // Create a custom path that only traverses part of the circle (arc)
+  // This ensures icons stay on one side and don't go behind the image
+  const customPathAnimation = {
+    rotate: [startAngle, startAngle + angleRange],
+    transition: {
+      duration: orbitDuration,
+      repeat: Infinity,
+      repeatType: "reverse" as const, // Go back and forth along the arc
+      ease: "easeInOut",
     },
   };
 
@@ -57,24 +41,39 @@ const OrbitingContactIcon = ({
     <motion.div
       className="absolute"
       style={{
+        width: 0,
+        height: 0,
         top: "50%",
         left: "50%",
-        margin: "-20px", // Half of icon size to center it
       }}
-      initial={circleAnimation.initial}
-      animate={circleAnimation.animate}
     >
       <motion.div
-        className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer transition-transform hover:scale-110"
-        style={{ 
-          backgroundColor: color,
+        className="absolute"
+        style={{
+          width: 56, // Icon container width
+          height: 56, // Icon container height
+          x: -28, // Center the icon (half of width)
+          y: -28, // Center the icon (half of height)
+          transformOrigin: `${orbitRadius + 28}px 28px`, // Position at orbit distance
+          left: 0,
+          top: 0,
         }}
-        whileHover={{ scale: 1.2 }}
-        onClick={onClick}
+        animate={customPathAnimation}
       >
-        <div className="text-white w-8 h-8 flex items-center justify-center">
-          {icon}
-        </div>
+        <motion.div
+          className="absolute flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer"
+          style={{ 
+            backgroundColor: color,
+            left: orbitRadius, // Position at orbit distance
+            top: 0,
+          }}
+          whileHover={{ scale: 1.2 }}
+          onClick={onClick}
+        >
+          <div className="text-white w-8 h-8 flex items-center justify-center">
+            {icon}
+          </div>
+        </motion.div>
       </motion.div>
     </motion.div>
   );
@@ -114,32 +113,36 @@ export default function Contact() {
       color: "#EA4335",
       onClick: copyToClipboard,
       orbitRadius: 170, // Furthest from the center
-      orbitDuration: 30, // Medium speed
-      initialRotation: 0,
+      orbitDuration: 8, // Medium speed
+      initialRotation: 0, // Starts at the left middle
+      angleRange: 120, // Oscillates in a smaller arc
     },
     {
       icon: <Linkedin size={24} />,
       color: "#0077B5",
       href: "https://www.linkedin.com/in/mckayla-lankau/",
       orbitRadius: 140, // Medium distance
-      orbitDuration: 35, // Slower
-      initialRotation: 90,
+      orbitDuration: 12, // Slower
+      initialRotation: 45, // Starts slightly above
+      angleRange: 90, // Oscillates in a smaller arc
     },
     {
       icon: <Github size={24} />,
       color: "#333",
       href: "https://github.com/lankaukk",
       orbitRadius: 120, // Closer to center
-      orbitDuration: 25, // Faster
-      initialRotation: 180,
+      orbitDuration: 10, // Faster
+      initialRotation: -45, // Starts slightly below
+      angleRange: 70, // Oscillates in an even smaller arc
     },
     {
       icon: <Instagram size={24} />,
       color: "#E1306C",
       href: "https://www.instagram.com/forwardchaos/?hl=en",
       orbitRadius: 150, // Medium-far distance
-      orbitDuration: 40, // Slowest
-      initialRotation: 270,
+      orbitDuration: 14, // Slowest
+      initialRotation: -30, // Starts slightly below
+      angleRange: 100, // Medium arc movement
     },
   ];
 
@@ -180,6 +183,7 @@ export default function Contact() {
                 orbitRadius={config.orbitRadius}
                 orbitDuration={config.orbitDuration}
                 initialRotation={config.initialRotation}
+                angleRange={config.angleRange}
               />
             ))}
           </div>
