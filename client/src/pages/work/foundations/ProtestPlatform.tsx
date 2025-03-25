@@ -1,62 +1,27 @@
 import ProjectLayout from "@/components/layout/ProjectLayout";
-import { Card, CardContent } from "@/components/ui/card";
+import protestPlatformPic from "@/assets/images/protest-platform/protest-platform-map.gif";
 
 export default function ProtestPlatform() {
   return (
     <ProjectLayout
       title="Protest Platform"
-      description="A digital toolkit for organizing social movements"
+      description="UI Design for a theoretical social media platform for protesters around the world. Activists can post the contents of their picket signs onto a bulletin for their city, connect with each other and organize demonstarations. Users view the posts for other cities around the world, and see what they are experienceing. However to avoid foreign interferance, users can only participate on the bulletins for the city where they are located. True change comes from within."
       backLink="/work/foundations"
       backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1591625677520-65c9b8016a31"
-          alt="Protest Platform Interface"
+          src={protestPlatformPic}
+          alt="Robot Pigeon Interface"
           className="w-full rounded-lg shadow-xl"
         />
-
-        <div className="grid gap-8 md:grid-cols-2">
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold ">Mission</h3>
-              <p className="">
-                Develop a secure and accessible platform that empowers
-                activists to organize, communicate, and coordinate social
-                movements effectively.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold ">Approach</h3>
-              <p className="">
-                Created a comprehensive suite of tools focused on privacy,
-                accessibility, and rapid information sharing, designed to
-                work even in challenging connectivity conditions.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="prose-lg max-w-none ">
-          <h2>Core Features</h2>
-          <ul>
-            <li>Secure communication channels</li>
-            <li>Resource coordination tools</li>
-            <li>Emergency response system</li>
-            <li>Offline functionality</li>
-            <li>Multi-language support</li>
-          </ul>
-
-          <h2>Impact</h2>
-          <p>
-            The Protest Platform has become an essential tool for grassroots
-            organizations, facilitating more effective and safer coordination
-            of social movements while ensuring privacy and accessibility.
-          </p>
-        </div>
+      </div>
+      <div className="space-y-24">
+        <p>
+          Insipiration: Foreign influence operatives got tens of thousands of
+          Americans to attend for their phony political events on Facebook, in
+          wake of the 2016 US presidential election.
+        </p>
       </div>
     </ProjectLayout>
   );

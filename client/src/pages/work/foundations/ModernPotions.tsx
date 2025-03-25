@@ -1,62 +1,20 @@
 import ProjectLayout from "@/components/layout/ProjectLayout";
-import { Card, CardContent } from "@/components/ui/card";
+import CoverPic from "@/assets/images/modern-potions/covers.jpeg";
 
 export default function ModernPotions() {
   return (
     <ProjectLayout
       title="Modern Potions"
-      description="An e-commerce redesign for artisanal beverages"
+      description="Modern Potions is a speculative catalog selling the season's most potent magic potions. It's essential reading material for influential witches and humans alike."
       backLink="/work/foundations"
       backText="Back to Foundations"
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64"
+          src={CoverPic}
           alt="Modern Potions Store"
           className="w-full rounded-lg shadow-xl"
         />
-
-        <div className="grid gap-8 md:grid-cols-2">
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold ">Challenge</h3>
-              <p className="">
-                Reimagine the online shopping experience for craft beverages,
-                focusing on storytelling and visual presentation while maintaining
-                efficient e-commerce functionality.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-bold ">Solution</h3>
-              <p className="">
-                Created an immersive shopping experience that combines beautiful
-                product photography with engaging content about ingredients,
-                brewing processes, and brand stories.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="prose-lg max-w-none ">
-          <h2>Key Features</h2>
-          <ul>
-            <li>Immersive product presentations</li>
-            <li>Interactive brewing guides</li>
-            <li>Subscription management system</li>
-            <li>Personalized recommendations</li>
-            <li>Seamless checkout process</li>
-          </ul>
-
-          <h2>Results</h2>
-          <p>
-            The redesigned platform has significantly improved customer
-            engagement and sales conversion rates, while establishing Modern
-            Potions as a premium destination for artisanal beverages.
-          </p>
-        </div>
       </div>
     </ProjectLayout>
   );

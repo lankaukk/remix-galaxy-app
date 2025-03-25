@@ -4,33 +4,35 @@ import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
-
-import pexelArt from '@/assets/images/pexel-art.png';
-import igLikes from '@/assets/images/ig-likes.gif';
-import pigeonSquare from '@/assets/images/pigeon-square.png';
-import potionsCatalog from '@/assets/images/potions-catalog-cover-square.jpg';
-import protestPlatform from '@/assets/images/protest-platform/protest-platform-map.gif';
+import pexelArt from "@/assets/images/pexel-art.png";
+import igLikes from "@/assets/images/ig-likes.gif";
+import pigeonSquare from "@/assets/images/pigeon-square.png";
+import potionsCatalog from "@/assets/images/potions-catalog-cover-square.jpg";
+import protestPlatform from "@/assets/images/protest-platform/protest-platform-map.gif";
+import typoPosters from "@/assets/images/typo-posters.jpg";
+import journalApp from "@/assets/images/journal-mockup.jpg";
+import Blank from "@/assets/images/_blank-playspace.gif";
 
 const projects = [
   {
     title: "Typo App",
     description: "Web app for creating typographic compositions",
     href: "/work/foundations/typo",
-    image: "https://mckayla.com/images/typo-posters.jpg",
+    image: typoPosters,
   },
   {
     title: "Journal App",
     description:
       "Mobile App Design and Prototype for an ExpressiveJournaling App",
     href: "/work/foundations/journal_app",
-    image: "https://mckayla.com/images/journal-mockup.jpg",
+    image: journalApp,
   },
   {
     title: "_blank",
     description:
       "Digital Experience exploring contemporary social media consumption",
     href: "/work/foundations/blank",
-    image: "https://mckayla.com/images/projects/blank/install.gif",
+    image: Blank,
   },
   {
     title: "Pexel Art",
