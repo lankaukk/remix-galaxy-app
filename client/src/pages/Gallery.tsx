@@ -28,6 +28,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -300,74 +301,26 @@ export default function Gallery() {
       {/* Sort selector */}
       {artworks.length > 1 && !isLoading && (
         <div className="mb-6 flex justify-end">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">Sort by:</span>
-              <Select
-                value={sortOptions.field}
-                onValueChange={(value) => 
-                  setSortOptions(prev => ({ ...prev, field: value as SortField }))}
-              >
-                <SelectTrigger className="w-[130px]">
-                  <SelectValue placeholder="Sort field" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="date">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="h-3.5 w-3.5" />
-                      <span>Date</span>
-                      {sortOptions.field === "date" && (
-                        sortOptions.direction === "asc" ? (
-                          <ArrowUp className="h-3.5 w-3.5 ml-auto" />
-                        ) : (
-                          <ArrowDown className="h-3.5 w-3.5 ml-auto" />
-                        )
-                      )}
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="title">
-                    <div className="flex items-center gap-1.5">
-                      <Type className="h-3.5 w-3.5" />
-                      <span>Title</span>
-                      {sortOptions.field === "title" && (
-                        sortOptions.direction === "asc" ? (
-                          <ArrowUp className="h-3.5 w-3.5 ml-auto" />
-                        ) : (
-                          <ArrowDown className="h-3.5 w-3.5 ml-auto" />
-                        )
-                      )}
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">Order:</span>
-              <Select
-                value={sortOptions.direction}
-                onValueChange={(value) => 
-                  setSortOptions(prev => ({ ...prev, direction: value as SortDirection }))}
-              >
-                <SelectTrigger className="w-[130px]">
-                  <SelectValue placeholder="Sort direction" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="asc">
-                    <div className="flex items-center gap-1.5">
-                      <ArrowUp className="h-3.5 w-3.5" />
-                      <span>Ascending</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="desc">
-                    <div className="flex items-center gap-1.5">
-                      <ArrowDown className="h-3.5 w-3.5" />
-                      <span>Descending</span>
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">Sort by:</span>
+            <Select
+              value={`${sortOptions.field}-${sortOptions.direction}`}
+              onValueChange={(value) => {
+                const [field, direction] = value.split('-') as [SortField, SortDirection];
+                setSortOptions({ field, direction });
+              }}
+            >
+              <SelectTrigger className="w-[150px]">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="date-desc">Date (newest first)</SelectItem>
+                <SelectItem value="date-asc">Date (oldest first)</SelectItem>
+                <SelectSeparator />
+                <SelectItem value="title-asc">Title (A-Z)</SelectItem>
+                <SelectItem value="title-desc">Title (Z-A)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       )}
