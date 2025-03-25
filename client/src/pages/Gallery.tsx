@@ -53,10 +53,19 @@ function GalleryError({ error }: { error: Error | unknown }) {
 }
 
 function GalleryItemSkeleton() {
+  // Create different aspect ratios for more natural looking skeletons
+  // This will simulate the variable heights of actual artwork
+  const randomRatios = [65, 75, 85, 100, 120];
+  const randomIndex = Math.floor(Math.random() * randomRatios.length);
+  const aspectRatio = randomRatios[randomIndex];
+  
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden mb-6">
       <CardContent className="p-0">
-        <div className="relative pt-[75%] w-full bg-muted flex items-center justify-center">
+        <div 
+          className="relative w-full bg-muted flex items-center justify-center"
+          style={{ paddingTop: `${aspectRatio}%` }}
+        >
           <Skeleton className="absolute inset-0" />
         </div>
       </CardContent>
@@ -303,13 +312,17 @@ export default function Gallery() {
       )}
 
       {isLoading ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {Array(6)
+        <Masonry
+          breakpointCols={breakpointColumns}
+          className="flex -ml-6 w-auto"
+          columnClassName="pl-6 bg-clip-padding"
+        >
+          {Array(9)
             .fill(0)
             .map((_, index) => (
-              <GalleryItemSkeleton key={index} />
+              <GalleryItemSkeleton key={`skeleton-${index}`} />
             ))}
-        </div>
+        </Masonry>
       ) : (
         <Masonry
           breakpointCols={breakpointColumns}
