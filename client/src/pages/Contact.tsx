@@ -8,7 +8,7 @@ const ContactBubble = ({
   color,
   onClick,
   href,
-  animationProps
+  animationProps,
 }: {
   icon: React.ReactNode;
   color: string;
@@ -38,14 +38,14 @@ const ContactBubble = ({
       </a>
     );
   }
-  
+
   return content;
 };
 
 export default function Contact() {
   const { toast } = useToast();
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -69,9 +69,9 @@ export default function Contact() {
         transition: {
           duration: 10,
           repeat: Infinity,
-          ease: "easeInOut"
-        }
-      }
+          ease: "easeInOut",
+        },
+      },
     },
     {
       initial: { x: 60, y: -40 },
@@ -81,9 +81,9 @@ export default function Contact() {
         transition: {
           duration: 12,
           repeat: Infinity,
-          ease: "easeInOut"
-        }
-      }
+          ease: "easeInOut",
+        },
+      },
     },
     {
       initial: { x: -130, y: 60 },
@@ -93,9 +93,9 @@ export default function Contact() {
         transition: {
           duration: 11,
           repeat: Infinity,
-          ease: "easeInOut"
-        }
-      }
+          ease: "easeInOut",
+        },
+      },
     },
     {
       initial: { x: 20, y: 90 },
@@ -105,10 +105,10 @@ export default function Contact() {
         transition: {
           duration: 13,
           repeat: Infinity,
-          ease: "easeInOut"
-        }
-      }
-    }
+          ease: "easeInOut",
+        },
+      },
+    },
   ];
 
   return (
@@ -127,8 +127,8 @@ export default function Contact() {
           className="relative z-0"
         >
           <div className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary shadow-xl bg-background">
-            <img 
-              src="/profile_photo.jpg" 
+            <img
+              src="/profile_photo.jpg"
               alt="Profile"
               className="w-full h-full object-cover"
             />
@@ -140,25 +140,25 @@ export default function Contact() {
           <>
             <ContactBubble
               icon={<Mail size={24} />}
-              color="#EA4335"
+              color="#b400a8"
               onClick={copyToClipboard}
               animationProps={bubbleAnimations[0]}
             />
-            
+
             <ContactBubble
               icon={<Linkedin size={24} />}
               color="#0077B5"
               href="https://www.linkedin.com/in/mckayla-lankau/"
               animationProps={bubbleAnimations[1]}
             />
-            
+
             <ContactBubble
               icon={<Github size={24} />}
               color="#333"
               href="https://github.com/lankaukk"
               animationProps={bubbleAnimations[2]}
             />
-            
+
             <ContactBubble
               icon={<Instagram size={24} />}
               color="#E1306C"
