@@ -63,11 +63,11 @@ function GalleryItemSkeleton() {
   const randomRatios = [60, 75, 85, 100];
   const randomIndex = Math.floor(Math.random() * randomRatios.length);
   const aspectRatio = randomRatios[randomIndex];
-  
+
   return (
     <Card className="overflow-hidden mb-6">
       <CardContent className="p-0">
-        <div 
+        <div
           className="relative w-full bg-muted flex items-center justify-center"
           style={{ paddingTop: `${aspectRatio}%` }}
         >
@@ -125,14 +125,15 @@ function ImageWithFallback({
   // For gallery cards, we want them to maintain aspect ratio but have consistent width
   if (inGallery) {
     // Calculate an appropriate aspect ratio for loading and error states
-    const aspectRatio = imgNaturalWidth && imgNaturalHeight 
-      ? (imgNaturalHeight / imgNaturalWidth) * 100
-      : 66.7; // Default 3:2 ratio if dimensions not known yet
-      
+    const aspectRatio =
+      imgNaturalWidth && imgNaturalHeight
+        ? (imgNaturalHeight / imgNaturalWidth) * 100
+        : 66.7; // Default 3:2 ratio if dimensions not known yet
+
     return (
       <div className="w-full">
         {isLoading && (
-          <div 
+          <div
             className="w-full relative"
             style={{ paddingTop: `${aspectRatio}%` }}
           >
@@ -140,7 +141,7 @@ function ImageWithFallback({
           </div>
         )}
         {hasError ? (
-          <div 
+          <div
             className="w-full relative flex items-center justify-center bg-muted"
             style={{ paddingTop: `${aspectRatio}%` }}
           >
@@ -256,9 +257,9 @@ type SortOptions = {
 export default function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sortOptions, setSortOptions] = useState<SortOptions>({ 
-    field: "date", 
-    direction: "desc" 
+  const [sortOptions, setSortOptions] = useState<SortOptions>({
+    field: "date",
+    direction: "desc",
   });
 
   const {
@@ -272,20 +273,21 @@ export default function Gallery() {
   });
 
   // First, ensure all artworks have unique IDs by filtering out duplicates
-  const uniqueArtworks = artworksData?.reduce<Artwork[]>((acc, current) => {
-    // Only add the artwork if it's not already in the accumulator
-    const exists = acc.find(item => item.id === current.id);
-    if (!exists) {
-      acc.push(current);
-    }
-    return acc;
-  }, []) || [];
+  const uniqueArtworks =
+    artworksData?.reduce<Artwork[]>((acc, current) => {
+      // Only add the artwork if it's not already in the accumulator
+      const exists = acc.find((item) => item.id === current.id);
+      if (!exists) {
+        acc.push(current);
+      }
+      return acc;
+    }, []) || [];
 
   // Sort artworks based on selected sort option
   const artworks = [...uniqueArtworks].sort((a, b) => {
     // Determine sort order multiplier based on direction
     const directionMultiplier = sortOptions.direction === "asc" ? 1 : -1;
-    
+
     if (sortOptions.field === "title") {
       // Sort by title, then by id as secondary sort to ensure consistent order
       const titleCompare = (a.title || "").localeCompare(b.title || "");
@@ -298,7 +300,7 @@ export default function Gallery() {
       if (!a.year && !b.year) return a.id - b.id; // If neither has year, sort by ID
       if (!a.year) return directionMultiplier * 1;
       if (!b.year) return directionMultiplier * -1;
-      
+
       const yearCompare = a.year.localeCompare(b.year);
       if (yearCompare === 0) {
         return a.id - b.id; // If years are the same, sort by ID
@@ -317,11 +319,13 @@ export default function Gallery() {
       {artworks.length > 1 && !isLoading && (
         <div className="mb-6 flex justify-end">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Sort by:</span>
             <Select
               value={`${sortOptions.field}-${sortOptions.direction}`}
               onValueChange={(value) => {
-                const [field, direction] = value.split('-') as [SortField, SortDirection];
+                const [field, direction] = value.split("-") as [
+                  SortField,
+                  SortDirection,
+                ];
                 setSortOptions({ field, direction });
               }}
             >
@@ -329,8 +333,8 @@ export default function Gallery() {
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="date-desc">Date (newest first)</SelectItem>
-                <SelectItem value="date-asc">Date (oldest first)</SelectItem>
+                <SelectItem value="date-desc">Newest</SelectItem>
+                <SelectItem value="date-asc">Oldest</SelectItem>
                 <SelectItem value="title-asc">Title (A-Z)</SelectItem>
                 <SelectItem value="title-desc">Title (Z-A)</SelectItem>
               </SelectContent>
@@ -416,11 +420,6 @@ export default function Gallery() {
                         {artwork.year ? artwork.year.split("-")[0] : ""}
                       </span>
                     )}
-                    {/* {artwork.collection && (
-                      <span className="block">
-                        Collection: {artwork.collection}
-                      </span>
-                    )} */}
                   </DialogDescription>
                   <div className="relative">
                     <AnimatePresence mode="wait">
