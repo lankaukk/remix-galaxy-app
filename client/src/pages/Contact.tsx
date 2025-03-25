@@ -126,9 +126,9 @@ export default function Contact() {
           transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
           className="relative z-0"
         >
-          <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary shadow-xl bg-background">
+          <div className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary shadow-xl bg-background">
             <img 
-              src="/profile_image.svg" 
+              src="/profile_photo.jpg"
               alt="Profile"
               className="w-full h-full object-cover"
             />
