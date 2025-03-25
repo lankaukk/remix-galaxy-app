@@ -27,12 +27,13 @@ const breakpointColumns = {
   640: 1,
 };
 
-function GalleryError({ error }: { error: any }) {
+function GalleryError({ error }: { error: Error | unknown }) {
   const getErrorMessage = () => {
-    if (error.message?.includes("AUTHENTICATION_REQUIRED")) {
+    const err = error as any;
+    if (err?.message?.includes("AUTHENTICATION_REQUIRED")) {
       return "Unable to connect to the artwork database. Please verify the API credentials.";
     }
-    return error.error || "Failed to load artwork. Please try again later.";
+    return err?.error || "Failed to load artwork. Please try again later.";
   };
 
   return (
@@ -61,24 +62,26 @@ function ImageWithFallback({
   alt,
   onLoad,
   onError,
+  maintainAspectRatio = false,
 }: {
   src: string;
   alt: string;
   onLoad?: () => void;
   onError?: () => void;
+  maintainAspectRatio?: boolean;
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="relative pt-[75%] w-full ">
+    <div className={`relative ${!maintainAspectRatio ? "pt-[75%]" : ""} w-full`}>
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Skeleton className="w-full h-full absolute inset-0" />
+        <div className={`${!maintainAspectRatio ? "absolute inset-0" : "min-h-[200px]"} flex items-center justify-center`}>
+          <Skeleton className={`${!maintainAspectRatio ? "absolute inset-0" : "w-full h-[200px]"}`} />
         </div>
       )}
       {hasError ? (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted">
+        <div className={`${!maintainAspectRatio ? "absolute inset-0" : "min-h-[200px]"} flex items-center justify-center bg-muted`}>
           <div className="text-center">
             <ImageIcon className="h-12 w-12 text-muted-foreground mx-auto" />
             <p className="text-sm text-muted-foreground mt-2">
@@ -90,7 +93,7 @@ function ImageWithFallback({
         <img
           src={src}
           alt={alt}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+          className={`${!maintainAspectRatio ? "absolute inset-0 w-full h-full object-cover" : "w-full max-h-[70vh] object-contain"} transition-opacity duration-300 ${
             isLoading ? "opacity-0" : "opacity-100"
           }`}
           loading="lazy"
@@ -114,16 +117,13 @@ export default function Gallery() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
-    data: artworks,
+    data: artworks = [],
     isLoading,
     error,
   } = useQuery<Artwork[]>({
     queryKey: ["/api/artwork"],
     retry: 2,
     refetchOnWindowFocus: false,
-    onError: (error) => {
-      console.error("Gallery fetch error:", error);
-    },
   });
 
   if (error) {
@@ -194,13 +194,13 @@ export default function Gallery() {
                   </Card>
                 </DialogTrigger>
 
-                <DialogContent className="max-w-4xl">
+                <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
                   <DialogTitle>{artwork.title}</DialogTitle>
 
                   <DialogDescription>
-                    {artwork.medium && (
+                    {artwork.medium && artwork.year && (
                       <span className="block">
-                        {artwork.medium}, {artwork.year.split("-")[0]}
+                        {artwork.medium}, {artwork.year ? artwork.year.split("-")[0] : ""}
                       </span>
                     )}
                     {/* {artwork.collection && (
@@ -222,6 +222,7 @@ export default function Gallery() {
                         <ImageWithFallback
                           src={artworks[currentImageIndex].image}
                           alt={artworks[currentImageIndex].title}
+                          maintainAspectRatio={true}
                         />
                       </motion.div>
                     </AnimatePresence>
