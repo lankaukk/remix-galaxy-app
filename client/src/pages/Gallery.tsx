@@ -16,8 +16,6 @@ import {
   ChevronRight,
   ImageIcon,
   AlertCircle,
-  ArrowDownAZ,
-  CalendarDays,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import type { Artwork } from "@shared/schema";
@@ -218,12 +216,12 @@ function ImageWithFallback({
   );
 }
 
-type SortOption = 'default' | 'title' | 'date';
+type SortOption = 'date' | 'title';
 
 export default function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sortBy, setSortBy] = useState<SortOption>('default');
+  const [sortBy, setSortBy] = useState<SortOption>('date');
 
   const {
     data: artworksData = [],
@@ -236,18 +234,15 @@ export default function Gallery() {
   });
 
   // Sort artworks based on selected sort option
-  const artworks = [...artworksData].sort((a, b) => {
-    switch (sortBy) {
-      case 'title':
-        return (a.title || '').localeCompare(b.title || '');
-      case 'date':
-        // Sort by year, most recent first
-        if (!a.year && !b.year) return 0;
-        if (!a.year) return 1;
-        if (!b.year) return -1;
-        return b.year.localeCompare(a.year);
-      default:
-        return 0; // Maintain original order
+  const artworks = [...(artworksData || [])].sort((a, b) => {
+    if (sortBy === 'title') {
+      return (a.title || '').localeCompare(b.title || '');
+    } else {
+      // Sort by year, most recent first (date is default)
+      if (!a.year && !b.year) return 0;
+      if (!a.year) return 1;
+      if (!b.year) return -1;
+      return b.year.localeCompare(a.year);
     }
   });
 
@@ -258,7 +253,7 @@ export default function Gallery() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-background text-foreground">
       {/* Sort selector */}
-      {artworks.length > 0 && !isLoading && (
+      {artworks.length > 1 && !isLoading && (
         <div className="mb-6 flex justify-end">
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">Sort by:</span>
@@ -266,27 +261,15 @@ export default function Gallery() {
               value={sortBy} 
               onValueChange={(value) => setSortBy(value as SortOption)}
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[130px]">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="default">
-                  <div className="flex items-center gap-2">
-                    <ImageIcon className="h-4 w-4" />
-                    <span>Default</span>
-                  </div>
+                <SelectItem value="date">
+                  <span>Date (Newest)</span>
                 </SelectItem>
                 <SelectItem value="title">
-                  <div className="flex items-center gap-2">
-                    <ArrowDownAZ className="h-4 w-4" />
-                    <span>Title (A-Z)</span>
-                  </div>
-                </SelectItem>
-                <SelectItem value="date">
-                  <div className="flex items-center gap-2">
-                    <CalendarDays className="h-4 w-4" />
-                    <span>Date (Newest)</span>
-                  </div>
+                  <span>Title (A-Z)</span>
                 </SelectItem>
               </SelectContent>
             </Select>
