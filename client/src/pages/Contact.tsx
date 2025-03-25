@@ -20,14 +20,35 @@ const OrbitingContactIcon = ({
   orbitDuration: number;
   initialRotation: number;
 }) => {
-  const rotateAnimation = {
-    initial: { rotate: initialRotation },
+  // This creates a circular path animation
+  const orbitPath = {
+    x: Math.cos(initialRotation * (Math.PI / 180)) * orbitRadius,
+    y: Math.sin(initialRotation * (Math.PI / 180)) * orbitRadius,
+  };
+
+  // Animation to move in a circle
+  const circleAnimation = {
+    initial: { x: orbitPath.x, y: orbitPath.y },
     animate: {
-      rotate: initialRotation + 360,
+      x: [
+        Math.cos(initialRotation * (Math.PI / 180)) * orbitRadius,
+        Math.cos((initialRotation + 90) * (Math.PI / 180)) * orbitRadius,
+        Math.cos((initialRotation + 180) * (Math.PI / 180)) * orbitRadius,
+        Math.cos((initialRotation + 270) * (Math.PI / 180)) * orbitRadius,
+        Math.cos((initialRotation + 360) * (Math.PI / 180)) * orbitRadius,
+      ],
+      y: [
+        Math.sin(initialRotation * (Math.PI / 180)) * orbitRadius,
+        Math.sin((initialRotation + 90) * (Math.PI / 180)) * orbitRadius,
+        Math.sin((initialRotation + 180) * (Math.PI / 180)) * orbitRadius,
+        Math.sin((initialRotation + 270) * (Math.PI / 180)) * orbitRadius,
+        Math.sin((initialRotation + 360) * (Math.PI / 180)) * orbitRadius,
+      ],
       transition: {
         duration: orbitDuration,
         repeat: Infinity,
         ease: "linear",
+        times: [0, 0.25, 0.5, 0.75, 1],
       },
     },
   };
@@ -36,20 +57,17 @@ const OrbitingContactIcon = ({
     <motion.div
       className="absolute"
       style={{
-        width: orbitRadius * 2,
-        height: orbitRadius * 2,
-        borderRadius: "50%",
+        top: "50%",
+        left: "50%",
+        margin: "-20px", // Half of icon size to center it
       }}
-      initial={rotateAnimation.initial}
-      animate={rotateAnimation.animate}
+      initial={circleAnimation.initial}
+      animate={circleAnimation.animate}
     >
       <motion.div
-        className="absolute flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer transition-transform hover:scale-110"
+        className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer transition-transform hover:scale-110"
         style={{ 
           backgroundColor: color,
-          top: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
         }}
         whileHover={{ scale: 1.2 }}
         onClick={onClick}
@@ -95,32 +113,32 @@ export default function Contact() {
       icon: <Mail size={24} />,
       color: "#EA4335",
       onClick: copyToClipboard,
-      orbitRadius: 140,
-      orbitDuration: 20,
+      orbitRadius: 170, // Furthest from the center
+      orbitDuration: 30, // Medium speed
       initialRotation: 0,
     },
     {
       icon: <Linkedin size={24} />,
       color: "#0077B5",
       href: "https://www.linkedin.com/in/mckayla-lankau/",
-      orbitRadius: 140,
-      orbitDuration: 25,
+      orbitRadius: 140, // Medium distance
+      orbitDuration: 35, // Slower
       initialRotation: 90,
     },
     {
       icon: <Github size={24} />,
       color: "#333",
       href: "https://github.com/lankaukk",
-      orbitRadius: 140,
-      orbitDuration: 30,
+      orbitRadius: 120, // Closer to center
+      orbitDuration: 25, // Faster
       initialRotation: 180,
     },
     {
       icon: <Instagram size={24} />,
       color: "#E1306C",
       href: "https://www.instagram.com/forwardchaos/?hl=en",
-      orbitRadius: 140,
-      orbitDuration: 35,
+      orbitRadius: 150, // Medium-far distance
+      orbitDuration: 40, // Slowest
       initialRotation: 270,
     },
   ];
