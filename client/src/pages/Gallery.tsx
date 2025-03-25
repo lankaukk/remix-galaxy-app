@@ -85,14 +85,14 @@ function ImageWithFallback({
   const [imgNaturalWidth, setImgNaturalWidth] = useState<number | null>(null);
   const [imgSrc, setImgSrc] = useState(src);
   const [retryCount, setRetryCount] = useState(0);
-  
+
   // Try to refresh the image if it fails to load initially (may help with temporary URLs)
   const handleImageError = () => {
     if (retryCount < 2) {
       // Add a cache-busting parameter
-      const newSrc = `${src}${src.includes('?') ? '&' : '?'}_retry=${Date.now()}`;
+      const newSrc = `${src}${src.includes("?") ? "&" : "?"}_retry=${Date.now()}`;
       setImgSrc(newSrc);
-      setRetryCount(prev => prev + 1);
+      setRetryCount((prev) => prev + 1);
     } else {
       setIsLoading(false);
       setHasError(true);
@@ -110,15 +110,26 @@ function ImageWithFallback({
 
   // For gallery cards, we want them to maintain aspect ratio but have consistent width
   if (inGallery) {
+    // Calculate an appropriate aspect ratio for loading and error states
+    const aspectRatio = imgNaturalWidth && imgNaturalHeight 
+      ? (imgNaturalHeight / imgNaturalWidth) * 100
+      : 75; // Default 4:3 ratio if dimensions not known yet
+      
     return (
       <div className="w-full">
         {isLoading && (
-          <div className="w-full pt-[75%] relative">
+          <div 
+            className="w-full relative"
+            style={{ paddingTop: `${aspectRatio}%` }}
+          >
             <Skeleton className="absolute inset-0" />
           </div>
         )}
         {hasError ? (
-          <div className="w-full pt-[75%] relative flex items-center justify-center bg-muted">
+          <div 
+            className="w-full relative flex items-center justify-center bg-muted"
+            style={{ paddingTop: `${aspectRatio}%` }}
+          >
             <div className="text-center absolute inset-0 flex flex-col items-center justify-center">
               <ImageIcon className="h-12 w-12 text-muted-foreground" />
               <p className="text-sm text-muted-foreground mt-2">
@@ -127,16 +138,20 @@ function ImageWithFallback({
             </div>
           </div>
         ) : (
-          <div 
-            className={`w-full ${isLoading ? 'pt-[75%]' : ''} relative`}
-            style={imgNaturalWidth && imgNaturalHeight && !isLoading ? {
-              paddingTop: `${(imgNaturalHeight / imgNaturalWidth * 100)}%`
-            } : {}}
+          <div
+            className="w-full relative"
+            style={
+              imgNaturalWidth && imgNaturalHeight && !isLoading
+                ? {
+                    paddingTop: `${(imgNaturalHeight / imgNaturalWidth) * 100}%`,
+                  }
+                : { paddingTop: `${aspectRatio}%` }
+            }
           >
             <img
               src={imgSrc}
               alt={alt}
-              className={`${isLoading ? 'hidden' : 'block'} absolute inset-0 w-full h-full object-cover transition-opacity duration-300`}
+              className={`${isLoading ? "hidden" : "block"} absolute inset-0 w-full h-full object-cover transition-opacity duration-300`}
               loading="lazy"
               onLoad={handleImageLoad}
               onError={handleImageError}
@@ -214,12 +229,12 @@ function ImageWithFallback({
   );
 }
 
-type SortOption = 'date' | 'title';
+type SortOption = "date" | "title";
 
 export default function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sortBy, setSortBy] = useState<SortOption>('date');
+  const [sortBy, setSortBy] = useState<SortOption>("date");
 
   const {
     data: artworksData = [],
@@ -233,8 +248,8 @@ export default function Gallery() {
 
   // Sort artworks based on selected sort option
   const artworks = [...(artworksData || [])].sort((a, b) => {
-    if (sortBy === 'title') {
-      return (a.title || '').localeCompare(b.title || '');
+    if (sortBy === "title") {
+      return (a.title || "").localeCompare(b.title || "");
     } else {
       // Sort by year, most recent first (date is default)
       if (!a.year && !b.year) return 0;
@@ -255,8 +270,8 @@ export default function Gallery() {
         <div className="mb-6 flex justify-end">
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">Sort by:</span>
-            <Select 
-              value={sortBy} 
+            <Select
+              value={sortBy}
               onValueChange={(value) => setSortBy(value as SortOption)}
             >
               <SelectTrigger className="w-[130px]">
@@ -264,10 +279,10 @@ export default function Gallery() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="date">
-                  <span>Date (Newest)</span>
+                  <span>Date</span>
                 </SelectItem>
                 <SelectItem value="title">
-                  <span>Title (A-Z)</span>
+                  <span>Title</span>
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -344,7 +359,8 @@ export default function Gallery() {
                   <DialogDescription>
                     {artwork.medium && artwork.year && (
                       <span className="block">
-                        {artwork.medium}, {artwork.year ? artwork.year.split("-")[0] : ""}
+                        {artwork.medium},{" "}
+                        {artwork.year ? artwork.year.split("-")[0] : ""}
                       </span>
                     )}
                     {/* {artwork.collection && (
