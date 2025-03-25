@@ -54,8 +54,8 @@ function GalleryError({ error }: { error: Error | unknown }) {
 
 function GalleryItemSkeleton() {
   // Create different aspect ratios for more natural looking skeletons
-  // This will simulate the variable heights of actual artwork
-  const randomRatios = [65, 75, 85, 100, 120];
+  // Using a more conservative range to avoid cards that are too tall
+  const randomRatios = [60, 75, 85, 100];
   const randomIndex = Math.floor(Math.random() * randomRatios.length);
   const aspectRatio = randomRatios[randomIndex];
   
@@ -122,7 +122,7 @@ function ImageWithFallback({
     // Calculate an appropriate aspect ratio for loading and error states
     const aspectRatio = imgNaturalWidth && imgNaturalHeight 
       ? (imgNaturalHeight / imgNaturalWidth) * 100
-      : 75; // Default 4:3 ratio if dimensions not known yet
+      : 66.7; // Default 3:2 ratio if dimensions not known yet
       
     return (
       <div className="w-full">
