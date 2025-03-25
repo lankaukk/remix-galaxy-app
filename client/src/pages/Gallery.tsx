@@ -271,24 +271,39 @@ export default function Gallery() {
     refetchOnWindowFocus: false,
   });
 
+  // First, ensure all artworks have unique IDs by filtering out duplicates
+  const uniqueArtworks = artworksData?.reduce<Artwork[]>((acc, current) => {
+    // Only add the artwork if it's not already in the accumulator
+    const exists = acc.find(item => item.id === current.id);
+    if (!exists) {
+      acc.push(current);
+    }
+    return acc;
+  }, []) || [];
+
   // Sort artworks based on selected sort option
-  const artworks = [...(artworksData || [])].sort((a, b) => {
+  const artworks = [...uniqueArtworks].sort((a, b) => {
     // Determine sort order multiplier based on direction
     const directionMultiplier = sortOptions.direction === "asc" ? 1 : -1;
     
     if (sortOptions.field === "title") {
-      // Sort by title
-      return directionMultiplier * (a.title || "").localeCompare(b.title || "");
+      // Sort by title, then by id as secondary sort to ensure consistent order
+      const titleCompare = (a.title || "").localeCompare(b.title || "");
+      if (titleCompare === 0) {
+        return a.id - b.id; // If titles are the same, sort by ID to maintain stable order
+      }
+      return directionMultiplier * titleCompare;
     } else {
       // Sort by year
-      if (!a.year && !b.year) return 0;
+      if (!a.year && !b.year) return a.id - b.id; // If neither has year, sort by ID
       if (!a.year) return directionMultiplier * 1;
       if (!b.year) return directionMultiplier * -1;
-      return directionMultiplier * (
-        sortOptions.direction === "asc" 
-          ? a.year.localeCompare(b.year) 
-          : b.year.localeCompare(a.year)
-      );
+      
+      const yearCompare = a.year.localeCompare(b.year);
+      if (yearCompare === 0) {
+        return a.id - b.id; // If years are the same, sort by ID
+      }
+      return directionMultiplier * yearCompare;
     }
   });
 
@@ -316,7 +331,6 @@ export default function Gallery() {
               <SelectContent>
                 <SelectItem value="date-desc">Date (newest first)</SelectItem>
                 <SelectItem value="date-asc">Date (oldest first)</SelectItem>
-                <SelectSeparator />
                 <SelectItem value="title-asc">Title (A-Z)</SelectItem>
                 <SelectItem value="title-desc">Title (Z-A)</SelectItem>
               </SelectContent>
