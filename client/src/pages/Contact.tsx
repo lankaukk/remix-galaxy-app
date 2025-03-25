@@ -3,18 +3,18 @@ import { Mail, Linkedin, Github, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 
-const ContactBubble = ({ 
-  icon, 
-  color, 
-  onClick, 
-  href, 
-  animationProps 
-}: { 
-  icon: React.ReactNode, 
-  color: string, 
-  onClick?: () => void, 
-  href?: string, 
-  animationProps: any 
+const ContactBubble = ({
+  icon,
+  color,
+  onClick,
+  href,
+  animationProps
+}: {
+  icon: React.ReactNode;
+  color: string;
+  onClick?: () => void;
+  href?: string;
+  animationProps: any;
 }) => {
   const content = (
     <motion.div
@@ -59,12 +59,12 @@ export default function Contact() {
     });
   };
 
-  // Define animation paths for each bubble
+  // Define animation paths for each bubble - shifted to the left
   const bubbleAnimations = [
     {
-      initial: { x: -40, y: -100 },
+      initial: { x: -80, y: -100 },
       animate: {
-        x: [-40, 10, -40],
+        x: [-80, -50, -80],
         y: [-100, -120, -100],
         transition: {
           duration: 10,
@@ -74,9 +74,9 @@ export default function Contact() {
       }
     },
     {
-      initial: { x: 100, y: -40 },
+      initial: { x: 60, y: -40 },
       animate: {
-        x: [100, 120, 100],
+        x: [60, 80, 60],
         y: [-40, 10, -40],
         transition: {
           duration: 12,
@@ -86,9 +86,9 @@ export default function Contact() {
       }
     },
     {
-      initial: { x: -90, y: 60 },
+      initial: { x: -130, y: 60 },
       animate: {
-        x: [-90, -120, -90],
+        x: [-130, -160, -130],
         y: [60, 20, 60],
         transition: {
           duration: 11,
@@ -98,9 +98,9 @@ export default function Contact() {
       }
     },
     {
-      initial: { x: 60, y: 90 },
+      initial: { x: 20, y: 90 },
       animate: {
-        x: [60, 90, 60],
+        x: [20, 50, 20],
         y: [90, 110, 90],
         transition: {
           duration: 13,
@@ -128,7 +128,7 @@ export default function Contact() {
         >
           <div className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary shadow-xl bg-background">
             <img 
-              src="/profile_photo.jpg"
+              src="/profile_photo.jpg" 
               alt="Profile"
               className="w-full h-full object-cover"
             />
