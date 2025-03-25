@@ -160,7 +160,9 @@ function ImageWithFallback({
             <img
               src={imgSrc}
               alt={alt}
-              className={`${isLoading ? "hidden" : "block"} absolute inset-0 w-full h-full object-cover transition-opacity duration-300`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                isLoading ? "opacity-40" : "opacity-100"
+              }`}
               loading="lazy"
               onLoad={handleImageLoad}
               onError={handleImageError}
@@ -194,7 +196,7 @@ function ImageWithFallback({
             src={imgSrc}
             alt={alt}
             className={`w-full max-h-[70vh] object-contain transition-opacity duration-300 ${
-              isLoading ? "opacity-0" : "opacity-100"
+              isLoading ? "opacity-40" : "opacity-100"
             }`}
             loading="lazy"
             onLoad={handleImageLoad}
@@ -227,7 +229,7 @@ function ImageWithFallback({
           src={imgSrc}
           alt={alt}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-            isLoading ? "opacity-0" : "opacity-100"
+            isLoading ? "opacity-40" : "opacity-100"
           }`}
           loading="lazy"
           onLoad={handleImageLoad}
