@@ -83,6 +83,22 @@ function ImageWithFallback({
   const [hasError, setHasError] = useState(false);
   const [imgNaturalHeight, setImgNaturalHeight] = useState<number | null>(null);
   const [imgNaturalWidth, setImgNaturalWidth] = useState<number | null>(null);
+  const [imgSrc, setImgSrc] = useState(src);
+  const [retryCount, setRetryCount] = useState(0);
+  
+  // Try to refresh the image if it fails to load initially (may help with temporary URLs)
+  const handleImageError = () => {
+    if (retryCount < 2) {
+      // Add a cache-busting parameter
+      const newSrc = `${src}${src.includes('?') ? '&' : '?'}_retry=${Date.now()}`;
+      setImgSrc(newSrc);
+      setRetryCount(prev => prev + 1);
+    } else {
+      setIsLoading(false);
+      setHasError(true);
+      onError?.();
+    }
+  };
 
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
@@ -118,16 +134,12 @@ function ImageWithFallback({
             } : {}}
           >
             <img
-              src={src}
+              src={imgSrc}
               alt={alt}
               className={`${isLoading ? 'hidden' : 'block'} absolute inset-0 w-full h-full object-cover transition-opacity duration-300`}
               loading="lazy"
               onLoad={handleImageLoad}
-              onError={() => {
-                setIsLoading(false);
-                setHasError(true);
-                onError?.();
-              }}
+              onError={handleImageError}
             />
           </div>
         )}
@@ -155,21 +167,14 @@ function ImageWithFallback({
           </div>
         ) : (
           <img
-            src={src}
+            src={imgSrc}
             alt={alt}
             className={`w-full max-h-[70vh] object-contain transition-opacity duration-300 ${
               isLoading ? "opacity-0" : "opacity-100"
             }`}
             loading="lazy"
-            onLoad={() => {
-              setIsLoading(false);
-              onLoad?.();
-            }}
-            onError={() => {
-              setIsLoading(false);
-              setHasError(true);
-              onError?.();
-            }}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
           />
         )}
       </div>
@@ -195,21 +200,14 @@ function ImageWithFallback({
         </div>
       ) : (
         <img
-          src={src}
+          src={imgSrc}
           alt={alt}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
             isLoading ? "opacity-0" : "opacity-100"
           }`}
           loading="lazy"
-          onLoad={() => {
-            setIsLoading(false);
-            onLoad?.();
-          }}
-          onError={() => {
-            setIsLoading(false);
-            setHasError(true);
-            onError?.();
-          }}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
         />
       )}
     </div>
