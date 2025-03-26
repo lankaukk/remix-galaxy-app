@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
+import ProfilePhoto1 from "@/assets/images/profile-photos/profile-photo-1.jpg";
+import ProfilePhoto2 from "@/assets/images/profile-photos/profile-photo-2.jpg";
+import ProfilePhoto3 from "@/assets/images/profile-photos/profile-photo-3.jpg";
 
 // Create a wrapper component that will handle the circular motion
 const OrbitingBubble = ({
@@ -150,9 +153,9 @@ export default function Contact() {
 
   // Array of profile photos in the cycle - can add more here later
   const profilePhotos = [
-    "/profile-photos/profile-photo-1.jpg",
-    "/profile-photos/profile-photo-2.jpg",
-    "/profile-photos/profile-photo-3.jpg",
+    ProfilePhoto1,
+    ProfilePhoto2,
+    ProfilePhoto3,
     // Add more photos here to extend the cycle
   ];
 
