@@ -3,28 +3,67 @@ import { Mail, Linkedin, Github, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 
+// Create a wrapper component that will handle the circular motion
+const OrbitingBubble = ({
+  radius,
+  duration,
+  startAngle,
+  children,
+}: {
+  radius: number;
+  duration: number;
+  startAngle: number;
+  children: React.ReactNode;
+}) => {
+  return (
+    <motion.div
+      className="absolute"
+      style={{
+        width: radius * 2,
+        height: radius * 2,
+        top: "50%",
+        left: "50%",
+        marginLeft: -radius,
+        marginTop: -radius,
+      }}
+      animate={{
+        rotate: [0, 360],
+      }}
+      transition={{
+        duration: duration,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: `rotate(${startAngle}deg)`,
+        }}
+      >
+        {children}
+      </div>
+    </motion.div>
+  );
+};
+
 const ContactBubble = ({
   icon,
   color,
   onClick,
   href,
-  animationProps,
 }: {
   icon: React.ReactNode;
   color: string;
   onClick?: () => void;
   href?: string;
-  animationProps: any;
 }) => {
   const content = (
     <motion.div
-      className={`flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer
-      transition-transform hover:scale-110 absolute z-10`}
-      style={{ 
-        backgroundColor: color,
-        ...animationProps.style 
-      }}
-      animate={animationProps.animate}
+      className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer"
+      style={{ backgroundColor: color }}
       whileHover={{ scale: 1.2 }}
       onClick={onClick}
     >
@@ -62,34 +101,12 @@ export default function Contact() {
     });
   };
 
-  // Create a simpler circular orbit animation that works consistently for all bubbles
-  const generateOrbitAnimation = (radius: number, duration: number, startAngle: number) => {
-    return {
-      animate: {
-        // We'll use a simple transform to rotate around the origin
-        rotate: [startAngle, startAngle + 360],
-        transition: {
-          duration: duration,
-          repeat: Infinity,
-          ease: "linear",
-        }
-      },
-      style: {
-        // Position each bubble at its respective distance from center
-        left: '50%',
-        top: '50%',
-        transformOrigin: 'center',
-        transform: `rotate(${startAngle}deg) translate(${radius}px) rotate(-${startAngle}deg)`,
-      }
-    };
-  };
-
-  // Define different orbits for each bubble - all using same animation approach
-  const bubbleAnimations = [
-    generateOrbitAnimation(120, 20, 0),     // First orbit - closest
-    generateOrbitAnimation(160, 25, 90),    // Second orbit
-    generateOrbitAnimation(200, 30, 180),   // Third orbit
-    generateOrbitAnimation(240, 35, 270),   // Fourth orbit - farthest
+  // Define orbit configurations
+  const orbits = [
+    { radius: 120, duration: 15, startAngle: 0 },     // Email - closest orbit
+    { radius: 160, duration: 20, startAngle: 90 },    // LinkedIn - medium distance
+    { radius: 200, duration: 25, startAngle: 180 },   // GitHub - far
+    { radius: 240, duration: 30, startAngle: 270 },   // Instagram - farthest
   ];
 
   return (
@@ -116,36 +133,56 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Floating contact bubbles */}
+        {/* Orbiting contact bubbles */}
         {mounted && (
           <>
-            <ContactBubble
-              icon={<Mail size={24} />}
-              color="#b400a8"
-              onClick={copyToClipboard}
-              animationProps={bubbleAnimations[0]}
-            />
+            <OrbitingBubble 
+              radius={orbits[0].radius} 
+              duration={orbits[0].duration} 
+              startAngle={orbits[0].startAngle}
+            >
+              <ContactBubble
+                icon={<Mail size={24} />}
+                color="#b400a8"
+                onClick={copyToClipboard}
+              />
+            </OrbitingBubble>
 
-            <ContactBubble
-              icon={<Linkedin size={24} />}
-              color="#0077B5"
-              href="https://www.linkedin.com/in/mckayla-lankau/"
-              animationProps={bubbleAnimations[1]}
-            />
+            <OrbitingBubble 
+              radius={orbits[1].radius} 
+              duration={orbits[1].duration} 
+              startAngle={orbits[1].startAngle}
+            >
+              <ContactBubble
+                icon={<Linkedin size={24} />}
+                color="#0077B5"
+                href="https://www.linkedin.com/in/mckayla-lankau/"
+              />
+            </OrbitingBubble>
 
-            <ContactBubble
-              icon={<Github size={24} />}
-              color="#333"
-              href="https://github.com/lankaukk"
-              animationProps={bubbleAnimations[2]}
-            />
+            <OrbitingBubble 
+              radius={orbits[2].radius} 
+              duration={orbits[2].duration} 
+              startAngle={orbits[2].startAngle}
+            >
+              <ContactBubble
+                icon={<Github size={24} />}
+                color="#333"
+                href="https://github.com/lankaukk"
+              />
+            </OrbitingBubble>
 
-            <ContactBubble
-              icon={<Instagram size={24} />}
-              color="#E1306C"
-              href="https://www.instagram.com/forwardchaos/?hl=en"
-              animationProps={bubbleAnimations[3]}
-            />
+            <OrbitingBubble 
+              radius={orbits[3].radius} 
+              duration={orbits[3].duration} 
+              startAngle={orbits[3].startAngle}
+            >
+              <ContactBubble
+                icon={<Instagram size={24} />}
+                color="#E1306C"
+                href="https://www.instagram.com/forwardchaos/?hl=en"
+              />
+            </OrbitingBubble>
           </>
         )}
       </motion.div>
