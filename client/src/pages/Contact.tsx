@@ -4,6 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import ProfilePhoto1 from "@/assets/images/profile-photos/profile-photo-1.jpg";
 import ProfilePhoto2 from "@/assets/images/profile-photos/profile-photo-2.jpg";
+import ProfilePhoto3 from "@/assets/images/profile-photos/profile-photo-3.jpg";
 
 // Create a wrapper component that will handle the circular motion
 const OrbitingBubble = ({
@@ -85,16 +86,41 @@ const DecorativeBubble = ({
   size?: number;
 }) => {
   return (
-    <motion.div
-      className="rounded-full shadow-md"
-      style={{
-        backgroundColor: color,
-        width: size,
-        height: size,
-        zIndex: 5, // Lower z-index than contact bubbles (20)
-      }}
-      whileHover={{ scale: 1.1 }}
-    />
+    <div className="relative">
+      {/* Glowing trail effect */}
+      <motion.div
+        className="absolute rounded-full blur-md opacity-70"
+        style={{
+          backgroundColor: color,
+          width: size * 1.5,
+          height: size * 1.2,
+          zIndex: 4,
+          left: -size * 0.3,
+          top: 0,
+          filter: `blur(${size / 4}px)`,
+          boxShadow: `0 0 ${size / 2}px ${color}`,
+        }}
+        animate={{
+          opacity: [0.3, 0.7, 0.3],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="rounded-full shadow-md relative"
+        style={{
+          backgroundColor: color,
+          width: size,
+          height: size,
+          zIndex: 5, // Lower z-index than contact bubbles (20)
+          boxShadow: `0 0 ${size / 3}px ${color}80`,
+        }}
+        whileHover={{ scale: 1.1 }}
+      />
+    </div>
   );
 };
 
@@ -110,19 +136,44 @@ const ContactBubble = ({
   href?: string;
 }) => {
   const content = (
-    <motion.div
-      className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer relative"
-      style={{
-        backgroundColor: color,
-        zIndex: 20, // Ensure contact bubbles stay above decorative ones
-      }}
-      whileHover={{ scale: 1.2 }}
-      onClick={onClick}
-    >
-      <div className="text-white w-8 h-8 flex items-center justify-center">
-        {icon}
-      </div>
-    </motion.div>
+    <div className="relative">
+      {/* Glowing trail effect */}
+      <motion.div
+        className="absolute rounded-full blur-md opacity-70"
+        style={{
+          backgroundColor: color,
+          width: 55,
+          height: 45,
+          zIndex: 19,
+          left: -10,
+          top: 0,
+          filter: 'blur(8px)',
+          boxShadow: `0 0 15px ${color}`,
+        }}
+        animate={{
+          opacity: [0.4, 0.7, 0.4],
+        }}
+        transition={{
+          duration: 2.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer relative"
+        style={{
+          backgroundColor: color,
+          zIndex: 20, // Ensure contact bubbles stay above decorative ones
+          boxShadow: `0 0 12px ${color}90`,
+        }}
+        whileHover={{ scale: 1.2 }}
+        onClick={onClick}
+      >
+        <div className="text-white w-8 h-8 flex items-center justify-center">
+          {icon}
+        </div>
+      </motion.div>
+    </div>
   );
 
   if (href) {
@@ -134,7 +185,7 @@ const ContactBubble = ({
         className="block" // Added to make sure the link takes full space
         style={{
           pointerEvents: "all",
-          zIndex: 10, // Ensure contact bubbles stay above decorative ones
+          zIndex: 20, // Ensure contact bubbles stay above decorative ones
         }}
       >
         {content}
@@ -154,6 +205,7 @@ export default function Contact() {
   const profilePhotos = [
     ProfilePhoto1,
     ProfilePhoto2,
+    ProfilePhoto3,
     // Add more photos here to extend the cycle
   ];
 
