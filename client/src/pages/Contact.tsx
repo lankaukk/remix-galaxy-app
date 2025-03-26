@@ -20,7 +20,7 @@ const OrbitingBubble = ({
   // Determine animation rotation based on direction
   const rotateValues = direction === "clockwise" ? [0, 360] : [0, -360];
   const counterRotateValues = direction === "clockwise" ? [0, -360] : [0, 360];
-  
+
   return (
     <motion.div
       className="absolute"
@@ -54,9 +54,9 @@ const OrbitingBubble = ({
       >
         {/* Counter-rotation to keep icons upright */}
         <motion.div
-          style={{ 
+          style={{
             transformOrigin: "center",
-            pointerEvents: "auto" // Re-enable pointer events just for the icon
+            pointerEvents: "auto", // Re-enable pointer events just for the icon
           }}
           animate={{
             rotate: counterRotateValues, // Counter-rotate to keep icons straight
@@ -75,15 +75,21 @@ const OrbitingBubble = ({
 };
 
 // A simple decorative bubble that doesn't link anywhere
-const DecorativeBubble = ({ color, size = 14 }: { color: string; size?: number }) => {
+const DecorativeBubble = ({
+  color,
+  size = 14,
+}: {
+  color: string;
+  size?: number;
+}) => {
   return (
     <motion.div
       className="rounded-full shadow-md"
-      style={{ 
+      style={{
         backgroundColor: color,
         width: size,
         height: size,
-        zIndex: 5 // Lower z-index than contact bubbles (10)
+        zIndex: 5, // Lower z-index than contact bubbles (10)
       }}
       whileHover={{ scale: 1.1 }}
     />
@@ -104,9 +110,9 @@ const ContactBubble = ({
   const content = (
     <motion.div
       className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer relative"
-      style={{ 
+      style={{
         backgroundColor: color,
-        zIndex: 10 // Ensure contact bubbles stay above decorative ones
+        zIndex: 10, // Ensure contact bubbles stay above decorative ones
       }}
       whileHover={{ scale: 1.2 }}
       onClick={onClick}
@@ -119,14 +125,14 @@ const ContactBubble = ({
 
   if (href) {
     return (
-      <a 
-        href={href} 
-        target="_blank" 
+      <a
+        href={href}
+        target="_blank"
         rel="noopener noreferrer"
         className="block" // Added to make sure the link takes full space
-        style={{ 
-          pointerEvents: 'all',
-          zIndex: 10 // Ensure contact bubbles stay above decorative ones
+        style={{
+          pointerEvents: "all",
+          zIndex: 10, // Ensure contact bubbles stay above decorative ones
         }}
       >
         {content}
@@ -145,7 +151,8 @@ export default function Contact() {
   // Array of profile photos in the cycle - can add more here later
   const profilePhotos = [
     "/profile-photos/profile-photo-1.jpg",
-    "/profile-photos/profile-photo-2.jpg"
+    "/profile-photos/profile-photo-2.jpg",
+    "/profile-photos/profile-photo-3.jpg",
     // Add more photos here to extend the cycle
   ];
 
@@ -161,7 +168,7 @@ export default function Contact() {
       description: "Email address has been copied to clipboard",
     });
   };
-  
+
   // Cycle to the next photo when clicked
   const cycleProfilePhoto = () => {
     setCurrentPhotoIndex((prevIndex) => (prevIndex + 1) % profilePhotos.length);
@@ -174,17 +181,17 @@ export default function Contact() {
     { radius: 240, duration: 25, startAngle: 180 }, // GitHub - far
     { radius: 270, duration: 30, startAngle: 270 }, // Instagram - farthest
   ];
-  
+
   // Define decorative bubble configurations that orbit counter-clockwise
   const decorativeBubbles = [
-    { radius: 140, duration: 18, startAngle: 30, color: "#FF6B6B", size: 16 },  // Coral
+    { radius: 140, duration: 18, startAngle: 30, color: "#FF6B6B", size: 16 }, // Coral
     { radius: 160, duration: 24, startAngle: 120, color: "#4ECDC4", size: 14 }, // Turquoise
     { radius: 195, duration: 30, startAngle: 210, color: "#FFD166", size: 12 }, // Yellow
     { radius: 230, duration: 22, startAngle: 300, color: "#6A0572", size: 16 }, // Purple
-    { radius: 260, duration: 26, startAngle: 45, color: "#1A936F", size: 14 },  // Green
+    { radius: 260, duration: 26, startAngle: 45, color: "#1A936F", size: 14 }, // Green
     { radius: 185, duration: 28, startAngle: 170, color: "#F77F00", size: 10 }, // Orange
     { radius: 220, duration: 20, startAngle: 240, color: "#7209B7", size: 12 }, // Violet
-    { radius: 250, duration: 32, startAngle: 15, color: "#3A86FF", size: 14 },  // Blue
+    { radius: 250, duration: 32, startAngle: 15, color: "#3A86FF", size: 14 }, // Blue
   ];
 
   return (
@@ -202,7 +209,7 @@ export default function Contact() {
           transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
           className="relative z-0"
         >
-          <motion.div 
+          <motion.div
             className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-1 border-foreground shadow-xl bg-background cursor-pointer"
             whileHover={{ scale: 1.05 }}
             onClick={cycleProfilePhoto}
@@ -241,7 +248,9 @@ export default function Contact() {
               startAngle={orbits[1].startAngle}
             >
               <ContactBubble
-                icon={<Linkedin size={24} style={{ transform: "rotate(-90deg)" }} />}
+                icon={
+                  <Linkedin size={24} style={{ transform: "rotate(-90deg)" }} />
+                }
                 color="#0077B5"
                 href="https://www.linkedin.com/in/mckayla-lankau/"
               />
@@ -253,7 +262,9 @@ export default function Contact() {
               startAngle={orbits[2].startAngle}
             >
               <ContactBubble
-                icon={<Github size={24} style={{ transform: "rotate(180deg)" }} />}
+                icon={
+                  <Github size={24} style={{ transform: "rotate(180deg)" }} />
+                }
                 color="#333"
                 href="https://github.com/lankaukk"
               />
@@ -280,10 +291,7 @@ export default function Contact() {
                 startAngle={bubble.startAngle}
                 direction="counterclockwise"
               >
-                <DecorativeBubble 
-                  color={bubble.color} 
-                  size={bubble.size} 
-                />
+                <DecorativeBubble color={bubble.color} size={bubble.size} />
               </OrbitingBubble>
             ))}
           </>
