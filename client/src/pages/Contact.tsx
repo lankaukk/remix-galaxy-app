@@ -140,6 +140,14 @@ const ContactBubble = ({
 export default function Contact() {
   const { toast } = useToast();
   const [mounted, setMounted] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+
+  // Array of profile photos in the cycle - can add more here later
+  const profilePhotos = [
+    "/profile_photo.jpg",
+    "/pro-pic.jpg"
+    // Add more photos here to extend the cycle
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -152,6 +160,11 @@ export default function Contact() {
       title: "Email Copied!",
       description: "Email address has been copied to clipboard",
     });
+  };
+  
+  // Cycle to the next photo when clicked
+  const cycleProfilePhoto = () => {
+    setCurrentPhotoIndex((prevIndex) => (prevIndex + 1) % profilePhotos.length);
   };
 
   // Define orbit configurations with smaller distances between orbits
@@ -189,13 +202,21 @@ export default function Contact() {
           transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
           className="relative z-0"
         >
-          <div className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-1 border-foreground shadow-xl bg-background">
-            <img
-              src="/profile_photo.jpg"
+          <motion.div 
+            className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-1 border-foreground shadow-xl bg-background cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            onClick={cycleProfilePhoto}
+          >
+            <motion.img
+              key={currentPhotoIndex} // Add key to trigger animation when image changes
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              src={profilePhotos[currentPhotoIndex]}
               alt="Profile"
               className="w-full h-full object-cover"
             />
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Orbiting contact bubbles */}
