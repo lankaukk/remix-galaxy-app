@@ -20,11 +20,7 @@ const ContactBubble = ({
     <motion.div
       className={`flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer
       transition-transform hover:scale-110 absolute z-10`}
-      style={{ 
-        backgroundColor: color,
-        ...animationProps.style 
-      }}
-      initial={animationProps.initial}
+      style={{ backgroundColor: color }}
       animate={animationProps.animate}
       whileHover={{ scale: 1.2 }}
       onClick={onClick}
@@ -65,38 +61,22 @@ export default function Contact() {
 
   // Create circular orbit paths for the bubbles
   const generateOrbitAnimation = (radius: number, duration: number, startAngle: number) => {
-    // Create a function to calculate positions along a circular path
-    const calculateOrbitPosition = (angle: number) => {
-      // Convert angle from degrees to radians
-      const radians = (angle * Math.PI) / 180;
-      // Calculate x and y coordinates on the circle
-      const x = radius * Math.cos(radians);
-      const y = radius * Math.sin(radians);
-      return { x, y };
-    };
-    
-    // Get starting position
-    const startPosition = calculateOrbitPosition(startAngle);
-    
+    // Create a custom animation for circular movement
+    // Unlike the previous approach that used rotation, this directly animates x and y coordinates
     return {
-      initial: startPosition,
       animate: {
-        // Use a custom property to track the angle
-        rotateZ: [startAngle, startAngle + 360],
+        // Animate both x and y to create a circular path
+        x: Array.from({ length: 60 }).map((_, i) => 
+          radius * Math.cos(((i / 60) * 2 * Math.PI) + (startAngle * Math.PI / 180))
+        ),
+        y: Array.from({ length: 60 }).map((_, i) => 
+          radius * Math.sin(((i / 60) * 2 * Math.PI) + (startAngle * Math.PI / 180))
+        ),
         transition: {
           duration: duration,
           repeat: Infinity,
           ease: "linear",
-        },
-      },
-      style: {
-        // Set transform origin to ensure it rotates around the center
-        transformOrigin: "center center",
-        // Set the radius distance to position the element from the center
-        x: 0, 
-        y: -radius,
-        // This helps position along the circle
-        transform: `rotate(${startAngle}deg) translateY(${radius}px)`,
+        }
       }
     };
   };
@@ -104,9 +84,9 @@ export default function Contact() {
   // Define different orbits for each bubble
   const bubbleAnimations = [
     generateOrbitAnimation(120, 30, 0),    // First orbit - close
-    generateOrbitAnimation(160, 40, 90),   // Second orbit - medium distance
-    generateOrbitAnimation(200, 50, 180),  // Third orbit - far
-    generateOrbitAnimation(240, 60, 270),  // Fourth orbit - farthest
+    generateOrbitAnimation(160, 25, 90),   // Second orbit - medium distance
+    generateOrbitAnimation(200, 35, 180),  // Third orbit - far
+    generateOrbitAnimation(240, 45, 270),  // Fourth orbit - farthest
   ];
 
   return (
