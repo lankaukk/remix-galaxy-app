@@ -20,7 +20,10 @@ const ContactBubble = ({
     <motion.div
       className={`flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer
       transition-transform hover:scale-110 absolute z-10`}
-      style={{ backgroundColor: color }}
+      style={{ 
+        backgroundColor: color,
+        ...animationProps.style 
+      }}
       animate={animationProps.animate}
       whileHover={{ scale: 1.2 }}
       onClick={onClick}
@@ -59,34 +62,34 @@ export default function Contact() {
     });
   };
 
-  // Create circular orbit paths for the bubbles
+  // Create a simpler circular orbit animation that works consistently for all bubbles
   const generateOrbitAnimation = (radius: number, duration: number, startAngle: number) => {
-    // Create a custom animation for circular movement
-    // Unlike the previous approach that used rotation, this directly animates x and y coordinates
     return {
       animate: {
-        // Animate both x and y to create a circular path
-        x: Array.from({ length: 60 }).map((_, i) => 
-          radius * Math.cos(((i / 60) * 2 * Math.PI) + (startAngle * Math.PI / 180))
-        ),
-        y: Array.from({ length: 60 }).map((_, i) => 
-          radius * Math.sin(((i / 60) * 2 * Math.PI) + (startAngle * Math.PI / 180))
-        ),
+        // We'll use a simple transform to rotate around the origin
+        rotate: [startAngle, startAngle + 360],
         transition: {
           duration: duration,
           repeat: Infinity,
           ease: "linear",
         }
+      },
+      style: {
+        // Position each bubble at its respective distance from center
+        left: '50%',
+        top: '50%',
+        transformOrigin: 'center',
+        transform: `rotate(${startAngle}deg) translate(${radius}px) rotate(-${startAngle}deg)`,
       }
     };
   };
 
-  // Define different orbits for each bubble
+  // Define different orbits for each bubble - all using same animation approach
   const bubbleAnimations = [
-    generateOrbitAnimation(120, 30, 0),    // First orbit - close
-    generateOrbitAnimation(160, 25, 90),   // Second orbit - medium distance
-    generateOrbitAnimation(200, 35, 180),  // Third orbit - far
-    generateOrbitAnimation(240, 45, 270),  // Fourth orbit - farthest
+    generateOrbitAnimation(120, 20, 0),     // First orbit - closest
+    generateOrbitAnimation(160, 25, 90),    // Second orbit
+    generateOrbitAnimation(200, 30, 180),   // Third orbit
+    generateOrbitAnimation(240, 35, 270),   // Fourth orbit - farthest
   ];
 
   return (
