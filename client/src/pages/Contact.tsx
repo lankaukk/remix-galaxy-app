@@ -9,12 +9,18 @@ const OrbitingBubble = ({
   duration,
   startAngle,
   children,
+  direction = "clockwise", // Default is clockwise
 }: {
   radius: number;
   duration: number;
   startAngle: number;
   children: React.ReactNode;
+  direction?: "clockwise" | "counterclockwise";
 }) => {
+  // Determine animation rotation based on direction
+  const rotateValues = direction === "clockwise" ? [0, 360] : [0, -360];
+  const counterRotateValues = direction === "clockwise" ? [0, -360] : [0, 360];
+  
   return (
     <motion.div
       className="absolute"
@@ -28,7 +34,7 @@ const OrbitingBubble = ({
         pointerEvents: "none", // Don't block click events
       }}
       animate={{
-        rotate: [0, 360],
+        rotate: rotateValues,
       }}
       transition={{
         duration: duration,
@@ -53,7 +59,7 @@ const OrbitingBubble = ({
             pointerEvents: "auto" // Re-enable pointer events just for the icon
           }}
           animate={{
-            rotate: [0, -360], // Counter-rotate to keep icons straight
+            rotate: counterRotateValues, // Counter-rotate to keep icons straight
           }}
           transition={{
             duration: duration,
@@ -65,6 +71,21 @@ const OrbitingBubble = ({
         </motion.div>
       </div>
     </motion.div>
+  );
+};
+
+// A simple decorative bubble that doesn't link anywhere
+const DecorativeBubble = ({ color, size = 14 }: { color: string; size?: number }) => {
+  return (
+    <motion.div
+      className="rounded-full shadow-md"
+      style={{ 
+        backgroundColor: color,
+        width: size,
+        height: size
+      }}
+      whileHover={{ scale: 1.1 }}
+    />
   );
 };
 
@@ -133,6 +154,15 @@ export default function Contact() {
     { radius: 240, duration: 25, startAngle: 180 }, // GitHub - far
     { radius: 270, duration: 30, startAngle: 270 }, // Instagram - farthest
   ];
+  
+  // Define decorative bubble configurations that orbit counter-clockwise
+  const decorativeBubbles = [
+    { radius: 140, duration: 18, startAngle: 30, color: "#FF6B6B", size: 16 },  // Coral
+    { radius: 160, duration: 24, startAngle: 120, color: "#4ECDC4", size: 14 }, // Turquoise
+    { radius: 195, duration: 30, startAngle: 210, color: "#FFD166", size: 12 }, // Yellow
+    { radius: 230, duration: 22, startAngle: 300, color: "#6A0572", size: 16 }, // Purple
+    { radius: 260, duration: 26, startAngle: 45, color: "#1A936F", size: 14 },  // Green
+  ];
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-background text-foreground min-h-[80vh] flex items-center justify-center">
@@ -161,6 +191,7 @@ export default function Contact() {
         {/* Orbiting contact bubbles */}
         {mounted && (
           <>
+            {/* Main contact bubbles (clockwise) */}
             <OrbitingBubble
               radius={orbits[0].radius}
               duration={orbits[0].duration}
@@ -208,6 +239,22 @@ export default function Contact() {
                 href="https://www.instagram.com/forwardchaos/?hl=en"
               />
             </OrbitingBubble>
+
+            {/* Decorative bubbles (counter-clockwise) */}
+            {decorativeBubbles.map((bubble, index) => (
+              <OrbitingBubble
+                key={`decorative-${index}`}
+                radius={bubble.radius}
+                duration={bubble.duration}
+                startAngle={bubble.startAngle}
+                direction="counterclockwise"
+              >
+                <DecorativeBubble 
+                  color={bubble.color} 
+                  size={bubble.size} 
+                />
+              </OrbitingBubble>
+            ))}
           </>
         )}
       </motion.div>
