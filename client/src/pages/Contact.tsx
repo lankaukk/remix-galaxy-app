@@ -35,6 +35,7 @@ const OrbitingBubble = ({
         ease: "linear",
       }}
     >
+      {/* Outer container for positioning */}
       <div
         style={{
           position: "absolute",
@@ -43,7 +44,20 @@ const OrbitingBubble = ({
           transform: `rotate(${startAngle}deg)`,
         }}
       >
-        {children}
+        {/* Counter-rotation to keep icons upright */}
+        <motion.div
+          style={{ transformOrigin: "center" }}
+          animate={{
+            rotate: [0, -360], // Counter-rotate to keep icons straight
+          }}
+          transition={{
+            duration: duration,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          {children}
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -101,12 +115,12 @@ export default function Contact() {
     });
   };
 
-  // Define orbit configurations
+  // Define orbit configurations with increased radius so they don't overlap the photo
   const orbits = [
-    { radius: 120, duration: 15, startAngle: 0 },     // Email - closest orbit
-    { radius: 160, duration: 20, startAngle: 90 },    // LinkedIn - medium distance
-    { radius: 200, duration: 25, startAngle: 180 },   // GitHub - far
-    { radius: 240, duration: 30, startAngle: 270 },   // Instagram - farthest
+    { radius: 180, duration: 15, startAngle: 0 },     // Email - closest orbit
+    { radius: 230, duration: 20, startAngle: 90 },    // LinkedIn - medium distance
+    { radius: 280, duration: 25, startAngle: 180 },   // GitHub - far
+    { radius: 330, duration: 30, startAngle: 270 },   // Instagram - farthest
   ];
 
   return (
