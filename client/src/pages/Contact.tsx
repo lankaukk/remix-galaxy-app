@@ -144,8 +144,8 @@ export default function Contact() {
 
   // Array of profile photos in the cycle - can add more here later
   const profilePhotos = [
-    "/profile_photo.jpg",
-    "/pro-pic.jpg"
+    "/profile-photos/profile-photo-1.jpg",
+    "/profile-photos/profile-photo-2.jpg"
     // Add more photos here to extend the cycle
   ];
 
