@@ -4,7 +4,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import ProfilePhoto1 from "@/assets/images/profile-photos/profile-photo-1.jpg";
 import ProfilePhoto2 from "@/assets/images/profile-photos/profile-photo-2.jpg";
-import ProfilePhoto3 from "@/assets/images/profile-photos/profile-photo-3.jpg";
 
 // Create a wrapper component that will handle the circular motion
 const OrbitingBubble = ({
@@ -135,7 +134,7 @@ const ContactBubble = ({
         className="block" // Added to make sure the link takes full space
         style={{
           pointerEvents: "all",
-          zIndex: 20, // Ensure contact bubbles stay above decorative ones
+          zIndex: 10, // Ensure contact bubbles stay above decorative ones
         }}
       >
         {content}
@@ -155,7 +154,6 @@ export default function Contact() {
   const profilePhotos = [
     ProfilePhoto1,
     ProfilePhoto2,
-    ProfilePhoto3,
     // Add more photos here to extend the cycle
   ];
 
@@ -215,6 +213,7 @@ export default function Contact() {
           <motion.div
             className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-1 border-foreground shadow-xl bg-background cursor-pointer"
             whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 1.1 }}
             onClick={cycleProfilePhoto}
           >
             <motion.img
