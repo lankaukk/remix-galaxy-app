@@ -20,10 +20,14 @@ const ContactBubble = ({
     <motion.div
       className={`flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer
       transition-transform hover:scale-110 absolute z-10`}
-      style={{ backgroundColor: color }}
+      style={{ 
+        backgroundColor: color,
+        ...animationProps.style 
+      }}
+      initial={animationProps.initial}
+      animate={animationProps.animate}
       whileHover={{ scale: 1.2 }}
       onClick={onClick}
-      {...animationProps}
     >
       <div className="text-white w-8 h-8 flex items-center justify-center">
         {icon}
@@ -59,56 +63,50 @@ export default function Contact() {
     });
   };
 
-  // Define animation paths for each bubble - shifted to the left
+  // Create circular orbit paths for the bubbles
+  const generateOrbitAnimation = (radius: number, duration: number, startAngle: number) => {
+    // Create a function to calculate positions along a circular path
+    const calculateOrbitPosition = (angle: number) => {
+      // Convert angle from degrees to radians
+      const radians = (angle * Math.PI) / 180;
+      // Calculate x and y coordinates on the circle
+      const x = radius * Math.cos(radians);
+      const y = radius * Math.sin(radians);
+      return { x, y };
+    };
+    
+    // Get starting position
+    const startPosition = calculateOrbitPosition(startAngle);
+    
+    return {
+      initial: startPosition,
+      animate: {
+        // Use a custom property to track the angle
+        rotateZ: [startAngle, startAngle + 360],
+        transition: {
+          duration: duration,
+          repeat: Infinity,
+          ease: "linear",
+        },
+      },
+      style: {
+        // Set transform origin to ensure it rotates around the center
+        transformOrigin: "center center",
+        // Set the radius distance to position the element from the center
+        x: 0, 
+        y: -radius,
+        // This helps position along the circle
+        transform: `rotate(${startAngle}deg) translateY(${radius}px)`,
+      }
+    };
+  };
+
+  // Define different orbits for each bubble
   const bubbleAnimations = [
-    {
-      initial: { x: -80, y: -100 },
-      animate: {
-        x: [-80, -50, -80],
-        y: [-100, -120, -100],
-        transition: {
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      },
-    },
-    {
-      initial: { x: 60, y: -40 },
-      animate: {
-        x: [60, 80, 60],
-        y: [-40, 10, -40],
-        transition: {
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      },
-    },
-    {
-      initial: { x: -130, y: 60 },
-      animate: {
-        x: [-130, -160, -130],
-        y: [60, 20, 60],
-        transition: {
-          duration: 11,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      },
-    },
-    {
-      initial: { x: 20, y: 90 },
-      animate: {
-        x: [20, 50, 20],
-        y: [90, 110, 90],
-        transition: {
-          duration: 13,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      },
-    },
+    generateOrbitAnimation(120, 30, 0),    // First orbit - close
+    generateOrbitAnimation(160, 40, 90),   // Second orbit - medium distance
+    generateOrbitAnimation(200, 50, 180),  // Third orbit - far
+    generateOrbitAnimation(240, 60, 270),  // Fourth orbit - farthest
   ];
 
   return (
