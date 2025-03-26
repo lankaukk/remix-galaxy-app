@@ -82,7 +82,8 @@ const DecorativeBubble = ({ color, size = 14 }: { color: string; size?: number }
       style={{ 
         backgroundColor: color,
         width: size,
-        height: size
+        height: size,
+        zIndex: 5 // Lower z-index than contact bubbles (10)
       }}
       whileHover={{ scale: 1.1 }}
     />
@@ -102,8 +103,11 @@ const ContactBubble = ({
 }) => {
   const content = (
     <motion.div
-      className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer"
-      style={{ backgroundColor: color }}
+      className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer relative"
+      style={{ 
+        backgroundColor: color,
+        zIndex: 10 // Ensure contact bubbles stay above decorative ones
+      }}
       whileHover={{ scale: 1.2 }}
       onClick={onClick}
     >
@@ -120,7 +124,10 @@ const ContactBubble = ({
         target="_blank" 
         rel="noopener noreferrer"
         className="block" // Added to make sure the link takes full space
-        style={{ pointerEvents: 'all' }} // Ensure pointer events work
+        style={{ 
+          pointerEvents: 'all',
+          zIndex: 10 // Ensure contact bubbles stay above decorative ones
+        }}
       >
         {content}
       </a>
@@ -162,6 +169,9 @@ export default function Contact() {
     { radius: 195, duration: 30, startAngle: 210, color: "#FFD166", size: 12 }, // Yellow
     { radius: 230, duration: 22, startAngle: 300, color: "#6A0572", size: 16 }, // Purple
     { radius: 260, duration: 26, startAngle: 45, color: "#1A936F", size: 14 },  // Green
+    { radius: 185, duration: 28, startAngle: 170, color: "#F77F00", size: 10 }, // Orange
+    { radius: 220, duration: 20, startAngle: 240, color: "#7209B7", size: 12 }, // Violet
+    { radius: 250, duration: 32, startAngle: 15, color: "#3A86FF", size: 14 },  // Blue
   ];
 
   return (
