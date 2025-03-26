@@ -115,12 +115,12 @@ export default function Contact() {
     });
   };
 
-  // Define orbit configurations with increased radius so they don't overlap the photo
+  // Define orbit configurations with smaller distances between orbits
   const orbits = [
     { radius: 180, duration: 15, startAngle: 0 },     // Email - closest orbit
-    { radius: 230, duration: 20, startAngle: 90 },    // LinkedIn - medium distance
-    { radius: 280, duration: 25, startAngle: 180 },   // GitHub - far
-    { radius: 330, duration: 30, startAngle: 270 },   // Instagram - farthest
+    { radius: 210, duration: 20, startAngle: 90 },    // LinkedIn - medium distance
+    { radius: 240, duration: 25, startAngle: 180 },   // GitHub - far
+    { radius: 270, duration: 30, startAngle: 270 },   // Instagram - farthest
   ];
 
   return (
@@ -168,7 +168,7 @@ export default function Contact() {
               startAngle={orbits[1].startAngle}
             >
               <ContactBubble
-                icon={<Linkedin size={24} />}
+                icon={<div style={{ transform: 'scaleX(-1)' }}><Linkedin size={24} /></div>}
                 color="#0077B5"
                 href="https://www.linkedin.com/in/mckayla-lankau/"
               />
@@ -180,7 +180,7 @@ export default function Contact() {
               startAngle={orbits[2].startAngle}
             >
               <ContactBubble
-                icon={<Github size={24} />}
+                icon={<div style={{ transform: 'rotate(180deg)' }}><Github size={24} /></div>}
                 color="#333"
                 href="https://github.com/lankaukk"
               />
