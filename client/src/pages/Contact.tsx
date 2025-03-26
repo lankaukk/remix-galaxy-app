@@ -1,10 +1,51 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ProfilePhoto1 from "@/assets/images/profile-photos/profile-photo-1.jpg";
 import ProfilePhoto2 from "@/assets/images/profile-photos/profile-photo-2.jpg";
 import ProfilePhoto3 from "@/assets/images/profile-photos/profile-photo-3.jpg";
+
+// Trail component that follows the bubble
+const BubbleTrail = ({ 
+  color,
+  size = 10,
+  trailLength = 10,
+}: { 
+  color: string;
+  size?: number;
+  trailLength?: number;
+}) => {
+  // Create array of trail particles
+  const particles = [];
+  for (let i = 0; i < trailLength; i++) {
+    const opacity = 1 - (i / trailLength);
+    const particleSize = size * (1 - (i / trailLength) * 0.7);
+    
+    particles.push(
+      <div 
+        key={i}
+        className="absolute rounded-full z-10"
+        style={{
+          background: color,
+          width: particleSize,
+          height: particleSize,
+          opacity: opacity,
+          boxShadow: `0 0 ${particleSize}px ${color}80`,
+          filter: `blur(${particleSize / 4}px)`,
+          left: `-${i * 3}px`,
+          top: 0,
+        }}
+      />
+    );
+  }
+  
+  return (
+    <div className="absolute top-1/2 left-1/2 -translate-y-1/2">
+      {particles}
+    </div>
+  );
+};
 
 // Create a wrapper component that will handle the circular motion
 const OrbitingBubble = ({
@@ -13,48 +54,20 @@ const OrbitingBubble = ({
   startAngle,
   children,
   direction = "clockwise", // Default is clockwise
-  trailCount = 0, // Number of trail elements
   isDecorative = false, // Whether this is a decorative bubble
+  color,
 }: {
   radius: number;
   duration: number;
   startAngle: number;
   children: React.ReactNode;
   direction?: "clockwise" | "counterclockwise";
-  trailCount?: number;
   isDecorative?: boolean;
+  color?: string;
 }) => {
   // Determine animation rotation based on direction
   const rotateValues = direction === "clockwise" ? [0, 360] : [0, -360];
   const counterRotateValues = direction === "clockwise" ? [0, -360] : [0, 360];
-
-  // Generate trail elements with increasing distance and opacity based on index
-  const trailElements = [];
-  if (trailCount > 0) {
-    const trailRotationOffset = direction === "clockwise" ? -10 : 10; // Offset for trails
-    
-    for (let i = 1; i <= trailCount; i++) {
-      const trailOpacity = 0.7 - (i / trailCount) * 0.7; // Fading trail
-      const trailAngleOffset = trailRotationOffset * i;
-      
-      trailElements.push(
-        <div
-          key={`trail-${i}`}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: "50%",
-            transform: `rotate(${startAngle + trailAngleOffset}deg)`,
-            pointerEvents: "none",
-            opacity: trailOpacity,
-          }}
-        >
-          {/* We use a clone of the children but wrapped to control opacity */}
-          <div className="opacity-50">{children}</div>
-        </div>
-      );
-    }
-  }
 
   return (
     <motion.div
@@ -77,9 +90,6 @@ const OrbitingBubble = ({
         ease: "linear",
       }}
     >
-      {/* Trail elements */}
-      {trailElements}
-      
       {/* Outer container for positioning */}
       <div
         style={{
@@ -90,6 +100,23 @@ const OrbitingBubble = ({
           pointerEvents: "none", // Don't block click events
         }}
       >
+        {/* Trail effect */}
+        {color && (
+          <div 
+            className="absolute" 
+            style={{ 
+              transform: 'translateX(-50%)',
+              zIndex: isDecorative ? 4 : 19,
+            }}
+          >
+            <BubbleTrail 
+              color={color} 
+              size={isDecorative ? 8 : 12}
+              trailLength={isDecorative ? 8 : 12}
+            />
+          </div>
+        )}
+        
         {/* Counter-rotation to keep icons upright */}
         <motion.div
           style={{
@@ -122,22 +149,22 @@ const DecorativeBubble = ({
 }) => {
   return (
     <div className="relative">
-      {/* Enhanced cosmic glow effect */}
+      {/* Glowing effect */}
       <motion.div
         className="absolute rounded-full blur-md"
         style={{
           backgroundColor: color,
-          width: size * 2,
-          height: size * 1.5,
+          width: size * 1.8,
+          height: size * 1.8,
           zIndex: 4,
-          left: -size * 0.5,
-          top: -size * 0.25,
-          filter: `blur(${size / 3}px)`,
+          left: -size * 0.4,
+          top: -size * 0.4,
+          filter: `blur(${size / 2}px)`,
           background: `radial-gradient(circle, ${color}, transparent 70%)`,
         }}
         animate={{
-          opacity: [0.2, 0.5, 0.2],
-          scale: [0.8, 1.2, 0.8],
+          opacity: [0.3, 0.6, 0.3],
+          scale: [0.9, 1.1, 0.9],
         }}
         transition={{
           duration: 3,
@@ -145,6 +172,7 @@ const DecorativeBubble = ({
           ease: "easeInOut",
         }}
       />
+      
       {/* The main bubble */}
       <motion.div
         className="rounded-full relative"
@@ -153,19 +181,7 @@ const DecorativeBubble = ({
           width: size,
           height: size,
           zIndex: 5, // Lower z-index than contact bubbles (20)
-          boxShadow: `0 0 ${size / 2}px ${color}90, 0 0 ${size}px ${color}50`,
-        }}
-        animate={{
-          boxShadow: [
-            `0 0 ${size / 2}px ${color}90, 0 0 ${size}px ${color}50`,
-            `0 0 ${size}px ${color}90, 0 0 ${size * 1.5}px ${color}50`,
-            `0 0 ${size / 2}px ${color}90, 0 0 ${size}px ${color}50`,
-          ],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
+          boxShadow: `0 0 ${size / 2}px ${color}`,
         }}
         whileHover={{ scale: 1.2 }}
       />
@@ -186,51 +202,25 @@ const ContactBubble = ({
 }) => {
   const content = (
     <div className="relative">
-      {/* Enhanced cosmic glow effect */}
+      {/* Glowing aura */}
       <motion.div
         className="absolute rounded-full blur-md"
         style={{
-          width: 70,
-          height: 70,
+          backgroundColor: color,
+          width: 50,
+          height: 50,
           zIndex: 19,
-          left: -15,
-          top: -15,
-          filter: 'blur(10px)',
-          background: `radial-gradient(circle, ${color}, transparent 70%)`,
+          left: -5,
+          top: -5,
+          filter: 'blur(8px)',
+          boxShadow: `0 0 12px ${color}`,
         }}
         animate={{
-          opacity: [0.3, 0.7, 0.3],
-          scale: [0.9, 1.1, 0.9]
+          opacity: [0.4, 0.7, 0.4],
+          scale: [0.9, 1.1, 0.9],
         }}
         transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      
-      {/* Outer glow ring */}
-      <motion.div
-        className="absolute rounded-full blur-sm"
-        style={{
-          border: `2px solid ${color}`,
-          width: 56,
-          height: 56,
-          zIndex: 19,
-          left: -8,
-          top: -8,
-          boxShadow: `0 0 10px ${color}, inset 0 0 5px ${color}`,
-        }}
-        animate={{
-          opacity: [0.7, 1, 0.7],
-          boxShadow: [
-            `0 0 10px ${color}, inset 0 0 5px ${color}`,
-            `0 0 15px ${color}, inset 0 0 8px ${color}`,
-            `0 0 10px ${color}, inset 0 0 5px ${color}`,
-          ],
-        }}
-        transition={{
-          duration: 2,
+          duration: 2.5,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -242,12 +232,9 @@ const ContactBubble = ({
         style={{
           backgroundColor: color,
           zIndex: 20, // Ensure contact bubbles stay above decorative ones
-          boxShadow: `0 0 12px ${color}90, 0 0 20px ${color}50`,
+          boxShadow: `0 0 12px ${color}90`,
         }}
-        whileHover={{ 
-          scale: 1.2,
-          boxShadow: `0 0 18px ${color}, 0 0 30px ${color}80`
-        }}
+        whileHover={{ scale: 1.2 }}
         onClick={onClick}
       >
         <div className="text-white w-8 h-8 flex items-center justify-center">
@@ -369,7 +356,7 @@ export default function Contact() {
               radius={orbits[0].radius}
               duration={orbits[0].duration}
               startAngle={orbits[0].startAngle}
-              trailCount={5}
+              color="#b400a8"
             >
               <ContactBubble
                 icon={<Mail size={24} />}
@@ -382,7 +369,7 @@ export default function Contact() {
               radius={orbits[1].radius}
               duration={orbits[1].duration}
               startAngle={orbits[1].startAngle}
-              trailCount={5}
+              color="#0077B5"
             >
               <ContactBubble
                 icon={
@@ -397,7 +384,7 @@ export default function Contact() {
               radius={orbits[2].radius}
               duration={orbits[2].duration}
               startAngle={orbits[2].startAngle}
-              trailCount={5}
+              color="#333"
             >
               <ContactBubble
                 icon={
@@ -412,7 +399,7 @@ export default function Contact() {
               radius={orbits[3].radius}
               duration={orbits[3].duration}
               startAngle={orbits[3].startAngle}
-              trailCount={5}
+              color="#E1306C"
             >
               <ContactBubble
                 icon={<Instagram size={24} />}
@@ -429,7 +416,7 @@ export default function Contact() {
                 duration={bubble.duration}
                 startAngle={bubble.startAngle}
                 direction="counterclockwise"
-                trailCount={3}
+                color={bubble.color}
                 isDecorative={true}
               >
                 <DecorativeBubble color={bubble.color} size={bubble.size} />
