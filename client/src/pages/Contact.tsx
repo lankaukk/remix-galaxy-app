@@ -25,6 +25,7 @@ const OrbitingBubble = ({
         left: "50%",
         marginLeft: -radius,
         marginTop: -radius,
+        pointerEvents: "none", // Don't block click events
       }}
       animate={{
         rotate: [0, 360],
@@ -42,11 +43,15 @@ const OrbitingBubble = ({
           top: 0,
           left: "50%",
           transform: `rotate(${startAngle}deg)`,
+          pointerEvents: "none", // Don't block click events
         }}
       >
         {/* Counter-rotation to keep icons upright */}
         <motion.div
-          style={{ transformOrigin: "center" }}
+          style={{ 
+            transformOrigin: "center",
+            pointerEvents: "auto" // Re-enable pointer events just for the icon
+          }}
           animate={{
             rotate: [0, -360], // Counter-rotate to keep icons straight
           }}
@@ -89,7 +94,13 @@ const ContactBubble = ({
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a 
+        href={href} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block" // Added to make sure the link takes full space
+        style={{ pointerEvents: 'all' }} // Ensure pointer events work
+      >
         {content}
       </a>
     );
@@ -117,10 +128,10 @@ export default function Contact() {
 
   // Define orbit configurations with smaller distances between orbits
   const orbits = [
-    { radius: 180, duration: 15, startAngle: 0 },     // Email - closest orbit
-    { radius: 210, duration: 20, startAngle: 90 },    // LinkedIn - medium distance
-    { radius: 240, duration: 25, startAngle: 180 },   // GitHub - far
-    { radius: 270, duration: 30, startAngle: 270 },   // Instagram - farthest
+    { radius: 180, duration: 15, startAngle: 0 }, // Email - closest orbit
+    { radius: 210, duration: 20, startAngle: 90 }, // LinkedIn - medium distance
+    { radius: 240, duration: 25, startAngle: 180 }, // GitHub - far
+    { radius: 270, duration: 30, startAngle: 270 }, // Instagram - farthest
   ];
 
   return (
@@ -138,7 +149,7 @@ export default function Contact() {
           transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
           className="relative z-0"
         >
-          <div className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary shadow-xl bg-background">
+          <div className="w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-1 border-foreground shadow-xl bg-background">
             <img
               src="/profile_photo.jpg"
               alt="Profile"
@@ -150,9 +161,9 @@ export default function Contact() {
         {/* Orbiting contact bubbles */}
         {mounted && (
           <>
-            <OrbitingBubble 
-              radius={orbits[0].radius} 
-              duration={orbits[0].duration} 
+            <OrbitingBubble
+              radius={orbits[0].radius}
+              duration={orbits[0].duration}
               startAngle={orbits[0].startAngle}
             >
               <ContactBubble
@@ -162,33 +173,33 @@ export default function Contact() {
               />
             </OrbitingBubble>
 
-            <OrbitingBubble 
-              radius={orbits[1].radius} 
-              duration={orbits[1].duration} 
+            <OrbitingBubble
+              radius={orbits[1].radius}
+              duration={orbits[1].duration}
               startAngle={orbits[1].startAngle}
             >
               <ContactBubble
-                icon={<div style={{ transform: 'scaleX(-1)' }}><Linkedin size={24} /></div>}
+                icon={<Linkedin size={24} style={{ transform: "rotate(-90deg)" }} />}
                 color="#0077B5"
                 href="https://www.linkedin.com/in/mckayla-lankau/"
               />
             </OrbitingBubble>
 
-            <OrbitingBubble 
-              radius={orbits[2].radius} 
-              duration={orbits[2].duration} 
+            <OrbitingBubble
+              radius={orbits[2].radius}
+              duration={orbits[2].duration}
               startAngle={orbits[2].startAngle}
             >
               <ContactBubble
-                icon={<div style={{ transform: 'rotate(180deg)' }}><Github size={24} /></div>}
+                icon={<Github size={24} style={{ transform: "rotate(180deg)" }} />}
                 color="#333"
                 href="https://github.com/lankaukk"
               />
             </OrbitingBubble>
 
-            <OrbitingBubble 
-              radius={orbits[3].radius} 
-              duration={orbits[3].duration} 
+            <OrbitingBubble
+              radius={orbits[3].radius}
+              duration={orbits[3].duration}
               startAngle={orbits[3].startAngle}
             >
               <ContactBubble
