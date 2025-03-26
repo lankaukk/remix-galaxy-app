@@ -92,7 +92,7 @@ const DecorativeBubble = ({
         backgroundColor: color,
         width: size,
         height: size,
-        zIndex: 5, // Lower z-index than contact bubbles (10)
+        zIndex: 5, // Lower z-index than contact bubbles (20)
       }}
       whileHover={{ scale: 1.1 }}
     />
@@ -115,7 +115,7 @@ const ContactBubble = ({
       className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer relative"
       style={{
         backgroundColor: color,
-        zIndex: 10, // Ensure contact bubbles stay above decorative ones
+        zIndex: 20, // Ensure contact bubbles stay above decorative ones
       }}
       whileHover={{ scale: 1.2 }}
       onClick={onClick}
@@ -135,7 +135,7 @@ const ContactBubble = ({
         className="block" // Added to make sure the link takes full space
         style={{
           pointerEvents: "all",
-          zIndex: 10, // Ensure contact bubbles stay above decorative ones
+          zIndex: 20, // Ensure contact bubbles stay above decorative ones
         }}
       >
         {content}
