@@ -67,6 +67,17 @@ export default function Shopify() {
           <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
         </div>
 
+        <div className="my-12">
+          <div className="aspect-video w-full rounded-lg overflow-hidden shadow-xl">
+            <iframe
+              src="https://www.shopify.com/editions/summer2024#hydrogen-visual-editor-top-10"
+              className="w-full h-full"
+              allow="autoplay; fullscreen"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+
         {/* <div className="prose-lg max-w-none">
           <h2>Learning & Growth</h2>
           <p>
