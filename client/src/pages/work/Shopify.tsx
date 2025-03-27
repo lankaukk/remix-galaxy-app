@@ -27,7 +27,7 @@ export default function Shopify() {
     return (
       <ProjectLayout
         title="UX Designer at Shopify"
-        description="I joined Shopify when it acquired Utopia in 2022, and I currently design aspects of the core platform across various teams including Storefronts and the Channels Platform."
+        description="As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business."
         backLink="/work"
         backText="All Work"
       >
@@ -39,7 +39,7 @@ export default function Shopify() {
   return (
     <ProjectLayout
       title="UX Designer at Shopify"
-      description="I joined Shopify when it acquired Utopia in 2022, and I currently design aspects of the core platform across various teams including Storefronts and the Channels Platform."
+      description="As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business."
       backLink="/work"
       backText="All Work"
     >
@@ -54,17 +54,25 @@ export default function Shopify() {
         <div className="prose-lg max-w-none">
           <h2>Process & Contributions</h2>
           <p>
-             As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business. 
+            I joined Shopify when it acquired Utopia in 2022, and I currently
+            design aspects of the core platform across various teams including
+            Storefronts and the Channels Platform.
           </p>
         </div>
 
         <div className="my-12">
           <blockquote className="twitter-tweet">
             <p lang="en" dir="ltr">
-              <a href="https://x.com/Shopify/status/1805220460877038068?s=20">Link to X Post</a>
+              <a href="https://x.com/Shopify/status/1805220460877038068?s=20">
+                Link to X Post
+              </a>
             </p>
           </blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charSet="utf-8"
+          ></script>
         </div>
 
         <div className="my-12">
