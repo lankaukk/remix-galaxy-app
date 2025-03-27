@@ -61,9 +61,8 @@ export default function Shopify() {
         </div>
 
         <div className="my-12">
-          <blockquote className="twitter-tweet" data-media-max-width="560">
-            <p lang="en" dir="ltr">🧑‍💻 Hydrogen Visual Editor powered by Utopia<br /><br />Announced today: Merchants can maximize efficiency by letting non-technical staff visually build headless storefronts and collaborate in a single tool to design, develop, and merchandise their stores. <a href="https://t.co/BCbZqNUuzS">pic.twitter.com/BCbZqNUuzS</a></p>
-            &mdash; Shopify (@Shopify) <a href="https://twitter.com/Shopify/status/1805220460877038068?ref_src=twsrc%5Etfw">June 24, 2024</a>
+          <blockquote className="twitter-tweet" data-media-max-width="560" data-conversation="none">
+            <a href="https://twitter.com/Shopify/status/1805220460877038068"></a>
           </blockquote>
           <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
         </div>
