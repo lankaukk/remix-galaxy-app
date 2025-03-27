@@ -59,10 +59,12 @@ export default function Shopify() {
         </div>
 
         <div className="my-12">
-          <blockquote className="twitter-tweet" data-media-max-width="560">
-            <a href="https://twitter.com/Shopify/status/1805220460877038068"></a>
+          <blockquote className="twitter-tweet">
+            <p lang="en" dir="ltr">
+              <a href="https://x.com/Shopify/status/1805220460877038068?s=20">Link to X Post</a>
+            </p>
           </blockquote>
-          <script async src="https://platform.twitter.com/widgets.js"></script>
+          <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
         </div>
 
         {/* <div className="prose-lg max-w-none">
