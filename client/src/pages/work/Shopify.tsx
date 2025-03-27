@@ -1,4 +1,11 @@
 import { useState, useEffect } from "react";
+
+// Load Twitter widgets when component mounts
+const loadTwitterWidgets = () => {
+  if (window.twttr) {
+    window.twttr.widgets.load();
+  }
+};
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
@@ -11,6 +18,7 @@ export default function Shopify() {
     // Simulate loading time for images and content
     const timer = setTimeout(() => {
       setIsLoading(false);
+      loadTwitterWidgets();
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
@@ -48,6 +56,13 @@ export default function Shopify() {
           <p>
              As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business. 
           </p>
+        </div>
+
+        <div className="my-12">
+          <blockquote className="twitter-tweet" data-media-max-width="560">
+            <a href="https://twitter.com/Shopify/status/1805220460877038068"></a>
+          </blockquote>
+          <script async src="https://platform.twitter.com/widgets.js"></script>
         </div>
 
         {/* <div className="prose-lg max-w-none">
