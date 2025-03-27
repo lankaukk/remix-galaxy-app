@@ -77,8 +77,24 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
+}
 
-  .sunset body {
-    background: var(--background);
-  }
+/* Fix for the sunset theme background issue */
+html.sunset {
+  background-color: hsl(350 100% 98%);
+  min-height: 100%;
+  height: 100%;
+}
+
+html.sunset body {
+  background-color: hsl(350 100% 98%);
+  min-height: 100vh;
+}
+
+html.sunset #root {
+  min-height: 100vh;
+}
+
+html.sunset .relative {
+  min-height: 100vh;
 }
