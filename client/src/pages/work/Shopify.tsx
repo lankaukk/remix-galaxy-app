@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
+import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
 
 export default function Shopify() {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +19,7 @@ export default function Shopify() {
     return (
       <ProjectLayout
         title="UX Designer at Shopify"
-        description="Defining and crafting elegant user experiences, so merchants can intuitively use the products and services we create at Shopify to help them win."
+        description="I joined Shopify when it acquired Utopia in 2022, and I currently design aspects of the core platform across various teams including Storefronts and the Channels Platform."
         backLink="/work"
         backText="All Work"
       >
@@ -30,13 +31,13 @@ export default function Shopify() {
   return (
     <ProjectLayout
       title="UX Designer at Shopify"
-      description="Defining and crafting elegant user experiences, so merchants can intuitively use the products and services we create at Shopify to help them win."
+      description="I joined Shopify when it acquired Utopia in 2022, and I currently design aspects of the core platform across various teams including Storefronts and the Channels Platform."
       backLink="/work"
       backText="All Work"
     >
       <div className="space-y-12">
         <img
-          src="https://media.graphassets.com/53cwIkkyTGCGg2faP1WY"
+          src={ShopifyCover}
           alt="Shopify Platform"
           className="w-full rounded-lg shadow-xl"
           loading="lazy"
@@ -45,16 +46,11 @@ export default function Shopify() {
         <div className="prose-lg max-w-none">
           <h2>Process & Contributions</h2>
           <p>
-            I joined Shopify when it acquired Utopia in 2022, and I currently
-            design aspects of the core platform across teams. Through applying
-            Shopify's UX Principles and prototyping solutions, I validate
-            enhancements via iterative feedback and testing. This work results
-            in a more stylish, intuitive platform that aligns with business
-            needs and exceeds user expectations.
+             As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business. 
           </p>
         </div>
 
-        <div className="prose-lg max-w-none">
+        {/* <div className="prose-lg max-w-none">
           <h2>Learning & Growth</h2>
           <p>
             In my role at Shopify, I emphasize system-level thinking, creating
@@ -63,7 +59,7 @@ export default function Shopify() {
             approach, I contribute to a dynamic Shopify environment that evolves
             and improves continuously for its users.
           </p>
-        </div>
+        </div> */}
       </div>
     </ProjectLayout>
   );
