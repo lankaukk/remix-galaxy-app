@@ -95,6 +95,7 @@ html.sunset #root {
   min-height: 100vh;
 }
 
-html.sunset .relative {
+/* More specific selector to target only the main container, not contact bubbles */
+html.sunset > body > #root > .relative {
   min-height: 100vh;
 }
