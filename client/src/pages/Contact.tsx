@@ -41,9 +41,10 @@ const OrbitingBubble = ({
       }}
       initial={{ rotate: initialRotation }} // Start at random position
       animate={{
-        rotate: direction === "clockwise" 
-          ? [initialRotation, initialRotation + 360] 
-          : [initialRotation, initialRotation - 360],
+        rotate:
+          direction === "clockwise"
+            ? [initialRotation, initialRotation + 360]
+            : [initialRotation, initialRotation - 360],
       }}
       transition={{
         duration: duration,
@@ -69,9 +70,10 @@ const OrbitingBubble = ({
           }}
           initial={{ rotate: -initialRotation }} // Counter the initial random rotation
           animate={{
-            rotate: direction === "clockwise"
-              ? [-initialRotation, -initialRotation - 360]
-              : [-initialRotation, -initialRotation + 360],
+            rotate:
+              direction === "clockwise"
+                ? [-initialRotation, -initialRotation - 360]
+                : [-initialRotation, -initialRotation + 360],
           }}
           transition={{
             duration: duration,
@@ -99,6 +101,7 @@ const DecorativeBubble = ({
       className="rounded-full shadow-md"
       style={{
         backgroundColor: color,
+        boxShadow: `0px 0px 20px ${color}`,
         width: size,
         height: size,
         zIndex: 5, // Lower z-index than contact bubbles (20)
@@ -124,6 +127,7 @@ const ContactBubble = ({
       className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer relative"
       style={{
         backgroundColor: color,
+        boxShadow: `0px 0px 20px ${color}`,
         zIndex: 20, // Ensure contact bubbles stay above decorative ones
       }}
       whileHover={{ scale: 1.2 }}
@@ -225,6 +229,7 @@ export default function Contact() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 1.1 }}
             onClick={cycleProfilePhoto}
+            style={{ boxShadow: "0px 0px 50px 0px #ffffff60" }}
           >
             <motion.img
               key={currentPhotoIndex} // Add key to trigger animation when image changes
