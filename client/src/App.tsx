@@ -24,6 +24,7 @@ import ModernPotions from "@/pages/work/foundations/ModernPotions";
 import ProtestPlatform from "@/pages/work/foundations/ProtestPlatform";
 import { useEffect } from "react";
 import { Waves } from "@/components/Waves";
+import { useTheme } from "@/hooks/use-theme";
 
 function Router() {
   const [location] = useLocation();
@@ -67,6 +68,14 @@ function Router() {
 }
 
 function App() {
+  const { theme } = useTheme();
+  
+  // Initialize theme class on document 
+  useEffect(() => {
+    document.documentElement.classList.remove("light", "dark", "sunset");
+    document.documentElement.classList.add(theme);
+  }, [theme]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className="relative">
