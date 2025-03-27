@@ -5,18 +5,6 @@ import { useEffect, useState } from "react";
 import ProfilePhoto1 from "@/assets/images/profile-photos/profile-photo-1.jpg";
 import ProfilePhoto2 from "@/assets/images/profile-photos/profile-photo-2.jpg";
 
-// Define orbit types
-type OrbitConfig = {
-  radius: number;
-  duration: number;
-  startAngle: number;
-};
-
-type DecorativeBubbleConfig = OrbitConfig & {
-  color: string;
-  size: number;
-};
-
 // Create a wrapper component that will handle the circular motion
 const OrbitingBubble = ({
   radius,
@@ -35,6 +23,10 @@ const OrbitingBubble = ({
   const rotateValues = direction === "clockwise" ? [0, 360] : [0, -360];
   const counterRotateValues = direction === "clockwise" ? [0, -360] : [0, 360];
 
+  // Calculate initial position on the orbit
+  // This is the key change - we use a different initial animation state
+  const initialRotation = Math.random() * 360;
+
   return (
     <motion.div
       className="absolute"
@@ -47,8 +39,11 @@ const OrbitingBubble = ({
         marginTop: -radius,
         pointerEvents: "none", // Don't block click events
       }}
+      initial={{ rotate: initialRotation }} // Start at random position
       animate={{
-        rotate: rotateValues,
+        rotate: direction === "clockwise" 
+          ? [initialRotation, initialRotation + 360] 
+          : [initialRotation, initialRotation - 360],
       }}
       transition={{
         duration: duration,
@@ -72,8 +67,11 @@ const OrbitingBubble = ({
             transformOrigin: "center",
             pointerEvents: "auto", // Re-enable pointer events just for the icon
           }}
+          initial={{ rotate: -initialRotation }} // Counter the initial random rotation
           animate={{
-            rotate: counterRotateValues, // Counter-rotate to keep icons straight
+            rotate: direction === "clockwise"
+              ? [-initialRotation, -initialRotation - 360]
+              : [-initialRotation, -initialRotation + 360],
           }}
           transition={{
             duration: duration,
@@ -161,8 +159,6 @@ export default function Contact() {
   const { toast } = useToast();
   const [mounted, setMounted] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const [contactBubbles, setContactBubbles] = useState<OrbitConfig[]>([]);
-  const [decorativeBubbles, setDecorativeBubbles] = useState<DecorativeBubbleConfig[]>([]);
 
   // Array of profile photos in the cycle - can add more here later
   const profilePhotos = [
@@ -171,42 +167,7 @@ export default function Contact() {
     // Add more photos here to extend the cycle
   ];
 
-  // Helper function to get a random angle between 0 and 360
-  const getRandomAngle = (): number => Math.floor(Math.random() * 360);
-
   useEffect(() => {
-    // Initialize with random start angles when component mounts
-    const baseContacts: OrbitConfig[] = [
-      { radius: 180, duration: 15, startAngle: 0 }, // Email - closest orbit
-      { radius: 210, duration: 20, startAngle: 90 }, // LinkedIn - medium distance
-      { radius: 240, duration: 25, startAngle: 180 }, // GitHub - far
-      { radius: 270, duration: 30, startAngle: 270 }, // Instagram - farthest
-    ];
-
-    const baseDecorative: DecorativeBubbleConfig[] = [
-      { radius: 140, duration: 18, startAngle: 30, color: "#FF6B6B", size: 16 }, // Coral
-      { radius: 160, duration: 24, startAngle: 120, color: "#4ECDC4", size: 14 }, // Turquoise
-      { radius: 195, duration: 30, startAngle: 210, color: "#FFD166", size: 12 }, // Yellow
-      { radius: 230, duration: 22, startAngle: 300, color: "#6A0572", size: 16 }, // Purple
-      { radius: 260, duration: 26, startAngle: 45, color: "#1A936F", size: 14 }, // Green
-      { radius: 185, duration: 28, startAngle: 170, color: "#F77F00", size: 10 }, // Orange
-      { radius: 220, duration: 20, startAngle: 240, color: "#7209B7", size: 12 }, // Violet
-      { radius: 250, duration: 32, startAngle: 15, color: "#3A86FF", size: 14 }, // Blue
-    ];
-
-    // Randomize the starting angles for all bubbles
-    const randomizedContacts = baseContacts.map(orbit => ({
-      ...orbit,
-      startAngle: getRandomAngle()
-    }));
-
-    const randomizedDecorative = baseDecorative.map(bubble => ({
-      ...bubble,
-      startAngle: getRandomAngle()
-    }));
-
-    setContactBubbles(randomizedContacts);
-    setDecorativeBubbles(randomizedDecorative);
     setMounted(true);
   }, []);
 
@@ -223,6 +184,26 @@ export default function Contact() {
   const cycleProfilePhoto = () => {
     setCurrentPhotoIndex((prevIndex) => (prevIndex + 1) % profilePhotos.length);
   };
+
+  // Define orbit configurations with smaller distances between orbits
+  const orbits = [
+    { radius: 180, duration: 15, startAngle: 0 }, // Email - closest orbit
+    { radius: 210, duration: 20, startAngle: 90 }, // LinkedIn - medium distance
+    { radius: 240, duration: 25, startAngle: 180 }, // GitHub - far
+    { radius: 270, duration: 30, startAngle: 270 }, // Instagram - farthest
+  ];
+
+  // Define decorative bubble configurations that orbit counter-clockwise
+  const decorativeBubbles = [
+    { radius: 140, duration: 18, startAngle: 30, color: "#FF6B6B", size: 16 }, // Coral
+    { radius: 160, duration: 24, startAngle: 120, color: "#4ECDC4", size: 14 }, // Turquoise
+    { radius: 195, duration: 30, startAngle: 210, color: "#FFD166", size: 12 }, // Yellow
+    { radius: 230, duration: 22, startAngle: 300, color: "#6A0572", size: 16 }, // Purple
+    { radius: 260, duration: 26, startAngle: 45, color: "#1A936F", size: 14 }, // Green
+    { radius: 185, duration: 28, startAngle: 170, color: "#F77F00", size: 10 }, // Orange
+    { radius: 220, duration: 20, startAngle: 240, color: "#7209B7", size: 12 }, // Violet
+    { radius: 250, duration: 32, startAngle: 15, color: "#3A86FF", size: 14 }, // Blue
+  ];
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-background text-foreground min-h-[80vh] flex items-center justify-center">
@@ -258,68 +239,60 @@ export default function Contact() {
         </motion.div>
 
         {/* Orbiting contact bubbles */}
-        {mounted && contactBubbles.length > 0 && decorativeBubbles.length > 0 && (
+        {mounted && (
           <>
             {/* Main contact bubbles (clockwise) */}
-            {contactBubbles.length >= 4 && (
-              <>
-                {/* Email */}
-                <OrbitingBubble
-                  radius={contactBubbles[0].radius}
-                  duration={contactBubbles[0].duration}
-                  startAngle={contactBubbles[0].startAngle}
-                >
-                  <ContactBubble
-                    icon={<Mail size={24} />}
-                    color="#b400a8"
-                    onClick={copyToClipboard}
-                  />
-                </OrbitingBubble>
+            <OrbitingBubble
+              radius={orbits[0].radius}
+              duration={orbits[0].duration}
+              startAngle={orbits[0].startAngle}
+            >
+              <ContactBubble
+                icon={<Mail size={24} />}
+                color="#b400a8"
+                onClick={copyToClipboard}
+              />
+            </OrbitingBubble>
 
-                {/* LinkedIn */}
-                <OrbitingBubble
-                  radius={contactBubbles[1].radius}
-                  duration={contactBubbles[1].duration}
-                  startAngle={contactBubbles[1].startAngle}
-                >
-                  <ContactBubble
-                    icon={
-                      <Linkedin size={24} style={{ transform: "rotate(-90deg)" }} />
-                    }
-                    color="#0077B5"
-                    href="https://www.linkedin.com/in/mckayla-lankau/"
-                  />
-                </OrbitingBubble>
+            <OrbitingBubble
+              radius={orbits[1].radius}
+              duration={orbits[1].duration}
+              startAngle={orbits[1].startAngle}
+            >
+              <ContactBubble
+                icon={
+                  <Linkedin size={24} style={{ transform: "rotate(-90deg)" }} />
+                }
+                color="#0077B5"
+                href="https://www.linkedin.com/in/mckayla-lankau/"
+              />
+            </OrbitingBubble>
 
-                {/* GitHub */}
-                <OrbitingBubble
-                  radius={contactBubbles[2].radius}
-                  duration={contactBubbles[2].duration}
-                  startAngle={contactBubbles[2].startAngle}
-                >
-                  <ContactBubble
-                    icon={
-                      <Github size={24} style={{ transform: "rotate(180deg)" }} />
-                    }
-                    color="#333"
-                    href="https://github.com/lankaukk"
-                  />
-                </OrbitingBubble>
+            <OrbitingBubble
+              radius={orbits[2].radius}
+              duration={orbits[2].duration}
+              startAngle={orbits[2].startAngle}
+            >
+              <ContactBubble
+                icon={
+                  <Github size={24} style={{ transform: "rotate(180deg)" }} />
+                }
+                color="#333"
+                href="https://github.com/lankaukk"
+              />
+            </OrbitingBubble>
 
-                {/* Instagram */}
-                <OrbitingBubble
-                  radius={contactBubbles[3].radius}
-                  duration={contactBubbles[3].duration}
-                  startAngle={contactBubbles[3].startAngle}
-                >
-                  <ContactBubble
-                    icon={<Instagram size={24} />}
-                    color="#E1306C"
-                    href="https://www.instagram.com/forwardchaos/?hl=en"
-                  />
-                </OrbitingBubble>
-              </>
-            )}
+            <OrbitingBubble
+              radius={orbits[3].radius}
+              duration={orbits[3].duration}
+              startAngle={orbits[3].startAngle}
+            >
+              <ContactBubble
+                icon={<Instagram size={24} />}
+                color="#E1306C"
+                href="https://www.instagram.com/forwardchaos/?hl=en"
+              />
+            </OrbitingBubble>
 
             {/* Decorative bubbles (counter-clockwise) */}
             {decorativeBubbles.map((bubble, index) => (
