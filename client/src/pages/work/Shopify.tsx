@@ -72,25 +72,9 @@ export default function Shopify() {
         </div>
 
         <div className="my-12 border border-gray-700 rounded-lg p-4">
-          {" "}
-          {/* Added border */}
-          <a href="https://twitter.com/Shopify/status/1805220460877038068?ref_src=twsrc%5Etfw">
-            <blockquote className="twitter-tweet">
-              <p lang="en" dir="ltr">
-                🧑‍💻 Hydrogen Visual Editor powered by Utopia
-                <br />
-                <br />
-                Announced today: Merchants can maximize efficiency by letting
-                non-technical staff visually build headless storefronts and
-                collaborate in a single tool to design, develop, and merchandise
-                their stores.{" "}
-                <a href="https://t.co/BCbZqNUuzS">
-                  <image href=" pic.twitter.com/BCbZqNUuzS" />
-                </a>
-              </p>
-              &mdash; Shopify (@Shopify) June 24, 2024
-            </blockquote>
-          </a>
+          <blockquote className="twitter-tweet">
+            <a href="https://twitter.com/Shopify/status/1805220460877038068"></a>
+          </blockquote>
           <script
             async
             src="https://platform.twitter.com/widgets.js"
