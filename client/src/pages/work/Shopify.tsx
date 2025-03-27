@@ -60,13 +60,6 @@ export default function Shopify() {
           </p>
         </div>
 
-        <div className="my-12 border border-gray-300 rounded-lg p-4"> {/* Added border */}
-          <blockquote className="twitter-tweet" data-media-max-width="560" data-conversation="none">
-            <a href="https://twitter.com/Shopify/status/1805220460877038068"></a>
-          </blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
-        </div>
-
         <div className="my-12">
           <div className="aspect-video w-full rounded-lg overflow-hidden shadow-xl">
             <iframe
@@ -78,23 +71,31 @@ export default function Shopify() {
           </div>
         </div>
 
-        {/* <div className="prose-lg max-w-none">
-          <h2>Learning & Growth</h2>
-          <p>
-            In my role at Shopify, I emphasize system-level thinking, creating
-            solutions that resonate across all layers of the experience. By
-            challenging design boundaries and embracing an experimental
-            approach, I contribute to a dynamic Shopify environment that evolves
-            and improves continuously for its users.
-          </p>
-        </div> */}
-
-        <div className="my-12 border border-gray-300 rounded-lg p-4"> {/* Added border */}
-          <blockquote className="twitter-tweet">
-            <p lang="en" dir="ltr">🧑‍💻 Hydrogen Visual Editor powered by Utopia<br /><br />Announced today: Merchants can maximize efficiency by letting non-technical staff visually build headless storefronts and collaborate in a single tool to design, develop, and merchandise their stores. <a href="https://t.co/BCbZqNUuzS">pic.twitter.com/BCbZqNUuzS</a></p>
-            &mdash; Shopify (@Shopify) <a href="https://twitter.com/Shopify/status/1805220460877038068?ref_src=twsrc%5Etfw">June 24, 2024</a>
-          </blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+        <div className="my-12 border border-gray-700 rounded-lg p-4">
+          {" "}
+          {/* Added border */}
+          <a href="https://twitter.com/Shopify/status/1805220460877038068?ref_src=twsrc%5Etfw">
+            <blockquote className="twitter-tweet">
+              <p lang="en" dir="ltr">
+                🧑‍💻 Hydrogen Visual Editor powered by Utopia
+                <br />
+                <br />
+                Announced today: Merchants can maximize efficiency by letting
+                non-technical staff visually build headless storefronts and
+                collaborate in a single tool to design, develop, and merchandise
+                their stores.{" "}
+                <a href="https://t.co/BCbZqNUuzS">
+                  <image href=" pic.twitter.com/BCbZqNUuzS" />
+                </a>
+              </p>
+              &mdash; Shopify (@Shopify) June 24, 2024
+            </blockquote>
+          </a>
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charSet="utf-8"
+          ></script>
         </div>
       </div>
     </ProjectLayout>
