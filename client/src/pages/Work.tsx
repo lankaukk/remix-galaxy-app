@@ -10,7 +10,8 @@ import SidekickCover from "@/assets/images/shopify/sidekick-cover.png";
 const projects = [
   {
     title: "Shopify",
-    description: "Senior UX Designer on Sidekick, the AI assistant for commerce",
+    description:
+      "Senior UX Designer on Sidekick, the AI assistant for commerc
     image: SidekickCover,
     href: "/work/shopify_sidekick",
   },
