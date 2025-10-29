@@ -74,17 +74,6 @@ export default function Home() {
           size={sticker.size}
         />
       ))}
-      <div
-        style={{
-          width: "100vw",
-          height: "90vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        hi
-      </div>
     </div>
   );
 }
