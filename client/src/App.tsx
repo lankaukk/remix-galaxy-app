@@ -26,7 +26,6 @@ import RobotPigeon from "@/pages/work/foundations/RobotPigeon";
 import ModernPotions from "@/pages/work/foundations/ModernPotions";
 import ProtestPlatform from "@/pages/work/foundations/ProtestPlatform";
 import { useEffect } from "react";
-import { Waves } from "@/components/Waves";
 import { useTheme } from "@/hooks/use-theme";
 
 function Router() {
@@ -38,7 +37,7 @@ function Router() {
 
   return (
     <Switch>
-      <Route path="/" component={Waves} />
+      <Route path="/" component={Home} />
       <Route path="/work" component={Work} />
       <Route path="/work/shopify_sidekick" component={ShopifySidekick} />
       <Route path="/work/shopify_sidekick/multimodal" component={SidekickMultimodal} />
