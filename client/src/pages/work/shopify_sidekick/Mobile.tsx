@@ -5,7 +5,7 @@ import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import sidekickMobileCover from "@/assets/images/shopify/sidekick-mobile-cover.png";
 
 const PAGE_TITLE = "Sidekick on Mobile";
-const PAGE_DESCRIPTION = "Leading mobile and voice design for Shopify's AI assistant, bringing conversational AI to hundreds of thousands of merchants on the go";
+const PAGE_DESCRIPTION = "Leading mobile and voice design for Shopify's AI assistant, bringing conversational AI to hundreds of thousands of merchants on the go.";
 
 export default function Mobile() {
   const [isLoading, setIsLoading] = useState(true);
