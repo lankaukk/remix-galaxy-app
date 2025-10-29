@@ -7,7 +7,6 @@ import hourGlass from "../assets/stickers/hour-glass.png";
 import liveLaughLove from "../assets/stickers/live-laugh-love-emoji.png";
 import magician from "../assets/stickers/magician.png";
 import pillowsPink from "../assets/stickers/pillows-pink.png";
-import saraFem from "../assets/stickers/sara-fem.png";
 import selfie2024 from "../assets/stickers/selfie-sticker-2024.png";
 import selfie2025 from "../assets/stickers/selfie-sticker-2025.png";
 import string from "../assets/stickers/string.png";
@@ -69,14 +68,6 @@ const stickerConfig = [
     yPercent: 0.52,
     rotation: -10,
     size: 95,
-  },
-  {
-    src: saraFem,
-    alt: "sara-fem",
-    xPercent: 0.15,
-    yPercent: 0.7,
-    rotation: 12,
-    size: 110,
   },
   {
     src: selfie2024,

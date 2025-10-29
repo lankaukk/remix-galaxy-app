@@ -70,6 +70,11 @@ export function DraggableSticker({
 
     const handleEnd = () => {
       setIsDragging(false);
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const xPercent = (position.x / vw).toFixed(2);
+      const yPercent = (position.y / vh).toFixed(2);
+      console.log(`${alt}: xPercent: ${xPercent}, yPercent: ${yPercent}, x: ${position.x.toFixed(0)}, y: ${position.y.toFixed(0)}`);
     };
 
     if (isDragging) {
