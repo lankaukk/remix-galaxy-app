@@ -9,7 +9,8 @@ import {
 import SidekickCover from "@/assets/images/shopify/sidekick-cover.png";
 
 const PAGE_TITLE = "Shopify Sidekick";
-const PAGE_DESCRIPTION = "Sidekick is an AI-powered commerce assistant built into Shopify that helps merchants manage their stores through natural language, automate tasks, and get personalized support—available across multiple devices and interaction modes.";
+const PAGE_DESCRIPTION =
+  "Sidekick is the AI-powered assistant built into Shopify that helps merchants manage their stores through natural language. Use Sidekick to automate tasks, generate assets, and get personalized support—available across multiple devices and interaction modes.";
 
 const sections = [
   {
@@ -22,7 +23,7 @@ const sections = [
   {
     title: "Mobile",
     description:
-      "Creating seamless AI assistance experiences across mobile devices and touch interfaces",
+      "Creating seamless AI assistance experiences across iOS and Android mobile devices.",
     href: "/work/shopify_sidekick/mobile",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
   },
