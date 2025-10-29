@@ -3,8 +3,8 @@ import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 
-const PAGE_TITLE = "Multimodal AI Experiences";
-const PAGE_DESCRIPTION = "Designing conversational AI with voice, screen sharing, and natural language understanding";
+const PAGE_TITLE = "Multimodal Sidekick";
+const PAGE_DESCRIPTION = "Exploring voice, screen sharing, skills, and conversational AI patterns that create natural, helpful interactions for merchants";
 
 export default function Multimodal() {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,31 +45,24 @@ export default function Multimodal() {
         />
 
         <div className="prose-lg max-w-none">
-          <h2>Overview</h2>
+          <h2>Screen Share in Admin</h2>
           <p>
-            As part of Shopify Sidekick, I designed multimodal interaction
-            patterns that allow merchants to communicate with AI through
-            multiple channels—text, voice, and screen sharing. This work focused
-            on creating seamless transitions between different input modes while
-            maintaining context and conversation flow.
+            I designed the Screen Share experience within Shopify Admin, tackling complex flows around permissions, post-call summaries, and interruption feedback. This feature enables real-time collaborative support, allowing Sidekick to guide merchants through tasks visually while maintaining clear communication about what's happening during the session.
           </p>
 
-          <h2>Key Features</h2>
+          <h2>Sidekick Skills</h2>
           <p>
-            The multimodal experience includes voice mode for hands-free
-            interactions, screen sharing for real-time step-by-step guidance,
-            and natural language processing that understands merchant intent
-            across 20+ languages. Each interaction mode was designed to feel
-            natural and appropriate for different merchant scenarios.
+            I explored and designed Sidekick Skills features, including long text handling and saved prompts. These capabilities help merchants work more efficiently by enabling them to save frequently used queries and manage longer, more complex interactions with the AI assistant.
           </p>
 
-          <h2>Design Challenges</h2>
+          <h2>Knowledge Base & Help Center</h2>
           <p>
-            One of the core challenges was ensuring that switching between
-            interaction modes felt seamless and that the AI could maintain
-            context across different modalities. We also needed to design for
-            accessibility, ensuring that voice and visual modes could work
-            independently or together based on merchant preferences and needs.
+            I worked on the Knowledge Base integration and designed the handoff from Sidekick to the Help Center, ensuring merchants can seamlessly transition between AI assistance and traditional help resources. This creates a unified support experience where merchants get help in the format that works best for their specific needs.
+          </p>
+
+          <h2>Conversational Design</h2>
+          <p>
+            Throughout these features, I focused on natural conversational flow and communication design. I excel at creative problem-solving that makes complex AI interactions feel intuitive and human, iterating quickly across multiple features to find the right balance between capability and simplicity.
           </p>
         </div>
       </div>

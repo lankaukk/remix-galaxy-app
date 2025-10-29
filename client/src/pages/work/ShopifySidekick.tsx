@@ -75,20 +75,17 @@ export default function ShopifySidekick() {
         />
 
         <div className="prose-lg max-w-none">
-          <h2>About the product</h2>
+          <h2>About the Product</h2>
           <p>
-            Shopify Sidekick represents the future of declarative commerce,
-            where merchants describe what they want and AI handles the
-            execution. As a Senior UX Designer on the Sidekick team, I focus on
-            creating intuitive, accessible AI experiences that empower merchants
-            to manage their stores effortlessly through conversation, voice, and
-            visual interactions.
+            Shopify Sidekick is an AI-powered assistant built directly into Shopify that helps merchants manage their stores through natural language, voice, and visual interactions.
+          </p>
+
+          <h2>My Contributions</h2>
+          <p>
+            I went from brand-new on Sidekick to owning big pieces of Mobile and Voice. I led the first real audio interaction patterns at Shopify—visualizing sound with waveforms and ripples, clear voice-active states, and motion that feels alive. I designed the core mobile chat and input, made it feel native with our hybrid webview and React Native approach, contributed voice-mode icons to Polaris, and extended into core Admin mobile navigation. Sidekick on Mobile is now in the hands of hundreds of thousands of shops with strong satisfaction, putting Sidekick where it's easy for merchants to work—on their phones.
           </p>
           <p>
-            Sidekick integrates directly into the Shopify admin, providing
-            real-time help, task automation, content generation, and strategic
-            insights—all through natural language interactions available in 20+
-            languages.
+            I explored broadly and iterated fast across Multimodal Sidekick and Screen Share in Admin (permissions, post-call summaries, interruption feedback), Sidekick Skills (long text, saved prompts), Knowledge Base, and the Sidekick to Help Center handoff. I excel at creative problem-solving and communication design focused on natural conversational flow, with a steep growth curve—from zero mobile product design background to shipping high-impact work at scale.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
