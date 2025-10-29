@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
+import sidekickMobileCover from "@/assets/images/shopify/sidekick-mobile-cover.png";
 
 const PAGE_TITLE = "Sidekick on Mobile";
 const PAGE_DESCRIPTION = "Leading mobile and voice design for Shopify's AI assistant, bringing conversational AI to hundreds of thousands of merchants on the go";
@@ -38,7 +39,7 @@ export default function Mobile() {
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c"
+          src={sidekickMobileCover}
           alt="Mobile Experience"
           className="w-full rounded-lg shadow-xl"
           loading="lazy"
