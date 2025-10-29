@@ -10,6 +10,8 @@ import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import Shopify from "@/pages/work/Shopify";
 import ShopifySidekick from "@/pages/work/ShopifySidekick";
+import SidekickMultimodal from "@/pages/work/shopify_sidekick/Multimodal";
+import SidekickMobile from "@/pages/work/shopify_sidekick/Mobile";
 import Utopia from "@/pages/work/Utopia";
 import UiSimplification from "@/pages/work/utopia/UiSimplification";
 import Multiplayer from "@/pages/work/utopia/Multiplayer";
@@ -39,6 +41,8 @@ function Router() {
       <Route path="/" component={Waves} />
       <Route path="/work" component={Work} />
       <Route path="/work/shopify_sidekick" component={ShopifySidekick} />
+      <Route path="/work/shopify_sidekick/multimodal" component={SidekickMultimodal} />
+      <Route path="/work/shopify_sidekick/mobile" component={SidekickMobile} />
       <Route path="/work/shopify_channels_platform" component={Shopify} />
       <Route path="/work/utopia" component={Utopia} />
       <Route
