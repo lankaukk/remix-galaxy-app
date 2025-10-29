@@ -12,13 +12,13 @@ const projects = [
     title: "Shopify",
     description: "Senior UX Designer on Sidekick, your AI commerce assistant",
     image: SidekickCover,
-    href: "/work/shopify-sidekick",
+    href: "/work/shopify_sidekick",
   },
   {
     title: "Shopify",
     description: "UX Designer on the Channels Platform",
     image: ShopifyCover,
-    href: "/work/shopify",
+    href: "/work/shopify_channels_platform",
   },
   {
     title: "Utopia",

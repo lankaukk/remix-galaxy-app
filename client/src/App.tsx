@@ -9,6 +9,7 @@ import Work from "@/pages/Work";
 import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import Shopify from "@/pages/work/Shopify";
+import ShopifySidekick from "@/pages/work/ShopifySidekick";
 import Utopia from "@/pages/work/Utopia";
 import UiSimplification from "@/pages/work/utopia/UiSimplification";
 import Multiplayer from "@/pages/work/utopia/Multiplayer";
@@ -37,7 +38,8 @@ function Router() {
     <Switch>
       <Route path="/" component={Waves} />
       <Route path="/work" component={Work} />
-      <Route path="/work/shopify" component={Shopify} />
+      <Route path="/work/shopify_sidekick" component={ShopifySidekick} />
+      <Route path="/work/shopify_channels_platform" component={Shopify} />
       <Route path="/work/utopia" component={Utopia} />
       <Route
         path="/work/utopia/ui_simplification"
