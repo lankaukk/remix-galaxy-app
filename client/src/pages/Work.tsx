@@ -5,8 +5,15 @@ import { useState, useEffect } from "react";
 import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 import UtopiaCover from "@/assets/images/utopia/Utopia_Cover.jpg";
 import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
+import SidekickCover from "@/assets/images/shopify/sidekick-cover.png";
 
 const projects = [
+  {
+    title: "Shopify",
+    description: "Senior UX Designer on Sidekick, your AI commerce assistant",
+    image: SidekickCover,
+    href: "/work/shopify-sidekick",
+  },
   {
     title: "Shopify",
     description: "UX Designer on the Channels Platform",
@@ -50,7 +57,7 @@ export default function Work() {
               .fill(0)
               .map((_, index) => <ProjectCardSkeleton key={index} />)
           : projects.map((project) => (
-              <Link key={project.title} href={project.href}>
+              <Link key={project.href} href={project.href}>
                 <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
                   <CardContent className="p-0">
                     <img
