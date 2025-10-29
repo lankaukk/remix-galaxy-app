@@ -47,7 +47,7 @@ const stickerConfig = [
   {
     src: magician,
     alt: "magician",
-    xPercent: 0.60,
+    xPercent: 0.6,
     yPercent: 0.28,
     rotation: -30,
     size: 220,
@@ -56,16 +56,16 @@ const stickerConfig = [
   {
     src: pillowsPink,
     alt: "pillows-pink",
-    xPercent: 0.24,
-    yPercent: 0.66,
+    xPercent: 0.15,
+    yPercent: 0.6,
     rotation: -26,
     size: 275,
   },
   {
     src: butternutSquash,
     alt: "butternut-squash",
-    xPercent: 0.08,
-    yPercent: 0.20,
+    xPercent: 0.15,
+    yPercent: 0.8,
     rotation: -12,
     size: 100,
   },
@@ -80,10 +80,10 @@ const stickerConfig = [
   {
     src: selfie2025,
     alt: "selfie-2025",
-    xPercent: 0.20,
+    xPercent: 0.2,
     yPercent: 0.25,
     rotation: 8,
-    size: 450,
+    size: 300,
   },
   {
     src: string,
