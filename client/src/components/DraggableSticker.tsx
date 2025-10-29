@@ -22,6 +22,10 @@ export function DraggableSticker({
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const stickerRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setPosition({ x: initialX, y: initialY });
+  }, [initialX, initialY]);
+
   const handleStart = (clientX: number, clientY: number) => {
     if (stickerRef.current) {
       const rect = stickerRef.current.getBoundingClientRect();
