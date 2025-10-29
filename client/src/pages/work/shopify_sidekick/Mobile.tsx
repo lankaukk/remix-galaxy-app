@@ -3,6 +3,9 @@ import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 
+const PAGE_TITLE = "Mobile AI Assistant";
+const PAGE_DESCRIPTION = "Creating seamless AI assistance experiences across mobile devices";
+
 export default function Mobile() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,8 +19,8 @@ export default function Mobile() {
   if (isLoading) {
     return (
       <ProjectLayout
-        title="Mobile AI Assistant"
-        description="Creating seamless AI assistance experiences across mobile devices"
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
         backLink="/work/shopify_sidekick"
         backText="Shopify Sidekick"
       >
@@ -28,8 +31,8 @@ export default function Mobile() {
 
   return (
     <ProjectLayout
-      title="Mobile AI Assistant"
-      description="Creating seamless AI assistance experiences across mobile devices"
+      title={PAGE_TITLE}
+      description={PAGE_DESCRIPTION}
       backLink="/work/shopify_sidekick"
       backText="Shopify Sidekick"
     >

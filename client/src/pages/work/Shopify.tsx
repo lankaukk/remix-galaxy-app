@@ -11,6 +11,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
 
+const PAGE_TITLE = "UX Designer at Shopify";
+const PAGE_DESCRIPTION = "As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business.";
+
 export default function Shopify() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,8 +29,8 @@ export default function Shopify() {
   if (isLoading) {
     return (
       <ProjectLayout
-        title="UX Designer at Shopify"
-        description="As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business."
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
         backLink="/work"
         backText="All Work"
       >
@@ -38,8 +41,8 @@ export default function Shopify() {
 
   return (
     <ProjectLayout
-      title="UX Designer at Shopify"
-      description="As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business."
+      title={PAGE_TITLE}
+      description={PAGE_DESCRIPTION}
       backLink="/work"
       backText="All Work"
     >

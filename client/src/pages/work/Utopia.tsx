@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { ArrowLeft } from "lucide-react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card } from "@/components/ui/card";
 import {
   ProjectDetailSkeleton,
   ProjectCardSkeleton,
 } from "@/components/ui/project-card-skeleton";
+
+const PAGE_TITLE = "Utopia";
+const PAGE_DESCRIPTION = "Utopia is an integrated design and development environment for React. It uses React code as the source of truth, and lets you make real time changes to components by editing your app visually and using a suite of familiar design tools.";
 
 const sections = [
   {
@@ -41,21 +43,11 @@ export default function Utopia() {
     return () => clearTimeout(timer);
   }, []);
 
-  const backButton = (
-    <Link
-      href="/work"
-      className="inline-flex items-center text-muted-foreground hover:text-foreground"
-    >
-      <ArrowLeft className="mr-2 h-4 w-4" />
-      All Work
-    </Link>
-  );
-
   if (isLoading) {
     return (
       <ProjectLayout
-        title="Utopia"
-        description="Utopia is an integrated design and development environment for React. It uses React code as the source of truth, and lets you make real time changes to components by editing your app visually and using a suite of familiar design tools."
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
         backLink="/work"
         backText="All Work"
       >
@@ -66,7 +58,6 @@ export default function Utopia() {
               <ProjectCardSkeleton key={i} />
             ))}
           </div>
-          {backButton}
         </div>
       </ProjectLayout>
     );
@@ -74,8 +65,8 @@ export default function Utopia() {
 
   return (
     <ProjectLayout
-      title="Utopia"
-      description="Utopia is an integrated design and development environment for React. It uses React code as the source of truth, and lets you make real time changes to components by editing your app visually and using a suite of familiar design tools."
+      title={PAGE_TITLE}
+      description={PAGE_DESCRIPTION}
       backLink="/work"
       backText="All Work"
     >
@@ -115,7 +106,6 @@ export default function Utopia() {
             </Link>
           ))}
         </div>
-        {backButton}
       </div>
     </ProjectLayout>
   );

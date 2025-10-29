@@ -8,6 +8,9 @@ import {
 } from "@/components/ui/project-card-skeleton";
 import SidekickCover from "@/assets/images/shopify/sidekick-cover.png";
 
+const PAGE_TITLE = "Shopify Sidekick";
+const PAGE_DESCRIPTION = "Sidekick is an AI-powered commerce assistant built into Shopify that helps merchants manage their stores through natural language, automate tasks, and get personalized support—available across multiple devices and interaction modes.";
+
 const sections = [
   {
     title: "Multimodal",
@@ -38,8 +41,8 @@ export default function ShopifySidekick() {
   if (isLoading) {
     return (
       <ProjectLayout
-        title="Shopify Sidekick"
-        description="Sidekick is an AI-powered commerce assistant built into Shopify that helps merchants manage their stores through natural language, automate tasks, and get personalized support—available across multiple devices and interaction modes."
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
         backLink="/work"
         backText="All Work"
       >
@@ -57,8 +60,8 @@ export default function ShopifySidekick() {
 
   return (
     <ProjectLayout
-      title="Shopify Sidekick"
-      description="Sidekick is an AI-powered commerce assistant built into Shopify that helps merchants manage their stores through natural language, automate tasks, and get personalized support—available across multiple devices and interaction modes."
+      title={PAGE_TITLE}
+      description={PAGE_DESCRIPTION}
       backLink="/work"
       backText="All Work"
     >

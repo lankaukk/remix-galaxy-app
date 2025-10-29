@@ -3,6 +3,9 @@ import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 
+const PAGE_TITLE = "Multimodal AI Experiences";
+const PAGE_DESCRIPTION = "Designing conversational AI with voice, screen sharing, and natural language understanding";
+
 export default function Multimodal() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,8 +19,8 @@ export default function Multimodal() {
   if (isLoading) {
     return (
       <ProjectLayout
-        title="Multimodal AI Experiences"
-        description="Designing conversational AI with voice, screen sharing, and natural language understanding"
+        title={PAGE_TITLE}
+        description={PAGE_DESCRIPTION}
         backLink="/work/shopify_sidekick"
         backText="Shopify Sidekick"
       >
@@ -28,8 +31,8 @@ export default function Multimodal() {
 
   return (
     <ProjectLayout
-      title="Multimodal AI Experiences"
-      description="Designing conversational AI with voice, screen sharing, and natural language understanding"
+      title={PAGE_TITLE}
+      description={PAGE_DESCRIPTION}
       backLink="/work/shopify_sidekick"
       backText="Shopify Sidekick"
     >
