@@ -1,18 +1,27 @@
 import { useState, useEffect } from "react";
-
-// Load Twitter widgets when component mounts
-const loadTwitterWidgets = () => {
-  if (window.twttr) {
-    window.twttr.widgets.load();
-  }
-};
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
 
-const PAGE_TITLE = "UX Designer at Shopify";
-const PAGE_DESCRIPTION = "As a UX Designer at Shopify, I define and develop elegant product experiences, so that people can intuitively use our tools to help them succeed in their online business.";
+declare global {
+  interface Window {
+    twttr?: {
+      widgets: {
+        load: () => void;
+      };
+    };
+  }
+}
+
+const loadTwitterWidgets = () => {
+  if (window.twttr) {
+    window.twttr.widgets.load();
+  }
+};
+
+const PAGE_TITLE = "Senior Product Designer at Shopify";
+const PAGE_DESCRIPTION = "Designing intuitive, accessible experiences for Shopify's core platform, from Storefronts to the Channels Platform.";
 
 export default function Shopify() {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,11 +64,14 @@ export default function Shopify() {
         />
 
         <div className="prose-lg max-w-none">
-          <h2>Process & Contributions</h2>
+          <h2>About the Product</h2>
           <p>
-            I joined Shopify when it acquired Utopia in 2022, and I currently
-            design aspects of the core platform across various teams including
-            Storefronts and the Channels Platform.
+            Shopify empowers merchants to build and scale their online businesses through an integrated commerce platform.
+          </p>
+
+          <h2>My Contributions</h2>
+          <p>
+            I joined Shopify when it acquired Utopia in 2022, and currently design core platform experiences across Storefronts and the Channels Platform. My approach emphasizes system-level thinking, exploring multiple design directions to find elegant solutions while maintaining pixel-perfect craft from prototype through release. I collaborate closely with cross-functional teams, using storytelling to validate solutions with users and influence decisions at all levels. By challenging existing standards and pushing boundaries, I create stylish, intuitive, and accessible experiences that help merchants succeed—always treating requirements as a floor and raising the ceiling through ambitious, well-crafted design.
           </p>
         </div>
 
