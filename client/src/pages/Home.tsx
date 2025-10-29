@@ -56,7 +56,7 @@ const stickerConfig = [
   {
     src: pillowsPink,
     alt: "pillows-pink",
-    xPercent: 0.15,
+    xPercent: 0.05,
     yPercent: 0.6,
     rotation: -26,
     size: 275,
@@ -80,7 +80,7 @@ const stickerConfig = [
   {
     src: selfie2025,
     alt: "selfie-2025",
-    xPercent: 0.2,
+    xPercent: 0.14,
     yPercent: 0.25,
     rotation: 8,
     size: 300,
