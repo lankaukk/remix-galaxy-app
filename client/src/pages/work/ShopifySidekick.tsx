@@ -58,7 +58,7 @@ export default function ShopifySidekick() {
   return (
     <ProjectLayout
       title="Shopify Sidekick"
-      description="Sidekick is an AI-powered commerce assistant built into Shopify that helps merchants manage their stores through natural language, automate tasks, and get personalized support—available across multiple platforms and interaction modes."
+      description="Sidekick is an AI-powered commerce assistant built into Shopify that helps merchants manage their stores through natural language, automate tasks, and get personalized support—available across multiple devices and interaction modes."
       backLink="/work"
       backText="All Work"
     >
