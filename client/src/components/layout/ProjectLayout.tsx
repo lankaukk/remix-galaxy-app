@@ -26,11 +26,9 @@ export default function ProjectLayout({
     >
       <div className="mb-8">
         {backLink && (
-          <Link href={backLink}>
-            <a className="inline-flex items-center hover:text-[#FF5757]">
-              <ArrowLeft className="mr-2 h-5 w-5" />
-              {backText || "Back"}
-            </a>
+          <Link href={backLink} className="inline-flex items-center hover:text-[#FF5757]">
+            <ArrowLeft className="mr-2 h-5 w-5" />
+            {backText || "Back"}
           </Link>
         )}
       </div>

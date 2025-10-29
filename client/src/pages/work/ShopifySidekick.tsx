@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { ArrowLeft } from "lucide-react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card } from "@/components/ui/card";
 import {
@@ -36,16 +35,6 @@ export default function ShopifySidekick() {
     return () => clearTimeout(timer);
   }, []);
 
-  const backButton = (
-    <Link
-      href="/work"
-      className="inline-flex items-center text-muted-foreground hover:text-foreground"
-    >
-      <ArrowLeft className="mr-2 h-4 w-4" />
-      All Work
-    </Link>
-  );
-
   if (isLoading) {
     return (
       <ProjectLayout
@@ -61,7 +50,6 @@ export default function ShopifySidekick() {
               <ProjectCardSkeleton key={i} />
             ))}
           </div>
-          {backButton}
         </div>
       </ProjectLayout>
     );
@@ -116,7 +104,6 @@ export default function ShopifySidekick() {
             </Link>
           ))}
         </div>
-        {backButton}
       </div>
     </ProjectLayout>
   );
