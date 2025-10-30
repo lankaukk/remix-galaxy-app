@@ -3,7 +3,30 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertArtworkSchema } from "@shared/schema";
 
+declare module "express-session" {
+  interface SessionData {
+    shopifySidekickAuth?: boolean;
+  }
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Shopify Sidekick authentication routes
+  app.post('/api/auth/shopify-sidekick', (req, res) => {
+    const { password } = req.body;
+    const correctPassword = process.env.SHOPIFY_PASSWORD;
+
+    if (password === correctPassword) {
+      req.session.shopifySidekickAuth = true;
+      res.json({ authenticated: true });
+    } else {
+      res.status(401).json({ authenticated: false, error: 'Incorrect password' });
+    }
+  });
+
+  app.get('/api/auth/shopify-sidekick/status', (req, res) => {
+    res.json({ authenticated: !!req.session.shopifySidekickAuth });
+  });
+
   // Artwork API routes
   app.get('/api/artwork', async (req, res) => {
     try {
