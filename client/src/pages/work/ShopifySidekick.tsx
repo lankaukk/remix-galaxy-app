@@ -79,10 +79,7 @@ export default function ShopifySidekick() {
         <div className="prose-lg max-w-none">
           <h2>About the Product</h2>
           <p>
-            Shopify Sidekick is an AI-powered assistant built directly into Shopify that helps merchants manage their stores through natural language, voice, and visual interactions. Available across web, iOS, and Android, Sidekick enables merchants to automate routine tasks, generate marketing assets, get instant answers, and receive personalized support wherever they work.
-          </p>
-          <p>
-            The multimodal experience includes text chat, voice interaction, and screen sharing capabilities, allowing merchants to collaborate with AI in the way that feels most natural for their workflow. From quick mobile queries to complex troubleshooting sessions with visual guidance, Sidekick adapts to merchants' needs across devices and contexts.
+            Sidekick brings multimodal AI interaction to Shopify, allowing merchants to work through text chat, voice, and screen sharing across web and mobile platforms. The experience adapts to different contexts—from quick mobile queries to complex troubleshooting with visual guidance.
           </p>
 
           <h2>My Contributions</h2>
