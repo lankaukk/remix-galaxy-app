@@ -15,42 +15,42 @@ export default function MultimodalAnimation() {
         @keyframes sidekickGrowingCircle {
           0% { 
             opacity: 0; 
-            width: 50px;
-            height: 50px;
-            filter: blur(2px) saturate(3);
+            width: 125px;
+            height: 125px;
+            filter: blur(5px) saturate(3);
           }
           33% { 
             opacity: 1; 
-            width: 105px;
-            height: 105px;
-            filter: blur(4px) saturate(3);
+            width: 262.5px;
+            height: 262.5px;
+            filter: blur(10px) saturate(3);
           }
           66% { 
             opacity: 0.2; 
-            width: 180px;
-            height: 180px;
-            filter: blur(26px) saturate(3);
+            width: 450px;
+            height: 450px;
+            filter: blur(65px) saturate(3);
           }
           100% { 
             opacity: 0; 
-            width: 320px;
-            height: 320px;
-            filter: blur(48px) saturate(3);
+            width: 800px;
+            height: 800px;
+            filter: blur(120px) saturate(3);
           }
         }
 
         @keyframes sidekickGrowingBorder {
           0% { 
-            padding: 2px;
+            padding: 5px;
           }
           33% { 
-            padding: 3px;
+            padding: 7.5px;
           }
           66% { 
-            padding: 6px;
+            padding: 15px;
           }
           100% { 
-            padding: 15px;
+            padding: 37.5px;
           }
         }
 
