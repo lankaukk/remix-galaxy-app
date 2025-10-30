@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
+import MultimodalAnimation from "@/components/MultimodalAnimation";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION = "Exploring voice, screen sharing, skills, and conversational AI patterns that create natural, helpful interactions for merchants";
@@ -37,12 +38,7 @@ export default function Multimodal() {
       backText="Shopify Sidekick"
     >
       <div className="space-y-12">
-        <img
-          src="https://images.unsplash.com/photo-1589254065878-42c9da997008"
-          alt="Multimodal AI"
-          className="w-full rounded-lg shadow-xl"
-          loading="lazy"
-        />
+        <MultimodalAnimation />
 
         <div className="prose-lg max-w-none">
           <h2>Screen Share in Admin</h2>
