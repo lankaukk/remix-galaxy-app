@@ -378,7 +378,10 @@ export default function Gallery() {
                 }}
               >
                 <DialogTrigger asChild>
-                  <Card className="overflow-hidden group cursor-pointer relative">
+                  <Card 
+                    className="overflow-hidden group cursor-pointer relative"
+                    style={artwork.title === "Golden Squiggle" ? { borderRadius: "2px" } : undefined}
+                  >
                     <CardContent className="p-0">
                       <ImageWithFallback
                         src={artwork.image}
