@@ -25,6 +25,7 @@ import NoLikes from "@/pages/work/foundations/NoLikes";
 import RobotPigeon from "@/pages/work/foundations/RobotPigeon";
 import ModernPotions from "@/pages/work/foundations/ModernPotions";
 import ProtestPlatform from "@/pages/work/foundations/ProtestPlatform";
+import PasswordGate from "@/components/PasswordGate";
 import { useEffect } from "react";
 import { useTheme } from "@/hooks/use-theme";
 
@@ -39,9 +40,21 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/work" component={Work} />
-      <Route path="/work/shopify_sidekick" component={ShopifySidekick} />
-      <Route path="/work/shopify_sidekick/multimodal" component={SidekickMultimodal} />
-      <Route path="/work/shopify_sidekick/mobile" component={SidekickMobile} />
+      <Route path="/work/shopify_sidekick">
+        <PasswordGate>
+          <ShopifySidekick />
+        </PasswordGate>
+      </Route>
+      <Route path="/work/shopify_sidekick/multimodal">
+        <PasswordGate>
+          <SidekickMultimodal />
+        </PasswordGate>
+      </Route>
+      <Route path="/work/shopify_sidekick/mobile">
+        <PasswordGate>
+          <SidekickMobile />
+        </PasswordGate>
+      </Route>
       <Route path="/work/shopify_channels_platform" component={Shopify} />
       <Route path="/work/utopia" component={Utopia} />
       <Route
