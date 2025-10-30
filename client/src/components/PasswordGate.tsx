@@ -74,8 +74,8 @@ export default function PasswordGate({ children }: PasswordGateProps) {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="mb-8">
+      <div className="w-full max-w-md flex flex-col">
+        <div className="mb-6">
           <Link href="/work" className="inline-flex items-center hover:text-[#FF5757]">
             <ArrowLeft className="mr-2 h-5 w-5" />
             All Work
