@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/project-card-skeleton";
 import SidekickCover from "@/assets/images/shopify/sidekick-cover.png";
 import SidekickMobileCover from "@/assets/images/shopify/sidekick-mobile-cover.png";
+import MultimodalAnimation from "@/components/MultimodalAnimation";
 
 const PAGE_TITLE = "Shopify Sidekick";
 const PAGE_DESCRIPTION =
@@ -19,7 +20,7 @@ const sections = [
     description:
       "Designing conversational AI experiences with voice, screen sharing, and natural language understanding",
     href: "/work/shopify_sidekick/multimodal",
-    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008",
+    useAnimation: true,
   },
   {
     title: "Mobile",
@@ -93,11 +94,15 @@ export default function ShopifySidekick() {
           {sections.map((section) => (
             <Link key={section.title} href={section.href}>
               <Card className="cursor-pointer transition-transform hover:scale-[1.02]">
-                <img
-                  src={section.image}
-                  alt={section.title}
-                  className="aspect-video w-full object-cover"
-                />
+                {section.useAnimation ? (
+                  <MultimodalAnimation />
+                ) : (
+                  <img
+                    src={section.image}
+                    alt={section.title}
+                    className="aspect-video w-full object-cover"
+                  />
+                )}
                 <div className="p-6">
                   <h3 className="mb-2 text-xl font-bold">{section.title}</h3>
                   <p className="text-muted-foreground">{section.description}</p>

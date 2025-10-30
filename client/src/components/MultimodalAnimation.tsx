@@ -1,4 +1,4 @@
-import AvatarImage from "@assets/Avatar_1761782734555.png";
+import AvatarImage from "@/assets/images/sidekick-avatar.png";
 
 export default function MultimodalAnimation() {
   return (
