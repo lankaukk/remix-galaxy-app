@@ -163,6 +163,7 @@ export default function Contact() {
   const { toast } = useToast();
   const [mounted, setMounted] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Array of profile photos in the cycle - can add more here later
   const profilePhotos = [
@@ -186,6 +187,7 @@ export default function Contact() {
 
   // Cycle to the next photo when clicked
   const cycleProfilePhoto = () => {
+    setImageLoaded(false);
     setCurrentPhotoIndex((prevIndex) => (prevIndex + 1) % profilePhotos.length);
   };
 
@@ -229,16 +231,17 @@ export default function Contact() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 1.1 }}
             onClick={cycleProfilePhoto}
-            style={{ boxShadow: "0px 0px 50px 0px #ffffff60" }}
+            style={imageLoaded ? { boxShadow: "0px 0px 50px 0px #ffffff60" } : {}}
           >
             <motion.img
-              key={currentPhotoIndex} // Add key to trigger animation when image changes
+              key={currentPhotoIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
               src={profilePhotos[currentPhotoIndex]}
               alt="Profile"
               className="w-full h-full object-cover"
+              onLoad={() => setImageLoaded(true)}
             />
           </motion.div>
         </motion.div>
