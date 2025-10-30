@@ -61,7 +61,7 @@ function GalleryItemSkeleton() {
   return (
     <Card className="overflow-hidden mb-6">
       <CardContent className="p-0">
-        <Skeleton className="aspect-[3/4] w-full" />
+        <Skeleton className="aspect-[3/4] w-full rounded-none" />
       </CardContent>
     </Card>
   );
