@@ -34,6 +34,15 @@ export default function PasswordGate({ children }: PasswordGateProps) {
     checkAuth();
   }, []);
 
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [isAuthenticated]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
