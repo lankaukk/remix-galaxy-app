@@ -59,6 +59,9 @@ export default function MultimodalAnimation() {
           border-radius: 50%;
           animation: sidekickGrowingCircle 3s linear infinite, sidekickGrowingBorder 3s linear infinite;
           position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
           display: flex;
           align-items: center;
           justify-content: center;
