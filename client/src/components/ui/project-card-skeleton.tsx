@@ -7,10 +7,7 @@ export function ProjectCardSkeleton() {
       <CardContent className="p-0">
         <Skeleton className="aspect-video w-full" />
         <div className="p-6 space-y-3">
-          <div className="flex items-center justify-between">
-            <Skeleton className="h-6 w-[140px]" />
-            <Skeleton className="h-5 w-5 rounded-full" />
-          </div>
+          <Skeleton className="h-6 w-[140px]" />
           <Skeleton className="h-4 w-[200px]" />
         </div>
       </CardContent>

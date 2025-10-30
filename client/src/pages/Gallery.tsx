@@ -58,21 +58,10 @@ function GalleryError({ error }: { error: Error | unknown }) {
 }
 
 function GalleryItemSkeleton() {
-  // Create different aspect ratios for more natural looking skeletons
-  // Using a more conservative range to avoid cards that are too tall
-  const randomRatios = [60, 75, 85, 100];
-  const randomIndex = Math.floor(Math.random() * randomRatios.length);
-  const aspectRatio = randomRatios[randomIndex];
-
   return (
     <Card className="overflow-hidden mb-6">
       <CardContent className="p-0">
-        <div
-          className="relative w-full bg-muted flex items-center justify-center"
-          style={{ paddingTop: `${aspectRatio}%` }}
-        >
-          <Skeleton className="absolute inset-0" />
-        </div>
+        <Skeleton className="aspect-[3/4] w-full" />
       </CardContent>
     </Card>
   );
