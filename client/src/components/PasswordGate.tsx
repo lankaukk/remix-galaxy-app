@@ -103,6 +103,7 @@ export default function PasswordGate({ children }: PasswordGateProps) {
                   className={error ? "border-red-500 pr-10" : "pr-10"}
                   autoFocus
                   disabled={isSubmitting}
+                  autoComplete="off"
                   data-testid="input-password"
                 />
                 <button
