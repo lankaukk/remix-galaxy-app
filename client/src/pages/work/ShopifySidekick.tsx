@@ -79,15 +79,15 @@ export default function ShopifySidekick() {
         <div className="prose-lg max-w-none">
           <h2>About the Product</h2>
           <p>
-            Shopify Sidekick is an AI-powered assistant built directly into Shopify that helps merchants manage their stores through natural language, voice, and visual interactions.
+            Shopify Sidekick is an AI-powered assistant built directly into Shopify that helps merchants manage their stores through natural language, voice, and visual interactions. Available across web, iOS, and Android, Sidekick enables merchants to automate routine tasks, generate marketing assets, get instant answers, and receive personalized support wherever they work.
+          </p>
+          <p>
+            The multimodal experience includes text chat, voice interaction, and screen sharing capabilities, allowing merchants to collaborate with AI in the way that feels most natural for their workflow. From quick mobile queries to complex troubleshooting sessions with visual guidance, Sidekick adapts to merchants' needs across devices and contexts.
           </p>
 
           <h2>My Contributions</h2>
           <p>
-            I went from brand-new on Sidekick to owning big pieces of Mobile and Voice. I led the first real audio interaction patterns at Shopify—visualizing sound with waveforms and ripples, clear voice-active states, and motion that feels alive. I designed the core mobile chat and input, made it feel native with our hybrid webview and React Native approach, contributed voice-mode icons to Polaris, and extended into core Admin mobile navigation. Sidekick on Mobile is now in the hands of hundreds of thousands of shops with strong satisfaction, putting Sidekick where it's easy for merchants to work—on their phones.
-          </p>
-          <p>
-            I explored broadly and iterated fast across Multimodal Sidekick and Screen Share in Admin (permissions, post-call summaries, interruption feedback), Sidekick Skills (long text, saved prompts), Knowledge Base, and the Sidekick to Help Center handoff. I excel at creative problem-solving and communication design focused on natural conversational flow, with a steep growth curve—from zero mobile product design background to shipping high-impact work at scale.
+            I led mobile and voice design for Sidekick, creating the first audio interaction patterns at Shopify with waveforms, voice-active states, and responsive motion. I designed the core mobile chat experience, contributed voice-mode icons to Polaris, and extended the design into Admin mobile navigation. On multimodal features, I designed screen sharing flows, Sidekick Skills, Knowledge Base integration, and the Help Center handoff. This work is now serving hundreds of thousands of merchants with strong satisfaction scores.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
