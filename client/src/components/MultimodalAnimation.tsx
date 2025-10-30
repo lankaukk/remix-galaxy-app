@@ -9,33 +9,33 @@ export default function MultimodalAnimation() {
       <img 
         src={AvatarImage} 
         alt="Sidekick Avatar" 
-        className="relative z-10 w-24 h-24 md:w-32 md:h-32"
+        className="relative z-10 w-24 h-24 md:w-32 md:h-32 object-contain"
       />
       <style>{`
         @keyframes sidekickGrowingCircle {
           0% { 
-            opacity: 0%; 
+            opacity: 0; 
             width: 50px;
             height: 50px;
-            filter: blur(3px);
+            filter: blur(2px) saturate(3);
           }
           33% { 
-            opacity: 100%; 
+            opacity: 1; 
             width: 105px;
             height: 105px;
-            filter: blur(6px);
+            filter: blur(4px) saturate(3);
           }
           66% { 
-            opacity: 40%; 
+            opacity: 0.2; 
             width: 180px;
             height: 180px;
-            filter: blur(8px);
+            filter: blur(26px) saturate(3);
           }
           100% { 
-            opacity: 0%; 
-            width: 270px;
-            height: 270px;
-            filter: blur(15px);
+            opacity: 0; 
+            width: 320px;
+            height: 320px;
+            filter: blur(48px) saturate(3);
           }
         }
 
@@ -55,7 +55,13 @@ export default function MultimodalAnimation() {
         }
 
         .sidekick-circle {
-          background: linear-gradient(to right, #FFB890, #E890FF, #A8A0FF, #80C0FF);
+          background: linear-gradient(
+            to right,
+            rgba(255, 102, 0, 0.35),
+            rgba(255, 0, 4, 0.35),
+            rgba(88, 16, 255, 0.35),
+            rgba(31, 120, 253, 0.35)
+          );
           border-radius: 50%;
           animation: sidekickGrowingCircle 3s linear infinite, sidekickGrowingBorder 3s linear infinite;
           position: absolute;
