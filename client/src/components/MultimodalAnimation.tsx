@@ -86,11 +86,11 @@ export default function MultimodalAnimation() {
         }
 
         .circle-2 {
-          animation-delay: 1s;
+          animation-delay: 0.6s;
         }
 
         .circle-3 {
-          animation-delay: 2s;
+          animation-delay: 3.3s;
         }
       `}</style>
     </div>
