@@ -73,14 +73,14 @@ export default function PasswordGate({ children }: PasswordGateProps) {
   }
 
   return (
-    <div className="min-h-screen relative">
-      <div className="absolute top-8 left-8">
+    <div className="h-screen overflow-hidden relative">
+      <div className="absolute top-8 left-8 z-10">
         <Link href="/work" className="inline-flex items-center hover:text-[#FF5757]">
           <ArrowLeft className="mr-2 h-5 w-5" />
           All Work
         </Link>
       </div>
-      <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="h-full flex items-center justify-center p-4">
         <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
