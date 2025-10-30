@@ -7,6 +7,7 @@ import {
   ProjectCardSkeleton,
 } from "@/components/ui/project-card-skeleton";
 import SidekickCover from "@/assets/images/shopify/sidekick-cover.png";
+import SidekickMobileCover from "@/assets/images/shopify/sidekick-mobile-cover.png";
 
 const PAGE_TITLE = "Shopify Sidekick";
 const PAGE_DESCRIPTION =
@@ -25,7 +26,7 @@ const sections = [
     description:
       "Creating seamless AI assistance experiences across iOS and Android mobile devices.",
     href: "/work/shopify_sidekick/mobile",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
+    image: SidekickMobileCover,
   },
 ];
 
