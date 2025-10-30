@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Lock, Eye, EyeOff } from "lucide-react";
+import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Link } from "wouter";
 
 interface PasswordGateProps {
   children: React.ReactNode;
@@ -73,7 +74,14 @@ export default function PasswordGate({ children }: PasswordGateProps) {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+      <div className="w-full max-w-md">
+        <div className="mb-8">
+          <Link href="/work" className="inline-flex items-center hover:text-[#FF5757]">
+            <ArrowLeft className="mr-2 h-5 w-5" />
+            All Work
+          </Link>
+        </div>
+        <Card className="w-full">
         <CardHeader className="text-center">
           <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
             <Lock className="w-6 h-6 text-primary" />
@@ -124,6 +132,7 @@ export default function PasswordGate({ children }: PasswordGateProps) {
           </form>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }
