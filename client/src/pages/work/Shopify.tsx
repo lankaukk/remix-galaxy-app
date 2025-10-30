@@ -4,22 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
 
-declare global {
-  interface Window {
-    twttr?: {
-      widgets: {
-        load: () => void;
-      };
-    };
-  }
-}
-
-const loadTwitterWidgets = () => {
-  if (window.twttr) {
-    window.twttr.widgets.load();
-  }
-};
-
 const PAGE_TITLE = "Senior Product Designer at Shopify";
 const PAGE_DESCRIPTION = "Designing intuitive, accessible experiences for Shopify's core platform, from Storefronts to the Channels Platform.";
 
@@ -30,7 +14,6 @@ export default function Shopify() {
     // Simulate loading time for images and content
     const timer = setTimeout(() => {
       setIsLoading(false);
-      loadTwitterWidgets();
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
@@ -86,32 +69,36 @@ export default function Shopify() {
           </div>
         </div>
 
-        <div className="my-12 border border-gray-700 rounded-lg p-4">
-          {" "}
-          {/* Added border */}
-          <a href="https://twitter.com/Shopify/status/1805220460877038068?ref_src=twsrc%5Etfw">
-            <blockquote className="twitter-tweet">
-              <p lang="en" dir="ltr">
-                🧑‍💻 Hydrogen Visual Editor powered by Utopia
-                <br />
-                <br />
-                Announced today: Merchants can maximize efficiency by letting
-                non-technical staff visually build headless storefronts and
-                collaborate in a single tool to design, develop, and merchandise
-                their stores.{" "}
-                <a href="https://t.co/BCbZqNUuzS">
-                  <image href=" pic.twitter.com/BCbZqNUuzS" />
-                </a>
-              </p>
-              &mdash; Shopify (@Shopify) June 24, 2024
-            </blockquote>
-          </a>
-          <script
-            async
-            src="https://platform.twitter.com/widgets.js"
-            charSet="utf-8"
-          ></script>
-        </div>
+        <Card className="my-12">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 text-4xl">🧑‍💻</div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg mb-2">Hydrogen Visual Editor powered by Utopia</h3>
+                <p className="text-muted-foreground mb-4">
+                  Announced today: Merchants can maximize efficiency by letting
+                  non-technical staff visually build headless storefronts and
+                  collaborate in a single tool to design, develop, and merchandise
+                  their stores.
+                </p>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span>Shopify (@Shopify)</span>
+                  <span>•</span>
+                  <span>June 24, 2024</span>
+                  <span>•</span>
+                  <a 
+                    href="https://twitter.com/Shopify/status/1805220460877038068" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    View on Twitter
+                  </a>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </ProjectLayout>
   );
