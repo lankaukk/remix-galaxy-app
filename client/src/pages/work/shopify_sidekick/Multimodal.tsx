@@ -8,7 +8,7 @@ import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
-  "Exploring voice mode, screen sharing, and conversational AI patterns that provide natural, helpful assistance for merchants.";
+  "Designing a voice mode and screen sharing experience with conversational AI to provide natural, helpful assistance for merchants.";
 
 export default function Multimodal() {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +50,7 @@ export default function Multimodal() {
             "Single entry point for all Sidekick interactions",
             "Persistent conversation history across mode transitions",
             "Feature parity across all modes with same tools and capabilities",
-            "Multi-modal conversations properly evaluated by ACE"
+            "Multi-modal conversations properly evaluated by ACE",
           ]}
           timePeriod="Q3 2025"
           challenges={[
@@ -58,19 +58,19 @@ export default function Multimodal() {
             "Limited engineering resources",
             "Complex microphone and screen-sharing permission flows",
             "Managing third-party AI model constraints",
-            "Securing leadership alignment across multiple stakeholders"
+            "Securing leadership alignment across multiple stakeholders",
           ]}
         />
 
         <ProjectOutcome
-          outcome="Successfully unified Sidekick's experience across text, voice, and voice+screenshare modes with seamless context preservation and a single entry point."
+          outcome="Successfully unified Sidekick's experience across text, voice, and voice+screenshare modes with seamless context preservation and a single entry point. This first implementation of multimodal Sidekick is now available to all merchants, and enhancments will be made through smaller targeted projects."
           usageData={[
             "<strong>Massive Scale:</strong> 15M+ suggestions helping 190K+ merchants",
             "<strong>High Effectiveness:</strong> 75% apply rate, 60% save rate",
             "<strong>Strong Trust:</strong> 50% saved without edits",
             "<strong>Positive Sentiment:</strong> 79% positive feedback",
             "<strong>Improving Quality:</strong> Apply/save rates increasing month-over-month",
-            "<strong>Broad Reach:</strong> Helping nearly 190K shops improve their stores"
+            "<strong>Broad Reach:</strong> Helping nearly 190K shops improve their stores",
           ]}
         />
 
