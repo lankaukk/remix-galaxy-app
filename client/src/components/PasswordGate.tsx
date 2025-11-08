@@ -83,7 +83,7 @@ export default function PasswordGate({ children }: PasswordGateProps) {
 
   return (
     <div className="h-screen overflow-hidden relative">
-      <div className="absolute top-8 left-8 z-10">
+      <div className="absolute top-12 left-4 sm:left-6 lg:left-8 z-10">
         <Link href="/work" className="inline-flex items-center hover:text-[#FF5757]">
           <ArrowLeft className="mr-2 h-5 w-5" />
           All Work
