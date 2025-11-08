@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 interface ProjectBriefProps {
   brief?: string;
-  requirements?: string;
+  requirements?: string[];
   timePeriod?: string;
   challenges?: string[];
   className?: string;
@@ -43,14 +43,18 @@ export function ProjectBrief({
           </div>
         )}
         
-        {requirements && (
+        {requirements && requirements.length > 0 && (
           <div>
             <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground mb-2" data-testid="label-requirements">
-              Requirements
+              Success Criteria
             </h3>
-            <p className="text-base leading-relaxed" data-testid="text-requirements">
-              {requirements}
-            </p>
+            <ul className="list-disc list-outside ml-5 space-y-2" data-testid="list-requirements">
+              {requirements.map((requirement, index) => (
+                <li key={index} className="text-base leading-relaxed pl-1" data-testid={`requirement-${index}`}>
+                  {requirement}
+                </li>
+              ))}
+            </ul>
           </div>
         )}
         
@@ -59,9 +63,9 @@ export function ProjectBrief({
             <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground mb-2" data-testid="label-challenges">
               Challenges
             </h3>
-            <ul className="list-disc list-inside space-y-2" data-testid="list-challenges">
+            <ul className="list-disc list-outside ml-5 space-y-2" data-testid="list-challenges">
               {challenges.map((challenge, index) => (
-                <li key={index} className="text-base leading-relaxed" data-testid={`challenge-${index}`}>
+                <li key={index} className="text-base leading-relaxed pl-1" data-testid={`challenge-${index}`}>
                   {challenge}
                 </li>
               ))}

@@ -44,8 +44,14 @@ export default function Multimodal() {
         <MultimodalAnimation />
 
         <ProjectBrief
-          brief="Design the voice interaction experience for Shopify Sidekick—Shopify's first voice-enabled AI assistant. Merchants can now speak naturally to get real-time help and navigate the admin interface hands-free."
-          requirements="Create an intuitive voice interface with clear visual feedback showing when the user is speaking and when Sidekick is responding."
+          brief="Unify Sidekick's experience across text, voice, and voice+screenshare modes, allowing merchants to seamlessly switch between interaction types within a single conversation."
+          requirements={[
+            "Seamless switching between text, voice, and voice+screenshare modes without losing context",
+            "Single entry point for all Sidekick interactions",
+            "Persistent conversation history across mode transitions",
+            "Feature parity across all modes with same tools and capabilities",
+            "Multi-modal conversations properly evaluated by ACE"
+          ]}
           timePeriod="Q3 2025"
           challenges={[
             "Cross-team coordination across multiple teams",
@@ -57,7 +63,9 @@ export default function Multimodal() {
         />
 
         <ProjectOutcome
-          designTradeoffs="Selected the 'Puck' voice from Google Gemini for its near-gender-neutral tone that aligns with Shopify's brand and its superior tool-calling capabilities among available models."
+          outcome="Voice capabilities fully integrated and rolled out to all merchants with strong adoption and positive feedback. Established a robust process for evaluating and adopting new multimodal models from OpenAI and Google."
+          designTradeoffs="Selected the 'Puck' voice from Google Gemini for its near-gender-neutral tone and superior tool-calling capabilities. Screenshare remained separate based on leadership feedback, though it uses the same infrastructure."
+          usageData="Delivered seamless text-to-voice switching, persistent context, unified entry point, and ACE integration. Voice features include auto-navigation, mobile support, multilingual capabilities with automatic detection, and visual feedback. ACE scores for voice are still below text mode but showing improvement."
         />
 
         <div className="prose-lg max-w-none"></div>
