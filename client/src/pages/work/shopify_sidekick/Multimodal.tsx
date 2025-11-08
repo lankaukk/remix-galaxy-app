@@ -8,7 +8,7 @@ import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
-  "Exploring voice, screen sharing, skills, and conversational AI patterns that create natural, helpful interactions for merchants";
+  "Exploring voice mode, screen sharing, and conversational AI patterns that provide natural, helpful assistance for merchants.";
 
 export default function Multimodal() {
   const [isLoading, setIsLoading] = useState(true);
