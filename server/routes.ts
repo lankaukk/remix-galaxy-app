@@ -13,9 +13,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Shopify Sidekick authentication routes
   app.post('/api/auth/shopify-sidekick', (req, res) => {
     const { password } = req.body;
-    const correctPassword = process.env.SHOPIFY_PASSWORD;
+    const validPasswords = [
+      process.env.SHOPIFY_PASSWORD,
+      process.env.SHOPIFY_PASSWORD_2
+    ].filter(Boolean);
 
-    if (password === correctPassword) {
+    if (validPasswords.includes(password)) {
       req.session.shopifySidekickAuth = true;
       res.json({ authenticated: true });
     } else {
