@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import MultimodalAnimation from "@/components/MultimodalAnimation";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
+import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -40,9 +41,11 @@ export default function Multimodal() {
       backText="Shopify Sidekick"
     >
       <div className="space-y-12">
+        <MultimodalAnimation />
+
         <ProjectBrief
           brief="Design the voice interaction experience for Shopify Sidekick—Shopify's first voice-enabled AI assistant. Merchants can now speak naturally to get real-time help and navigate the admin interface hands-free."
-          requirements="Create an intuitive voice interface with clear visual feedback showing when the user is speaking and when Sidekick is responding. Implement the 'Puck' voice from Google Gemini, chosen for its near-gender-neutral tone that aligns with Shopify's brand and its superior tool-calling capabilities."
+          requirements="Create an intuitive voice interface with clear visual feedback showing when the user is speaking and when Sidekick is responding."
           timePeriod="Q3 2025"
           challenges={[
             "Cross-team coordination across multiple teams",
@@ -53,7 +56,9 @@ export default function Multimodal() {
           ]}
         />
 
-        <MultimodalAnimation />
+        <ProjectOutcome
+          designTradeoffs="Selected the 'Puck' voice from Google Gemini for its near-gender-neutral tone that aligns with Shopify's brand and its superior tool-calling capabilities among available models."
+        />
 
         <div className="prose-lg max-w-none"></div>
       </div>
