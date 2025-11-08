@@ -64,7 +64,12 @@ export default function Multimodal() {
 
         <ProjectOutcome
           outcome="Successfully unified Sidekick's experience across text, voice, and voice+screenshare modes with seamless context preservation and a single entry point. Established robust evaluation processes for multimodal AI models."
-          usageData="729,570 total conversations across 190,886 merchants. Delivered 15.1 million suggestions with 75.1% apply rate and 60.2% save rate. Achieved 79.2% positive feedback ratio. Features include auto-navigation via voice, mobile support, and multilingual capabilities with automatic detection."
+          usageData={[
+            "729,570 total conversations across 190,886 merchants",
+            "15.1 million suggestions delivered with 75.1% apply rate and 60.2% save rate",
+            "79.2% positive feedback ratio",
+            "Voice features include auto-navigation, mobile support, and multilingual capabilities with automatic detection"
+          ]}
         />
 
         <div className="prose-lg max-w-none"></div>
