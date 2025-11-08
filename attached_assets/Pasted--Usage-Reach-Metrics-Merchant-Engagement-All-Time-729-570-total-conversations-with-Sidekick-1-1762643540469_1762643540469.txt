@@ -1,0 +1,66 @@
+📊 Usage & Reach Metrics
+Merchant Engagement (All-Time)
+
+729,570 total conversations with Sidekick
+190,886 unique users engaged
+189,162 unique shops using Sidekick
+979,882 total conversation turns (interactions)
+3.8 average conversations per user
+534 days of active operation (since April 23, 2024)
+💡 Positive Merchant Benefits
+Actionable Suggestions & Time Savings
+
+15.1 million suggestions made to merchants
+11.4 million merchant actions applied (75.1% apply rate)
+6.8 million actions saved by merchants (60.2% save rate)
+49.8% of actions saved without modification (showing high trust/confidence)
+What This Means:
+
+Sidekick is making 15+ million helpful suggestions that merchants find valuable
+3 out of 4 suggestions are applied by merchants (75% apply rate)
+6 out of 10 applied actions result in saved changes (60% save rate)
+Nearly half of saved actions require no editing, demonstrating Sidekick's accuracy
+😊 Merchant Sentiment
+Feedback Metrics
+
+79.2% positive feedback ratio
+802 positive feedback responses
+210 negative feedback responses
+This shows strong merchant satisfaction with the tool.
+
+🎯 Feature Usage Breakdown
+Primary Use Cases
+
+Forms: 107,536 activities (77% of usage)
+Products, discounts, orders, collections, etc.
+Themes: 30,996 activities (23% of usage)
+📈 Recent Growth Trends (October-November 2025)
+October 2025
+
+2.99 million suggestions made
+2.51 million actions applied (71.7% apply rate)
+1.69 million actions saved (61.0% save rate)
+November 2025 (partial month)
+
+92,361 suggestions made
+80,161 actions applied (77.3% apply rate)
+54,770 actions saved (73.1% save rate)
+Apply and save rates are increasing over time, showing improved quality.
+
+🎥 Note on Multimodal Features
+Based on the current data:
+
+Multimodal features (image, video, voice attachments) show zero usage in the reporting metrics table
+This indicates these features may be:
+In development or early beta testing
+Tracked through different data sources
+Planned for future rollout
+The "multimodal" aspects of the project may refer to the variety of interaction types Sidekick supports (cards, suggestions, forms, themes) rather than traditional multimodal inputs like images/video.
+
+🎯 Key Takeaways
+Massive Scale: 15M+ suggestions helping 190K+ merchants
+High Effectiveness: 75% apply rate, 60% save rate
+Strong Trust: 50% saved without edits
+Positive Sentiment: 79% positive feedback
+Improving Quality: Apply/save rates increasing month-over-month
+Broad Reach: Helping nearly 190K shops improve their stores

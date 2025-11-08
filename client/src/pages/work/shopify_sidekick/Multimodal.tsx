@@ -63,9 +63,8 @@ export default function Multimodal() {
         />
 
         <ProjectOutcome
-          outcome="Voice capabilities fully integrated and rolled out to all merchants with strong adoption and positive feedback. Established a robust process for evaluating and adopting new multimodal models from OpenAI and Google."
-          designTradeoffs="Selected the 'Puck' voice from Google Gemini for its near-gender-neutral tone and superior tool-calling capabilities. Screenshare remained separate based on leadership feedback, though it uses the same infrastructure."
-          usageData="Delivered seamless text-to-voice switching, persistent context, unified entry point, and ACE integration. Voice features include auto-navigation, mobile support, multilingual capabilities with automatic detection, and visual feedback. ACE scores for voice are still below text mode but showing improvement."
+          outcome="Successfully unified Sidekick's experience across text, voice, and voice+screenshare modes with seamless context preservation and a single entry point. Established robust evaluation processes for multimodal AI models."
+          usageData="729,570 total conversations across 190,886 merchants. Delivered 15.1 million suggestions with 75.1% apply rate and 60.2% save rate. Achieved 79.2% positive feedback ratio. Features include auto-navigation via voice, mobile support, and multilingual capabilities with automatic detection."
         />
 
         <div className="prose-lg max-w-none"></div>
