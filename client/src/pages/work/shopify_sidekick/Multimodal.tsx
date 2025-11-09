@@ -5,6 +5,7 @@ import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import MultimodalAnimation from "@/components/MultimodalAnimation";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
+import desktopEntryPointGif from "@/assets/shopify_sidekick/multimodal/desktop-entry-point.gif";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -75,18 +76,21 @@ export default function Multimodal() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div
-                className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
-                data-testid="placeholder-entry-point-desktop"
+                className="bg-muted rounded-lg aspect-[9/16] flex flex-col items-center justify-center text-muted-foreground"
+                data-testid="placeholder-entry-point-mobile"
               >
                 <span className="text-lg font-medium">Mobile</span>
                 <span className="text-sm">Final Design</span>
               </div>
               <div
-                className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
-                data-testid="placeholder-entry-point-desktop"
+                className="rounded-lg aspect-video overflow-hidden"
+                data-testid="image-entry-point-desktop"
               >
-                <span className="text-lg font-medium">Desktop</span>
-                <span className="text-sm">Final Design</span>
+                <img 
+                  src={desktopEntryPointGif} 
+                  alt="Desktop entry point final design"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
