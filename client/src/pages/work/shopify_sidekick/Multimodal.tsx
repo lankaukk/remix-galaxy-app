@@ -62,6 +62,137 @@ export default function Multimodal() {
           ]}
         />
 
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Creating an entry point
+          </h2>
+          <div className="space-y-4">
+            <div
+              className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+              data-testid="placeholder-entry-point-gif"
+            >
+              <span className="text-lg">GIF: Iterations</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div
+                className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
+                data-testid="placeholder-entry-point-desktop"
+              >
+                <span className="text-lg font-medium">Mobile</span>
+                <span className="text-sm">Final Design</span>
+              </div>
+              <div
+                className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
+                data-testid="placeholder-entry-point-desktop"
+              >
+                <span className="text-lg font-medium">Desktop</span>
+                <span className="text-sm">Final Design</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">
+            What is voice mode?
+          </h2>
+          <div
+            className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+            data-testid="placeholder-voice-mode-gif"
+          >
+            <span className="text-lg">GIF: Iterations</span>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Visualizing Sound
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {[1, 2, 3, 4, 5].map((index) => (
+              <div
+                key={index}
+                className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground"
+                data-testid={`placeholder-visualizing-sound-${index}`}
+              >
+                <span className="text-lg">GIF {index}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">Rendering cards</h2>
+          <div
+            className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+            data-testid="placeholder-rendering-cards-gif"
+          >
+            <span className="text-lg">GIF: Full Width</span>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Speaking while navigating
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
+              data-testid="placeholder-speaking-desktop"
+            >
+              <span className="text-lg font-medium">Mobile</span>
+              <span className="text-sm">GIF</span>
+            </div>
+            <div
+              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
+              data-testid="placeholder-speaking-desktop"
+            >
+              <span className="text-lg font-medium">Desktop</span>
+              <span className="text-sm">GIF</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Screenshare, Screenshot, and Tab Share concepts
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {["Screenshare", "Screenshot", "Tab Share"].map(
+              (concept, index) => (
+                <div
+                  key={index}
+                  className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
+                  data-testid={`placeholder-screenshare-${index + 1}`}
+                >
+                  <span className="text-lg font-medium">{concept}</span>
+                  <span className="text-sm">GIF</span>
+                </div>
+              ),
+            )}
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">Call summaries</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
+              data-testid="placeholder-summaries-desktop"
+            >
+              <span className="text-lg font-medium">Mobile</span>
+              <span className="text-sm">GIF</span>
+            </div>
+            <div
+              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
+              data-testid="placeholder-summaries-desktop"
+            >
+              <span className="text-lg font-medium">Desktop</span>
+              <span className="text-sm">GIF</span>
+            </div>
+          </div>
+        </section>
+
         <ProjectOutcome
           outcome="Successfully unified Sidekick's experience across text, voice, and voice+screenshare modes with seamless context preservation and a single entry point. This first implementation of multimodal Sidekick is now available to all merchants, and enhancments will be made through smaller targeted projects."
           usageData={[
@@ -73,98 +204,6 @@ export default function Multimodal() {
             "<strong>Broad Reach:</strong> Helping nearly 190K shops improve their stores",
           ]}
         />
-
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Creating an entry point</h2>
-          <div className="space-y-4">
-            <div className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground" data-testid="placeholder-entry-point-gif">
-              <span className="text-lg">GIF: Iterations</span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-muted rounded-lg aspect-[9/16] flex flex-col items-center justify-center text-muted-foreground" data-testid="placeholder-entry-point-mobile">
-                <span className="text-lg font-medium">Mobile</span>
-                <span className="text-sm">Final Design</span>
-              </div>
-              <div className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground" data-testid="placeholder-entry-point-desktop">
-                <span className="text-lg font-medium">Desktop</span>
-                <span className="text-sm">Final Design</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">What is voice mode?</h2>
-          <div className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground" data-testid="placeholder-voice-mode-gif">
-            <span className="text-lg">GIF: Iterations</span>
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Visualizing Sound</h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {[1, 2, 3, 4, 5].map((index) => (
-              <div 
-                key={index}
-                className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground" 
-                data-testid={`placeholder-visualizing-sound-${index}`}
-              >
-                <span className="text-lg">GIF {index}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Rendering cards</h2>
-          <div className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground" data-testid="placeholder-rendering-cards-gif">
-            <span className="text-lg">GIF: Full Width</span>
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Speaking while navigating</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-muted rounded-lg aspect-[9/16] flex flex-col items-center justify-center text-muted-foreground" data-testid="placeholder-speaking-mobile">
-              <span className="text-lg font-medium">Mobile</span>
-              <span className="text-sm">GIF</span>
-            </div>
-            <div className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground" data-testid="placeholder-speaking-desktop">
-              <span className="text-lg font-medium">Desktop</span>
-              <span className="text-sm">GIF</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Screenshare, Screenshot, and Tab Share concepts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {['Screenshare', 'Screenshot', 'Tab Share'].map((concept, index) => (
-              <div 
-                key={index}
-                className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground" 
-                data-testid={`placeholder-screenshare-${index + 1}`}
-              >
-                <span className="text-lg font-medium">{concept}</span>
-                <span className="text-sm">GIF</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Call summaries</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-muted rounded-lg aspect-[9/16] flex flex-col items-center justify-center text-muted-foreground" data-testid="placeholder-summaries-mobile">
-              <span className="text-lg font-medium">Mobile</span>
-              <span className="text-sm">GIF</span>
-            </div>
-            <div className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground" data-testid="placeholder-summaries-desktop">
-              <span className="text-lg font-medium">Desktop</span>
-              <span className="text-sm">GIF</span>
-            </div>
-          </div>
-        </section>
 
         <div className="prose-lg max-w-none"></div>
       </div>
