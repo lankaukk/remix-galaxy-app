@@ -77,7 +77,8 @@ export default function Multimodal() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div
-                className="rounded-lg aspect-[9/16] overflow-hidden flex items-center justify-center bg-black"
+                className="rounded-lg overflow-hidden flex items-center justify-center"
+                style={{ aspectRatio: '9/16', height: 'auto' }}
                 data-testid="video-entry-point-mobile"
               >
                 <video
@@ -86,17 +87,19 @@ export default function Multimodal() {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div
-                className="rounded-lg aspect-video overflow-hidden"
+                className="rounded-lg overflow-hidden"
+                style={{ aspectRatio: '16/9', height: 'auto' }}
                 data-testid="image-entry-point-desktop"
               >
                 <img 
                   src={desktopEntryPointGif} 
                   alt="Desktop entry point final design"
                   className="w-full h-full object-cover"
+                  style={{ transform: 'scale(1.02)' }}
                 />
               </div>
             </div>
