@@ -5,8 +5,8 @@ import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import MultimodalAnimation from "@/components/MultimodalAnimation";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
-import desktopEntryPointGif from "@/assets/shopify_sidekick/multimodal/desktop-entry-point.gif";
-import mobileEntryPointVideo from "@/assets/shopify_sidekick/multimodal/voice-mobile-entry-point.mp4";
+import desktopEntryPointGif from "../../../assets/shopify_sidekick/multimodal/desktop-entry-point.gif";
+import mobileEntryPointVideo from "../../../assets/shopify_sidekick/multimodal/voice-mobile-entry-point.mp4";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
