@@ -75,10 +75,10 @@ export default function Multimodal() {
             >
               <span className="text-lg">GIF: Iterations</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex flex-col md:flex-row gap-4 md:h-[600px]">
               <div
-                className="rounded-lg overflow-hidden flex items-center justify-center"
-                style={{ aspectRatio: '9/16', height: 'auto' }}
+                className="rounded-lg overflow-hidden mx-auto md:mx-0 w-auto md:h-full"
+                style={{ aspectRatio: '9/16' }}
                 data-testid="video-entry-point-mobile"
               >
                 <video
@@ -91,8 +91,7 @@ export default function Multimodal() {
                 />
               </div>
               <div
-                className="rounded-lg overflow-hidden"
-                style={{ aspectRatio: '16/9', height: 'auto' }}
+                className="rounded-lg overflow-hidden md:flex-1 md:h-full"
                 data-testid="image-entry-point-desktop"
               >
                 <img 
