@@ -6,6 +6,7 @@ import MultimodalAnimation from "@/components/MultimodalAnimation";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 import desktopEntryPointGif from "@/assets/shopify_sidekick/multimodal/desktop-entry-point.gif";
+import mobileEntryPointVideo from "@/assets/shopify_sidekick/multimodal/voice-mobile-entry-point.mp4";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -76,11 +77,17 @@ export default function Multimodal() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div
-                className="bg-muted rounded-lg aspect-[9/16] flex flex-col items-center justify-center text-muted-foreground"
-                data-testid="placeholder-entry-point-mobile"
+                className="rounded-lg aspect-[9/16] overflow-hidden flex items-center justify-center bg-black"
+                data-testid="video-entry-point-mobile"
               >
-                <span className="text-lg font-medium">Mobile</span>
-                <span className="text-sm">Final Design</span>
+                <video
+                  src={mobileEntryPointVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div
                 className="rounded-lg aspect-video overflow-hidden"
