@@ -97,7 +97,7 @@ export default function Multimodal() {
                 <img 
                   src={desktopEntryPointGif} 
                   alt="Desktop entry point final design"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-right"
                   style={{ transform: 'scale(1.02)' }}
                 />
               </div>
