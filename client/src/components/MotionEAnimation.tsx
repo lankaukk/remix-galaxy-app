@@ -5,7 +5,7 @@ export default function MotionEAnimation() {
       <div className="sidekick-circle circle-2"></div>
       <div className="sidekick-circle circle-3"></div>
       <style>{`
-        @keyframes sidekickGrowingCircle {
+        @keyframes motionEGrowingCircle {
           0% { 
             opacity: 0; 
             width: 60px;
@@ -32,7 +32,7 @@ export default function MotionEAnimation() {
           }
         }
 
-        @keyframes sidekickGrowingBorder {
+        @keyframes motionEGrowingBorder {
           0% { 
             padding: 5px;
           }
@@ -56,7 +56,7 @@ export default function MotionEAnimation() {
             rgba(31, 120, 253, 0.35)
           );
           border-radius: 50%;
-          animation: sidekickGrowingCircle 3s linear infinite, sidekickGrowingBorder 3s linear infinite;
+          animation: motionEGrowingCircle 3s linear infinite, motionEGrowingBorder 3s linear infinite;
           position: absolute;
           top: 50%;
           left: 50%;
