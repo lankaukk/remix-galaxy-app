@@ -1,10 +1,18 @@
 import AvatarImage from "@/assets/images/sidekick-avatar.png";
 
-export default function MultimodalAnimation() {
+type MultimodalAnimationProps = {
+  scale?: number;
+};
+
+export default function MultimodalAnimation({ scale = 1 }: MultimodalAnimationProps) {
   return (
     <div
       className="relative w-full aspect-video rounded-lg shadow-xl flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: "#E3E4E5" }}
+      style={{ 
+        backgroundColor: "#E3E4E5",
+        // @ts-ignore
+        "--scale": scale,
+      }}
     >
       <div className="sidekick-circle circle-1"></div>
       <div className="sidekick-circle circle-2"></div>
@@ -18,42 +26,42 @@ export default function MultimodalAnimation() {
         @keyframes sidekickGrowingCircle {
           0% { 
             opacity: 0; 
-            width: 125px;
-            height: 125px;
-            filter: blur(5px) saturate(3);
+            width: calc(125px * var(--scale));
+            height: calc(125px * var(--scale));
+            filter: blur(calc(5px * var(--scale))) saturate(3);
           }
           33% { 
             opacity: 1; 
-            width: 262.5px;
-            height: 262.5px;
-            filter: blur(10px) saturate(3);
+            width: calc(262.5px * var(--scale));
+            height: calc(262.5px * var(--scale));
+            filter: blur(calc(10px * var(--scale))) saturate(3);
           }
           66% { 
             opacity: 0.2; 
-            width: 450px;
-            height: 450px;
-            filter: blur(65px) saturate(3);
+            width: calc(450px * var(--scale));
+            height: calc(450px * var(--scale));
+            filter: blur(calc(65px * var(--scale))) saturate(3);
           }
           100% { 
             opacity: 0; 
-            width: 800px;
-            height: 800px;
-            filter: blur(120px) saturate(3);
+            width: calc(800px * var(--scale));
+            height: calc(800px * var(--scale));
+            filter: blur(calc(120px * var(--scale))) saturate(3);
           }
         }
 
         @keyframes sidekickGrowingBorder {
           0% { 
-            padding: 5px;
+            padding: calc(5px * var(--scale));
           }
           33% { 
-            padding: 7.5px;
+            padding: calc(7.5px * var(--scale));
           }
           66% { 
-            padding: 15px;
+            padding: calc(15px * var(--scale));
           }
           100% { 
-            padding: 37.5px;
+            padding: calc(37.5px * var(--scale));
           }
         }
 
