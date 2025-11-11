@@ -56,14 +56,14 @@ export default function MainNav() {
                   <Menu className="h-6 w-6" />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[240px] sm:w-[280px]">
-                <div className="mt-6 flex flex-col space-y-3">
+              <SheetContent side="right" className="w-full bg-background/90 backdrop-blur-md border-l-0">
+                <div className="mt-6 flex flex-col space-y-3 items-center">
                   {navigation.map((item) => (
                     <SheetClose key={item.name} asChild>
                       <Link
                         href={item.href}
                         className={cn(
-                          "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                          "w-full rounded-md px-3 py-2 text-sm font-medium transition-colors text-center",
                           location === item.href
                             ? "text-[#FF5757]"
                             : "text-foreground hover:text-[#00C2FF]",
@@ -73,7 +73,7 @@ export default function MainNav() {
                       </Link>
                     </SheetClose>
                   ))}
-                  <div className="px-3 py-2">
+                  <div className="w-full flex justify-center py-2">
                     <ThemeToggle />
                   </div>
                 </div>
