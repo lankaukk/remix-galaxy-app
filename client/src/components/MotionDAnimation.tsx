@@ -6,54 +6,12 @@ export default function MotionDAnimation() {
       <div className="motion-d-circle circle-3"></div>
       <div className="motion-d-circle circle-4"></div>
       <style>{`
-        @keyframes motionDFadeGrowSmall {
+        @keyframes motionDFadeGrow {
           0% { 
             opacity: 0;
             transform: translate(-50%, -50%) scale(0);
           }
-          30% { 
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-          }
-          70% { 
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-          }
-          100% { 
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-          }
-        }
-
-        @keyframes motionDFadeGrowMedium {
-          0% { 
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-          }
-          35% { 
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-          }
-          65% { 
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-          }
-          100% { 
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-          }
-        }
-
-        @keyframes motionDFadeGrowLarge {
-          0% { 
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-          }
-          40% { 
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-          }
-          60% { 
+          50% { 
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
           }
@@ -80,7 +38,7 @@ export default function MotionDAnimation() {
           left: 25%;
           width: 28%;
           height: 28%;
-          animation: motionDFadeGrowLarge 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+          animation: motionDFadeGrow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
           animation-delay: 0s;
         }
 
@@ -89,8 +47,8 @@ export default function MotionDAnimation() {
           left: 70%;
           width: 15%;
           height: 15%;
-          animation: motionDFadeGrowSmall 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-          animation-delay: 1.2s;
+          animation: motionDFadeGrow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          animation-delay: 0.8s;
         }
 
         .motion-d-circle.circle-3 {
@@ -98,8 +56,8 @@ export default function MotionDAnimation() {
           left: 50%;
           width: 22%;
           height: 22%;
-          animation: motionDFadeGrowMedium 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-          animation-delay: 2.4s;
+          animation: motionDFadeGrow 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          animation-delay: 1.6s;
         }
 
         .motion-d-circle.circle-4 {
@@ -107,8 +65,8 @@ export default function MotionDAnimation() {
           left: 35%;
           width: 18%;
           height: 18%;
-          animation: motionDFadeGrowMedium 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-          animation-delay: 3.6s;
+          animation: motionDFadeGrow 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          animation-delay: 2.4s;
         }
       `}</style>
     </div>
