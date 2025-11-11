@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Instagram } from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import ProfilePhoto1 from "@/assets/images/profile-photos/profile-photo-1.jpg";
@@ -197,6 +198,7 @@ export default function Contact() {
     { radius: 210, duration: 20, startAngle: 90 }, // LinkedIn - medium distance
     { radius: 240, duration: 25, startAngle: 180 }, // GitHub - far
     { radius: 270, duration: 30, startAngle: 270 }, // Instagram - farthest
+    { radius: 300, duration: 35, startAngle: 45 }, // Twitter/X - outermost
   ];
 
   // Define decorative bubble configurations that orbit counter-clockwise
@@ -299,6 +301,18 @@ export default function Contact() {
                 icon={<Instagram size={24} />}
                 color="#E1306C"
                 href="https://www.instagram.com/forwardchaos/?hl=en"
+              />
+            </OrbitingBubble>
+
+            <OrbitingBubble
+              radius={orbits[4].radius}
+              duration={orbits[4].duration}
+              startAngle={orbits[4].startAngle}
+            >
+              <ContactBubble
+                icon={<FaXTwitter size={24} />}
+                color="#000000"
+                href="https://x.com/mckayla789809?s=21"
               />
             </OrbitingBubble>
 
