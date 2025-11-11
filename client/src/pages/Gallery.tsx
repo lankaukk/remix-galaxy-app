@@ -402,7 +402,7 @@ export default function Gallery() {
                   </Card>
                 </DialogTrigger>
 
-                <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogContent className="max-w-4xl">
                   <DialogTitle>{artwork.title}</DialogTitle>
 
                   <DialogDescription>
@@ -421,12 +421,12 @@ export default function Gallery() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="relative"
+                        className="relative w-full aspect-[4/3] bg-muted rounded-lg overflow-hidden flex items-center justify-center"
                       >
-                        <ImageWithFallback
+                        <img
                           src={artworks[currentImageIndex].image}
                           alt={artworks[currentImageIndex].title}
-                          maintainAspectRatio={true}
+                          className="w-full h-full object-contain"
                         />
                       </motion.div>
                     </AnimatePresence>
