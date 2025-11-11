@@ -6,7 +6,7 @@ import MultimodalAnimation from "@/components/MultimodalAnimation";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 import desktopEntryPointVideo from "@/assets/shopify_sidekick/multimodal/desktop-input.mov";
-import mobileEntryPointVideo from "@/assets/images/shopify_sidekick/multimodal/voice-mobile-entry-point.mp4";
+import mobileEntryPointVideo from "@/assets/shopify_sidekick/multimodal/voice-mobile-entry-point.mov";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
