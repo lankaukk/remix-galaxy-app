@@ -30,7 +30,7 @@ export default function MotionDAnimation() {
             rgba(78, 0, 255, 0.5) 66%, 
             rgba(0, 166, 255, 0.5) 100%
           );
-          filter: blur(25.55px);
+          filter: blur(15.55px);
         }
 
         .motion-d-circle.circle-1 {
