@@ -4,7 +4,7 @@ export default function MultimodalAnimation() {
   return (
     <div
       className="relative w-full aspect-video rounded-lg shadow-xl flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: "#F4F4F4" }}
+      style={{ backgroundColor: "#E3E4E5" }}
     >
       <div className="sidekick-circle circle-1"></div>
       <div className="sidekick-circle circle-2"></div>
