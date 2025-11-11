@@ -2,7 +2,7 @@ import AvatarImage from "@/assets/images/sidekick-avatar.png";
 
 export default function MultimodalAnimation() {
   return (
-    <div className="relative w-full aspect-video bg-white rounded-lg shadow-xl flex items-center justify-center overflow-hidden">
+    <div className="relative w-full aspect-video rounded-lg shadow-xl flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#E3E4E5' }}>
       <div className="sidekick-circle circle-1"></div>
       <div className="sidekick-circle circle-2"></div>
       <div className="sidekick-circle circle-3"></div>
@@ -75,7 +75,7 @@ export default function MultimodalAnimation() {
 
         .sidekick-circle::before {
           content: '';
-          background: #ffffff;
+          background: #E3E4E5;
           border-radius: 50%;
           width: 100%;
           height: 100%;
