@@ -3,6 +3,7 @@ import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import MultimodalAnimation from "@/components/MultimodalAnimation";
+import MotionDAnimation from "@/components/MotionDAnimation";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 import desktopEntryPointVideo from "@/assets/shopify_sidekick/multimodal/desktop-input.mov";
@@ -205,10 +206,10 @@ export default function Multimodal() {
               />
             </div>
             <div
-              className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground"
-              data-testid="placeholder-visualizing-sound-4"
+              className="rounded-lg aspect-square overflow-hidden"
+              data-testid="animation-visualizing-sound-4"
             >
-              <span className="text-lg">GIF 4</span>
+              <MotionDAnimation />
             </div>
             <div
               className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground"
