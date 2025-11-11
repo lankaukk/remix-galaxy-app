@@ -216,7 +216,7 @@ export default function Multimodal() {
               <MotionDAnimation />
             </div>
             <div
-              className="rounded-lg aspect-square overflow-hidden shadow-xl"
+              className="rounded-lg aspect-square overflow-hidden shadow-xl col-span-2 md:col-span-1"
               data-testid="animation-visualizing-sound-5"
             >
               <MotionEAnimation />
