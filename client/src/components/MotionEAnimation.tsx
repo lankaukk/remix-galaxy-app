@@ -80,7 +80,7 @@ export default function MotionEAnimation() {
 
         .motion-e-circle::before {
           content: '';
-          background: #E3E4E5;
+          background: #FFFFFF;
           border-radius: 50%;
           width: 100%;
           height: 100%;
