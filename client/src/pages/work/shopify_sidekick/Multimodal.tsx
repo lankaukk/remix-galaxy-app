@@ -167,7 +167,7 @@ export default function Multimodal() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div
-              className="rounded-lg overflow-hidden aspect-square"
+              className="rounded-lg overflow-hidden aspect-square shadow-xl"
               data-testid="video-visualizing-sound-1"
             >
               <video
@@ -181,7 +181,7 @@ export default function Multimodal() {
               />
             </div>
             <div
-              className="rounded-lg overflow-hidden aspect-square"
+              className="rounded-lg overflow-hidden aspect-square shadow-xl"
               data-testid="video-visualizing-sound-2"
             >
               <video
@@ -195,7 +195,7 @@ export default function Multimodal() {
               />
             </div>
             <div
-              className="rounded-lg overflow-hidden aspect-square"
+              className="rounded-lg overflow-hidden aspect-square shadow-xl"
               data-testid="video-visualizing-sound-3"
             >
               <video
@@ -209,13 +209,13 @@ export default function Multimodal() {
               />
             </div>
             <div
-              className="rounded-lg aspect-square overflow-hidden"
+              className="rounded-lg aspect-square overflow-hidden shadow-xl"
               data-testid="animation-visualizing-sound-4"
             >
               <MotionDAnimation />
             </div>
             <div
-              className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground"
+              className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground shadow-xl"
               data-testid="placeholder-visualizing-sound-5"
             >
               <span className="text-lg">GIF 5</span>
