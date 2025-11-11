@@ -39,11 +39,11 @@ export default function Work() {
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
   const handleImageLoad = (index: number) => {
-    setLoadedImages((prev) => new Set([...prev, index]));
+    setLoadedImages((prev) => new Set(Array.from(prev).concat(index)));
   };
 
   const handleImageError = (index: number) => {
-    setLoadedImages((prev) => new Set([...prev, index]));
+    setLoadedImages((prev) => new Set(Array.from(prev).concat(index)));
   };
 
   const allImagesLoaded = loadedImages.size === projects.length;
