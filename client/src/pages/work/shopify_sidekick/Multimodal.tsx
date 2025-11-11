@@ -95,7 +95,7 @@ export default function Multimodal() {
           </h2>
           <div className="space-y-4">
             <div
-              className="w-full rounded-lg aspect-video overflow-hidden"
+              className="w-full rounded-lg overflow-hidden"
               data-testid="video-iterations"
             >
               <video
@@ -106,7 +106,7 @@ export default function Multimodal() {
                 muted
                 playsInline
                 controls
-                className="w-full h-full object-cover"
+                className="w-full h-auto"
               />
             </div>
             <div className="flex flex-col md:flex-row gap-4 md:h-[600px]">
