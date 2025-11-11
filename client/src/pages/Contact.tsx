@@ -214,7 +214,7 @@ export default function Contact() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 pb-24 md:pb-12 sm:px-6 lg:px-8 bg-background text-foreground min-h-[80vh] flex items-center justify-center">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 bg-background text-foreground min-h-screen flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
