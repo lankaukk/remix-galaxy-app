@@ -15,6 +15,7 @@ import callSummaryDesktopVideo from "@/assets/shopify_sidekick/multimodal/call-s
 import motionAVideo from "@/assets/shopify_sidekick/multimodal/motion-A.mov";
 import motionBVideo from "@/assets/shopify_sidekick/multimodal/motion-B.mov";
 import motionCVideo from "@/assets/shopify_sidekick/multimodal/motion-C.mov";
+import whatIsVideo from "@/assets/shopify_sidekick/multimodal/what-is.mov";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -155,10 +156,17 @@ export default function Multimodal() {
             What is voice mode?
           </h2>
           <div
-            className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
-            data-testid="placeholder-voice-mode-gif"
+            className="w-full rounded-lg overflow-hidden aspect-video shadow-xl"
+            data-testid="video-what-is-voice-mode"
           >
-            <span className="text-lg">GIF: Iterations</span>
+            <video
+              src={whatIsVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
           </div>
         </section>
 
