@@ -1,9 +1,21 @@
 export default function MotionEAnimation() {
   return (
-    <div className="relative w-full h-full rounded-lg flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#E3E4E5' }}>
-      <div className="motion-e-circle motion-e-circle-1"></div>
-      <div className="motion-e-circle motion-e-circle-2"></div>
-      <div className="motion-e-circle motion-e-circle-3"></div>
+    <div
+      className="relative w-full h-full rounded-lg flex items-center justify-center overflow-hidden"
+      style={{ backgroundColor: "#fff" }}
+    >
+      <div
+        className="motion-e-circle motion-e-circle-1"
+        style={{ backgroundColor: "#fff" }}
+      ></div>
+      <div
+        className="motion-e-circle motion-e-circle-2"
+        style={{ backgroundColor: "#fff" }}
+      ></div>
+      <div
+        className="motion-e-circle motion-e-circle-3"
+        style={{ backgroundColor: "#fff" }}
+      ></div>
       <style>{`
         @keyframes motionEGrowingCircle {
           0% { 
