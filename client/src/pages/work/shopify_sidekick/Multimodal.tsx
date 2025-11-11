@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
@@ -7,6 +7,7 @@ import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 import desktopEntryPointVideo from "@/assets/shopify_sidekick/multimodal/desktop-input.mov";
 import mobileEntryPointVideo from "@/assets/shopify_sidekick/multimodal/voice-mobile-entry-point.mov";
+import inputIterationsVideo from "@/assets/shopify_sidekick/multimodal/input-iterations.mov";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -14,6 +15,7 @@ const PAGE_DESCRIPTION =
 
 export default function Multimodal() {
   const [isLoading, setIsLoading] = useState(true);
+  const iterationsVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,6 +23,29 @@ export default function Multimodal() {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const video = iterationsVideoRef.current;
+    if (!video) return;
+
+    video.controls = false;
+
+    const handleMouseEnter = () => {
+      video.controls = true;
+    };
+
+    const handleMouseLeave = () => {
+      video.controls = false;
+    };
+
+    video.addEventListener('mouseenter', handleMouseEnter);
+    video.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      video.removeEventListener('mouseenter', handleMouseEnter);
+      video.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [isLoading]);
 
   if (isLoading) {
     return (
@@ -70,10 +95,19 @@ export default function Multimodal() {
           </h2>
           <div className="space-y-4">
             <div
-              className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
-              data-testid="placeholder-entry-point-gif"
+              className="w-full rounded-lg aspect-video overflow-hidden"
+              data-testid="video-iterations"
             >
-              <span className="text-lg">GIF: Iterations</span>
+              <video
+                ref={iterationsVideoRef}
+                src={inputIterationsVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="flex flex-col md:flex-row gap-4 md:h-[600px]">
               <div
