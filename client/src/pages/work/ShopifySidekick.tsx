@@ -77,14 +77,28 @@ export default function ShopifySidekick() {
         />
 
         <div className="prose-lg max-w-none">
-          <h2>About the Product</h2>
           <p>
-            Sidekick brings multimodal AI interaction to Shopify, allowing merchants to work through text chat, voice, and screen sharing across web and mobile platforms. The experience adapts to different contexts—from quick mobile queries to complex troubleshooting with visual guidance.
+            Sidekick brings multimodal AI interaction to Shopify, allowing
+            merchants to work through text chat, voice, and screen sharing
+            across web and mobile platforms. The experience adapts to different
+            contexts—from quick mobile queries to complex troubleshooting with
+            visual guidance.
           </p>
 
           <h2>My Contributions</h2>
           <p>
-            I led mobile and voice design for Sidekick, creating the first audio interaction patterns at Shopify with waveforms, voice-active states, and responsive motion. I designed the core mobile chat experience, contributed voice-mode icons to Polaris, and extended the design into Admin mobile navigation. On multimodal features, I designed screen sharing flows, Sidekick Skills, Knowledge Base integration, and the Help Center handoff. This work is now serving hundreds of thousands of merchants with strong satisfaction scores.
+            I led mobile and voice design for Sidekick, creating the first audio
+            interaction patterns at Shopify with waveforms, voice-active states,
+            and responsive motion. I designed the core mobile chat experience,
+            contributed voice-mode icons to{" "}
+            <a href="https://polaris-react.shopify.com/" target="_blank">
+              Shopify's Polaris design system
+            </a>
+            , and extended the design into Admin mobile navigation. On
+            multimodal features, I designed screen sharing flows, Sidekick
+            Skills, the Knowledge Base app integration, and the Help Center
+            handoff. This work is now serving hundreds of thousands of merchants
+            with strong satisfaction scores.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
