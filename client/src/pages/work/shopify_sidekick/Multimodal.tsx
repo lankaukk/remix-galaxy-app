@@ -5,7 +5,7 @@ import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import MultimodalAnimation from "@/components/MultimodalAnimation";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
-import desktopEntryPointGif from "@/assets/images/shopify_sidekick/multimodal/desktop-entry-point.gif";
+import desktopEntryPointVideo from "@/assets/shopify_sidekick/multimodal/desktop-input.mov";
 import mobileEntryPointVideo from "@/assets/images/shopify_sidekick/multimodal/voice-mobile-entry-point.mp4";
 
 const PAGE_TITLE = "Multimodal Sidekick";
@@ -94,9 +94,12 @@ export default function Multimodal() {
                 className="rounded-lg overflow-hidden md:flex-1 md:h-full"
                 data-testid="image-entry-point-desktop"
               >
-                <img 
-                  src={desktopEntryPointGif} 
-                  alt="Desktop entry point final design"
+                <video
+                  src={desktopEntryPointVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   className="w-full h-full object-cover object-right"
                   style={{ transform: 'scale(1.02)' }}
                 />
