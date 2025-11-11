@@ -75,7 +75,7 @@ export default function Multimodal() {
       backText="Shopify Sidekick"
     >
       <div className="space-y-12">
-        <MultimodalAnimation />
+        <MultimodalAnimation size="hero" />
 
         <ProjectBrief
           brief="Unify Sidekick's experience across text, voice, and voice+screenshare modes, allowing merchants to seamlessly switch between interaction types within a single conversation."
