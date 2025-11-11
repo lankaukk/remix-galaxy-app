@@ -98,7 +98,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="relative">
         <MainNav />
-        <main className="min-h-screen pt-16 relative z-10">
+        <main className="min-h-screen pt-0 md:pt-16 pb-16 md:pb-0 relative z-10">
           <Router />
         </main>
         <Toaster />

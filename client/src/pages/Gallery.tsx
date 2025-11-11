@@ -303,7 +303,7 @@ export default function Gallery() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-background text-foreground">
+    <div className="mx-auto max-w-7xl px-4 py-12 pb-24 md:pb-12 sm:px-6 lg:px-8 bg-background text-foreground">
       {/* Sort selector */}
       {artworks.length > 1 && !isLoading && (
         <div className="mb-6 flex justify-end">
