@@ -1,6 +1,6 @@
 export default function MotionEAnimation() {
   return (
-    <div className="relative w-full h-full rounded-lg flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#E3E4E5' }}>
+    <div className="relative w-full h-full rounded-lg flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="sidekick-circle circle-1"></div>
       <div className="sidekick-circle circle-2"></div>
       <div className="sidekick-circle circle-3"></div>
@@ -68,7 +68,7 @@ export default function MotionEAnimation() {
 
         .sidekick-circle::before {
           content: '';
-          background: #E3E4E5;
+          background: #FFFFFF;
           border-radius: 50%;
           width: 100%;
           height: 100%;
