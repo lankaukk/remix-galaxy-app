@@ -5,14 +5,13 @@ type MultimodalAnimationProps = {
 };
 
 export default function MultimodalAnimation({ scale = 1 }: MultimodalAnimationProps) {
+  const animationName = `sidekickGrowingCircle-${scale}`;
+  const borderAnimationName = `sidekickGrowingBorder-${scale}`;
+  
   return (
     <div
       className="relative w-full aspect-video rounded-lg shadow-xl flex items-center justify-center overflow-hidden"
-      style={{ 
-        backgroundColor: "#E3E4E5",
-        // @ts-ignore
-        "--scale": scale,
-      }}
+      style={{ backgroundColor: "#E3E4E5" }}
     >
       <div className="sidekick-circle circle-1"></div>
       <div className="sidekick-circle circle-2"></div>
@@ -23,45 +22,45 @@ export default function MultimodalAnimation({ scale = 1 }: MultimodalAnimationPr
         className="relative z-10 w-24 h-24 md:w-32 md:h-32 object-contain"
       />
       <style>{`
-        @keyframes sidekickGrowingCircle {
+        @keyframes ${animationName} {
           0% { 
             opacity: 0; 
-            width: calc(125px * var(--scale));
-            height: calc(125px * var(--scale));
-            filter: blur(calc(5px * var(--scale))) saturate(3);
+            width: ${125 * scale}px;
+            height: ${125 * scale}px;
+            filter: blur(${5 * scale}px) saturate(3);
           }
           33% { 
             opacity: 1; 
-            width: calc(262.5px * var(--scale));
-            height: calc(262.5px * var(--scale));
-            filter: blur(calc(10px * var(--scale))) saturate(3);
+            width: ${262.5 * scale}px;
+            height: ${262.5 * scale}px;
+            filter: blur(${10 * scale}px) saturate(3);
           }
           66% { 
             opacity: 0.2; 
-            width: calc(450px * var(--scale));
-            height: calc(450px * var(--scale));
-            filter: blur(calc(65px * var(--scale))) saturate(3);
+            width: ${450 * scale}px;
+            height: ${450 * scale}px;
+            filter: blur(${65 * scale}px) saturate(3);
           }
           100% { 
             opacity: 0; 
-            width: calc(800px * var(--scale));
-            height: calc(800px * var(--scale));
-            filter: blur(calc(120px * var(--scale))) saturate(3);
+            width: ${800 * scale}px;
+            height: ${800 * scale}px;
+            filter: blur(${120 * scale}px) saturate(3);
           }
         }
 
-        @keyframes sidekickGrowingBorder {
+        @keyframes ${borderAnimationName} {
           0% { 
-            padding: calc(5px * var(--scale));
+            padding: ${5 * scale}px;
           }
           33% { 
-            padding: calc(7.5px * var(--scale));
+            padding: ${7.5 * scale}px;
           }
           66% { 
-            padding: calc(15px * var(--scale));
+            padding: ${15 * scale}px;
           }
           100% { 
-            padding: calc(37.5px * var(--scale));
+            padding: ${37.5 * scale}px;
           }
         }
 
@@ -74,7 +73,7 @@ export default function MultimodalAnimation({ scale = 1 }: MultimodalAnimationPr
             rgba(31, 120, 253, 0.35)
           );
           border-radius: 50%;
-          animation: sidekickGrowingCircle 3s linear infinite, sidekickGrowingBorder 3s linear infinite;
+          animation: ${animationName} 3s linear infinite, ${borderAnimationName} 3s linear infinite;
           position: absolute;
           top: 50%;
           left: 50%;
