@@ -10,6 +10,9 @@ import mobileEntryPointVideo from "@/assets/shopify_sidekick/multimodal/voice-mo
 import inputIterationsVideo from "@/assets/shopify_sidekick/multimodal/input-iterations.mov";
 import callSummaryMobileVideo from "@/assets/shopify_sidekick/multimodal/call-summary-mobile.mov";
 import callSummaryDesktopVideo from "@/assets/shopify_sidekick/multimodal/call-summary-desktop.mov";
+import motionAVideo from "@/assets/shopify_sidekick/multimodal/motion-A.mov";
+import motionBVideo from "@/assets/shopify_sidekick/multimodal/motion-B.mov";
+import motionCVideo from "@/assets/shopify_sidekick/multimodal/motion-C.mov";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -162,15 +165,57 @@ export default function Multimodal() {
             Visualizing Sound
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {[1, 2, 3, 4, 5].map((index) => (
-              <div
-                key={index}
-                className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground"
-                data-testid={`placeholder-visualizing-sound-${index}`}
-              >
-                <span className="text-lg">GIF {index}</span>
-              </div>
-            ))}
+            <div
+              className="rounded-lg overflow-hidden aspect-square"
+              data-testid="video-visualizing-sound-1"
+            >
+              <video
+                src={motionAVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              className="rounded-lg overflow-hidden aspect-square"
+              data-testid="video-visualizing-sound-2"
+            >
+              <video
+                src={motionBVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              className="rounded-lg overflow-hidden aspect-square"
+              data-testid="video-visualizing-sound-3"
+            >
+              <video
+                src={motionCVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground"
+              data-testid="placeholder-visualizing-sound-4"
+            >
+              <span className="text-lg">GIF 4</span>
+            </div>
+            <div
+              className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground"
+              data-testid="placeholder-visualizing-sound-5"
+            >
+              <span className="text-lg">GIF 5</span>
+            </div>
           </div>
         </section>
 
