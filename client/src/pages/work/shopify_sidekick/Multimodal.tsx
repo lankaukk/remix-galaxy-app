@@ -88,6 +88,7 @@ export default function Multimodal() {
                   muted
                   playsInline
                   className="w-full h-full object-cover"
+                  style={{ transform: 'scale(1.02)' }}
                 />
               </div>
               <div
