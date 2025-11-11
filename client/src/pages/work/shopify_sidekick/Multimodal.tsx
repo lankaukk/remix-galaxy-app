@@ -177,6 +177,7 @@ export default function Multimodal() {
                 muted
                 playsInline
                 className="w-full h-full object-cover"
+                style={{ transform: 'scale(1.04)' }}
               />
             </div>
             <div
@@ -190,6 +191,7 @@ export default function Multimodal() {
                 muted
                 playsInline
                 className="w-full h-full object-cover"
+                style={{ transform: 'scale(1.04)' }}
               />
             </div>
             <div
@@ -203,6 +205,7 @@ export default function Multimodal() {
                 muted
                 playsInline
                 className="w-full h-full object-cover"
+                style={{ transform: 'scale(1.04)' }}
               />
             </div>
             <div
