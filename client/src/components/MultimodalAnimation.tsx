@@ -1,70 +1,63 @@
 import AvatarImage from "@/assets/images/sidekick-avatar.png";
 
-type MultimodalAnimationProps = {
-  scale?: number;
-};
-
-export default function MultimodalAnimation({ scale = 1 }: MultimodalAnimationProps) {
-  const animationName = `sidekickGrowingCircle-${scale}`;
-  const borderAnimationName = `sidekickGrowingBorder-${scale}`;
-  
+export default function MultimodalAnimation() {
   return (
     <div
       className="relative w-full aspect-video rounded-lg shadow-xl flex items-center justify-center overflow-hidden"
       style={{ backgroundColor: "#E3E4E5" }}
     >
-      <div className="sidekick-circle circle-1"></div>
-      <div className="sidekick-circle circle-2"></div>
-      <div className="sidekick-circle circle-3"></div>
+      <div className="multimodal-circle multimodal-circle-1"></div>
+      <div className="multimodal-circle multimodal-circle-2"></div>
+      <div className="multimodal-circle multimodal-circle-3"></div>
       <img
         src={AvatarImage}
         alt="Sidekick Avatar"
         className="relative z-10 w-24 h-24 md:w-32 md:h-32 object-contain"
       />
       <style>{`
-        @keyframes ${animationName} {
+        @keyframes multimodalGrowingCircle {
           0% { 
             opacity: 0; 
-            width: ${125 * scale}px;
-            height: ${125 * scale}px;
-            filter: blur(${5 * scale}px) saturate(3);
+            width: 125px;
+            height: 125px;
+            filter: blur(5px) saturate(3);
           }
           33% { 
             opacity: 1; 
-            width: ${262.5 * scale}px;
-            height: ${262.5 * scale}px;
-            filter: blur(${10 * scale}px) saturate(3);
+            width: 262.5px;
+            height: 262.5px;
+            filter: blur(10px) saturate(3);
           }
           66% { 
             opacity: 0.2; 
-            width: ${450 * scale}px;
-            height: ${450 * scale}px;
-            filter: blur(${65 * scale}px) saturate(3);
+            width: 450px;
+            height: 450px;
+            filter: blur(65px) saturate(3);
           }
           100% { 
             opacity: 0; 
-            width: ${800 * scale}px;
-            height: ${800 * scale}px;
-            filter: blur(${120 * scale}px) saturate(3);
+            width: 800px;
+            height: 800px;
+            filter: blur(120px) saturate(3);
           }
         }
 
-        @keyframes ${borderAnimationName} {
+        @keyframes multimodalGrowingBorder {
           0% { 
-            padding: ${5 * scale}px;
+            padding: 5px;
           }
           33% { 
-            padding: ${7.5 * scale}px;
+            padding: 7.5px;
           }
           66% { 
-            padding: ${15 * scale}px;
+            padding: 15px;
           }
           100% { 
-            padding: ${37.5 * scale}px;
+            padding: 37.5px;
           }
         }
 
-        .sidekick-circle {
+        .multimodal-circle {
           background: linear-gradient(
             to right,
             rgba(255, 102, 0, 0.35),
@@ -73,7 +66,7 @@ export default function MultimodalAnimation({ scale = 1 }: MultimodalAnimationPr
             rgba(31, 120, 253, 0.35)
           );
           border-radius: 50%;
-          animation: ${animationName} 3s linear infinite, ${borderAnimationName} 3s linear infinite;
+          animation: multimodalGrowingCircle 3s linear infinite, multimodalGrowingBorder 3s linear infinite;
           position: absolute;
           top: 50%;
           left: 50%;
@@ -83,7 +76,7 @@ export default function MultimodalAnimation({ scale = 1 }: MultimodalAnimationPr
           justify-content: center;
         }
 
-        .sidekick-circle::before {
+        .multimodal-circle::before {
           content: '';
           background: #E3E4E5;
           border-radius: 50%;
@@ -91,15 +84,15 @@ export default function MultimodalAnimation({ scale = 1 }: MultimodalAnimationPr
           height: 100%;
         }
 
-        .circle-1 {
+        .multimodal-circle-1 {
           animation-delay: 0s;
         }
 
-        .circle-2 {
+        .multimodal-circle-2 {
           animation-delay: 0.8s;
         }
 
-        .circle-3 {
+        .multimodal-circle-3 {
           animation-delay: 4.5s;
         }
       `}</style>

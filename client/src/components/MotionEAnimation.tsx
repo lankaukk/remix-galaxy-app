@@ -1,9 +1,9 @@
 export default function MotionEAnimation() {
   return (
-    <div className="relative w-full h-full rounded-lg flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
-      <div className="sidekick-circle circle-1"></div>
-      <div className="sidekick-circle circle-2"></div>
-      <div className="sidekick-circle circle-3"></div>
+    <div className="relative w-full h-full rounded-lg flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#E3E4E5' }}>
+      <div className="motion-e-circle motion-e-circle-1"></div>
+      <div className="motion-e-circle motion-e-circle-2"></div>
+      <div className="motion-e-circle motion-e-circle-3"></div>
       <style>{`
         @keyframes motionEGrowingCircle {
           0% { 
@@ -47,7 +47,7 @@ export default function MotionEAnimation() {
           }
         }
 
-        .sidekick-circle {
+        .motion-e-circle {
           background: linear-gradient(
             to right,
             rgba(255, 102, 0, 0.35),
@@ -66,23 +66,23 @@ export default function MotionEAnimation() {
           justify-content: center;
         }
 
-        .sidekick-circle::before {
+        .motion-e-circle::before {
           content: '';
-          background: #FFFFFF;
+          background: #E3E4E5;
           border-radius: 50%;
           width: 100%;
           height: 100%;
         }
 
-        .circle-1 {
+        .motion-e-circle-1 {
           animation-delay: 0s;
         }
 
-        .circle-2 {
+        .motion-e-circle-2 {
           animation-delay: 0.8s;
         }
 
-        .circle-3 {
+        .motion-e-circle-3 {
           animation-delay: 4.5s;
         }
       `}</style>
