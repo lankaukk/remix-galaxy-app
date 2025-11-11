@@ -98,9 +98,6 @@ export default function PasswordGate({ children }: PasswordGateProps) {
             <Lock className="w-6 h-6 text-primary" />
           </div>
           <CardTitle>Protected Content</CardTitle>
-          <CardDescription>
-            Enter the password to access these pages
-          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
