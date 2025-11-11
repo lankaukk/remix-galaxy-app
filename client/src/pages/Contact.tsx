@@ -117,18 +117,20 @@ const ContactBubble = ({
   color,
   onClick,
   href,
+  customShadow,
 }: {
   icon: React.ReactNode;
   color: string;
   onClick?: () => void;
   href?: string;
+  customShadow?: string;
 }) => {
   const content = (
     <motion.div
       className="flex items-center justify-center rounded-full p-3 shadow-lg cursor-pointer relative"
       style={{
         backgroundColor: color,
-        boxShadow: `0px 0px 20px ${color}`,
+        boxShadow: customShadow || `0px 0px 20px ${color}`,
         zIndex: 20, // Ensure contact bubbles stay above decorative ones
       }}
       whileHover={{ scale: 1.2 }}
@@ -313,6 +315,7 @@ export default function Contact() {
                 icon={<FaXTwitter size={24} style={{ transform: "rotate(-45deg)" }} />}
                 color="#000000"
                 href="https://x.com/mckayla789809?s=21"
+                customShadow="0px 0px 20px rgba(100, 100, 100, 0.6)"
               />
             </OrbitingBubble>
 
