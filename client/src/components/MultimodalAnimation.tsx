@@ -18,27 +18,27 @@ export default function MultimodalAnimation() {
         @keyframes sidekickGrowingCircle {
           0% { 
             opacity: 0; 
-            width: 125px;
-            height: 125px;
-            filter: blur(5px) saturate(3);
+            width: 200px;
+            height: 200px;
+            filter: blur(8px) saturate(3);
           }
           33% { 
             opacity: 1; 
-            width: 262.5px;
-            height: 262.5px;
-            filter: blur(10px) saturate(3);
+            width: 420px;
+            height: 420px;
+            filter: blur(16px) saturate(3);
           }
           66% { 
             opacity: 0.2; 
-            width: 450px;
-            height: 450px;
-            filter: blur(65px) saturate(3);
+            width: 720px;
+            height: 720px;
+            filter: blur(100px) saturate(3);
           }
           100% { 
             opacity: 0; 
-            width: 800px;
-            height: 800px;
-            filter: blur(120px) saturate(3);
+            width: 1280px;
+            height: 1280px;
+            filter: blur(190px) saturate(3);
           }
         }
 
