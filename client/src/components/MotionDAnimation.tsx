@@ -1,6 +1,6 @@
 export default function MotionDAnimation() {
   return (
-    <div className="relative w-full h-full bg-white rounded-lg overflow-hidden">
+    <div className="relative w-full h-full rounded-lg overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="motion-d-circle circle-1"></div>
       <div className="motion-d-circle circle-2"></div>
       <div className="motion-d-circle circle-3"></div>
