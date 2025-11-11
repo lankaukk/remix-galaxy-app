@@ -16,6 +16,7 @@ import motionAVideo from "@/assets/shopify_sidekick/multimodal/motion-A.mov";
 import motionBVideo from "@/assets/shopify_sidekick/multimodal/motion-B.mov";
 import motionCVideo from "@/assets/shopify_sidekick/multimodal/motion-C.mov";
 import whatIsVideo from "@/assets/shopify_sidekick/multimodal/what-is.mov";
+import whileNavigatingMobileVideo from "@/assets/shopify_sidekick/multimodal/while-navigating-mobile.mov";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -248,11 +249,17 @@ export default function Multimodal() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div
-              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
-              data-testid="placeholder-speaking-desktop"
+              className="rounded-lg overflow-hidden aspect-video"
+              data-testid="video-speaking-mobile"
             >
-              <span className="text-lg font-medium">Mobile</span>
-              <span className="text-sm">GIF</span>
+              <video
+                src={whileNavigatingMobileVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </div>
             <div
               className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
