@@ -8,6 +8,8 @@ import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 import desktopEntryPointVideo from "@/assets/shopify_sidekick/multimodal/desktop-input.mov";
 import mobileEntryPointVideo from "@/assets/shopify_sidekick/multimodal/voice-mobile-entry-point.mov";
 import inputIterationsVideo from "@/assets/shopify_sidekick/multimodal/input-iterations.mov";
+import callSummaryMobileVideo from "@/assets/shopify_sidekick/multimodal/call-summary-mobile.mov";
+import callSummaryDesktopVideo from "@/assets/shopify_sidekick/multimodal/call-summary-desktop.mov";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -228,18 +230,30 @@ export default function Multimodal() {
           <h2 className="text-3xl font-bold tracking-tight">Call summaries</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div
-              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
-              data-testid="placeholder-summaries-desktop"
+              className="rounded-lg overflow-hidden aspect-video"
+              data-testid="video-summaries-mobile"
             >
-              <span className="text-lg font-medium">Mobile</span>
-              <span className="text-sm">GIF</span>
+              <video
+                src={callSummaryMobileVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </div>
             <div
-              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
-              data-testid="placeholder-summaries-desktop"
+              className="rounded-lg overflow-hidden aspect-video"
+              data-testid="video-summaries-desktop"
             >
-              <span className="text-lg font-medium">Desktop</span>
-              <span className="text-sm">GIF</span>
+              <video
+                src={callSummaryDesktopVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </section>
