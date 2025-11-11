@@ -421,7 +421,7 @@ export default function Gallery() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="relative w-full aspect-[4/3] bg-muted rounded-lg overflow-hidden flex items-center justify-center"
+                        className="relative w-full aspect-[4/3] md:aspect-[4/3] aspect-[3/4] rounded-lg overflow-hidden flex items-center justify-center"
                       >
                         <img
                           src={artworks[currentImageIndex].image}
