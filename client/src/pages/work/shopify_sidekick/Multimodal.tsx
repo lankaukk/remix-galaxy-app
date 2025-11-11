@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import MultimodalAnimation from "@/components/MultimodalAnimation";
 import MotionDAnimation from "@/components/MotionDAnimation";
+import MotionEAnimation from "@/components/MotionEAnimation";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 import desktopEntryPointVideo from "@/assets/shopify_sidekick/multimodal/desktop-input.mov";
@@ -215,10 +216,10 @@ export default function Multimodal() {
               <MotionDAnimation />
             </div>
             <div
-              className="bg-muted rounded-lg aspect-square flex items-center justify-center text-muted-foreground shadow-xl"
-              data-testid="placeholder-visualizing-sound-5"
+              className="rounded-lg aspect-square overflow-hidden shadow-xl"
+              data-testid="animation-visualizing-sound-5"
             >
-              <span className="text-lg">GIF 5</span>
+              <MotionEAnimation />
             </div>
           </div>
         </section>
