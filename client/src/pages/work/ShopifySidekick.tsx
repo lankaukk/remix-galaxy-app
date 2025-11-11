@@ -77,14 +77,6 @@ export default function ShopifySidekick() {
         />
 
         <div className="prose-lg max-w-none">
-          <p>
-            Sidekick brings multimodal AI interaction to Shopify, allowing
-            merchants to work through text chat, voice, and screen sharing
-            across web and mobile platforms. The experience adapts to different
-            contexts—from quick mobile queries to complex troubleshooting with
-            visual guidance.
-          </p>
-
           <h2>My Contributions</h2>
           <p>
             I led mobile and voice design for Sidekick, creating the first audio
