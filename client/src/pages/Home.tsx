@@ -129,7 +129,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative h-screen overflow-hidden bg-background text-foreground pb-16 md:pb-0 md:pt-16">
       {stickers.map((sticker, index) => (
         <DraggableSticker
           key={index}
