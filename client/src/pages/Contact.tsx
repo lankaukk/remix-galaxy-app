@@ -310,7 +310,7 @@ export default function Contact() {
               startAngle={orbits[4].startAngle}
             >
               <ContactBubble
-                icon={<FaXTwitter size={24} />}
+                icon={<FaXTwitter size={24} style={{ transform: "rotate(-45deg)" }} />}
                 color="#000000"
                 href="https://x.com/mckayla789809?s=21"
               />
