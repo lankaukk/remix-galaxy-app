@@ -37,8 +37,8 @@ export default function MainNav() {
                   className={cn(
                     "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     location === item.href
-                      ? "text-[#FF5757]"
-                      : "text-foreground hover:text-[#00C2FF]",
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary",
                   )}
                 >
                   {item.name}
@@ -65,8 +65,8 @@ export default function MainNav() {
                         className={cn(
                           "w-full rounded-md px-3 py-2 text-lg md:text-sm font-medium transition-colors text-center",
                           location === item.href
-                            ? "text-[#FF5757]"
-                            : "text-foreground hover:text-[#00C2FF]",
+                            ? "text-primary"
+                            : "text-foreground hover:text-primary",
                         )}
                       >
                         {item.name}
