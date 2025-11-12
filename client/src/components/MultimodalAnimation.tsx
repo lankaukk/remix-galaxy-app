@@ -1,9 +1,13 @@
 import AvatarImage from "@/assets/images/sidekick-avatar.png";
 
-export default function MultimodalAnimation() {
+interface MultimodalAnimationProps {
+  roundedFull?: boolean;
+}
+
+export default function MultimodalAnimation({ roundedFull = false }: MultimodalAnimationProps) {
   return (
     <div
-      className="relative w-full aspect-video rounded-t-lg shadow-xl flex items-center justify-center overflow-hidden"
+      className={`relative w-full aspect-video ${roundedFull ? 'rounded-lg' : 'rounded-t-lg'} shadow-xl flex items-center justify-center overflow-hidden`}
       style={{ backgroundColor: "#E3E4E5" }}
     >
       <div className="multimodal-circle multimodal-circle-1"></div>
