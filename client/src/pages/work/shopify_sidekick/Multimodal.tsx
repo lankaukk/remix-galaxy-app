@@ -21,6 +21,7 @@ import closedChatImage from "@/assets/shopify_sidekick/multimodal/closed-chat.pn
 import screenShareVideo from "@/assets/shopify_sidekick/multimodal/screen-share-framed.mov";
 import tabShareVideo from "@/assets/shopify_sidekick/multimodal/tab-share.mov";
 import screenshotVideo from "@/assets/shopify_sidekick/multimodal/screenshot.mov";
+import chatClosedVideo from "@/assets/shopify_sidekick/multimodal/chat-closed.mov";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -276,11 +277,17 @@ export default function Multimodal() {
               />
             </div>
             <div
-              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
-              data-testid="placeholder-speaking-desktop-gif"
+              className="rounded-lg overflow-hidden aspect-video"
+              data-testid="video-speaking-desktop-gif"
             >
-              <span className="text-lg font-medium">Desktop</span>
-              <span className="text-sm">GIF</span>
+              <video
+                src={chatClosedVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </section>
