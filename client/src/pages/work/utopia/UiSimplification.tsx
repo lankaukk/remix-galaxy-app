@@ -2,6 +2,7 @@ import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
+import uiSimplificationImage from "@/assets/images/utopia/ui-simplification.png";
 
 export default function UiSimplification() {
   return (
@@ -13,7 +14,7 @@ export default function UiSimplification() {
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1586953208448-b95a79798f07"
+          src={uiSimplificationImage}
           alt="Utopia UI Transformation"
           className="w-full rounded-lg shadow-xl"
         />
@@ -55,11 +56,12 @@ export default function UiSimplification() {
             a full-featured development environment.
           </p>
 
-          <img
-            src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e"
-            alt="Customizable Workspace"
-            className="my-8 w-full rounded-lg shadow-xl"
-          />
+          <div
+            className="my-8 w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+            data-testid="placeholder-workspace"
+          >
+            <span className="text-lg">Customizable Workspace</span>
+          </div>
 
           <h2>Design Inspiration</h2>
           <p>
@@ -89,19 +91,21 @@ export default function UiSimplification() {
           <div className="my-12 grid gap-8 md:grid-cols-2">
             <div>
               <h3 className="mb-4 text-xl font-bold">Before</h3>
-              <img
-                src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb"
-                alt="Original Interface"
-                className="rounded-lg shadow-xl"
-              />
+              <div
+                className="bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+                data-testid="placeholder-before"
+              >
+                <span className="text-lg">Original Interface</span>
+              </div>
             </div>
             <div>
               <h3 className="mb-4 text-xl font-bold">After</h3>
-              <img
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f"
-                alt="Redesigned Interface"
-                className="rounded-lg shadow-xl"
-              />
+              <div
+                className="bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+                data-testid="placeholder-after"
+              >
+                <span className="text-lg">Redesigned Interface</span>
+              </div>
             </div>
           </div>
         </div>
