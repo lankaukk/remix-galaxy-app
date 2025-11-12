@@ -17,6 +17,7 @@ import motionBVideo from "@/assets/shopify_sidekick/multimodal/motion-B.mov";
 import motionCVideo from "@/assets/shopify_sidekick/multimodal/motion-C.mov";
 import whatIsVideo from "@/assets/shopify_sidekick/multimodal/what-is.mov";
 import whileNavigatingMobileVideo from "@/assets/shopify_sidekick/multimodal/while-navigating-mobile.mov";
+import closedChatImage from "@/assets/shopify_sidekick/multimodal/closed-chat.png";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -262,11 +263,14 @@ export default function Multimodal() {
               />
             </div>
             <div
-              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
-              data-testid="placeholder-speaking-desktop"
+              className="rounded-lg overflow-hidden aspect-video"
+              data-testid="image-speaking-desktop"
             >
-              <span className="text-lg font-medium">Desktop</span>
-              <span className="text-sm">GIF</span>
+              <img
+                src={closedChatImage}
+                alt="Desktop speaking while navigating"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </section>
