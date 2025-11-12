@@ -239,16 +239,6 @@ export default function Multimodal() {
         </section>
 
         <section className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight">Rendering cards</h2>
-          <div
-            className="w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
-            data-testid="placeholder-rendering-cards-gif"
-          >
-            <span className="text-lg">GIF: Full Width</span>
-          </div>
-        </section>
-
-        <section className="space-y-6">
           <h2 className="text-3xl font-bold tracking-tight">
             Speaking while navigating
           </h2>
@@ -299,10 +289,10 @@ export default function Multimodal() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div
               className="rounded-lg overflow-hidden aspect-video"
-              data-testid="video-screenshare"
+              data-testid="video-screenshot"
             >
               <video
-                src={screenShareVideo}
+                src={screenshotVideo}
                 autoPlay
                 loop
                 muted
@@ -312,10 +302,10 @@ export default function Multimodal() {
             </div>
             <div
               className="rounded-lg overflow-hidden aspect-video"
-              data-testid="video-screenshot"
+              data-testid="video-screenshare"
             >
               <video
-                src={screenshotVideo}
+                src={screenShareVideo}
                 autoPlay
                 loop
                 muted
