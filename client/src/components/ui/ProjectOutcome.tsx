@@ -22,7 +22,7 @@ export function ProjectOutcome({
       data-testid="card-project-outcome"
     >
       <h2 className="text-2xl font-semibold mb-2" data-testid="heading-project-outcome">
-        Project Outcome
+        Project outcome
       </h2>
       
       {outcome && (

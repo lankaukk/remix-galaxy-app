@@ -25,7 +25,7 @@ export function ProjectBrief({
     >
       <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
         <h2 className="text-2xl font-semibold" data-testid="heading-project-brief">
-          Project Brief
+          Project brief
         </h2>
         {timePeriod && (
           <p className="text-base text-muted-foreground" data-testid="text-time-period">
