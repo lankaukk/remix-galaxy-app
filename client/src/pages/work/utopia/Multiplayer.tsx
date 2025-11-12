@@ -1,8 +1,8 @@
-
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
+import multiplayerImage from "@/assets/images/utopia/multiplayer.png";
 
 export default function Multiplayer() {
   return (
@@ -14,7 +14,7 @@ export default function Multiplayer() {
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1552664730-d307ca884978"
+          src={multiplayerImage}
           alt="Multiplayer Features"
           className="w-full rounded-lg shadow-xl"
         />
@@ -53,11 +53,12 @@ export default function Multiplayer() {
             while clearly indicating different viewports.
           </p>
 
-          <img
-            src="https://images.unsplash.com/photo-1600267204091-5c1ab8b10c02"
-            alt="Multiplayer Cursors"
-            className="my-8 w-full rounded-lg shadow-xl"
-          />
+          <div
+            className="my-8 w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+            data-testid="placeholder-cursors"
+          >
+            <span className="text-lg">Multiplayer Cursors</span>
+          </div>
 
           <h2>Working with Constraints</h2>
           <p>
@@ -68,16 +69,18 @@ export default function Multiplayer() {
           </p>
 
           <div className="my-12 grid gap-8 md:grid-cols-2">
-            <img
-              src="https://images.unsplash.com/photo-1512758017271-d7b84c2113f1"
-              alt="Design Explorations"
-              className="rounded-lg shadow-xl"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1618788372246-79faff0c3742"
-              alt="Implementation"
-              className="rounded-lg shadow-xl"
-            />
+            <div
+              className="bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+              data-testid="placeholder-explorations"
+            >
+              <span className="text-lg">Design Explorations</span>
+            </div>
+            <div
+              className="bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+              data-testid="placeholder-implementation"
+            >
+              <span className="text-lg">Implementation</span>
+            </div>
           </div>
 
           <h2>Thoughtful Color Design</h2>
@@ -88,11 +91,12 @@ export default function Multiplayer() {
             while avoiding any implied hierarchy through color choices.
           </p>
 
-          <img
-            src="https://images.unsplash.com/photo-1550859492-d5da9d8e45f3"
-            alt="Color Palette"
-            className="my-8 w-full rounded-lg shadow-xl"
-          />
+          <div
+            className="my-8 w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+            data-testid="placeholder-colors"
+          >
+            <span className="text-lg">Color Palette</span>
+          </div>
 
           <h2>My Role</h2>
           <p>
