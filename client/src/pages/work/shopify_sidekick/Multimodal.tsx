@@ -15,7 +15,7 @@ import callSummaryDesktopVideo from "@/assets/shopify_sidekick/multimodal/call-s
 import motionAVideo from "@/assets/shopify_sidekick/multimodal/motion-A.mov";
 import motionBVideo from "@/assets/shopify_sidekick/multimodal/motion-B.mov";
 import motionCVideo from "@/assets/shopify_sidekick/multimodal/motion-C.mov";
-import whatIsVideo from "@/assets/shopify_sidekick/multimodal/what-is.mov";
+import whatIsImage from "@/assets/shopify_sidekick/multimodal/what-is-voice-mode.png";
 import whileNavigatingMobileVideo from "@/assets/shopify_sidekick/multimodal/while-navigating-mobile.mov";
 import closedChatImage from "@/assets/shopify_sidekick/multimodal/closed-chat.png";
 import screenShareVideo from "@/assets/shopify_sidekick/multimodal/screen-share-framed.mov";
@@ -162,15 +162,12 @@ export default function Multimodal() {
             What is voice mode?
           </h2>
           <div
-            className="w-full rounded-lg overflow-hidden aspect-video shadow-xl"
-            data-testid="video-what-is-voice-mode"
+            className="w-full rounded-lg overflow-hidden shadow-xl"
+            data-testid="image-what-is-voice-mode"
           >
-            <video
-              src={whatIsVideo}
-              autoPlay
-              loop
-              muted
-              playsInline
+            <img
+              src={whatIsImage}
+              alt="What is voice mode visual"
               className="w-full h-full object-cover"
             />
           </div>
