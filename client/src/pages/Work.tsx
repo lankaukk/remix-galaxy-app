@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 import UtopiaCover from "@/assets/images/utopia/Utopia_Cover.jpg";
 import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
-import SidekickCover from "@/assets/images/shopify/sidekick-cover.png";
+import SidekickCover from "@/assets/images/shopify/sidekick-cover-new.png";
 
 const projects = [
   {
