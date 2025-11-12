@@ -1,8 +1,8 @@
-
 import ProjectLayout from "@/components/layout/ProjectLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
+import projectsPageImage from "@/assets/images/utopia/projects-page.png";
 
 export default function ProjectsPage() {
   return (
@@ -14,7 +14,7 @@ export default function ProjectsPage() {
     >
       <div className="space-y-12">
         <img
-          src="https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d"
+          src={projectsPageImage}
           alt="Projects Page"
           className="w-full rounded-lg shadow-xl"
         />
@@ -62,11 +62,12 @@ export default function ProjectsPage() {
             This is not only a tool for designers and developers, but it can also be for artists, copywriters, marketers, merchandisers, - anyone from any discipline can collaborate on projects together from within Utopia. With different permission settings, you can invite others to view, comments on, or edit your projects. Non-technical collaborators can still make meaningful contributions to live applications, and the design-to-development workflow is fully synchronized.
           </p>
 
-          <img
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
-            alt="Project Collaboration Interface"
-            className="my-8 w-full rounded-lg shadow-xl"
-          />
+          <div
+            className="my-8 w-full bg-muted rounded-lg aspect-video flex items-center justify-center text-muted-foreground"
+            data-testid="placeholder-collaboration"
+          >
+            <span className="text-lg">Project Collaboration Interface</span>
+          </div>
         </div>
 
         <Link
