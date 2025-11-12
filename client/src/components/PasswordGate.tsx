@@ -85,7 +85,7 @@ export default function PasswordGate({ children }: PasswordGateProps) {
     <div className="h-screen overflow-hidden flex flex-col">
       <div className="mx-auto max-w-7xl w-full px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <Link href="/work" className="inline-flex items-center hover:text-[#FF5757]">
+          <Link href="/work" className="inline-flex items-center hover:text-primary transition-colors">
             <ArrowLeft className="mr-2 h-5 w-5" />
             All Work
           </Link>
