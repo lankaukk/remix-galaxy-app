@@ -248,7 +248,7 @@ export default function Multimodal() {
           <h2 className="text-3xl font-bold tracking-tight">
             Speaking while navigating
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div
               className="rounded-lg overflow-hidden aspect-video"
               data-testid="video-speaking-mobile"
@@ -271,6 +271,13 @@ export default function Multimodal() {
                 alt="Desktop speaking while navigating"
                 className="w-full h-full object-cover"
               />
+            </div>
+            <div
+              className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
+              data-testid="placeholder-speaking-desktop-gif"
+            >
+              <span className="text-lg font-medium">Desktop</span>
+              <span className="text-sm">GIF</span>
             </div>
           </div>
         </section>
