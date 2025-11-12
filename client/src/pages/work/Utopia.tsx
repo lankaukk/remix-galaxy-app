@@ -6,6 +6,10 @@ import {
   ProjectDetailSkeleton,
   ProjectCardSkeleton,
 } from "@/components/ui/project-card-skeleton";
+import utopiaUiCover from "@/assets/images/utopia/utopia-ui-cover.png";
+import uiSimplificationImage from "@/assets/images/utopia/ui-simplification.png";
+import multiplayerImage from "@/assets/images/utopia/multiplayer.png";
+import projectsPageImage from "@/assets/images/utopia/projects-page.png";
 
 const PAGE_TITLE = "Utopia";
 const PAGE_DESCRIPTION = "Utopia is an integrated design and development environment for React. It uses React code as the source of truth, and lets you make real time changes to components by editing your app visually and using a suite of familiar design tools.";
@@ -16,20 +20,20 @@ const sections = [
     description:
       "Interface redesign to create a more intuitive and flexible development environment",
     href: "/work/utopia/ui_simplification",
-    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07",
+    image: uiSimplificationImage,
   },
   {
     title: "Multiplayer Features",
     description:
       "Real-time collaboration tools that enhance the development experience",
     href: "/work/utopia/multiplayer",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978",
+    image: multiplayerImage,
   },
   {
     title: "Projects Page",
     description: "Efficient project management and organization system",
     href: "/work/utopia/projects_page",
-    image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d",
+    image: projectsPageImage,
   },
 ];
 
@@ -72,7 +76,7 @@ export default function Utopia() {
     >
       <div className="space-y-12">
         <img
-          src="https://user-images.githubusercontent.com/2226774/93580752-7b7b8e80-f9a0-11ea-8663-39683a53df2e.png"
+          src={utopiaUiCover}
           alt="Utopia Platform"
           className="w-full rounded-lg shadow-xl"
           loading="lazy"
