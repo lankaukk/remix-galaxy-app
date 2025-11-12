@@ -6,6 +6,7 @@ import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 import UtopiaCover from "@/assets/images/utopia/Utopia_Cover.jpg";
 import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
 import SidekickCover from "@/assets/images/shopify/sidekick-cover-new.png";
+import FoundationsCover from "@/assets/images/protest-platform/protest-platform-map.gif";
 
 const projects = [
   {
@@ -30,7 +31,7 @@ const projects = [
     title: "Foundations",
     description:
       "Early explorations of digital design and emerging technologies",
-    image: "https://mckayla.com/images/protest-platform-map.gif",
+    image: FoundationsCover,
     href: "/work/foundations",
   },
 ];
