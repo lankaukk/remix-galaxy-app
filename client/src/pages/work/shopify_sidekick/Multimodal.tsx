@@ -18,6 +18,9 @@ import motionCVideo from "@/assets/shopify_sidekick/multimodal/motion-C.mov";
 import whatIsVideo from "@/assets/shopify_sidekick/multimodal/what-is.mov";
 import whileNavigatingMobileVideo from "@/assets/shopify_sidekick/multimodal/while-navigating-mobile.mov";
 import closedChatImage from "@/assets/shopify_sidekick/multimodal/closed-chat.png";
+import screenShareVideo from "@/assets/shopify_sidekick/multimodal/screen-share-framed.mov";
+import tabShareVideo from "@/assets/shopify_sidekick/multimodal/tab-share.mov";
+import screenshotVideo from "@/assets/shopify_sidekick/multimodal/screenshot.mov";
 
 const PAGE_TITLE = "Multimodal Sidekick";
 const PAGE_DESCRIPTION =
@@ -287,18 +290,45 @@ export default function Multimodal() {
             Screenshare, Screenshot, and Tab Share concepts
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {["Screenshare", "Screenshot", "Tab Share"].map(
-              (concept, index) => (
-                <div
-                  key={index}
-                  className="bg-muted rounded-lg aspect-video flex flex-col items-center justify-center text-muted-foreground"
-                  data-testid={`placeholder-screenshare-${index + 1}`}
-                >
-                  <span className="text-lg font-medium">{concept}</span>
-                  <span className="text-sm">GIF</span>
-                </div>
-              ),
-            )}
+            <div
+              className="rounded-lg overflow-hidden aspect-video"
+              data-testid="video-screenshare"
+            >
+              <video
+                src={screenShareVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              className="rounded-lg overflow-hidden aspect-video"
+              data-testid="video-screenshot"
+            >
+              <video
+                src={screenshotVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              className="rounded-lg overflow-hidden aspect-video"
+              data-testid="video-tabshare"
+            >
+              <video
+                src={tabShareVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </section>
 
