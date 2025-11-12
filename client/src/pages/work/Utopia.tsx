@@ -100,7 +100,7 @@ export default function Utopia() {
                 <img
                   src={section.image}
                   alt={section.title}
-                  className="aspect-video w-full object-cover"
+                  className="aspect-video w-full object-cover rounded-t-lg"
                 />
                 <div className="p-6">
                   <h3 className="mb-2 text-xl font-bold">{section.title}</h3>

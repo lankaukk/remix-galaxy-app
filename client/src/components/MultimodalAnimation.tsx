@@ -3,7 +3,7 @@ import AvatarImage from "@/assets/images/sidekick-avatar.png";
 export default function MultimodalAnimation() {
   return (
     <div
-      className="relative w-full aspect-video rounded-lg shadow-xl flex items-center justify-center overflow-hidden"
+      className="relative w-full aspect-video rounded-t-lg shadow-xl flex items-center justify-center overflow-hidden"
       style={{ backgroundColor: "#E3E4E5" }}
     >
       <div className="multimodal-circle multimodal-circle-1"></div>
