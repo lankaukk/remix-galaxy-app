@@ -209,18 +209,35 @@ export function StarField() {
           ctx.shadowColor = colorHex;
           ctx.shadowBlur = star.size * 0.5;
 
-          // Vertical line
+          const lineLength = star.size * 0.7;
+
+          // Vertical line with gradient fade
+          const vertGradient = ctx.createLinearGradient(0, -lineLength, 0, lineLength);
+          vertGradient.addColorStop(0, "transparent");
+          vertGradient.addColorStop(0.3, colorHex);
+          vertGradient.addColorStop(0.5, colorHex);
+          vertGradient.addColorStop(0.7, colorHex);
+          vertGradient.addColorStop(1, "transparent");
+
           ctx.beginPath();
-          ctx.moveTo(0, -star.size / 2);
-          ctx.lineTo(0, star.size / 2);
-          ctx.strokeStyle = colorHex;
+          ctx.moveTo(0, -lineLength);
+          ctx.lineTo(0, lineLength);
+          ctx.strokeStyle = vertGradient;
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          // Horizontal line
+          // Horizontal line with gradient fade
+          const horizGradient = ctx.createLinearGradient(-lineLength, 0, lineLength, 0);
+          horizGradient.addColorStop(0, "transparent");
+          horizGradient.addColorStop(0.3, colorHex);
+          horizGradient.addColorStop(0.5, colorHex);
+          horizGradient.addColorStop(0.7, colorHex);
+          horizGradient.addColorStop(1, "transparent");
+
           ctx.beginPath();
-          ctx.moveTo(-star.size / 2, 0);
-          ctx.lineTo(star.size / 2, 0);
+          ctx.moveTo(-lineLength, 0);
+          ctx.lineTo(lineLength, 0);
+          ctx.strokeStyle = horizGradient;
           ctx.stroke();
 
           // Center dot
