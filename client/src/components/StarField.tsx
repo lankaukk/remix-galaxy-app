@@ -41,26 +41,26 @@ const generateStars = (): Star[] => {
   });
 
   const mediumOrbs = [
-    { x: 10, y: 15, size: 14, color: "purple" as const },
-    { x: 20, y: 55, size: 11, color: "purple" as const },
-    { x: 35, y: 10, size: 16, color: "purple" as const },
-    { x: 45, y: 30, size: 10, color: "blue" as const },
-    { x: 55, y: 15, size: 13, color: "purple" as const },
-    { x: 65, y: 40, size: 15, color: "cyan" as const },
-    { x: 80, y: 12, size: 11, color: "purple" as const },
-    { x: 90, y: 35, size: 10, color: "purple" as const },
-    { x: 5, y: 70, size: 13, color: "cyan" as const },
-    { x: 40, y: 65, size: 9, color: "purple" as const },
-    { x: 60, y: 70, size: 12, color: "blue" as const },
-    { x: 78, y: 80, size: 10, color: "purple" as const },
-    { x: 92, y: 75, size: 14, color: "purple" as const },
-    { x: 12, y: 88, size: 9, color: "cyan" as const },
-    { x: 55, y: 88, size: 11, color: "purple" as const },
-    { x: 88, y: 50, size: 10, color: "blue" as const },
-    { x: 8, y: 40, size: 12, color: "purple" as const },
-    { x: 48, y: 8, size: 9, color: "cyan" as const },
-    { x: 72, y: 55, size: 11, color: "blue" as const },
-    { x: 33, y: 92, size: 13, color: "purple" as const },
+    { x: 10, y: 15, size: 12, color: "purple" as const },
+    { x: 20, y: 55, size: 10, color: "purple" as const },
+    { x: 35, y: 10, size: 14, color: "purple" as const },
+    { x: 45, y: 30, size: 9, color: "blue" as const },
+    { x: 55, y: 15, size: 11, color: "purple" as const },
+    { x: 65, y: 40, size: 13, color: "cyan" as const },
+    { x: 80, y: 12, size: 10, color: "purple" as const },
+    { x: 90, y: 35, size: 9, color: "purple" as const },
+    { x: 5, y: 70, size: 11, color: "cyan" as const },
+    { x: 40, y: 65, size: 8, color: "purple" as const },
+    { x: 60, y: 70, size: 10, color: "blue" as const },
+    { x: 78, y: 80, size: 9, color: "purple" as const },
+    { x: 92, y: 75, size: 12, color: "purple" as const },
+    { x: 12, y: 88, size: 8, color: "cyan" as const },
+    { x: 55, y: 88, size: 10, color: "purple" as const },
+    { x: 88, y: 50, size: 9, color: "blue" as const },
+    { x: 8, y: 40, size: 11, color: "purple" as const },
+    { x: 48, y: 8, size: 8, color: "cyan" as const },
+    { x: 72, y: 55, size: 10, color: "blue" as const },
+    { x: 33, y: 92, size: 11, color: "purple" as const },
   ];
 
   mediumOrbs.forEach((s) => {
@@ -73,13 +73,13 @@ const generateStars = (): Star[] => {
     });
   });
 
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 400; i++) {
     stars.push({
       id: id++,
       type: "orb",
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: 1 + Math.random() * 4,
+      size: 1 + Math.random() * 3,
       color: ["blue", "purple", "cyan"][Math.floor(Math.random() * 3)] as "blue" | "purple" | "cyan",
       delay: Math.random() * 6,
       duration: 20 + Math.random() * 15,
@@ -171,62 +171,74 @@ function OrbIcon({ size, color }: { size: number; color: "blue" | "purple" | "cy
       style={{
         width: size,
         height: size,
-        background: size > 6 
+        background: size > 5 
           ? `radial-gradient(circle at 30% 30%, white, ${colors.main} 50%, ${colors.glow} 100%)`
           : colors.main,
-        boxShadow: size > 6 ? colors.shadow : `0 0 ${size * 2}px ${colors.glow}`,
+        boxShadow: size > 5 ? colors.shadow : `0 0 ${size * 2}px ${colors.glow}`,
       }}
     />
   );
 }
 
+interface StarOffset {
+  x: number;
+  y: number;
+  targetX: number;
+  targetY: number;
+}
+
 export function StarField() {
-  const [offsets, setOffsets] = useState<Map<number, { x: number; y: number }>>(new Map());
+  const [offsets, setOffsets] = useState<Map<number, StarOffset>>(new Map());
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
   const mousePosRef = useRef<{ x: number; y: number } | null>(null);
 
   const updateStarPositions = useCallback(() => {
-    if (!mousePosRef.current || !containerRef.current) {
+    if (!containerRef.current) {
       animationRef.current = requestAnimationFrame(updateStarPositions);
       return;
     }
 
     const rect = containerRef.current.getBoundingClientRect();
-    const mouseX = mousePosRef.current.x;
-    const mouseY = mousePosRef.current.y;
+    const mousePos = mousePosRef.current;
 
     setOffsets((prev) => {
-      const newOffsets = new Map(prev);
+      const newOffsets = new Map<number, StarOffset>();
       
       starsData.forEach((star) => {
         const starX = rect.left + (star.x / 100) * rect.width;
         const starY = rect.top + (star.y / 100) * rect.height;
         
-        const dx = starX - mouseX;
-        const dy = starY - mouseY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        const repelRadius = 120 + star.size * 2;
-        const currentOffset = prev.get(star.id) || { x: 0, y: 0 };
+        const currentOffset = prev.get(star.id) || { x: 0, y: 0, targetX: 0, targetY: 0 };
         
         let targetX = 0;
         let targetY = 0;
         
-        if (distance < repelRadius && distance > 0) {
-          const force = (1 - distance / repelRadius) * (40 + star.size * 0.5);
-          targetX = (dx / distance) * force;
-          targetY = (dy / distance) * force;
+        if (mousePos) {
+          const dx = starX - mousePos.x;
+          const dy = starY - mousePos.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          const repelRadius = 100 + star.size * 2;
+          
+          if (distance < repelRadius && distance > 0) {
+            const force = (1 - distance / repelRadius) * (50 + star.size * 0.8);
+            targetX = (dx / distance) * force;
+            targetY = (dy / distance) * force;
+          }
         }
         
-        const easing = 0.08;
+        const easingToTarget = 0.15;
+        const easingBack = 0.04;
+        
+        const isMovingToTarget = Math.abs(targetX) > 0.1 || Math.abs(targetY) > 0.1;
+        const easing = isMovingToTarget ? easingToTarget : easingBack;
+        
         const newX = currentOffset.x + (targetX - currentOffset.x) * easing;
         const newY = currentOffset.y + (targetY - currentOffset.y) * easing;
         
-        if (Math.abs(newX) > 0.01 || Math.abs(newY) > 0.01 || Math.abs(targetX) > 0.01 || Math.abs(targetY) > 0.01) {
-          newOffsets.set(star.id, { x: newX, y: newY });
-        } else {
-          newOffsets.delete(star.id);
+        if (Math.abs(newX) > 0.05 || Math.abs(newY) > 0.05) {
+          newOffsets.set(star.id, { x: newX, y: newY, targetX, targetY });
         }
       });
       
@@ -253,6 +265,10 @@ export function StarField() {
       }
     };
 
+    const handleTouchEnd = () => {
+      mousePosRef.current = null;
+    };
+
     const handleMouseLeave = () => {
       mousePosRef.current = null;
     };
@@ -260,6 +276,7 @@ export function StarField() {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
     document.addEventListener("mouseleave", handleMouseLeave);
 
     animationRef.current = requestAnimationFrame(updateStarPositions);
@@ -268,6 +285,7 @@ export function StarField() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
       document.removeEventListener("mouseleave", handleMouseLeave);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -278,7 +296,9 @@ export function StarField() {
   return (
     <div ref={containerRef} className="absolute inset-0 overflow-hidden">
       {starsData.map((star) => {
-        const offset = offsets.get(star.id) || { x: 0, y: 0 };
+        const offset = offsets.get(star.id);
+        const translateX = offset ? offset.x : 0;
+        const translateY = offset ? offset.y : 0;
         
         return (
           <div
@@ -287,11 +307,10 @@ export function StarField() {
             style={{
               left: `${star.x}%`,
               top: `${star.y}%`,
-              transform: `translate(${offset.x}px, ${offset.y}px)`,
+              transform: `translate(${translateX}px, ${translateY}px)`,
               animation: `star-float ${star.duration}s ease-in-out infinite`,
               animationDelay: `${star.delay}s`,
               zIndex: star.type === "sparkle" ? 2 : 1,
-              transition: "transform 0.1s ease-out",
             }}
           >
             {star.type === "sparkle" ? (
