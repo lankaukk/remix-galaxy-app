@@ -21,7 +21,10 @@ const COLORS = {
 export function StarField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const starsRef = useRef<Star[]>([]);
-  const mouseRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
+  const mouseRef = useRef<{ x: number | null; y: number | null }>({
+    x: null,
+    y: null,
+  });
   const animationRef = useRef<number>(0);
 
   useEffect(() => {
@@ -135,7 +138,7 @@ export function StarField() {
 
     // Animation loop
     let lastTime = performance.now();
-    
+
     const animate = (currentTime: number) => {
       const deltaTime = Math.min((currentTime - lastTime) / 1000, 0.1);
       lastTime = currentTime;
@@ -154,18 +157,18 @@ export function StarField() {
           const dx = star.baseX - mx;
           const dy = star.baseY - my;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const radius = 150 + star.size * 2;
+          const radius = 150 + star.size * 4;
 
           if (dist < radius && dist > 0) {
-            const force = Math.pow(1 - dist / radius, 1.5) * (80 + star.size);
+            const force = Math.pow(1 - dist / radius, 1.5) * (60 + star.size * 3);
             targetX = star.baseX + (dx / dist) * force;
             targetY = star.baseY + (dy / dist) * force;
           }
         }
 
         // Spring physics
-        const springStrength = 8;
-        const damping = 0.85;
+        const springStrength = 3;
+        const damping = 0.4;
 
         const ax = (targetX - star.x) * springStrength;
         const ay = (targetY - star.y) * springStrength;
