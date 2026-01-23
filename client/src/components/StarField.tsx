@@ -53,16 +53,106 @@ const STAR_CONFIGS: StarConfig[] = (() => {
   return stars;
 })();
 
+// Global state that persists across component remounts
+const globalState = {
+  mouseX: null as number | null,
+  mouseY: null as number | null,
+  container: null as HTMLDivElement | null,
+  stars: [] as { el: HTMLDivElement; config: StarConfig }[],
+  listenersAttached: false,
+  animationRunning: false,
+};
+
+function updateAllStars() {
+  if (!globalState.container) return;
+  
+  const rect = globalState.container.getBoundingClientRect();
+  const mx = globalState.mouseX;
+  const my = globalState.mouseY;
+
+  for (const star of globalState.stars) {
+    if (!star.el.isConnected) continue;
+    
+    const baseScreenX = rect.left + (star.config.baseX / 100) * rect.width;
+    const baseScreenY = rect.top + (star.config.baseY / 100) * rect.height;
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+    if (mx !== null && my !== null) {
+      const dx = baseScreenX - mx;
+      const dy = baseScreenY - my;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const radius = 120 + star.config.size * 2;
+
+      if (dist < radius && dist > 0) {
+        const force = Math.pow(1 - dist / radius, 1.2) * (100 + star.config.size * 2);
+        offsetX = (dx / dist) * force;
+        offsetY = (dy / dist) * force;
+      }
+    }
+
+    star.el.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+  }
+}
+
+function startAnimation() {
+  if (globalState.animationRunning) return;
+  globalState.animationRunning = true;
+  
+  function loop() {
+    updateAllStars();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
+// Attach listeners once at module level
+if (typeof window !== "undefined" && !globalState.listenersAttached) {
+  globalState.listenersAttached = true;
+  
+  window.addEventListener("mousemove", (e) => {
+    globalState.mouseX = e.clientX;
+    globalState.mouseY = e.clientY;
+  }, { passive: true });
+
+  window.addEventListener("touchmove", (e) => {
+    if (e.touches[0]) {
+      globalState.mouseX = e.touches[0].clientX;
+      globalState.mouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener("touchstart", (e) => {
+    if (e.touches[0]) {
+      globalState.mouseX = e.touches[0].clientX;
+      globalState.mouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener("touchend", () => {
+    globalState.mouseX = null;
+    globalState.mouseY = null;
+  }, { passive: true });
+
+  document.addEventListener("mouseleave", () => {
+    globalState.mouseX = null;
+    globalState.mouseY = null;
+  });
+  
+  startAnimation();
+}
+
 export function StarField() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const starsRef = useRef<{ el: HTMLDivElement; config: StarConfig }[]>([]);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     container.innerHTML = "";
-    starsRef.current = [];
+    globalState.container = container;
+    globalState.stars = [];
 
     STAR_CONFIGS.forEach((config) => {
       const el = document.createElement("div");
@@ -72,85 +162,18 @@ export function StarField() {
         top: ${config.baseY}%;
         z-index: ${config.type === "sparkle" ? 2 : 1};
         pointer-events: none;
-        transition: transform 0.15s ease-out;
+        transition: transform 0.2s ease-out;
         animation: star-float ${config.floatDuration}s ease-in-out infinite;
         animation-delay: ${config.floatDelay}s;
       `;
       el.innerHTML = config.type === "sparkle" ? createSparkleHTML(config.size, config.color) : createOrbHTML(config.size, config.color);
       container.appendChild(el);
-      starsRef.current.push({ el, config });
+      globalState.stars.push({ el, config });
     });
 
-    const updateStars = (mx: number | null, my: number | null) => {
-      const rect = container.getBoundingClientRect();
-      
-      for (const star of starsRef.current) {
-        const baseScreenX = rect.left + (star.config.baseX / 100) * rect.width;
-        const baseScreenY = rect.top + (star.config.baseY / 100) * rect.height;
-
-        let offsetX = 0;
-        let offsetY = 0;
-
-        if (mx !== null && my !== null) {
-          const dx = baseScreenX - mx;
-          const dy = baseScreenY - my;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const radius = 120 + star.config.size * 2;
-
-          if (dist < radius && dist > 0) {
-            const force = Math.pow(1 - dist / radius, 1.2) * (100 + star.config.size * 2);
-            offsetX = (dx / dist) * force;
-            offsetY = (dy / dist) * force;
-          }
-        }
-
-        star.el.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      }
-    };
-
-    let currentX: number | null = null;
-    let currentY: number | null = null;
-
-    const onMouseMove = (e: MouseEvent) => {
-      currentX = e.clientX;
-      currentY = e.clientY;
-      updateStars(currentX, currentY);
-    };
-
-    const onTouchMove = (e: TouchEvent) => {
-      if (e.touches[0]) {
-        currentX = e.touches[0].clientX;
-        currentY = e.touches[0].clientY;
-        updateStars(currentX, currentY);
-      }
-    };
-
-    const onTouchStart = (e: TouchEvent) => {
-      if (e.touches[0]) {
-        currentX = e.touches[0].clientX;
-        currentY = e.touches[0].clientY;
-        updateStars(currentX, currentY);
-      }
-    };
-
-    const onEnd = () => {
-      currentX = null;
-      currentY = null;
-      updateStars(null, null);
-    };
-
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchend", onEnd, { passive: true });
-    document.addEventListener("mouseleave", onEnd);
-
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchend", onEnd);
-      document.removeEventListener("mouseleave", onEnd);
+      globalState.container = null;
+      globalState.stars = [];
     };
   }, []);
 
