@@ -1,13 +1,12 @@
 import { useEffect, useRef } from "react";
 
-interface StarConfig {
+interface StarState {
+  el: HTMLElement;
   baseX: number;
   baseY: number;
   size: number;
-  color: string;
-  type: "sparkle" | "orb";
-  floatDuration: number;
-  floatDelay: number;
+  offsetX: number;
+  offsetY: number;
 }
 
 const colorMap: Record<string, { main: string; glow: string; shadow: string }> = {
@@ -16,7 +15,84 @@ const colorMap: Record<string, { main: string; glow: string; shadow: string }> =
   cyan: { main: "#66d9ef", glow: "rgba(102, 217, 239, 0.8)", shadow: "0 0 20px rgba(102, 217, 239, 0.6), 0 0 40px rgba(102, 217, 239, 0.4)" },
 };
 
-const STARS: StarConfig[] = (() => {
+let mouseX: number | null = null;
+let mouseY: number | null = null;
+let containerRect: DOMRect | null = null;
+let activeStars: StarState[] = [];
+let loopRunning = false;
+
+function startGlobalLoop() {
+  if (loopRunning) return;
+  loopRunning = true;
+
+  function tick() {
+    if (!loopRunning) return;
+    
+    for (let i = 0; i < activeStars.length; i++) {
+      const star = activeStars[i];
+      if (!star.el.isConnected) continue;
+
+      let targetX = 0;
+      let targetY = 0;
+
+      if (mouseX !== null && mouseY !== null && containerRect) {
+        const baseScreenX = containerRect.left + (star.baseX / 100) * containerRect.width;
+        const baseScreenY = containerRect.top + (star.baseY / 100) * containerRect.height;
+
+        const dx = baseScreenX - mouseX;
+        const dy = baseScreenY - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const radius = 120 + star.size * 2;
+
+        if (dist < radius && dist > 0) {
+          const force = Math.pow(1 - dist / radius, 1.2) * (100 + star.size * 2);
+          targetX = (dx / dist) * force;
+          targetY = (dy / dist) * force;
+        }
+      }
+
+      const ease = (targetX !== 0 || targetY !== 0) ? 0.1 : 0.03;
+      star.offsetX += (targetX - star.offsetX) * ease;
+      star.offsetY += (targetY - star.offsetY) * ease;
+
+      star.el.style.transform = `translate(${star.offsetX}px, ${star.offsetY}px)`;
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("mousemove", (e) => { mouseX = e.clientX; mouseY = e.clientY; }, { passive: true });
+  window.addEventListener("touchmove", (e) => { if (e.touches[0]) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; } }, { passive: true });
+  window.addEventListener("touchstart", (e) => { if (e.touches[0]) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; } }, { passive: true });
+  window.addEventListener("touchend", () => { mouseX = null; mouseY = null; }, { passive: true });
+  document.addEventListener("mouseleave", () => { mouseX = null; mouseY = null; });
+  startGlobalLoop();
+}
+
+function createSparkleHTML(size: number, color: string): string {
+  const c = colorMap[color];
+  return `<div style="position:relative;width:${size}px;height:${size}px">
+    <div style="position:absolute;inset:0;background:radial-gradient(circle,${c.main} 0%,transparent 70%);filter:blur(${size * 0.15}px);opacity:0.6"></div>
+    <div style="position:absolute;left:50%;top:0;width:2px;height:100%;background:linear-gradient(to bottom,transparent,${c.main},white,${c.main},transparent);transform:translateX(-50%);box-shadow:${c.shadow}"></div>
+    <div style="position:absolute;top:50%;left:0;height:2px;width:100%;background:linear-gradient(to right,transparent,${c.main},white,${c.main},transparent);transform:translateY(-50%);box-shadow:${c.shadow}"></div>
+    <div style="position:absolute;left:50%;top:50%;width:${size * 0.2}px;height:${size * 0.2}px;background:white;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px white,${c.shadow}"></div>
+  </div>`;
+}
+
+function createOrbHTML(size: number, color: string): string {
+  const c = colorMap[color];
+  const bg = size > 5 ? `radial-gradient(circle at 30% 30%, white, ${c.main} 50%, ${c.glow} 100%)` : c.main;
+  const shadow = size > 5 ? c.shadow : `0 0 ${size * 2}px ${c.glow}`;
+  return `<div style="width:${size}px;height:${size}px;background:${bg};border-radius:50%;box-shadow:${shadow}"></div>`;
+}
+
+interface StarConfig { baseX: number; baseY: number; size: number; color: string; type: "sparkle" | "orb"; floatDuration: number; floatDelay: number; }
+
+const STAR_CONFIGS: StarConfig[] = (() => {
   const stars: StarConfig[] = [];
   const colors = ["blue", "purple", "cyan"];
 
@@ -44,143 +120,40 @@ const STARS: StarConfig[] = (() => {
   return stars;
 })();
 
-function createSparkleHTML(size: number, color: string): string {
-  const c = colorMap[color];
-  return `<div style="position:relative;width:${size}px;height:${size}px">
-    <div style="position:absolute;inset:0;background:radial-gradient(circle,${c.main} 0%,transparent 70%);filter:blur(${size * 0.15}px);opacity:0.6"></div>
-    <div style="position:absolute;left:50%;top:0;width:2px;height:100%;background:linear-gradient(to bottom,transparent,${c.main},white,${c.main},transparent);transform:translateX(-50%);box-shadow:${c.shadow}"></div>
-    <div style="position:absolute;top:50%;left:0;height:2px;width:100%;background:linear-gradient(to right,transparent,${c.main},white,${c.main},transparent);transform:translateY(-50%);box-shadow:${c.shadow}"></div>
-    <div style="position:absolute;left:50%;top:50%;width:${size * 0.2}px;height:${size * 0.2}px;background:white;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px white,${c.shadow}"></div>
-  </div>`;
-}
-
-function createOrbHTML(size: number, color: string): string {
-  const c = colorMap[color];
-  const bg = size > 5 ? `radial-gradient(circle at 30% 30%, white, ${c.main} 50%, ${c.glow} 100%)` : c.main;
-  const shadow = size > 5 ? c.shadow : `0 0 ${size * 2}px ${c.glow}`;
-  return `<div style="width:${size}px;height:${size}px;background:${bg};border-radius:50%;box-shadow:${shadow}"></div>`;
-}
-
-declare global {
-  interface Window {
-    __starFieldMouse?: { x: number | null; y: number | null };
-    __starFieldInterval?: number;
-  }
-}
-
-if (typeof window !== "undefined" && !window.__starFieldMouse) {
-  window.__starFieldMouse = { x: null, y: null };
-  
-  window.addEventListener("mousemove", (e) => {
-    window.__starFieldMouse!.x = e.clientX;
-    window.__starFieldMouse!.y = e.clientY;
-  }, { passive: true });
-  
-  window.addEventListener("touchmove", (e) => {
-    if (e.touches[0]) {
-      window.__starFieldMouse!.x = e.touches[0].clientX;
-      window.__starFieldMouse!.y = e.touches[0].clientY;
-    }
-  }, { passive: true });
-  
-  window.addEventListener("touchstart", (e) => {
-    if (e.touches[0]) {
-      window.__starFieldMouse!.x = e.touches[0].clientX;
-      window.__starFieldMouse!.y = e.touches[0].clientY;
-    }
-  }, { passive: true });
-  
-  window.addEventListener("touchend", () => {
-    window.__starFieldMouse!.x = null;
-    window.__starFieldMouse!.y = null;
-  }, { passive: true });
-  
-  document.addEventListener("mouseleave", () => {
-    window.__starFieldMouse!.x = null;
-    window.__starFieldMouse!.y = null;
-  });
-}
-
 export function StarField() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const starsRef = useRef<{ el: HTMLDivElement; config: StarConfig; offsetX: number; offsetY: number }[]>([]);
+  const myStarsRef = useRef<StarState[]>([]);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     container.innerHTML = "";
-    starsRef.current = [];
+    myStarsRef.current = [];
 
-    STARS.forEach((config) => {
+    const updateRect = () => {
+      if (container) containerRect = container.getBoundingClientRect();
+    };
+    updateRect();
+    window.addEventListener("resize", updateRect);
+    window.addEventListener("scroll", updateRect);
+
+    STAR_CONFIGS.forEach((config) => {
       const el = document.createElement("div");
-      el.style.cssText = `
-        position: absolute;
-        left: ${config.baseX}%;
-        top: ${config.baseY}%;
-        z-index: ${config.type === "sparkle" ? 2 : 1};
-        pointer-events: none;
-        will-change: transform;
-        animation: star-float ${config.floatDuration}s ease-in-out infinite;
-        animation-delay: ${config.floatDelay}s;
-      `;
-      el.innerHTML = config.type === "sparkle" 
-        ? createSparkleHTML(config.size, config.color) 
-        : createOrbHTML(config.size, config.color);
+      el.style.cssText = `position:absolute;left:${config.baseX}%;top:${config.baseY}%;z-index:${config.type === "sparkle" ? 2 : 1};pointer-events:none;will-change:transform;animation:star-float ${config.floatDuration}s ease-in-out infinite;animation-delay:${config.floatDelay}s;`;
+      el.innerHTML = config.type === "sparkle" ? createSparkleHTML(config.size, config.color) : createOrbHTML(config.size, config.color);
       container.appendChild(el);
-      starsRef.current.push({ el, config, offsetX: 0, offsetY: 0 });
+      
+      const starState: StarState = { el, baseX: config.baseX, baseY: config.baseY, size: config.size, offsetX: 0, offsetY: 0 };
+      myStarsRef.current.push(starState);
+      activeStars.push(starState);
     });
 
-    if (window.__starFieldInterval) {
-      clearInterval(window.__starFieldInterval);
-    }
-
-    const animate = () => {
-      const mouse = window.__starFieldMouse;
-      if (!mouse || !container) return;
-
-      const rect = container.getBoundingClientRect();
-      const mx = mouse.x;
-      const my = mouse.y;
-
-      for (const star of starsRef.current) {
-        const baseScreenX = rect.left + (star.config.baseX / 100) * rect.width;
-        const baseScreenY = rect.top + (star.config.baseY / 100) * rect.height;
-
-        let targetX = 0;
-        let targetY = 0;
-
-        if (mx !== null && my !== null) {
-          const dx = baseScreenX - mx;
-          const dy = baseScreenY - my;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const radius = 120 + star.config.size * 2;
-
-          if (dist < radius && dist > 0) {
-            const force = Math.pow(1 - dist / radius, 1.2) * (100 + star.config.size * 2);
-            targetX = (dx / dist) * force;
-            targetY = (dy / dist) * force;
-          }
-        }
-
-        const easeIn = 0.1;
-        const easeOut = 0.03;
-        const ease = (targetX !== 0 || targetY !== 0) ? easeIn : easeOut;
-
-        star.offsetX += (targetX - star.offsetX) * ease;
-        star.offsetY += (targetY - star.offsetY) * ease;
-
-        star.el.style.transform = `translate(${star.offsetX}px, ${star.offsetY}px)`;
-      }
-    };
-
-    window.__starFieldInterval = window.setInterval(animate, 16);
-
     return () => {
-      if (window.__starFieldInterval) {
-        clearInterval(window.__starFieldInterval);
-        window.__starFieldInterval = undefined;
-      }
+      window.removeEventListener("resize", updateRect);
+      window.removeEventListener("scroll", updateRect);
+      activeStars = activeStars.filter(s => !myStarsRef.current.includes(s));
+      containerRect = null;
     };
   }, []);
 
