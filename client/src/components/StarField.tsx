@@ -62,6 +62,8 @@ export function StarField() {
 
     // Large sparkle stars
     const sparklePositions = [
+      { x: 35, y: 40, size: 120, color: "blue" },
+      { x: 75, y: 25, size: 110, color: "cyan" },
       { x: 50, y: 50, size: 85, color: "blue" },
       { x: 20, y: 30, size: 75, color: "cyan" },
       { x: 80, y: 70, size: 70, color: "purple" },
