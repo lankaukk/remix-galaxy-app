@@ -110,7 +110,7 @@ export function StarField() {
     }
 
     // Tiny background stars
-    for (let i = 0; i < 400; i++) {
+    for (let i = 0; i < 800; i++) {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
       stars.push({
