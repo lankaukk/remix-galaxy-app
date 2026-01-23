@@ -31,44 +31,44 @@ const colorMap: Record<string, { main: string; glow: string; shadow: string }> =
   },
 };
 
-let globalMouseX: number | null = null;
-let globalMouseY: number | null = null;
-let listenersAttached = false;
+const globalState = {
+  mouseX: null as number | null,
+  mouseY: null as number | null,
+  initialized: false,
+};
 
-function attachGlobalListeners() {
-  if (listenersAttached) return;
-  listenersAttached = true;
+function initGlobalListeners() {
+  if (globalState.initialized) return;
+  globalState.initialized = true;
 
-  const onMouseMove = (e: MouseEvent) => {
-    globalMouseX = e.clientX;
-    globalMouseY = e.clientY;
-  };
-  const onTouchMove = (e: TouchEvent) => {
+  window.addEventListener("mousemove", (e) => {
+    globalState.mouseX = e.clientX;
+    globalState.mouseY = e.clientY;
+  }, { passive: true });
+
+  window.addEventListener("touchmove", (e) => {
     if (e.touches.length > 0) {
-      globalMouseX = e.touches[0].clientX;
-      globalMouseY = e.touches[0].clientY;
+      globalState.mouseX = e.touches[0].clientX;
+      globalState.mouseY = e.touches[0].clientY;
     }
-  };
-  const onTouchStart = (e: TouchEvent) => {
-    if (e.touches.length > 0) {
-      globalMouseX = e.touches[0].clientX;
-      globalMouseY = e.touches[0].clientY;
-    }
-  };
-  const onTouchEnd = () => {
-    globalMouseX = null;
-    globalMouseY = null;
-  };
-  const onMouseLeave = () => {
-    globalMouseX = null;
-    globalMouseY = null;
-  };
+  }, { passive: true });
 
-  window.addEventListener("mousemove", onMouseMove, { passive: true });
-  window.addEventListener("touchmove", onTouchMove, { passive: true });
-  window.addEventListener("touchstart", onTouchStart, { passive: true });
-  window.addEventListener("touchend", onTouchEnd, { passive: true });
-  document.addEventListener("mouseleave", onMouseLeave);
+  window.addEventListener("touchstart", (e) => {
+    if (e.touches.length > 0) {
+      globalState.mouseX = e.touches[0].clientX;
+      globalState.mouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener("touchend", () => {
+    globalState.mouseX = null;
+    globalState.mouseY = null;
+  }, { passive: true });
+
+  document.addEventListener("mouseleave", () => {
+    globalState.mouseX = null;
+    globalState.mouseY = null;
+  });
 }
 
 function createSparkle(size: number, color: string): string {
@@ -147,10 +147,10 @@ function generateStarsData(): StarData[] {
 export function StarField() {
   const containerRef = useRef<HTMLDivElement>(null);
   const starsRef = useRef<StarData[]>([]);
-  const rafRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
-    attachGlobalListeners();
+    initGlobalListeners();
 
     const container = containerRef.current;
     if (!container) return;
@@ -167,17 +167,10 @@ export function StarField() {
       star.el = div;
     });
 
-    let lastTime = 0;
-    const loop = (time: number) => {
-      if (time - lastTime < 16) {
-        rafRef.current = requestAnimationFrame(loop);
-        return;
-      }
-      lastTime = time;
-
+    const tick = () => {
       const rect = container.getBoundingClientRect();
-      const mx = globalMouseX;
-      const my = globalMouseY;
+      const mx = globalState.mouseX;
+      const my = globalState.mouseY;
 
       for (let i = 0; i < stars.length; i++) {
         const star = stars[i];
@@ -207,16 +200,14 @@ export function StarField() {
 
         star.el.style.transform = `translate(${star.offsetX}px, ${star.offsetY}px)`;
       }
-
-      rafRef.current = requestAnimationFrame(loop);
     };
 
-    rafRef.current = requestAnimationFrame(loop);
+    intervalRef.current = window.setInterval(tick, 16);
 
     return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
+      if (intervalRef.current !== null) {
+        window.clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     };
   }, []);
