@@ -214,12 +214,16 @@ export function StarField() {
           // Vertical line - two halves, each fading outward from center
           const vertGradientTop = ctx.createLinearGradient(0, 0, 0, -lineLength);
           vertGradientTop.addColorStop(0, colorHex);
-          vertGradientTop.addColorStop(0.7, colorHex);
+          vertGradientTop.addColorStop(0.3, colorHex);
+          vertGradientTop.addColorStop(0.6, colorHex + "80");
+          vertGradientTop.addColorStop(0.85, colorHex + "20");
           vertGradientTop.addColorStop(1, "transparent");
 
           const vertGradientBottom = ctx.createLinearGradient(0, 0, 0, lineLength);
           vertGradientBottom.addColorStop(0, colorHex);
-          vertGradientBottom.addColorStop(0.7, colorHex);
+          vertGradientBottom.addColorStop(0.3, colorHex);
+          vertGradientBottom.addColorStop(0.6, colorHex + "80");
+          vertGradientBottom.addColorStop(0.85, colorHex + "20");
           vertGradientBottom.addColorStop(1, "transparent");
 
           ctx.lineWidth = 2;
@@ -239,12 +243,16 @@ export function StarField() {
           // Horizontal line - two halves, each fading outward from center
           const horizGradientLeft = ctx.createLinearGradient(0, 0, -lineLength, 0);
           horizGradientLeft.addColorStop(0, colorHex);
-          horizGradientLeft.addColorStop(0.7, colorHex);
+          horizGradientLeft.addColorStop(0.3, colorHex);
+          horizGradientLeft.addColorStop(0.6, colorHex + "80");
+          horizGradientLeft.addColorStop(0.85, colorHex + "20");
           horizGradientLeft.addColorStop(1, "transparent");
 
           const horizGradientRight = ctx.createLinearGradient(0, 0, lineLength, 0);
           horizGradientRight.addColorStop(0, colorHex);
-          horizGradientRight.addColorStop(0.7, colorHex);
+          horizGradientRight.addColorStop(0.3, colorHex);
+          horizGradientRight.addColorStop(0.6, colorHex + "80");
+          horizGradientRight.addColorStop(0.85, colorHex + "20");
           horizGradientRight.addColorStop(1, "transparent");
 
           ctx.beginPath();
