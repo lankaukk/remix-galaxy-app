@@ -219,14 +219,14 @@ export function StarField() {
           vertGradientTop.addColorStop(0.3, colorHex);
           vertGradientTop.addColorStop(0.6, colorHex + "80");
           vertGradientTop.addColorStop(0.85, colorHex + "20");
-          vertGradientTop.addColorStop(1, "transparent");
+          vertGradientTop.addColorStop(1, colorHex + "00");
 
           const vertGradientBottom = ctx.createLinearGradient(0, 0, 0, lineLength);
           vertGradientBottom.addColorStop(0, colorHex);
           vertGradientBottom.addColorStop(0.3, colorHex);
           vertGradientBottom.addColorStop(0.6, colorHex + "80");
           vertGradientBottom.addColorStop(0.85, colorHex + "20");
-          vertGradientBottom.addColorStop(1, "transparent");
+          vertGradientBottom.addColorStop(1, colorHex + "00");
 
           ctx.lineWidth = 2;
 
@@ -248,14 +248,14 @@ export function StarField() {
           horizGradientLeft.addColorStop(0.3, colorHex);
           horizGradientLeft.addColorStop(0.6, colorHex + "80");
           horizGradientLeft.addColorStop(0.85, colorHex + "20");
-          horizGradientLeft.addColorStop(1, "transparent");
+          horizGradientLeft.addColorStop(1, colorHex + "00");
 
           const horizGradientRight = ctx.createLinearGradient(0, 0, lineLength, 0);
           horizGradientRight.addColorStop(0, colorHex);
           horizGradientRight.addColorStop(0.3, colorHex);
           horizGradientRight.addColorStop(0.6, colorHex + "80");
           horizGradientRight.addColorStop(0.85, colorHex + "20");
-          horizGradientRight.addColorStop(1, "transparent");
+          horizGradientRight.addColorStop(1, colorHex + "00");
 
           ctx.beginPath();
           ctx.moveTo(0, 0);
@@ -273,9 +273,9 @@ export function StarField() {
           ctx.shadowBlur = 0;
           const dotRadius = star.size * 0.15;
           const dotGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, dotRadius);
-          dotGradient.addColorStop(0, "white");
-          dotGradient.addColorStop(0.4, colorHex);
-          dotGradient.addColorStop(1, "transparent");
+          dotGradient.addColorStop(0, colorHex);
+          dotGradient.addColorStop(0.5, colorHex);
+          dotGradient.addColorStop(1, colorHex + "00");
 
           ctx.beginPath();
           ctx.arc(0, 0, dotRadius, 0, Math.PI * 2);
