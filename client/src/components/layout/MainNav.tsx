@@ -23,7 +23,7 @@ export default function MainNav() {
     <nav className="fixed bottom-0 left-0 right-0 md:bottom-auto md:top-0 md:left-auto md:right-auto z-50 w-full border-t md:border-t-0 md:border-b border-border backdrop-blur-sm bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-foreground">
+          <Link href="/" className="text-xl font-bold text-foreground" style={{ fontFamily: '"Jacquarda Bastarda 9", serif' }}>
             McKayla Lankau
           </Link>
 

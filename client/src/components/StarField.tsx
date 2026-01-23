@@ -20,8 +20,8 @@ const THEME_COLORS = {
     cyan: "#00E2E6",
   },
   dark: {
-    blue: "#76BAFF",
-    purple: "#B695FF",
+    blue: "#D1BCFF",
+    purple: "#A6D2FF",
     cyan: "#82F7FF",
   },
   sunset: {
