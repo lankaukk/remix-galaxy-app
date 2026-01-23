@@ -284,10 +284,16 @@ export function StarField() {
 
           ctx.restore();
         } else {
-          // Draw orb - skip glow on tiny stars for performance
+          // Draw orb with gradient fade
+          const orbRadius = star.size / 2;
+          const orbGradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, orbRadius);
+          orbGradient.addColorStop(0, colorHex);
+          orbGradient.addColorStop(0.25, colorHex);
+          orbGradient.addColorStop(1, colorHex + "00");
+
           ctx.beginPath();
-          ctx.arc(star.x, star.y, star.size / 2, 0, Math.PI * 2);
-          ctx.fillStyle = colorHex;
+          ctx.arc(star.x, star.y, orbRadius, 0, Math.PI * 2);
+          ctx.fillStyle = orbGradient;
           if (star.size > 4) {
             ctx.shadowColor = colorHex;
             ctx.shadowBlur = star.size * 2;
