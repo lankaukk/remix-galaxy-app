@@ -15,19 +15,19 @@ interface Star {
 
 const THEME_COLORS = {
   light: {
-    blue: "#2563eb",
-    purple: "#9333ea",
-    cyan: "#06b6d4",
+    blue: "#005DFF",
+    purple: "#A900BC",
+    cyan: "#00E2E6",
   },
   dark: {
-    blue: "#4a90d9",
-    purple: "#9b6dff",
-    cyan: "#66d9ef",
+    blue: "#76BAFF",
+    purple: "#B695FF",
+    cyan: "#82F7FF",
   },
   sunset: {
-    blue: "#f97316",
-    purple: "#ec4899",
-    cyan: "#fbbf24",
+    blue: "#E20070",
+    purple: "#FD3870",
+    cyan: "#EAC300",
   },
 };
 
@@ -176,7 +176,8 @@ export function StarField() {
           const radius = 150 + star.size * 4;
 
           if (dist < radius && dist > 0) {
-            const force = Math.pow(1 - dist / radius, 1.5) * (60 + star.size * 3);
+            const force =
+              Math.pow(1 - dist / radius, 1.5) * (60 + star.size * 3);
             targetX = star.baseX + (dx / dist) * force;
             targetY = star.baseY + (dy / dist) * force;
           }

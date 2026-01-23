@@ -49,7 +49,8 @@ export default function MainNav() {
           </div>
 
           {/* Mobile Navigation */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
             <Sheet>
               <SheetTrigger asChild>
                 <button className="rounded-md p-2 text-foreground hover:bg-accent">
@@ -73,9 +74,6 @@ export default function MainNav() {
                       </Link>
                     </SheetClose>
                   ))}
-                  <div className="w-full flex justify-center py-2">
-                    <ThemeToggle />
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>
