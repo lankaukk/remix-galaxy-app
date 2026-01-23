@@ -1,14 +1,16 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 
 interface Star {
   id: number;
   type: "sparkle" | "orb";
-  x: number;
-  y: number;
+  baseX: number;
+  baseY: number;
   size: number;
   color: "blue" | "purple" | "cyan";
   delay: number;
   duration: number;
+  offsetX: number;
+  offsetY: number;
 }
 
 const generateStars = (): Star[] => {
@@ -34,9 +36,14 @@ const generateStars = (): Star[] => {
     stars.push({
       id: id++,
       type: "sparkle",
-      ...s,
+      baseX: s.x,
+      baseY: s.y,
+      size: s.size,
+      color: s.color,
       delay: Math.random() * 3,
       duration: 15 + Math.random() * 10,
+      offsetX: 0,
+      offsetY: 0,
     });
   });
 
@@ -67,9 +74,14 @@ const generateStars = (): Star[] => {
     stars.push({
       id: id++,
       type: "orb",
-      ...s,
+      baseX: s.x,
+      baseY: s.y,
+      size: s.size,
+      color: s.color,
       delay: Math.random() * 4,
       duration: 18 + Math.random() * 12,
+      offsetX: 0,
+      offsetY: 0,
     });
   });
 
@@ -77,19 +89,19 @@ const generateStars = (): Star[] => {
     stars.push({
       id: id++,
       type: "orb",
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+      baseX: Math.random() * 100,
+      baseY: Math.random() * 100,
       size: 1 + Math.random() * 3,
       color: ["blue", "purple", "cyan"][Math.floor(Math.random() * 3)] as "blue" | "purple" | "cyan",
       delay: Math.random() * 6,
       duration: 20 + Math.random() * 15,
+      offsetX: 0,
+      offsetY: 0,
     });
   }
 
   return stars;
 };
-
-const starsData = generateStars();
 
 const colorMap = {
   blue: {
@@ -109,146 +121,104 @@ const colorMap = {
   },
 };
 
-function SparkleIcon({ size, color }: { size: number; color: "blue" | "purple" | "cyan" }) {
+function createSparkleHTML(size: number, color: "blue" | "purple" | "cyan"): string {
   const colors = colorMap[color];
-  
-  return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(circle, ${colors.main} 0%, transparent 70%)`,
-          filter: `blur(${size * 0.15}px)`,
-          opacity: 0.6,
-        }}
-      />
-      <div
-        className="absolute"
-        style={{
-          left: "50%",
-          top: 0,
-          width: 2,
-          height: "100%",
-          background: `linear-gradient(to bottom, transparent, ${colors.main}, white, ${colors.main}, transparent)`,
-          transform: "translateX(-50%)",
-          boxShadow: colors.shadow,
-        }}
-      />
-      <div
-        className="absolute"
-        style={{
-          top: "50%",
-          left: 0,
-          height: 2,
-          width: "100%",
-          background: `linear-gradient(to right, transparent, ${colors.main}, white, ${colors.main}, transparent)`,
-          transform: "translateY(-50%)",
-          boxShadow: colors.shadow,
-        }}
-      />
-      <div
-        className="absolute rounded-full"
-        style={{
-          left: "50%",
-          top: "50%",
-          width: size * 0.2,
-          height: size * 0.2,
-          background: "white",
-          transform: "translate(-50%, -50%)",
-          boxShadow: `0 0 10px white, ${colors.shadow}`,
-        }}
-      />
+  return `
+    <div style="position:relative;width:${size}px;height:${size}px">
+      <div style="position:absolute;inset:0;background:radial-gradient(circle,${colors.main} 0%,transparent 70%);filter:blur(${size * 0.15}px);opacity:0.6"></div>
+      <div style="position:absolute;left:50%;top:0;width:2px;height:100%;background:linear-gradient(to bottom,transparent,${colors.main},white,${colors.main},transparent);transform:translateX(-50%);box-shadow:${colors.shadow}"></div>
+      <div style="position:absolute;top:50%;left:0;height:2px;width:100%;background:linear-gradient(to right,transparent,${colors.main},white,${colors.main},transparent);transform:translateY(-50%);box-shadow:${colors.shadow}"></div>
+      <div style="position:absolute;left:50%;top:50%;width:${size * 0.2}px;height:${size * 0.2}px;background:white;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px white,${colors.shadow}"></div>
     </div>
-  );
+  `;
 }
 
-function OrbIcon({ size, color }: { size: number; color: "blue" | "purple" | "cyan" }) {
+function createOrbHTML(size: number, color: "blue" | "purple" | "cyan"): string {
   const colors = colorMap[color];
-  
-  return (
-    <div
-      className="rounded-full"
-      style={{
-        width: size,
-        height: size,
-        background: size > 5 
-          ? `radial-gradient(circle at 30% 30%, white, ${colors.main} 50%, ${colors.glow} 100%)`
-          : colors.main,
-        boxShadow: size > 5 ? colors.shadow : `0 0 ${size * 2}px ${colors.glow}`,
-      }}
-    />
-  );
-}
-
-interface StarOffset {
-  x: number;
-  y: number;
-  targetX: number;
-  targetY: number;
+  const bg = size > 5 
+    ? `radial-gradient(circle at 30% 30%, white, ${colors.main} 50%, ${colors.glow} 100%)`
+    : colors.main;
+  const shadow = size > 5 ? colors.shadow : `0 0 ${size * 2}px ${colors.glow}`;
+  return `<div style="width:${size}px;height:${size}px;background:${bg};border-radius:50%;box-shadow:${shadow}"></div>`;
 }
 
 export function StarField() {
-  const [offsets, setOffsets] = useState<Map<number, StarOffset>>(new Map());
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const starsRef = useRef<Star[]>(generateStars());
+  const starElementsRef = useRef<Map<number, HTMLDivElement>>(new Map());
   const mousePosRef = useRef<{ x: number; y: number } | null>(null);
+  const animationRef = useRef<number>();
+  const isRunningRef = useRef(true);
 
-  const updateStarPositions = useCallback(() => {
-    if (!containerRef.current) {
-      animationRef.current = requestAnimationFrame(updateStarPositions);
-      return;
-    }
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-    const rect = containerRef.current.getBoundingClientRect();
-    const mousePos = mousePosRef.current;
+    container.innerHTML = "";
+    starElementsRef.current.clear();
 
-    setOffsets((prev) => {
-      const newOffsets = new Map<number, StarOffset>();
+    starsRef.current.forEach((star) => {
+      const el = document.createElement("div");
+      el.style.cssText = `
+        position: absolute;
+        left: ${star.baseX}%;
+        top: ${star.baseY}%;
+        z-index: ${star.type === "sparkle" ? 2 : 1};
+        will-change: transform;
+        animation: star-float ${star.duration}s ease-in-out infinite;
+        animation-delay: ${star.delay}s;
+        pointer-events: none;
+      `;
+      el.innerHTML = star.type === "sparkle" 
+        ? createSparkleHTML(star.size, star.color)
+        : createOrbHTML(star.size, star.color);
       
-      starsData.forEach((star) => {
-        const starX = rect.left + (star.x / 100) * rect.width;
-        const starY = rect.top + (star.y / 100) * rect.height;
-        
-        const currentOffset = prev.get(star.id) || { x: 0, y: 0, targetX: 0, targetY: 0 };
-        
+      container.appendChild(el);
+      starElementsRef.current.set(star.id, el);
+    });
+
+    const updatePositions = () => {
+      if (!isRunningRef.current) return;
+
+      const rect = container.getBoundingClientRect();
+      const mousePos = mousePosRef.current;
+
+      starsRef.current.forEach((star) => {
+        const starScreenX = rect.left + (star.baseX / 100) * rect.width + star.offsetX;
+        const starScreenY = rect.top + (star.baseY / 100) * rect.height + star.offsetY;
+
         let targetX = 0;
         let targetY = 0;
-        
+
         if (mousePos) {
-          const dx = starX - mousePos.x;
-          const dy = starY - mousePos.y;
+          const dx = starScreenX - mousePos.x;
+          const dy = starScreenY - mousePos.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
           
-          const repelRadius = 100 + star.size * 2;
-          
+          const repelRadius = 80 + star.size * 1.5;
+
           if (distance < repelRadius && distance > 0) {
-            const force = (1 - distance / repelRadius) * (50 + star.size * 0.8);
+            const force = Math.pow(1 - distance / repelRadius, 1.5) * (60 + star.size);
             targetX = (dx / distance) * force;
             targetY = (dy / distance) * force;
           }
         }
-        
-        const easingToTarget = 0.15;
-        const easingBack = 0.04;
-        
-        const isMovingToTarget = Math.abs(targetX) > 0.1 || Math.abs(targetY) > 0.1;
-        const easing = isMovingToTarget ? easingToTarget : easingBack;
-        
-        const newX = currentOffset.x + (targetX - currentOffset.x) * easing;
-        const newY = currentOffset.y + (targetY - currentOffset.y) * easing;
-        
-        if (Math.abs(newX) > 0.05 || Math.abs(newY) > 0.05) {
-          newOffsets.set(star.id, { x: newX, y: newY, targetX, targetY });
+
+        const hasTarget = Math.abs(targetX) > 0.1 || Math.abs(targetY) > 0.1;
+        const easing = hasTarget ? 0.12 : 0.03;
+
+        star.offsetX += (targetX - star.offsetX) * easing;
+        star.offsetY += (targetY - star.offsetY) * easing;
+
+        const el = starElementsRef.current.get(star.id);
+        if (el) {
+          el.style.transform = `translate(${star.offsetX}px, ${star.offsetY}px)`;
         }
       });
-      
-      return newOffsets;
-    });
 
-    animationRef.current = requestAnimationFrame(updateStarPositions);
-  }, []);
+      animationRef.current = requestAnimationFrame(updatePositions);
+    };
 
-  useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       mousePosRef.current = { x: e.clientX, y: e.clientY };
     };
@@ -273,15 +243,17 @@ export function StarField() {
       mousePosRef.current = null;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
 
-    animationRef.current = requestAnimationFrame(updateStarPositions);
+    isRunningRef.current = true;
+    animationRef.current = requestAnimationFrame(updatePositions);
 
     return () => {
+      isRunningRef.current = false;
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchstart", handleTouchStart);
@@ -291,36 +263,7 @@ export function StarField() {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [updateStarPositions]);
+  }, []);
 
-  return (
-    <div ref={containerRef} className="absolute inset-0 overflow-hidden">
-      {starsData.map((star) => {
-        const offset = offsets.get(star.id);
-        const translateX = offset ? offset.x : 0;
-        const translateY = offset ? offset.y : 0;
-        
-        return (
-          <div
-            key={star.id}
-            className="absolute star-wrapper"
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              transform: `translate(${translateX}px, ${translateY}px)`,
-              animation: `star-float ${star.duration}s ease-in-out infinite`,
-              animationDelay: `${star.delay}s`,
-              zIndex: star.type === "sparkle" ? 2 : 1,
-            }}
-          >
-            {star.type === "sparkle" ? (
-              <SparkleIcon size={star.size} color={star.color} />
-            ) : (
-              <OrbIcon size={star.size} color={star.color} />
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <div ref={containerRef} className="absolute inset-0 overflow-hidden" />;
 }
