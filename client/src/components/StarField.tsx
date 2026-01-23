@@ -110,7 +110,7 @@ export function StarField() {
     }
 
     // Tiny background stars
-    for (let i = 0; i < 800; i++) {
+    for (let i = 0; i < 500; i++) {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
       stars.push({
@@ -231,15 +231,16 @@ export function StarField() {
 
           ctx.restore();
         } else {
-          // Draw orb
-          ctx.save();
-          ctx.shadowColor = colorHex;
-          ctx.shadowBlur = star.size * 2;
+          // Draw orb - skip glow on tiny stars for performance
           ctx.beginPath();
           ctx.arc(star.x, star.y, star.size / 2, 0, Math.PI * 2);
           ctx.fillStyle = colorHex;
+          if (star.size > 4) {
+            ctx.shadowColor = colorHex;
+            ctx.shadowBlur = star.size * 2;
+          }
           ctx.fill();
-          ctx.restore();
+          ctx.shadowBlur = 0;
         }
       }
 
