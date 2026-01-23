@@ -216,7 +216,11 @@ export default function Contact() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 bg-background text-foreground min-h-screen flex items-center justify-center">
+    <div 
+      className="fixed inset-0 overflow-hidden bg-background text-foreground flex items-center justify-center"
+      style={{ touchAction: 'none', overscrollBehavior: 'none' }}
+      onTouchMove={(e) => e.preventDefault()}
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

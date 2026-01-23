@@ -82,7 +82,11 @@ export default function PasswordGate({ children }: PasswordGateProps) {
   }
 
   return (
-    <div className="h-screen overflow-hidden flex flex-col">
+    <div 
+      className="fixed inset-0 overflow-hidden flex flex-col bg-background"
+      style={{ touchAction: 'none', overscrollBehavior: 'none' }}
+      onTouchMove={(e) => e.preventDefault()}
+    >
       <div className="mx-auto max-w-7xl w-full px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Link href="/work" className="inline-flex items-center hover:text-primary transition-colors">
