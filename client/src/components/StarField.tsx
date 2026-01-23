@@ -1,77 +1,10 @@
 import { useEffect, useRef } from "react";
 
-interface StarState {
-  el: HTMLElement;
-  baseX: number;
-  baseY: number;
-  size: number;
-  offsetX: number;
-  offsetY: number;
-}
-
 const colorMap: Record<string, { main: string; glow: string; shadow: string }> = {
   blue: { main: "#4a90d9", glow: "rgba(74, 144, 217, 0.8)", shadow: "0 0 20px rgba(74, 144, 217, 0.6), 0 0 40px rgba(74, 144, 217, 0.4)" },
   purple: { main: "#9b6dff", glow: "rgba(155, 109, 255, 0.8)", shadow: "0 0 20px rgba(155, 109, 255, 0.6), 0 0 40px rgba(155, 109, 255, 0.4)" },
   cyan: { main: "#66d9ef", glow: "rgba(102, 217, 239, 0.8)", shadow: "0 0 20px rgba(102, 217, 239, 0.6), 0 0 40px rgba(102, 217, 239, 0.4)" },
 };
-
-let mouseX: number | null = null;
-let mouseY: number | null = null;
-let containerRect: DOMRect | null = null;
-let activeStars: StarState[] = [];
-let loopRunning = false;
-
-function startGlobalLoop() {
-  if (loopRunning) return;
-  loopRunning = true;
-
-  function tick() {
-    if (!loopRunning) return;
-    
-    for (let i = 0; i < activeStars.length; i++) {
-      const star = activeStars[i];
-      if (!star.el.isConnected) continue;
-
-      let targetX = 0;
-      let targetY = 0;
-
-      if (mouseX !== null && mouseY !== null && containerRect) {
-        const baseScreenX = containerRect.left + (star.baseX / 100) * containerRect.width;
-        const baseScreenY = containerRect.top + (star.baseY / 100) * containerRect.height;
-
-        const dx = baseScreenX - mouseX;
-        const dy = baseScreenY - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const radius = 120 + star.size * 2;
-
-        if (dist < radius && dist > 0) {
-          const force = Math.pow(1 - dist / radius, 1.2) * (100 + star.size * 2);
-          targetX = (dx / dist) * force;
-          targetY = (dy / dist) * force;
-        }
-      }
-
-      const ease = (targetX !== 0 || targetY !== 0) ? 0.1 : 0.03;
-      star.offsetX += (targetX - star.offsetX) * ease;
-      star.offsetY += (targetY - star.offsetY) * ease;
-
-      star.el.style.transform = `translate(${star.offsetX}px, ${star.offsetY}px)`;
-    }
-
-    requestAnimationFrame(tick);
-  }
-
-  requestAnimationFrame(tick);
-}
-
-if (typeof window !== "undefined") {
-  window.addEventListener("mousemove", (e) => { mouseX = e.clientX; mouseY = e.clientY; }, { passive: true });
-  window.addEventListener("touchmove", (e) => { if (e.touches[0]) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; } }, { passive: true });
-  window.addEventListener("touchstart", (e) => { if (e.touches[0]) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; } }, { passive: true });
-  window.addEventListener("touchend", () => { mouseX = null; mouseY = null; }, { passive: true });
-  document.addEventListener("mouseleave", () => { mouseX = null; mouseY = null; });
-  startGlobalLoop();
-}
 
 function createSparkleHTML(size: number, color: string): string {
   const c = colorMap[color];
@@ -122,38 +55,102 @@ const STAR_CONFIGS: StarConfig[] = (() => {
 
 export function StarField() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const myStarsRef = useRef<StarState[]>([]);
+  const starsRef = useRef<{ el: HTMLDivElement; config: StarConfig }[]>([]);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     container.innerHTML = "";
-    myStarsRef.current = [];
-
-    const updateRect = () => {
-      if (container) containerRect = container.getBoundingClientRect();
-    };
-    updateRect();
-    window.addEventListener("resize", updateRect);
-    window.addEventListener("scroll", updateRect);
+    starsRef.current = [];
 
     STAR_CONFIGS.forEach((config) => {
       const el = document.createElement("div");
-      el.style.cssText = `position:absolute;left:${config.baseX}%;top:${config.baseY}%;z-index:${config.type === "sparkle" ? 2 : 1};pointer-events:none;will-change:transform;animation:star-float ${config.floatDuration}s ease-in-out infinite;animation-delay:${config.floatDelay}s;`;
+      el.style.cssText = `
+        position: absolute;
+        left: ${config.baseX}%;
+        top: ${config.baseY}%;
+        z-index: ${config.type === "sparkle" ? 2 : 1};
+        pointer-events: none;
+        transition: transform 0.15s ease-out;
+        animation: star-float ${config.floatDuration}s ease-in-out infinite;
+        animation-delay: ${config.floatDelay}s;
+      `;
       el.innerHTML = config.type === "sparkle" ? createSparkleHTML(config.size, config.color) : createOrbHTML(config.size, config.color);
       container.appendChild(el);
-      
-      const starState: StarState = { el, baseX: config.baseX, baseY: config.baseY, size: config.size, offsetX: 0, offsetY: 0 };
-      myStarsRef.current.push(starState);
-      activeStars.push(starState);
+      starsRef.current.push({ el, config });
     });
 
+    const updateStars = (mx: number | null, my: number | null) => {
+      const rect = container.getBoundingClientRect();
+      
+      for (const star of starsRef.current) {
+        const baseScreenX = rect.left + (star.config.baseX / 100) * rect.width;
+        const baseScreenY = rect.top + (star.config.baseY / 100) * rect.height;
+
+        let offsetX = 0;
+        let offsetY = 0;
+
+        if (mx !== null && my !== null) {
+          const dx = baseScreenX - mx;
+          const dy = baseScreenY - my;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const radius = 120 + star.config.size * 2;
+
+          if (dist < radius && dist > 0) {
+            const force = Math.pow(1 - dist / radius, 1.2) * (100 + star.config.size * 2);
+            offsetX = (dx / dist) * force;
+            offsetY = (dy / dist) * force;
+          }
+        }
+
+        star.el.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      }
+    };
+
+    let currentX: number | null = null;
+    let currentY: number | null = null;
+
+    const onMouseMove = (e: MouseEvent) => {
+      currentX = e.clientX;
+      currentY = e.clientY;
+      updateStars(currentX, currentY);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches[0]) {
+        currentX = e.touches[0].clientX;
+        currentY = e.touches[0].clientY;
+        updateStars(currentX, currentY);
+      }
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches[0]) {
+        currentX = e.touches[0].clientX;
+        currentY = e.touches[0].clientY;
+        updateStars(currentX, currentY);
+      }
+    };
+
+    const onEnd = () => {
+      currentX = null;
+      currentY = null;
+      updateStars(null, null);
+    };
+
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onEnd, { passive: true });
+    document.addEventListener("mouseleave", onEnd);
+
     return () => {
-      window.removeEventListener("resize", updateRect);
-      window.removeEventListener("scroll", updateRect);
-      activeStars = activeStars.filter(s => !myStarsRef.current.includes(s));
-      containerRect = null;
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onEnd);
+      document.removeEventListener("mouseleave", onEnd);
     };
   }, []);
 
