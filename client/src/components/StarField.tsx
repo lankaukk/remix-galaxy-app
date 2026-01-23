@@ -211,33 +211,52 @@ export function StarField() {
 
           const lineLength = star.size * 0.7;
 
-          // Vertical line with gradient fade
-          const vertGradient = ctx.createLinearGradient(0, -lineLength, 0, lineLength);
-          vertGradient.addColorStop(0, "transparent");
-          vertGradient.addColorStop(0.3, colorHex);
-          vertGradient.addColorStop(0.5, colorHex);
-          vertGradient.addColorStop(0.7, colorHex);
-          vertGradient.addColorStop(1, "transparent");
+          // Vertical line - two halves, each fading outward from center
+          const vertGradientTop = ctx.createLinearGradient(0, 0, 0, -lineLength);
+          vertGradientTop.addColorStop(0, colorHex);
+          vertGradientTop.addColorStop(0.7, colorHex);
+          vertGradientTop.addColorStop(1, "transparent");
+
+          const vertGradientBottom = ctx.createLinearGradient(0, 0, 0, lineLength);
+          vertGradientBottom.addColorStop(0, colorHex);
+          vertGradientBottom.addColorStop(0.7, colorHex);
+          vertGradientBottom.addColorStop(1, "transparent");
+
+          ctx.lineWidth = 2;
 
           ctx.beginPath();
-          ctx.moveTo(0, -lineLength);
-          ctx.lineTo(0, lineLength);
-          ctx.strokeStyle = vertGradient;
-          ctx.lineWidth = 2;
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, -lineLength);
+          ctx.strokeStyle = vertGradientTop;
           ctx.stroke();
 
-          // Horizontal line with gradient fade
-          const horizGradient = ctx.createLinearGradient(-lineLength, 0, lineLength, 0);
-          horizGradient.addColorStop(0, "transparent");
-          horizGradient.addColorStop(0.3, colorHex);
-          horizGradient.addColorStop(0.5, colorHex);
-          horizGradient.addColorStop(0.7, colorHex);
-          horizGradient.addColorStop(1, "transparent");
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, lineLength);
+          ctx.strokeStyle = vertGradientBottom;
+          ctx.stroke();
+
+          // Horizontal line - two halves, each fading outward from center
+          const horizGradientLeft = ctx.createLinearGradient(0, 0, -lineLength, 0);
+          horizGradientLeft.addColorStop(0, colorHex);
+          horizGradientLeft.addColorStop(0.7, colorHex);
+          horizGradientLeft.addColorStop(1, "transparent");
+
+          const horizGradientRight = ctx.createLinearGradient(0, 0, lineLength, 0);
+          horizGradientRight.addColorStop(0, colorHex);
+          horizGradientRight.addColorStop(0.7, colorHex);
+          horizGradientRight.addColorStop(1, "transparent");
 
           ctx.beginPath();
-          ctx.moveTo(-lineLength, 0);
+          ctx.moveTo(0, 0);
+          ctx.lineTo(-lineLength, 0);
+          ctx.strokeStyle = horizGradientLeft;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
           ctx.lineTo(lineLength, 0);
-          ctx.strokeStyle = horizGradient;
+          ctx.strokeStyle = horizGradientRight;
           ctx.stroke();
 
           // Center dot with faded edge - disable shadow so it blends with lines
