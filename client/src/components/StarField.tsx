@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 interface Star {
   id: number;
@@ -58,19 +58,11 @@ const colorMap = {
   },
 };
 
-function SparkleIcon({ size, color, isPressed }: { size: number; color: "blue" | "purple" | "cyan"; isPressed: boolean }) {
+function SparkleIcon({ size, color }: { size: number; color: "blue" | "purple" | "cyan" }) {
   const colors = colorMap[color];
-  const scale = isPressed ? 1.3 : 1;
   
   return (
-    <div
-      className="relative transition-transform duration-300 ease-out"
-      style={{
-        width: size,
-        height: size,
-        transform: `scale(${scale})`,
-      }}
-    >
+    <div className="relative" style={{ width: size, height: size }}>
       <div
         className="absolute inset-0"
         style={{
@@ -119,80 +111,62 @@ function SparkleIcon({ size, color, isPressed }: { size: number; color: "blue" |
   );
 }
 
-function OrbIcon({ size, color, isPressed }: { size: number; color: "blue" | "purple" | "cyan"; isPressed: boolean }) {
+function OrbIcon({ size, color }: { size: number; color: "blue" | "purple" | "cyan" }) {
   const colors = colorMap[color];
-  const scale = isPressed ? 1.4 : 1;
   
   return (
     <div
-      className="rounded-full transition-transform duration-300 ease-out"
+      className="rounded-full"
       style={{
         width: size,
         height: size,
         background: `radial-gradient(circle at 30% 30%, white, ${colors.main} 50%, ${colors.glow} 100%)`,
         boxShadow: colors.shadow,
-        transform: `scale(${scale})`,
       }}
     />
   );
 }
 
 function StarComponent({ star }: { star: Star }) {
-  const [isPressed, setIsPressed] = useState(false);
+  const [isBouncing, setIsBouncing] = useState(false);
 
-  const handleInteractionStart = () => {
-    setIsPressed(true);
-    setTimeout(() => setIsPressed(false), 300);
-  };
+  const handleInteraction = useCallback(() => {
+    if (isBouncing) return;
+    setIsBouncing(true);
+    setTimeout(() => setIsBouncing(false), 500);
+  }, [isBouncing]);
 
   return (
     <div
-      className="absolute cursor-pointer select-none"
+      className="absolute cursor-pointer select-none star-wrapper"
       style={{
         left: `${star.x}%`,
         top: `${star.y}%`,
-        animation: `float ${star.duration}s ease-in-out infinite`,
+        animation: `star-float ${star.duration}s ease-in-out infinite`,
         animationDelay: `${star.delay}s`,
         zIndex: star.type === "sparkle" ? 2 : 1,
       }}
-      onMouseEnter={handleInteractionStart}
-      onTouchStart={handleInteractionStart}
+      onMouseEnter={handleInteraction}
+      onPointerDown={handleInteraction}
+      onTouchStart={handleInteraction}
     >
-      {star.type === "sparkle" ? (
-        <SparkleIcon size={star.size} color={star.color} isPressed={isPressed} />
-      ) : (
-        <OrbIcon size={star.size} color={star.color} isPressed={isPressed} />
-      )}
+      <div className={isBouncing ? "star-bounce" : ""}>
+        {star.type === "sparkle" ? (
+          <SparkleIcon size={star.size} color={star.color} />
+        ) : (
+          <OrbIcon size={star.size} color={star.color} />
+        )}
+      </div>
     </div>
   );
 }
 
 export function StarField() {
   return (
-    <>
-      <style>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px) translateX(0px);
-          }
-          25% {
-            transform: translateY(-8px) translateX(4px);
-          }
-          50% {
-            transform: translateY(-4px) translateX(-4px);
-          }
-          75% {
-            transform: translateY(-12px) translateX(2px);
-          }
-        }
-      `}</style>
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {stars.map((star) => (
-          <div key={star.id} className="pointer-events-auto">
-            <StarComponent star={star} />
-          </div>
-        ))}
-      </div>
-    </>
+    <div className="absolute inset-0 overflow-hidden">
+      {stars.map((star) => (
+        <StarComponent key={star.id} star={star} />
+      ))}
+    </div>
   );
 }
