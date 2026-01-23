@@ -184,8 +184,8 @@ export function StarField() {
         }
 
         // Spring physics
-        const springStrength = 12;
-        const damping = 0.75;
+        const springStrength = 6;
+        const damping = 0.6;
 
         const ax = (targetX - star.x) * springStrength;
         const ay = (targetY - star.y) * springStrength;
