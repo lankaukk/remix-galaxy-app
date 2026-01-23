@@ -271,10 +271,10 @@ export function StarField() {
 
           // Center dot with faded edge - disable shadow so it blends with lines
           ctx.shadowBlur = 0;
-          const dotRadius = star.size * 0.15;
+          const dotRadius = star.size * 0.12;
           const dotGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, dotRadius);
           dotGradient.addColorStop(0, colorHex);
-          dotGradient.addColorStop(0.5, colorHex);
+          dotGradient.addColorStop(0.25, colorHex);
           dotGradient.addColorStop(1, colorHex + "00");
 
           ctx.beginPath();
