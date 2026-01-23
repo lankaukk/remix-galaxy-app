@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTheme } from "@/hooks/use-theme";
 
 interface Star {
   baseX: number;
@@ -12,13 +13,26 @@ interface Star {
   type: "sparkle" | "orb";
 }
 
-const COLORS = {
-  blue: "#4a90d9",
-  purple: "#9b6dff",
-  cyan: "#66d9ef",
+const THEME_COLORS = {
+  light: {
+    blue: "#2563eb",
+    purple: "#9333ea",
+    cyan: "#06b6d4",
+  },
+  dark: {
+    blue: "#4a90d9",
+    purple: "#9b6dff",
+    cyan: "#66d9ef",
+  },
+  sunset: {
+    blue: "#f97316",
+    purple: "#ec4899",
+    cyan: "#fbbf24",
+  },
 };
 
 export function StarField() {
+  const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const starsRef = useRef<Star[]>([]);
   const mouseRef = useRef<{ x: number | null; y: number | null }>({
@@ -182,7 +196,8 @@ export function StarField() {
         star.y += star.vy;
 
         // Draw star
-        const colorHex = COLORS[star.color as keyof typeof COLORS];
+        const colors = THEME_COLORS[theme];
+        const colorHex = colors[star.color as keyof typeof colors];
 
         if (star.type === "sparkle") {
           // Draw sparkle (cross shape with glow)
@@ -240,7 +255,7 @@ export function StarField() {
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas
