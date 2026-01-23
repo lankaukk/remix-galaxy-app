@@ -240,10 +240,16 @@ export function StarField() {
           ctx.strokeStyle = horizGradient;
           ctx.stroke();
 
-          // Center dot
+          // Center dot with faded edge
+          const dotRadius = star.size * 0.12;
+          const dotGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, dotRadius);
+          dotGradient.addColorStop(0, colorHex);
+          dotGradient.addColorStop(0.7, colorHex);
+          dotGradient.addColorStop(1, "transparent");
+
           ctx.beginPath();
-          ctx.arc(0, 0, star.size * 0.1, 0, Math.PI * 2);
-          ctx.fillStyle = colorHex;
+          ctx.arc(0, 0, dotRadius, 0, Math.PI * 2);
+          ctx.fillStyle = dotGradient;
           ctx.fill();
 
           ctx.restore();
