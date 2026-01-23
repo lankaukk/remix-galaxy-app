@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 interface Star {
   id: number;
@@ -11,34 +11,81 @@ interface Star {
   duration: number;
 }
 
-const stars: Star[] = [
-  { id: 1, type: "sparkle", x: 15, y: 45, size: 60, color: "blue", delay: 0, duration: 4 },
-  { id: 2, type: "sparkle", x: 25, y: 75, size: 50, color: "blue", delay: 0.5, duration: 3.5 },
-  { id: 3, type: "sparkle", x: 70, y: 85, size: 45, color: "cyan", delay: 1, duration: 4.5 },
-  { id: 4, type: "sparkle", x: 85, y: 60, size: 35, color: "blue", delay: 1.5, duration: 3.8 },
-  { id: 5, type: "sparkle", x: 50, y: 50, size: 80, color: "blue", delay: 0.3, duration: 5 },
-  { id: 6, type: "sparkle", x: 30, y: 20, size: 40, color: "purple", delay: 0.8, duration: 4.2 },
-  { id: 7, type: "sparkle", x: 75, y: 25, size: 55, color: "cyan", delay: 1.2, duration: 3.6 },
-  
-  { id: 8, type: "orb", x: 10, y: 15, size: 20, color: "purple", delay: 0, duration: 3 },
-  { id: 9, type: "orb", x: 20, y: 55, size: 15, color: "purple", delay: 0.4, duration: 3.5 },
-  { id: 10, type: "orb", x: 35, y: 10, size: 25, color: "purple", delay: 0.8, duration: 4 },
-  { id: 11, type: "orb", x: 45, y: 30, size: 12, color: "blue", delay: 1.2, duration: 3.2 },
-  { id: 12, type: "orb", x: 55, y: 15, size: 18, color: "purple", delay: 0.2, duration: 3.8 },
-  { id: 13, type: "orb", x: 65, y: 40, size: 22, color: "cyan", delay: 0.6, duration: 4.2 },
-  { id: 14, type: "orb", x: 80, y: 12, size: 16, color: "purple", delay: 1, duration: 3.4 },
-  { id: 15, type: "orb", x: 90, y: 35, size: 14, color: "purple", delay: 1.4, duration: 3.6 },
-  { id: 16, type: "orb", x: 5, y: 70, size: 20, color: "cyan", delay: 0.3, duration: 4 },
-  { id: 17, type: "orb", x: 40, y: 65, size: 12, color: "purple", delay: 0.7, duration: 3.3 },
-  { id: 18, type: "orb", x: 60, y: 70, size: 18, color: "blue", delay: 1.1, duration: 3.7 },
-  { id: 19, type: "orb", x: 78, y: 80, size: 15, color: "purple", delay: 0.5, duration: 4.1 },
-  { id: 20, type: "orb", x: 92, y: 75, size: 22, color: "purple", delay: 0.9, duration: 3.9 },
-  { id: 21, type: "orb", x: 12, y: 88, size: 10, color: "cyan", delay: 1.3, duration: 3.1 },
-  { id: 22, type: "orb", x: 55, y: 88, size: 16, color: "purple", delay: 0.1, duration: 4.3 },
-  { id: 23, type: "orb", x: 88, y: 50, size: 14, color: "blue", delay: 0.6, duration: 3.5 },
-  { id: 24, type: "orb", x: 8, y: 40, size: 18, color: "purple", delay: 1.5, duration: 4.5 },
-  { id: 25, type: "orb", x: 48, y: 8, size: 12, color: "cyan", delay: 0.4, duration: 3.8 },
-];
+const generateStars = (): Star[] => {
+  const stars: Star[] = [];
+  let id = 1;
+
+  const sparkles = [
+    { x: 15, y: 45, size: 50, color: "blue" as const },
+    { x: 25, y: 75, size: 40, color: "blue" as const },
+    { x: 70, y: 85, size: 35, color: "cyan" as const },
+    { x: 85, y: 60, size: 30, color: "blue" as const },
+    { x: 50, y: 50, size: 65, color: "blue" as const },
+    { x: 30, y: 20, size: 35, color: "purple" as const },
+    { x: 75, y: 25, size: 45, color: "cyan" as const },
+    { x: 8, y: 80, size: 38, color: "purple" as const },
+    { x: 92, y: 15, size: 32, color: "blue" as const },
+    { x: 60, y: 10, size: 28, color: "cyan" as const },
+  ];
+
+  sparkles.forEach((s) => {
+    stars.push({
+      id: id++,
+      type: "sparkle",
+      ...s,
+      delay: Math.random() * 3,
+      duration: 8 + Math.random() * 6,
+    });
+  });
+
+  const mediumOrbs = [
+    { x: 10, y: 15, size: 18, color: "purple" as const },
+    { x: 20, y: 55, size: 14, color: "purple" as const },
+    { x: 35, y: 10, size: 20, color: "purple" as const },
+    { x: 45, y: 30, size: 12, color: "blue" as const },
+    { x: 55, y: 15, size: 16, color: "purple" as const },
+    { x: 65, y: 40, size: 18, color: "cyan" as const },
+    { x: 80, y: 12, size: 14, color: "purple" as const },
+    { x: 90, y: 35, size: 12, color: "purple" as const },
+    { x: 5, y: 70, size: 16, color: "cyan" as const },
+    { x: 40, y: 65, size: 10, color: "purple" as const },
+    { x: 60, y: 70, size: 14, color: "blue" as const },
+    { x: 78, y: 80, size: 12, color: "purple" as const },
+    { x: 92, y: 75, size: 18, color: "purple" as const },
+    { x: 12, y: 88, size: 10, color: "cyan" as const },
+    { x: 55, y: 88, size: 14, color: "purple" as const },
+    { x: 88, y: 50, size: 12, color: "blue" as const },
+    { x: 8, y: 40, size: 15, color: "purple" as const },
+    { x: 48, y: 8, size: 11, color: "cyan" as const },
+  ];
+
+  mediumOrbs.forEach((s) => {
+    stars.push({
+      id: id++,
+      type: "orb",
+      ...s,
+      delay: Math.random() * 4,
+      duration: 10 + Math.random() * 8,
+    });
+  });
+
+  for (let i = 0; i < 80; i++) {
+    stars.push({
+      id: id++,
+      type: "orb",
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 2 + Math.random() * 5,
+      color: ["blue", "purple", "cyan"][Math.floor(Math.random() * 3)] as "blue" | "purple" | "cyan",
+      delay: Math.random() * 5,
+      duration: 12 + Math.random() * 10,
+    });
+  }
+
+  return stars;
+};
+
+const stars = generateStars();
 
 const colorMap = {
   blue: {
@@ -121,23 +168,51 @@ function OrbIcon({ size, color }: { size: number; color: "blue" | "purple" | "cy
         width: size,
         height: size,
         background: `radial-gradient(circle at 30% 30%, white, ${colors.main} 50%, ${colors.glow} 100%)`,
-        boxShadow: colors.shadow,
+        boxShadow: size > 8 ? colors.shadow : `0 0 ${size}px ${colors.glow}`,
       }}
     />
   );
 }
 
-function StarComponent({ star }: { star: Star }) {
-  const [isBouncing, setIsBouncing] = useState(false);
+function StarComponent({ star, mousePos }: { star: Star; mousePos: { x: number; y: number } | null }) {
+  const [isGooey, setIsGooey] = useState(false);
+  const starRef = useRef<HTMLDivElement>(null);
+  const lastTriggerTime = useRef(0);
 
-  const handleInteraction = useCallback(() => {
-    if (isBouncing) return;
-    setIsBouncing(true);
-    setTimeout(() => setIsBouncing(false), 500);
-  }, [isBouncing]);
+  useEffect(() => {
+    if (!mousePos || !starRef.current) return;
+    
+    const rect = starRef.current.getBoundingClientRect();
+    const starCenterX = rect.left + rect.width / 2;
+    const starCenterY = rect.top + rect.height / 2;
+    
+    const distance = Math.sqrt(
+      Math.pow(mousePos.x - starCenterX, 2) + 
+      Math.pow(mousePos.y - starCenterY, 2)
+    );
+    
+    const proximityThreshold = 80 + star.size;
+    const now = Date.now();
+    
+    if (distance < proximityThreshold && now - lastTriggerTime.current > 800) {
+      lastTriggerTime.current = now;
+      setIsGooey(true);
+      setTimeout(() => setIsGooey(false), 800);
+    }
+  }, [mousePos, star.size]);
+
+  const handleDirectInteraction = useCallback(() => {
+    const now = Date.now();
+    if (now - lastTriggerTime.current > 800) {
+      lastTriggerTime.current = now;
+      setIsGooey(true);
+      setTimeout(() => setIsGooey(false), 800);
+    }
+  }, []);
 
   return (
     <div
+      ref={starRef}
       className="absolute cursor-pointer select-none star-wrapper"
       style={{
         left: `${star.x}%`,
@@ -146,11 +221,10 @@ function StarComponent({ star }: { star: Star }) {
         animationDelay: `${star.delay}s`,
         zIndex: star.type === "sparkle" ? 2 : 1,
       }}
-      onMouseEnter={handleInteraction}
-      onPointerDown={handleInteraction}
-      onTouchStart={handleInteraction}
+      onPointerDown={handleDirectInteraction}
+      onTouchStart={handleDirectInteraction}
     >
-      <div className={isBouncing ? "star-bounce" : ""}>
+      <div className={isGooey ? "star-gooey" : ""}>
         {star.type === "sparkle" ? (
           <SparkleIcon size={star.size} color={star.color} />
         ) : (
@@ -162,10 +236,41 @@ function StarComponent({ star }: { star: Star }) {
 }
 
 export function StarField() {
+  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        setMousePos({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        setMousePos({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchstart", handleTouchStart);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchStart);
+    };
+  }, []);
+
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden">
       {stars.map((star) => (
-        <StarComponent key={star.id} star={star} />
+        <StarComponent key={star.id} star={star} mousePos={mousePos} />
       ))}
     </div>
   );
