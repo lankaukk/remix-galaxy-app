@@ -176,25 +176,25 @@ export function StarField() {
         const star = stars[i];
         if (!star.el) continue;
 
-        const sx = rect.left + (star.baseX / 100) * rect.width + star.offsetX;
-        const sy = rect.top + (star.baseY / 100) * rect.height + star.offsetY;
+        const baseScreenX = rect.left + (star.baseX / 100) * rect.width;
+        const baseScreenY = rect.top + (star.baseY / 100) * rect.height;
 
         let tx = 0, ty = 0;
 
         if (mx !== null && my !== null) {
-          const dx = sx - mx;
-          const dy = sy - my;
+          const dx = baseScreenX - mx;
+          const dy = baseScreenY - my;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const radius = 80 + star.size * 1.5;
+          const radius = 100 + star.size * 2;
 
           if (dist < radius && dist > 0) {
-            const force = Math.pow(1 - dist / radius, 1.5) * (60 + star.size);
+            const force = Math.pow(1 - dist / radius, 1.2) * (80 + star.size * 1.5);
             tx = (dx / dist) * force;
             ty = (dy / dist) * force;
           }
         }
 
-        const ease = (tx !== 0 || ty !== 0) ? 0.12 : 0.03;
+        const ease = (tx !== 0 || ty !== 0) ? 0.08 : 0.025;
         star.offsetX += (tx - star.offsetX) * ease;
         star.offsetY += (ty - star.offsetY) * ease;
 
