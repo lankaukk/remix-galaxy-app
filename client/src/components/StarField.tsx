@@ -1,5 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useEffect, useState, useMemo, memo } from "react";
+import { motion, useSpring } from "framer-motion";
 
 interface StarData {
   id: number;
@@ -8,8 +8,8 @@ interface StarData {
   size: number;
   color: "blue" | "purple" | "cyan";
   type: "sparkle" | "orb";
-  duration: number;
-  delay: number;
+  floatDuration: number;
+  floatDelay: number;
 }
 
 const colorMap = {
@@ -52,14 +52,8 @@ function generateStarsData(): StarData[] {
 
   sparkles.forEach((s) => {
     stars.push({
-      id: id++,
-      baseX: s.x,
-      baseY: s.y,
-      size: s.size,
-      color: s.color,
-      type: "sparkle",
-      duration: 15 + Math.random() * 10,
-      delay: Math.random() * 3,
+      id: id++, baseX: s.x, baseY: s.y, size: s.size, color: s.color, type: "sparkle",
+      floatDuration: 15 + Math.random() * 10, floatDelay: Math.random() * 3,
     });
   });
 
@@ -74,27 +68,16 @@ function generateStarsData(): StarData[] {
 
   orbs.forEach((s) => {
     stars.push({
-      id: id++,
-      baseX: s.x,
-      baseY: s.y,
-      size: s.size,
-      color: colors[Math.floor(Math.random() * 3)],
-      type: "orb",
-      duration: 18 + Math.random() * 12,
-      delay: Math.random() * 4,
+      id: id++, baseX: s.x, baseY: s.y, size: s.size, color: colors[Math.floor(Math.random() * 3)], type: "orb",
+      floatDuration: 18 + Math.random() * 12, floatDelay: Math.random() * 4,
     });
   });
 
   for (let i = 0; i < 400; i++) {
     stars.push({
-      id: id++,
-      baseX: Math.random() * 100,
-      baseY: Math.random() * 100,
-      size: 1 + Math.random() * 3,
-      color: colors[Math.floor(Math.random() * 3)],
-      type: "orb",
-      duration: 20 + Math.random() * 15,
-      delay: Math.random() * 6,
+      id: id++, baseX: Math.random() * 100, baseY: Math.random() * 100,
+      size: 1 + Math.random() * 3, color: colors[Math.floor(Math.random() * 3)], type: "orb",
+      floatDuration: 20 + Math.random() * 15, floatDelay: Math.random() * 6,
     });
   }
 
@@ -105,52 +88,10 @@ function Sparkle({ size, color }: { size: number; color: "blue" | "purple" | "cy
   const c = colorMap[color];
   return (
     <div style={{ position: "relative", width: size, height: size }}>
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: `radial-gradient(circle, ${c.main} 0%, transparent 70%)`,
-          filter: `blur(${size * 0.15}px)`,
-          opacity: 0.6,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: 0,
-          width: 2,
-          height: "100%",
-          background: `linear-gradient(to bottom, transparent, ${c.main}, white, ${c.main}, transparent)`,
-          transform: "translateX(-50%)",
-          boxShadow: c.shadow,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: 0,
-          height: 2,
-          width: "100%",
-          background: `linear-gradient(to right, transparent, ${c.main}, white, ${c.main}, transparent)`,
-          transform: "translateY(-50%)",
-          boxShadow: c.shadow,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          width: size * 0.2,
-          height: size * 0.2,
-          background: "white",
-          borderRadius: "50%",
-          transform: "translate(-50%, -50%)",
-          boxShadow: `0 0 10px white, ${c.shadow}`,
-        }}
-      />
+      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle, ${c.main} 0%, transparent 70%)`, filter: `blur(${size * 0.15}px)`, opacity: 0.6 }} />
+      <div style={{ position: "absolute", left: "50%", top: 0, width: 2, height: "100%", background: `linear-gradient(to bottom, transparent, ${c.main}, white, ${c.main}, transparent)`, transform: "translateX(-50%)", boxShadow: c.shadow }} />
+      <div style={{ position: "absolute", top: "50%", left: 0, height: 2, width: "100%", background: `linear-gradient(to right, transparent, ${c.main}, white, ${c.main}, transparent)`, transform: "translateY(-50%)", boxShadow: c.shadow }} />
+      <div style={{ position: "absolute", left: "50%", top: "50%", width: size * 0.2, height: size * 0.2, background: "white", borderRadius: "50%", transform: "translate(-50%, -50%)", boxShadow: `0 0 10px white, ${c.shadow}` }} />
     </div>
   );
 }
@@ -159,32 +100,17 @@ function Orb({ size, color }: { size: number; color: "blue" | "purple" | "cyan" 
   const c = colorMap[color];
   const bg = size > 5 ? `radial-gradient(circle at 30% 30%, white, ${c.main} 50%, ${c.glow} 100%)` : c.main;
   const shadow = size > 5 ? c.shadow : `0 0 ${size * 2}px ${c.glow}`;
-  return (
-    <div
-      style={{
-        width: size,
-        height: size,
-        background: bg,
-        borderRadius: "50%",
-        boxShadow: shadow,
-      }}
-    />
-  );
+  return <div style={{ width: size, height: size, background: bg, borderRadius: "50%", boxShadow: shadow }} />;
 }
 
-function Star({ star, mouseX, mouseY }: { star: StarData; mouseX: number | null; mouseY: number | null }) {
-  const springConfig = { damping: 25, stiffness: 120, mass: 1 };
-  
-  const offsetX = useMotionValue(0);
-  const offsetY = useMotionValue(0);
-  
-  const springX = useSpring(offsetX, springConfig);
-  const springY = useSpring(offsetY, springConfig);
+const Star = memo(function Star({ star, mouseX, mouseY }: { star: StarData; mouseX: number | null; mouseY: number | null }) {
+  const springX = useSpring(0, { damping: 20, stiffness: 80 });
+  const springY = useSpring(0, { damping: 20, stiffness: 80 });
 
   useEffect(() => {
     if (mouseX === null || mouseY === null) {
-      offsetX.set(0);
-      offsetY.set(0);
+      springX.set(0);
+      springY.set(0);
       return;
     }
 
@@ -198,13 +124,13 @@ function Star({ star, mouseX, mouseY }: { star: StarData; mouseX: number | null;
 
     if (dist < radius && dist > 0) {
       const force = Math.pow(1 - dist / radius, 1.2) * (100 + star.size * 2);
-      offsetX.set((dx / dist) * force);
-      offsetY.set((dy / dist) * force);
+      springX.set((dx / dist) * force);
+      springY.set((dy / dist) * force);
     } else {
-      offsetX.set(0);
-      offsetY.set(0);
+      springX.set(0);
+      springY.set(0);
     }
-  }, [mouseX, mouseY, star.baseX, star.baseY, star.size, offsetX, offsetY]);
+  }, [mouseX, mouseY, star.baseX, star.baseY, star.size, springX, springY]);
 
   return (
     <motion.div
@@ -216,69 +142,37 @@ function Star({ star, mouseX, mouseY }: { star: StarData; mouseX: number | null;
         y: springY,
         zIndex: star.type === "sparkle" ? 2 : 1,
         pointerEvents: "none",
-      }}
-      animate={{
-        y: [0, -3, 0, -2, 0],
-        x: [0, 2, 0, -1, 0],
-      }}
-      transition={{
-        duration: star.duration,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: star.delay,
+        animation: `star-float ${star.floatDuration}s ease-in-out infinite`,
+        animationDelay: `${star.floatDelay}s`,
       }}
     >
-      {star.type === "sparkle" ? (
-        <Sparkle size={star.size} color={star.color} />
-      ) : (
-        <Orb size={star.size} color={star.color} />
-      )}
+      {star.type === "sparkle" ? <Sparkle size={star.size} color={star.color} /> : <Orb size={star.size} color={star.color} />}
     </motion.div>
   );
-}
+});
 
 export function StarField() {
   const [mousePos, setMousePos] = useState<{ x: number | null; y: number | null }>({ x: null, y: null });
-  
   const stars = useMemo(() => generateStarsData(), []);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
+    const onMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
+    const onTouchMove = (e: TouchEvent) => { if (e.touches[0]) setMousePos({ x: e.touches[0].clientX, y: e.touches[0].clientY }); };
+    const onTouchStart = (e: TouchEvent) => { if (e.touches[0]) setMousePos({ x: e.touches[0].clientX, y: e.touches[0].clientY }); };
+    const onEnd = () => setMousePos({ x: null, y: null });
 
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        setMousePos({ x: e.touches[0].clientX, y: e.touches[0].clientY });
-      }
-    };
-
-    const handleTouchStart = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        setMousePos({ x: e.touches[0].clientX, y: e.touches[0].clientY });
-      }
-    };
-
-    const handleTouchEnd = () => {
-      setMousePos({ x: null, y: null });
-    };
-
-    const handleMouseLeave = () => {
-      setMousePos({ x: null, y: null });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchend", handleTouchEnd, { passive: true });
-    document.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onEnd, { passive: true });
+    document.addEventListener("mouseleave", onEnd);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchEnd);
-      document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onEnd);
+      document.removeEventListener("mouseleave", onEnd);
     };
   }, []);
 
