@@ -48,11 +48,13 @@ export function StarField() {
 
     // Large sparkle stars
     const sparklePositions = [
+      { x: 50, y: 50, size: 85, color: "blue" },
+      { x: 20, y: 30, size: 75, color: "cyan" },
+      { x: 80, y: 70, size: 70, color: "purple" },
       { x: 15, y: 45, size: 45, color: "blue" },
       { x: 25, y: 75, size: 35, color: "blue" },
       { x: 70, y: 85, size: 30, color: "cyan" },
       { x: 85, y: 60, size: 28, color: "blue" },
-      { x: 50, y: 50, size: 55, color: "blue" },
       { x: 30, y: 20, size: 30, color: "purple" },
       { x: 75, y: 25, size: 38, color: "cyan" },
       { x: 8, y: 80, size: 32, color: "purple" },
@@ -208,7 +210,7 @@ export function StarField() {
           // Center dot
           ctx.beginPath();
           ctx.arc(0, 0, star.size * 0.1, 0, Math.PI * 2);
-          ctx.fillStyle = "white";
+          ctx.fillStyle = colorHex;
           ctx.fill();
 
           ctx.restore();
