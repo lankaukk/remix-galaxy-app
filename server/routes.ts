@@ -17,6 +17,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       process.env.SHOPIFY_PASSWORD,
       process.env.SHOPIFY_PASSWORD_2,
       process.env.SHOPIFY_PASSWORD_3,
+      process.env.SHOPIFY_PASSWORD_4,
+      process.env.SHOPIFY_PASSWORD_5,
     ].filter(Boolean);
 
     if (validPasswords.includes(password)) {
