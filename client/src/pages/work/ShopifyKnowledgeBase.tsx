@@ -15,6 +15,14 @@ const PAGE_TITLE = "Shopify Knowledge Base";
 const PAGE_DESCRIPTION =
   "View and customize the FAQs that AI shopping agents use to answer questions about your store.";
 
+function Img({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="rounded-xl overflow-hidden shadow-xl">
+      <img src={src} alt={alt} className="w-full h-auto block" loading="lazy" />
+    </div>
+  );
+}
+
 export default function ShopifyKnowledgeBase() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -46,12 +54,14 @@ export default function ShopifyKnowledgeBase() {
       backText="All Work"
     >
       <div className="space-y-16">
-        <img
-          src={KnowledgeBaseCover}
-          alt="Shopify Knowledge Base"
-          className="w-full rounded-lg"
-          loading="lazy"
-        />
+        <div className="rounded-xl overflow-hidden shadow-xl">
+          <img
+            src={KnowledgeBaseCover}
+            alt="Shopify Knowledge Base"
+            className="w-full h-auto block"
+            loading="lazy"
+          />
+        </div>
 
         <ProjectBrief
           brief="Give merchants visibility into how AI shopping agents represent their store, and the tools to customize those answers — ensuring accuracy, brand voice, and competitive differentiation in an AI-first commerce landscape."
@@ -76,7 +86,7 @@ export default function ShopifyKnowledgeBase() {
           <p className="text-muted-foreground text-lg leading-relaxed">
             The core app gives merchants an activity dashboard — product query volume, FAQ resolution rate, top unanswered questions, and a full query log. Merchants can view Shopify-generated FAQs, add custom ones, and see exactly how AI agents are representing their store in real time.
           </p>
-          <div className="aspect-video w-full rounded-lg overflow-hidden">
+          <div className="rounded-xl overflow-hidden shadow-xl aspect-video">
             <iframe
               src="https://www.youtube.com/embed/22NqvJyppt8?si=fWkxvH9fNVZaGOx5"
               title="Shopify Knowledge Base"
@@ -86,18 +96,8 @@ export default function ShopifyKnowledgeBase() {
               allowFullScreen
             />
           </div>
-          <img
-            src={KbOverviewMobile}
-            alt="Knowledge Base overview — mobile"
-            className="w-full rounded-lg"
-            loading="lazy"
-          />
-          <img
-            src={KbOverviewDesktopHq}
-            alt="Knowledge Base overview — desktop"
-            className="w-full rounded-lg"
-            loading="lazy"
-          />
+          <Img src={KbOverviewMobile} alt="Knowledge Base overview — mobile" />
+          <Img src={KbOverviewDesktopHq} alt="Knowledge Base overview — desktop" />
         </section>
 
         <section className="space-y-6">
@@ -106,18 +106,8 @@ export default function ShopifyKnowledgeBase() {
             The query log gives merchants a live feed of every question AI agents have fielded about their store — answered, unanswered, and which FAQs matched. I designed both the empty state (for new merchants just getting set up) and the populated experience showing real query traffic.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <img
-              src={KbQueryLogEmpty}
-              alt="Query log — empty state"
-              className="w-full rounded-lg"
-              loading="lazy"
-            />
-            <img
-              src={KbQueryLogFull}
-              alt="Query log — populated with real queries"
-              className="w-full rounded-lg"
-              loading="lazy"
-            />
+            <Img src={KbQueryLogEmpty} alt="Query log — empty state" />
+            <Img src={KbQueryLogFull} alt="Query log — populated with real queries" />
           </div>
         </section>
 
@@ -130,24 +120,8 @@ export default function ShopifyKnowledgeBase() {
             Those screens didn't ship. The technical capability and commercial agreements weren't ready in time. What did ship was a strong foundation — and the uninstall feedback has since validated exactly what I knew was missing: merchants want to know which agents are sending queries, and they want control over each relationship. That work is still ahead.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="rounded-lg overflow-hidden" style={{ height: "320px" }}>
-              <img
-                src={KbAiAgentsHub}
-                alt="AI Agents Hub — ChatGPT integration"
-                className="w-full h-full object-cover"
-                style={{ objectPosition: "left 15%" }}
-                loading="lazy"
-              />
-            </div>
-            <div className="rounded-lg overflow-hidden" style={{ height: "320px" }}>
-              <img
-                src={KbOverviewDesktop1}
-                alt="Knowledge Base — FAQ queries panel"
-                className="w-full h-full object-cover"
-                style={{ objectPosition: "right center" }}
-                loading="lazy"
-              />
-            </div>
+            <Img src={KbAiAgentsHub} alt="AI Agents Hub — ChatGPT integration" />
+            <Img src={KbOverviewDesktop1} alt="Knowledge Base — FAQ queries panel" />
           </div>
         </section>
 
