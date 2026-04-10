@@ -23,7 +23,7 @@ const projects = [
     href: "/work/shopify_knowledge_base",
   },
   {
-    title: "Shopify",
+    title: "Shopify Sales Channels",
     description: "UX Designer on the Channels Platform",
     image: ShopifyCover,
     href: "/work/shopify_channels_platform",

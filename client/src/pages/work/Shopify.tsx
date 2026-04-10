@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
 
-const PAGE_TITLE = "Senior Product Designer at Shopify";
+const PAGE_TITLE = "Shopify Sales Channels";
 const PAGE_DESCRIPTION = "Designing intuitive, accessible experiences for Shopify's core platform, from Storefronts to the Channels Platform.";
 
 export default function Shopify() {
