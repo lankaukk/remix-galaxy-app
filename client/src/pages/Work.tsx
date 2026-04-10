@@ -11,8 +11,8 @@ import FoundationsCover from "@/assets/images/protest-platform/protest-platform-
 
 const projects = [
   {
-    title: "Shopify",
-    description: "Senior UX Designer on Sidekick, the AI assistant for commerce",
+    title: "Shopify Sidekick",
+    description: "Senior UX Designer on the AI assistant for commerce",
     image: SidekickCover,
     href: "/work/shopify_sidekick",
   },
