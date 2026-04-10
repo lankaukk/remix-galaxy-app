@@ -89,6 +89,18 @@ export default function ShopifyKnowledgeBase() {
           ]}
         />
 
+        <div className="rounded-xl overflow-hidden shadow-xl">
+          <video
+            src={KbOverviewDesktopVideo}
+            className="w-full h-auto block"
+            autoPlay
+            loop
+            muted
+            controls
+            playsInline
+          />
+        </div>
+
         <section className="space-y-6">
           <h2 className="text-3xl font-bold tracking-tight">The shipped experience</h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
@@ -102,17 +114,6 @@ export default function ShopifyKnowledgeBase() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden shadow-xl">
-            <video
-              src={KbOverviewDesktopVideo}
-              className="w-full h-auto block"
-              autoPlay
-              loop
-              muted
-              controls
-              playsInline
             />
           </div>
         </section>
