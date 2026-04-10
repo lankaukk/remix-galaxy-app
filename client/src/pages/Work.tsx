@@ -6,6 +6,7 @@ import { ProjectCardSkeleton } from "@/components/ui/project-card-skeleton";
 import UtopiaCover from "@/assets/images/utopia/Utopia_Cover.jpg";
 import ShopifyCover from "@/assets/images/shopify/sales_channels.png";
 import SidekickCover from "@/assets/images/shopify/sidekick-cover-new.png";
+import KnowledgeBaseCover from "@/assets/images/shopify/knowledge-base-cover.png";
 import FoundationsCover from "@/assets/images/protest-platform/protest-platform-map.gif";
 
 const projects = [
@@ -14,6 +15,12 @@ const projects = [
     description: "Senior UX Designer on Sidekick, the AI assistant for commerce",
     image: SidekickCover,
     href: "/work/shopify_sidekick",
+  },
+  {
+    title: "Shopify Knowledge Base",
+    description: "View and customize the FAQs that AI shopping agents use to answer questions about your store.",
+    image: KnowledgeBaseCover,
+    href: "/work/shopify_knowledge_base",
   },
   {
     title: "Shopify",
@@ -57,7 +64,7 @@ export default function Work() {
         className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
       >
         {!allImagesLoaded &&
-          Array(4)
+          Array(5)
             .fill(0)
             .map((_, index) => <ProjectCardSkeleton key={index} />)}
         
