@@ -37,7 +37,7 @@ export default function ProjectLayout({
       <div className="mb-8 flex items-start justify-between gap-6">
         <div>
           <h1 className="mb-4 text-4xl font-bold sm:text-5xl">{title}</h1>
-          <p className="text-lg">{description}</p>
+          {description && <p className="text-lg">{description}</p>}
         </div>
         {action && <div className="shrink-0 pt-1">{action}</div>}
       </div>

@@ -13,8 +13,7 @@ import KbQueryLogFull from "@/assets/images/shopify/kb-query-log-full.jpeg";
 import KbAiAgentsHub from "@/assets/images/shopify/kb-ai-agents-hub.jpeg";
 
 const PAGE_TITLE = "Shopify Knowledge Base";
-const PAGE_DESCRIPTION =
-  "View and customize the FAQs that AI shopping agents use to answer questions about your store.";
+const PAGE_DESCRIPTION = "";
 
 function Img({ src, alt }: { src: string; alt: string }) {
   return (
