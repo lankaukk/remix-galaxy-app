@@ -112,10 +112,10 @@ export default function ShopifyKnowledgeBase() {
             The query log gives merchants a live feed of every question AI agents have fielded about their store — answered, unanswered, and which FAQs matched. I designed both the empty state (for new merchants just getting set up) and the populated experience showing real query traffic.
           </p>
           <div className="relative flex items-start">
-            <div className="rounded-md overflow-hidden shadow-xl w-[45%] shrink-0">
+            <div className="rounded-md overflow-hidden shadow-xl w-[60%] shrink-0">
               <img src={KbQueryLogFull} alt="Query log — populated with real queries" className="w-full h-auto block" loading="lazy" style={{ imageRendering: "auto" }} />
             </div>
-            <div className="rounded-md overflow-hidden shadow-xl w-[42%] shrink-0 -ml-[7%] mt-10 relative z-10">
+            <div className="rounded-md overflow-hidden shadow-xl w-[42%] shrink-0 -ml-[3%] mt-10 relative z-10">
               <img src={KbQueryLogEmpty} alt="Query log — empty state" className="w-full h-auto block" loading="lazy" />
             </div>
           </div>
