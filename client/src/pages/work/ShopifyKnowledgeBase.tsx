@@ -4,6 +4,12 @@ import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
 import KnowledgeBaseCover from "@/assets/images/shopify/knowledge-base-cover.png";
+import KbOverviewMobile from "@/assets/images/shopify/kb-overview-mobile.jpeg";
+import KbOverviewDesktop1 from "@/assets/images/shopify/kb-overview-desktop-1.jpeg";
+import KbOverviewDesktop2 from "@/assets/images/shopify/kb-overview-desktop-2.jpeg";
+import KbQueryLogEmpty from "@/assets/images/shopify/kb-query-log-empty.jpeg";
+import KbQueryLogFull from "@/assets/images/shopify/kb-query-log-full.jpeg";
+import KbAiAgentsHub from "@/assets/images/shopify/kb-ai-agents-hub.jpeg";
 
 const PAGE_TITLE = "Shopify Knowledge Base";
 const PAGE_DESCRIPTION =
@@ -39,7 +45,7 @@ export default function ShopifyKnowledgeBase() {
       backLink="/work"
       backText="All Work"
     >
-      <div className="space-y-12">
+      <div className="space-y-16">
         <img
           src={KnowledgeBaseCover}
           alt="Shopify Knowledge Base"
@@ -79,47 +85,75 @@ export default function ShopifyKnowledgeBase() {
           </div>
         </section>
 
-        <div className="prose-lg max-w-none">
-          <h2>About the Product</h2>
-          <p>
-            AI agents are changing how people shop online. When shoppers use AI
-            agents to search for products or ask about store policies, Shopify
-            provides answers based on your store's catalog and settings.
-            Knowledge Base lets you view how often your store's info is
-            requested by AI agents and customize FAQs to ensure AI represents
-            your brand accurately and highlights what makes your business
-            unique. See what buyers are asking, so you can provide the answers
-            they're looking for.
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">The shipped experience</h2>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            The core app gives merchants an activity dashboard — product query volume, FAQ resolution rate, top unanswered questions, and a full query log. Merchants can view Shopify-generated FAQs, add custom ones, and see exactly how AI agents are representing their store in real time.
           </p>
-          <ul>
-            <li>
-              View Shopify-generated FAQs based on your store's settings and
-              policies.
-            </li>
-            <li>Monitor buyer inquiries about your store.</li>
-            <li>
-              Create custom FAQs to address a wider array of buyer questions.
-            </li>
-          </ul>
+          <img
+            src={KbOverviewMobile}
+            alt="Knowledge Base overview — mobile"
+            className="w-full rounded-lg shadow-xl"
+            loading="lazy"
+          />
+          <img
+            src={KbOverviewDesktop2}
+            alt="Knowledge Base overview — desktop with full activity data"
+            className="w-full rounded-lg shadow-xl"
+            loading="lazy"
+          />
+        </section>
 
-          <h2>My Contributions</h2>
-          <p>
-            I designed the Shopify Knowledge Base app as part of my work on
-            Sidekick's multimodal features. This included designing the FAQ
-            management interface, the inquiry monitoring dashboard, and the
-            custom FAQ creation flow — giving merchants clear visibility into
-            how AI agents represent their store and full control over the
-            answers shoppers receive.
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">Monitoring AI queries</h2>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            The query log gives merchants a live feed of every question AI agents have fielded about their store — answered, unanswered, and which FAQs matched. I designed both the empty state (for new merchants just getting set up) and the populated experience showing real query traffic.
           </p>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img
+              src={KbQueryLogEmpty}
+              alt="Query log — empty state"
+              className="w-full rounded-lg shadow-xl"
+              loading="lazy"
+            />
+            <img
+              src={KbQueryLogFull}
+              alt="Query log — populated with real queries"
+              className="w-full rounded-lg shadow-xl"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">Designing ahead of the partnership</h2>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            The bigger vision for this app — and what would make it really sing — depended on something outside our control: a live shopping partnership with ChatGPT. I designed forward-thinking dashboards showing per-agent breakdowns (ChatGPT, Anthropic, and others), plan management for each partnership, revenue attribution from AI-driven sales, and agent-specific resolution rates.
+          </p>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Those screens didn't ship. The technical capability and commercial agreements weren't ready in time. What did ship was a strong foundation — and the uninstall feedback has since validated exactly what I knew was missing: merchants want to know which agents are sending queries, and they want control over each relationship. That work is still ahead.
+          </p>
+          <img
+            src={KbAiAgentsHub}
+            alt="AI Agents Hub — per-agent dashboards with ChatGPT integration"
+            className="w-full rounded-lg shadow-xl"
+            loading="lazy"
+          />
+          <img
+            src={KbOverviewDesktop1}
+            alt="Knowledge Base admin — Shopify Agent Platform banner"
+            className="w-full rounded-lg shadow-xl"
+            loading="lazy"
+          />
+        </section>
 
         <ProjectOutcome
-          outcome="Knowledge Base launched in March 2025 and grew to 14,000+ active merchants within its first year — with strong retention and outsized adoption from high-value enterprise merchants. Uninstall feedback directly informed future onboarding improvements."
+          outcome="Knowledge Base launched in March 2025 and grew to 14,000+ active merchants within its first year — with strong retention and outsized adoption from high-value enterprise merchants. Uninstall feedback directly validated the forward-thinking design work: merchants want per-agent visibility and partnership controls, exactly what was designed but couldn't yet ship."
           usageData={[
             "<strong>14,000+ active merchants</strong> across 5 countries within the first year",
             "<strong>28% Shopify Plus adoption</strong> — high-value enterprise merchants make up over a quarter of the user base",
             "<strong>70–77% retention</strong> for mature cohorts, with only a ~5–7% deliberate monthly uninstall rate",
-            "<strong>Design insight:</strong> Uninstall feedback revealed onboarding gaps — merchants struggled to understand setup and visibility — directly shaping the next iteration of the first-run experience",
+            "<strong>Design insight:</strong> Uninstall feedback confirmed the vision — merchants asked for per-agent breakdowns and partnership controls, precisely what was designed ahead of the ChatGPT partnership being ready to ship",
           ]}
         />
       </div>
