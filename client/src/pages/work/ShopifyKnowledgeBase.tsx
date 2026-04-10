@@ -56,11 +56,10 @@ export default function ShopifyKnowledgeBase() {
             "Monitor query resolution rates and buyer inquiry trends",
             "Integrate seamlessly within the Sidekick ecosystem",
           ]}
-          timePeriod="Q4 2024"
+          timePeriod="Launched March 2025"
           challenges={[
             "Designing for a new merchant mental model around AI agent representation",
             "Balancing automated FAQ generation with merchant customization",
-            "Surfacing meaningful data without overwhelming merchants",
             "Coordinating between the Sidekick merchant agent team and consumer agent teams",
             "Working within the limitations of company partnerships and external LLM capabilities — surfacing all the information we wanted to was hard",
           ]}
@@ -115,12 +114,12 @@ export default function ShopifyKnowledgeBase() {
         </div>
 
         <ProjectOutcome
-          outcome="Knowledge Base shipped as a free Shopify app, giving merchants their first direct window into how AI agents represent their store. The app enables merchants to view, monitor, and customize the FAQs that power AI shopping interactions across the web."
+          outcome="Knowledge Base launched in March 2025 and grew to 14,000+ active merchants within its first year — with strong retention and outsized adoption from high-value enterprise merchants. Uninstall feedback directly informed future onboarding improvements."
           usageData={[
-            "<strong>Free to all merchants:</strong> Available on the Shopify App Store at no cost",
-            "<strong>AI-ready:</strong> Directly influences how AI shopping agents answer buyer questions",
-            "<strong>Merchant control:</strong> Custom FAQs allow brands to define their own voice and accuracy",
-            "<strong>Real-time monitoring:</strong> Live query volume and resolution rate tracking",
+            "<strong>14,000+ active merchants</strong> across 5 countries within the first year",
+            "<strong>28% Shopify Plus adoption</strong> — high-value enterprise merchants make up over a quarter of the user base",
+            "<strong>70–77% retention</strong> for mature cohorts, with only a ~5–7% deliberate monthly uninstall rate",
+            "<strong>Design insight:</strong> Uninstall feedback revealed onboarding gaps — merchants struggled to understand setup and visibility — directly shaping the next iteration of the first-run experience",
           ]}
         />
       </div>

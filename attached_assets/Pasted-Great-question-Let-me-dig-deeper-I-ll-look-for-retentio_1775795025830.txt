@@ -1,0 +1,128 @@
+Great question! Let me dig deeper — I'll look for retention data, merchant characteristics, churn patterns, and any other behavioral signals that can paint a fuller picture. Let me search across multiple angles.
+I found several rich data sources. Now let me get the metadata for the reviews table and the install state history table, and run several queries in parallel to get retention, churn, reviews, and merchant profile data for Knowledge Base.
+Now I have the schemas. Let me run several queries in parallel to get a richer picture — reviews & ratings, churn/retention, merchant profiles, and uninstall reasons.
+I got the uninstall reasons but hit some issues on other queries. Let me fix the partition filters and column names, and use a non-PII column set for reviews.
+Good progress! I have churn, retention, and uninstall data. Let me now run the merchant profile query with correct columns, and analyze all the results.
+Now let me fix the merchant profile query with the partition filter and get the reviews data through a different approach.
+The reviews table is blocked by a PII policy on an underlying column — I won't be able to query it directly. Let me analyze the merchant profile data I successfully retrieved, and then put together the full picture.
+Excellent — now I have a comprehensive picture. Here's the full deep dive on Knowledge Base:
+
+---
+
+# 🧠 Knowledge Base App — Deep Dive
+
+## What is Knowledge Base?
+
+Knowledge Base is a **1st-party Shopify app** (launched ~March 2025) that lets merchants create FAQ/knowledge base content for their online store. It appears to integrate with AI (likely Sidekick) to provide automated answers to customer questions based on the merchant's knowledge base entries.
+
+---
+
+## 📊 Who Uses It?
+
+**14,813 active shops** currently have Knowledge Base installed, spanning a wide range of merchant sizes:
+
+| Plan | Shops | % | Avg 30d GMV | Avg Tenure |
+|------|------:|--:|-------------|------------|
+| **Basic** | 6,023 | 40.7% | $5.8K | 2.9 years |
+| **Shopify Plus** | 4,198 | 28.3% | $1.17M | 5.7 years |
+| **Professional** | 3,447 | 23.3% | $39.5K | 4.6 years |
+| **Unlimited (Advanced)** | 1,088 | 7.3% | $150K | 5.6 years |
+
+**Key takeaway:** While Basic plan merchants make up the largest group by count, **28.3% of users are Shopify Plus merchants** — a remarkably high Plus penetration for a free 1P app. This signals strong enterprise appeal.
+
+### Geographic Spread
+| Country | Shops | % |
+|---------|------:|--:|
+| 🇺🇸 US | 8,638 | 58.3% |
+| 🇬🇧 UK | 1,305 | 8.8% |
+| 🇦🇺 Australia | 994 | 6.7% |
+| 🇨🇦 Canada | 797 | 5.4% |
+| 🇩🇪 Germany | 575 | 3.9% |
+
+![Merchant Profile](https://storage.cloud.google.com/data-portal-mcp-storage-production/mjlu44szlbwhgwktgvzvsvzvojmvqvsbmmzgq5tdi5wg2zktgvvgemrqhu/plot-results/30765a11c7294b9fa10439231b4953fe/plot.png)
+
+---
+
+## 📈 Growth & Churn
+
+![Installs vs Uninstalls](https://storage.cloud.google.com/data-portal-mcp-storage-production/mjlu44szlbwhgwktgvzvsvzvojmvqvsbmmzgq5tdi5wg2zktgvvgemrqhu/plot-results/7b1a7e382cf64584946463e30597c702/plot.png)
+
+### The good:
+- **Very low deliberate uninstall rate:** Only ~5-7% of monthly installers uninstall, which is excellent for a 1P app
+- **Strong net growth** through Jan 2026 — peaking at +567 net new in Dec 2025 and +558 in Jan 2026
+
+### The concern:
+- **March 2026 went net negative (-16)** for the first time — driven not by uninstalls but by **shop deactivations (102) outpacing new installs (171)**. This suggests the organic growth engine is decelerating
+- Shop deactivations have been steadily rising (from 2 in May 2025 → 102 in March 2026), which partly reflects the growing install base naturally experiencing churn
+
+---
+
+## 🔁 Retention
+
+![Retention](https://storage.cloud.google.com/data-portal-mcp-storage-production/mjlu44szlbwhgwktgvzvsvzvojmvqvsbmmzgq5tdi5wg2zktgvvgemrqhu/plot-results/beae57f4cf3b4221b09996835232b37a/plot.png)
+
+| Cohort | Size | Still Installed | Retention |
+|--------|-----:|----------------:|----------:|
+| May 2025 | 394 | 276 | **70.1%** |
+| Jun 2025 | 401 | 283 | **70.6%** |
+| Jul 2025 | 338 | 234 | **69.2%** |
+| Aug 2025 | 413 | 315 | **76.3%** |
+| Sep 2025 | 416 | 309 | **74.3%** |
+| Oct 2025 | 326 | 243 | **74.5%** |
+| Nov 2025 | 288 | 222 | **77.1%** |
+| Dec 2025 | 585 | 418 | **71.5%** |
+| Jan 2026 | 584 | 357 | **61.1%** |
+
+**Overall retention: 68.6%** across all cohorts — meaning roughly 7 in 10 shops that install Knowledge Base keep it.
+
+Early cohorts (May–Nov 2025) have matured to **70-77% retention**, which is solid. The Jan 2026 cohort at 61.1% is still maturing (only ~2.5 months old). The Dec/Jan spike in installs may have brought in more casual merchants who are more likely to churn.
+
+---
+
+## 💬 Why Merchants Uninstall (Qualitative)
+
+Only 18 uninstall reasons were collected (low sample), but themes emerge:
+
+| Theme | Examples |
+|-------|---------|
+| **Confusion / setup difficulty** | *"really dont know how to use this or how to make it visible on my webpage"*, *"unclear on how to install a Q&A location"* |
+| **Not ready yet** | *"I will install again in the future when I am ready to set up the FAQ"* |
+| **Missing features** | *"Need to be able to create categories"*, *"no way to make FAQs visible to the Storefront API"* |
+| **AI trust concerns** | *"Unsure if app is actively sending data to LLMs"*, *"The app is giving up control of my own store to AI bots"* |
+| **Overlap with existing tools** | *"Seems same as Inbox chat bot that's already on my home page"* |
+| **Store closure** | *"Closing store thank you"* |
+
+---
+
+## 🏆 How Successful Is It? — Summary Assessment
+
+| Dimension | Rating | Notes |
+|-----------|--------|-------|
+| **Adoption** | ✅ Strong | 17K+ installs in ~12 months for a relatively niche tool |
+| **Retention** | ✅ Strong | 70-77% for matured cohorts; well above typical 1P app benchmarks |
+| **Churn rate** | ✅ Excellent | Only 5-7% monthly deliberate uninstall rate |
+| **Enterprise appeal** | ✅ Very strong | 28% Shopify Plus — punches way above its weight |
+| **Growth momentum** | ⚠️ Slowing | Net-negative in March 2026; new installs declining from Jan peak |
+| **Engagement depth** | ⚠️ Moderate | ~200 daily app loads from 17K installed = ~1.2% daily active rate |
+| **Merchant feedback** | ⚠️ Limited data | Only 18 uninstall reasons captured; reviews table is access-restricted |
+
+### What It Does Well:
+- Fills a real gap — merchants clearly want FAQ/knowledge base tooling natively in Shopify
+- Retains users well once they set it up
+- Strong appeal to high-value Plus merchants ($1.17M avg monthly GMV)
+
+### Where It Could Improve:
+- **Onboarding/discoverability** — several uninstall reasons cite confusion about setup
+- **Storefront API access** — multiple merchants want to programmatically access KB content
+- **Feature depth** — requests for categories, better organization
+- **Daily engagement is low** — suggests it's a "set and forget" tool rather than an active daily-use app (which may be fine for its use case)
+
+---
+
+> ⚠️ **Note:** I was unable to access App Store review data (ratings, review text) due to a PII policy restriction on the underlying reviews table. If you need star ratings and review sentiment, you may need to request access through the `dw-apps-and-developers` team (#help-data-warehouse).
+
+---
+
+## 🚀 Want a Live Dashboard?
+
+I can create a **live, securely shareable dashboard** with all these Knowledge Base metrics — installs, retention cohorts, churn, merchant profiles, and more. The dashboard refreshes with live data so you can monitor trends over time. Would you like me to generate one?
