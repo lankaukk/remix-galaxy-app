@@ -61,7 +61,8 @@ export default function ShopifyKnowledgeBase() {
             "Designing for a new merchant mental model around AI agent representation",
             "Balancing automated FAQ generation with merchant customization",
             "Surfacing meaningful data without overwhelming merchants",
-            "Coordinating across the Sidekick, Admin, and data platform teams",
+            "Coordinating between the Sidekick merchant agent team and consumer agent teams",
+            "Working within the limitations of company partnerships and external LLM capabilities — surfacing all the information we wanted to was hard",
           ]}
         />
 
