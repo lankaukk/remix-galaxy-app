@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import KnowledgeBaseCover from "@/assets/images/shopify/knowledge-base-cover.png";
 import KbOverviewMobile from "@/assets/images/shopify/kb-overview-mobile.jpeg";
 import KbOverviewDesktopHq from "@/assets/images/shopify/kb-overview-desktop-hq.jpeg";
+import KbOverviewDesktopVideo from "@/assets/images/shopify/kb-overview-desktop.mp4";
 import KbOverviewDesktop1 from "@/assets/images/shopify/kb-overview-desktop-1.jpeg";
 import KbQueryLogEmpty from "@/assets/images/shopify/kb-query-log-empty.jpeg";
 import KbQueryLogFull from "@/assets/images/shopify/kb-query-log-full.jpeg";
@@ -103,7 +104,17 @@ export default function ShopifyKnowledgeBase() {
               allowFullScreen
             />
           </div>
-          <Img src={KbOverviewDesktopHq} alt="Knowledge Base overview — desktop" />
+          <div className="rounded-xl overflow-hidden shadow-xl">
+            <video
+              src={KbOverviewDesktopVideo}
+              className="w-full h-auto block"
+              autoPlay
+              loop
+              muted
+              controls
+              playsInline
+            />
+          </div>
         </section>
 
         <section className="space-y-6">
