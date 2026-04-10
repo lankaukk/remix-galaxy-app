@@ -53,14 +53,15 @@ export default function ShopifyKnowledgeBase() {
       description={PAGE_DESCRIPTION}
       backLink="/work"
       backText="All Work"
+      action={
+        <a href="https://apps.shopify.com/shopify-knowledge-base" target="_blank" rel="noopener noreferrer">
+          <Button className="rounded-full px-5" variant="outline">
+            View on Shopify App Store
+          </Button>
+        </a>
+      }
     >
       <div className="space-y-16">
-        <div>
-          <a href="https://apps.shopify.com/shopify-knowledge-base" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline">View on Shopify App Store</Button>
-          </a>
-        </div>
-
         <div className="rounded-xl overflow-hidden shadow-xl">
           <img
             src={KnowledgeBaseCover}
