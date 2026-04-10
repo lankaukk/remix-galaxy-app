@@ -79,18 +79,12 @@ export default function ShopifySidekick() {
         <div className="prose-lg max-w-none">
           <h2>My Contributions</h2>
           <p>
-            I led mobile and voice design for Sidekick, creating the first audio
-            interaction patterns at Shopify with waveforms, voice-active states,
-            and responsive motion. I designed the core mobile chat experience,
-            contributed voice-mode icons to{" "}
-            <a href="https://polaris-react.shopify.com/" target="_blank">
-              Shopify's Polaris design system
-            </a>
-            , and extended the design into Admin mobile navigation. On
-            multimodal features, I designed screen sharing flows, Sidekick
-            Skills, the Knowledge Base app integration, and the Help Center
-            handoff. This work is now serving hundreds of thousands of merchants
-            with strong satisfaction scores.
+            I lead mobile and multimodal UX design for Sidekick. We created the
+            first audio interaction patterns at Shopify with waveforms, and
+            responsive motion. I designed the core mobile chat experience,
+            contributed icons to Shopify's Polaris design system, and extended
+            the design into Admin mobile native navigation. This experience
+            supports hundreds of thousands of merchants.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
