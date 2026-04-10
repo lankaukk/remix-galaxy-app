@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 
@@ -96,14 +95,11 @@ export default function PasswordGate({ children }: PasswordGateProps) {
         </div>
       </div>
       <div className="flex-1 flex items-center justify-center p-4 -mt-20">
-        <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-            <Lock className="w-6 h-6 text-primary" />
+        <div className="w-full max-w-md space-y-6">
+          <div className="flex items-center gap-2">
+            <Lock className="w-5 h-5 text-foreground shrink-0" />
+            <h2 className="text-xl font-semibold">Protected Content</h2>
           </div>
-          <CardTitle>Protected Content</CardTitle>
-        </CardHeader>
-        <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <div className="relative">
@@ -143,8 +139,7 @@ export default function PasswordGate({ children }: PasswordGateProps) {
               {isSubmitting ? "Verifying..." : "Access Content"}
             </Button>
           </form>
-        </CardContent>
-      </Card>
+        </div>
       </div>
     </div>
   );
