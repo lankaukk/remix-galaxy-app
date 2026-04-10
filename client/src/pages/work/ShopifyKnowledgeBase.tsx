@@ -104,7 +104,6 @@ export default function ShopifyKnowledgeBase() {
               allowFullScreen
             />
           </div>
-          <Img src={KbOverviewMobile} alt="Knowledge Base overview — mobile" />
           <Img src={KbOverviewDesktopHq} alt="Knowledge Base overview — desktop" />
         </section>
 
