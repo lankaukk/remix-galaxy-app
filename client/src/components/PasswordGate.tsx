@@ -96,7 +96,7 @@ export default function PasswordGate({ children }: PasswordGateProps) {
       </div>
       <div className="flex-1 flex items-center justify-center p-4 -mt-20">
         <div className="w-full max-w-md space-y-6">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <Lock className="w-5 h-5 text-foreground shrink-0" />
             <h2 className="text-xl font-semibold">Protected Content</h2>
           </div>
