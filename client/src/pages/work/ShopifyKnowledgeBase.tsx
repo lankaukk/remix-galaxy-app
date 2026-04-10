@@ -136,7 +136,7 @@ export default function ShopifyKnowledgeBase() {
                 src={KbOverviewDesktop1}
                 alt="Knowledge Base — FAQ queries panel"
                 className="w-full h-full object-cover block"
-                style={{ objectPosition: "center calc(100% - 10px)" }}
+                style={{ objectPosition: "center bottom" }}
                 loading="lazy"
               />
             </div>
