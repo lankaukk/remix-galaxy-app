@@ -3,6 +3,7 @@ import ProjectLayout from "@/components/layout/ProjectLayout";
 import { ProjectDetailSkeleton } from "@/components/ui/project-card-skeleton";
 import { ProjectBrief } from "@/components/ui/ProjectBrief";
 import { ProjectOutcome } from "@/components/ui/ProjectOutcome";
+import { Button } from "@/components/ui/button";
 import KnowledgeBaseCover from "@/assets/images/shopify/knowledge-base-cover.png";
 import KbOverviewMobile from "@/assets/images/shopify/kb-overview-mobile.jpeg";
 import KbOverviewDesktopHq from "@/assets/images/shopify/kb-overview-desktop-hq.jpeg";
@@ -54,6 +55,12 @@ export default function ShopifyKnowledgeBase() {
       backText="All Work"
     >
       <div className="space-y-16">
+        <div>
+          <a href="https://apps.shopify.com/shopify-knowledge-base" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline">View on Shopify App Store</Button>
+          </a>
+        </div>
+
         <div className="rounded-xl overflow-hidden shadow-xl">
           <img
             src={KnowledgeBaseCover}
