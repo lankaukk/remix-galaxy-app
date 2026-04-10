@@ -120,49 +120,29 @@ function ImageWithFallback({
         : 66.7; // Default 3:2 ratio if dimensions not known yet
 
     return (
-      <div className="w-full">
-        {isLoading && (
-          <div
-            className="w-full relative"
-            style={{ paddingTop: `${aspectRatio}%` }}
-          >
-            <Skeleton className="absolute inset-0" />
-          </div>
-        )}
+      <div
+        className="w-full relative"
+        style={{ paddingTop: `${aspectRatio}%` }}
+      >
+        {isLoading && <Skeleton className="absolute inset-0" />}
         {hasError ? (
-          <div
-            className="w-full relative flex items-center justify-center bg-muted"
-            style={{ paddingTop: `${aspectRatio}%` }}
-          >
-            <div className="text-center absolute inset-0 flex flex-col items-center justify-center">
-              <ImageIcon className="h-12 w-12 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground mt-2">
-                Failed to load image
-              </p>
-            </div>
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-muted">
+            <ImageIcon className="h-12 w-12 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground mt-2">
+              Failed to load image
+            </p>
           </div>
         ) : (
-          <div
-            className="w-full relative"
-            style={
-              imgNaturalWidth && imgNaturalHeight && !isLoading
-                ? {
-                    paddingTop: `${(imgNaturalHeight / imgNaturalWidth) * 100}%`,
-                  }
-                : { paddingTop: `${aspectRatio}%` }
-            }
-          >
-            <img
-              src={imgSrc}
-              alt={alt}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-                isLoading ? "opacity-40" : "opacity-100"
-              }`}
-              loading="lazy"
-              onLoad={handleImageLoad}
-              onError={handleImageError}
-            />
-          </div>
+          <img
+            src={imgSrc}
+            alt={alt}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+              isLoading ? "opacity-0" : "opacity-100"
+            }`}
+            loading="lazy"
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+          />
         )}
       </div>
     );
