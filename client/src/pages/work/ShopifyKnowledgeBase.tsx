@@ -95,7 +95,7 @@ export default function ShopifyKnowledgeBase() {
           </p>
           <div className="rounded-xl overflow-hidden shadow-xl aspect-video">
             <iframe
-              src="https://www.youtube.com/embed/22NqvJyppt8?si=fWkxvH9fNVZaGOx5"
+              src="https://www.youtube.com/embed/22NqvJyppt8?si=fWkxvH9fNVZaGOx5&autoplay=1&mute=1&controls=1"
               title="Shopify Knowledge Base"
               className="w-full h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
