@@ -10,6 +10,7 @@ import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import Shopify from "@/pages/work/Shopify";
 import ShopifySidekick from "@/pages/work/ShopifySidekick";
+import ShopifyKnowledgeBase from "@/pages/work/ShopifyKnowledgeBase";
 import SidekickMultimodal from "@/pages/work/shopify_sidekick/Multimodal";
 import SidekickMobile from "@/pages/work/shopify_sidekick/Mobile";
 import Utopia from "@/pages/work/Utopia";
@@ -53,6 +54,11 @@ function Router() {
       <Route path="/work/shopify_sidekick/mobile">
         <PasswordGate>
           <SidekickMobile />
+        </PasswordGate>
+      </Route>
+      <Route path="/work/shopify_knowledge_base">
+        <PasswordGate>
+          <ShopifyKnowledgeBase />
         </PasswordGate>
       </Route>
       <Route path="/work/shopify_channels_platform" component={Shopify} />
