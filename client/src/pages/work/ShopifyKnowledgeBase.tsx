@@ -130,9 +130,16 @@ export default function ShopifyKnowledgeBase() {
           <p className="text-muted-foreground text-lg leading-relaxed">
             Those screens didn't ship. The technical capability and commercial agreements weren't ready in time. What did ship was a strong foundation — and the uninstall feedback has since validated exactly what I knew was missing: merchants want to know which agents are sending queries, and they want control over each relationship. That work is still ahead.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
             <Img src={KbAiAgentsHub} alt="AI Agents Hub — ChatGPT integration" />
-            <Img src={KbOverviewDesktop1} alt="Knowledge Base — FAQ queries panel" />
+            <div className="rounded-xl overflow-hidden shadow-xl h-full">
+              <img
+                src={KbOverviewDesktop1}
+                alt="Knowledge Base — FAQ queries panel"
+                className="w-full h-full object-cover object-top block"
+                loading="lazy"
+              />
+            </div>
           </div>
         </section>
 
